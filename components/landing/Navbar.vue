@@ -82,7 +82,10 @@ const open = ref(false);
         <div
           class="lg:hidden flex justify-center items-center mt-3 gap-4 w-full"
         >
-          <a href="#" aria-label="Instagram">
+          <a
+            href="https://www.facebook.com/gdcscasteloes/"
+            aria-label="Instagram"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 551.034 551.034"
@@ -115,7 +118,10 @@ const open = ref(false);
               />
             </svg>
           </a>
-          <a href="#" aria-label="Facebook">
+          <a
+            href="https://www.facebook.com/gdcscasteloes/"
+            aria-label="Facebook"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -130,7 +136,10 @@ const open = ref(false);
         </div>
       </nav>
       <div class="hidden lg:flex items-center gap-4">
-        <a href="#" aria-label="Instagram">
+        <a
+          href="https://www.facebook.com/gdcscasteloes/"
+          aria-label="Instagram"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 551.034 551.034"
@@ -161,7 +170,7 @@ const open = ref(false);
             />
           </svg>
         </a>
-        <a href="#" aria-label="Facebook">
+        <a href="https://www.facebook.com/gdcscasteloes/" aria-label="Facebook">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
