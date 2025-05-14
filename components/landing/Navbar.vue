@@ -83,7 +83,7 @@ const open = ref(false);
           class="lg:hidden flex justify-center items-center mt-3 gap-4 w-full"
         >
           <a
-            href="https://www.facebook.com/gdcscasteloes/"
+            href="https://www.instagram.com/gdcsscasteloes/"
             aria-label="Instagram"
           >
             <svg
@@ -137,7 +137,7 @@ const open = ref(false);
       </nav>
       <div class="hidden lg:flex items-center gap-4">
         <a
-          href="https://www.facebook.com/gdcscasteloes/"
+          href="https://www.instagram.com/gdcsscasteloes/"
           aria-label="Instagram"
         >
           <svg

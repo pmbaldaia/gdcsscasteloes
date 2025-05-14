@@ -30,8 +30,20 @@
           Redes Sociais
         </h3>
         <ul class="text-sm text-slate-500 mt-2 text-center lg:text-left">
-          <li><a href="#" class="hover:underline">Facebook</a></li>
-          <li><a href="#" class="hover:underline">Instagram</a></li>
+          <li>
+            <a
+              href="https://www.facebook.com/gdcscasteloes/"
+              class="hover:underline"
+              >Facebook</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/gdcsscasteloes/"
+              class="hover:underline"
+              >Instagram</a
+            >
+          </li>
         </ul>
       </div>
       <div class="col-span-1">
