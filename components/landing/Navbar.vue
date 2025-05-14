@@ -4,13 +4,18 @@ const menuitems = [
     title: "Início",
     path: "/",
   },
+
+  {
+    title: "Calendário",
+    path: "/calendario",
+  },
   {
     title: "Eventos",
     path: "/eventos",
   },
   {
-    title: "Calendário",
-    path: "/calendario",
+    title: "Sobre nós",
+    path: "/sobre",
   },
   {
     title: "Contactos",

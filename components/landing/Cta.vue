@@ -18,7 +18,6 @@
         class="bg-green-800 text-black hover:bg-black hover:text-white border border-green-800 hover:border-white w-full sm:w-auto"
         rel="noopener"
         href="/"
-        target="_blank"
       >
         Conhecer o Clube
       </LandingLink>
@@ -27,8 +26,7 @@
         size="lg"
         class="bg-red-800 text-black hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto"
         rel="noopener"
-        href="/calendario"
-        target="_blank"
+        href="/contacto"
       >
         Torna-te Sócio
       </LandingLink>

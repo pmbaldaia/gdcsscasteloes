@@ -16,7 +16,7 @@
       <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight">
         Bem-vindo ao site oficial do G.D.C.S.S. Castelões
       </h1>
-      <p class="text-lg mt-4 text-slate-600 max-w-xl">
+      <p class="text-lg mt-4 text-slate-600 max-w-xl text-justify">
         Celebrando com orgulho 41 anos de história, dedicação e conquistas, o
         G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada
         freguesia de Castelões. Venha fazer parte dessa jornada, repleta de
@@ -29,8 +29,7 @@
           size="lg"
           class="bg-red-800 text-black hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto"
           rel="noopener"
-          href="/calendario"
-          target="_blank"
+          href="/eventos"
         >
           Ver Eventos
         </LandingLink>
@@ -40,7 +39,6 @@
           class="bg-green-800 text-black hover:bg-black hover:text-white border border-green-800 hover:border-white w-full sm:w-auto"
           rel="noopener"
           href="/calendario"
-          target="_blank"
         >
           Ver Calendário
         </LandingLink>
