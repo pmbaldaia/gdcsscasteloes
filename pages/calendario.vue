@@ -159,7 +159,6 @@ const jornadas = {
 const selectedJornada = ref(1);
 const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
 </script>
-
 <template>
   <LandingContainer>
     <LandingSectionhead>
@@ -170,10 +169,6 @@ const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
     </LandingSectionhead>
 
     <div class="max-w-7xl mx-auto px-4 mt-12">
-      <!--  <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-4">
-        Jornada {{ selectedJornada }}
-      </h2> -->
-
       <div class="flex justify-center mb-10">
         <div class="relative">
           <select
@@ -203,32 +198,34 @@ const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
       </div>
 
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
       >
         <div
           v-for="(game, index) in filteredGames"
           :key="index"
-          class="bg-white p-4 rounded-2xl shadow-lg text-center w-full max-w-xs"
+          class="bg-white p-3 rounded-2xl shadow-lg text-center w-full"
         >
-          <h3 class="text-xl font-bold text-gray-800">{{ game.date }}</h3>
+          <h3 class="text-lg sm:text-xl font-bold text-gray-800">
+            {{ game.date }}
+          </h3>
 
-          <div class="flex justify-center items-center gap-6 mt-4">
+          <div class="flex justify-center items-center gap-4 mt-4">
             <div class="flex flex-col items-center">
               <img
                 :src="teams.find((t) => t.name === game.teams[0])?.logo"
-                class="w-16 h-16 object-contain mb-2"
+                class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
               />
               <p class="text-sm font-medium text-gray-700 text-center">
                 {{ game.teams[0] }}
               </p>
             </div>
 
-            <span class="text-2xl font-bold text-gray-800">vs</span>
+            <span class="text-xl sm:text-2xl font-bold text-gray-800">vs</span>
 
             <div class="flex flex-col items-center">
               <img
                 :src="teams.find((t) => t.name === game.teams[1])?.logo"
-                class="w-16 h-16 object-contain mb-2"
+                class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
               />
               <p class="text-sm font-medium text-gray-700 text-center">
                 {{ game.teams[1] }}
