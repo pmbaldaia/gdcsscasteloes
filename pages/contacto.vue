@@ -57,7 +57,9 @@ const handleSubmit = () => {
         <form @submit.prevent="handleSubmit">
           <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Nome</label
+              >
               <input
                 v-model="firstName"
                 type="text"
@@ -67,7 +69,9 @@ const handleSubmit = () => {
               />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Apelido</label>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Apelido</label
+              >
               <input
                 v-model="lastName"
                 type="text"
@@ -92,7 +96,9 @@ const handleSubmit = () => {
           </div>
 
           <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Assunto</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Assunto</label
+            >
             <input
               v-model="subject"
               type="text"
@@ -103,7 +109,9 @@ const handleSubmit = () => {
           </div>
 
           <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Mensagem</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Mensagem</label
+            >
             <textarea
               v-model="message"
               rows="5"
@@ -123,14 +131,16 @@ const handleSubmit = () => {
       </div>
     </div>
     <div class="space-y-4 text-gray-700 mt-3 px-5">
-      <div class="flex justify-between items-center gap-2">
-        <div class="flex items-center gap-2">
+      <div
+        class="grid grid-cols-1 gap-4 md:flex md:justify-between md:items-center md:gap-2 md:px-0 justify-center items-center"
+      >
+        <div class="flex items-center gap-2 justify-center">
           <Icon name="uil:envelope" class="text-blue-500 w-5 h-5" />
           <a href="mailto:gdcsscasteloes1984@gmail.com" class="hover:underline">
             gdcsscasteloes1984@gmail.com
           </a>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 justify-center">
           <Icon name="uil:map-marker" class="text-blue-500 w-5 h-5" />
           <span>Castelões, Penafiel, Portugal</span>
         </div>
