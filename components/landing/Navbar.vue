@@ -5,20 +5,16 @@ const menuitems = [
     path: "/",
   },
   {
-    title: "Clube",
-    path: "/pricing",
+    title: "Eventos",
+    path: "/eventos",
   },
   {
-    title: "Futebol",
-    path: "/about",
-  },
-  {
-    title: "Notícias",
-    path: "/contact",
+    title: "Calendário",
+    path: "/calendario",
   },
   {
     title: "Contactos",
-    path: "/contact",
+    path: "/contacto",
   },
 ];
 
@@ -127,7 +123,6 @@ const open = ref(false);
             </svg>
           </a>
         </div>
-        <hr class="border-t-2 border-gray-100 my-4 w-32 mx-auto" />
       </nav>
       <div class="hidden lg:flex items-center gap-4">
         <a href="#" aria-label="Instagram">

@@ -3,8 +3,8 @@
     <div class="p-24 md:order-1 hidden md:block">
       <img
         class="rounded-full transition-transform transform hover:scale-125"
-        src="~/assets/img/hero.jpg"
-        alt="Starship starts the engine"
+        src="~/assets/img/20252026.jpg"
+        alt="Época 2025/2026"
         loading="eager"
         format="avif"
         width="512"
@@ -14,28 +14,36 @@
 
     <div>
       <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight">
-        Marketing website done with Nuxt
+        Bem-vindo ao site oficial do G.D.C.S.S. Castelões
       </h1>
       <p class="text-lg mt-4 text-slate-600 max-w-xl">
-        Nuxtship is a starter template for startups, marketing websites &
-        landing pages.<wbr /> Built with Nuxt & TailwindCSS. You can quickly
-        create any website with this starter.
+        Celebrando com orgulho 41 anos de história, dedicação e conquistas, o
+        G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada
+        freguesia de Castelões. Venha fazer parte dessa jornada, repleta de
+        momentos inesquecíveis e vitórias que marcaram a nossa comunidade!
       </p>
-      <div class="mt-6 flex flex-col sm:flex-row gap-3">
-        <LandingLink
-          href="https://github.com/Gr33nW33n/nuxtship-template"
-          target="_blank"
-          rel="noopener"
-          >Get Started</LandingLink
-        >
+      <div
+        class="mt-6 flex flex-col sm:flex-row gap-3 justify-start items-center"
+      >
         <LandingLink
           size="lg"
-          styleName="outline"
+          class="bg-red-800 text-black hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto"
           rel="noopener"
-          href="https://github.com/Gr33nW33n/nuxtship-template"
+          href="/calendario"
           target="_blank"
-          >View Repo</LandingLink
         >
+          Ver Eventos
+        </LandingLink>
+
+        <LandingLink
+          size="lg"
+          class="bg-green-800 text-black hover:bg-black hover:text-white border border-green-800 hover:border-white w-full sm:w-auto"
+          rel="noopener"
+          href="/calendario"
+          target="_blank"
+        >
+          Ver Calendário
+        </LandingLink>
       </div>
     </div>
   </main>

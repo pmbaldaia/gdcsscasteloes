@@ -1,8 +1,10 @@
 # GDCSS Castelões
 
-Bem-vindo ao repositório oficial do **Grupo Desportivo, Cultural e Social de Castelões**.
+Bem-vindo ao site oficial do **Grupo Desportivo e Cultural de São Salvador Castelões**.
 
 Este projeto tem como objetivo divulgar e organizar as atividades, eventos e conteúdos relacionados com o GDCSS Castelões, promovendo o desporto, a cultura e o convívio social da comunidade.
+O Grupo Desportivo e Cultural São Salvador de Castelões foi fundado na freguesia de Castelões a 11 de Abril 1984.
+Rua do Grupo Desportivo, Penafiel 4560-060
 
 ## 📌 Sobre o Projeto
 

@@ -1,5 +1,5 @@
 <template>
-  <footer class="my-20">
+  <footer class="my-20 mx-4 lg:mx-0">
     <p class="text-center text-sm text-slate-500">
       Copyright © {{ new Date().getFullYear() }} GDCSSCastelões. Todos os
       direitos reservados.
