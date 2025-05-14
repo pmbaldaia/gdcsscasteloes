@@ -21,98 +21,185 @@ const teams = [
   { name: "SC Lagares", logo: "/logos/scLagares.png" },
 ];
 
-const allGames = [];
-const gameDates = [
-  "2025-05-15",
-  "2025-05-17",
-  "2025-05-20",
-  "2025-05-22",
-  "2025-05-24",
-  "2025-05-26",
-  "2025-05-28",
-];
-const gameTimes = [
-  "15:00",
-  "16:00",
-  "17:00",
-  "18:00",
-  "19:00",
-  "20:00",
-  "21:00",
-];
-const locations = [
-  "Estádio A",
-  "Estádio B",
-  "Estádio C",
-  "Estádio D",
-  "Estádio E",
-  "Estádio F",
-  "Estádio G",
-];
-
-let matchIndex = 0;
-
-for (let jornada = 1; jornada <= 30; jornada++) {
-  const usedTeams = new Set();
-  let localIndex = 0;
-  let dateIndex = 0;
-  for (let i = 0; i < 7; i++) {
-    let t1Index, t2Index;
-    do {
-      t1Index = (matchIndex + i * 2) % teams.length;
-    } while (usedTeams.has(t1Index));
-
-    usedTeams.add(t1Index);
-
-    do {
-      t2Index = (matchIndex + i * 2 + 1) % teams.length;
-    } while (usedTeams.has(t2Index) || t2Index === t1Index);
-
-    usedTeams.add(t2Index);
-
-    allGames.push({
-      jornada,
-      date: gameDates[dateIndex % gameDates.length],
-      time: gameTimes[i % gameTimes.length],
-      location: locations[localIndex % locations.length],
-      teams: [teams[t1Index].name, teams[t2Index].name],
-    });
-
-    dateIndex++;
-    localIndex++;
-  }
-
-  matchIndex += 7;
-}
+const jornadas = {
+  1: [
+    {
+      date: "2024-09-01",
+      time: "15:00",
+      location: "Estádio A",
+      teams: ["GRD Rans", "FC Boelhe"],
+    },
+    {
+      date: "2024-09-01",
+      time: "15:00",
+      location: "Estádio B",
+      teams: ["GDCSS Castelões", "AC Croca"],
+    },
+    {
+      date: "2024-09-01",
+      time: "15:00",
+      location: "Estádio C",
+      teams: ["ACDFC Calçada", "Cabeça Santa"],
+    },
+    {
+      date: "2024-09-01",
+      time: "15:00",
+      location: "Estádio D",
+      teams: ["Rio Mau FC", "Paço de Sousa"],
+    },
+    {
+      date: "2024-09-01",
+      time: "15:00",
+      location: "Estádio E",
+      teams: ["ADCR Eja", "ADC Lodares"],
+    },
+    {
+      date: "2024-09-01",
+      time: "15:00",
+      location: "Estádio F",
+      teams: ["UD Abragonense", "Desp. Canelas"],
+    },
+    {
+      date: "2024-09-01",
+      time: "15:00",
+      location: "Estádio G",
+      teams: ["SC Lagares", "GRD Rans"],
+    },
+  ],
+  2: [
+    {
+      date: "2024-09-08",
+      time: "15:00",
+      location: "Estádio A",
+      teams: ["FC Boelhe", "GDCSS Castelões"],
+    },
+    {
+      date: "2024-09-08",
+      time: "15:00",
+      location: "Estádio B",
+      teams: ["AC Croca", "ACDFC Calçada"],
+    },
+    {
+      date: "2024-09-08",
+      time: "15:00",
+      location: "Estádio C",
+      teams: ["Cabeça Santa", "Rio Mau FC"],
+    },
+    {
+      date: "2024-09-08",
+      time: "15:00",
+      location: "Estádio D",
+      teams: ["Paço de Sousa", "ADCR Eja"],
+    },
+    {
+      date: "2024-09-08",
+      time: "15:00",
+      location: "Estádio E",
+      teams: ["ADC Lodares", "UD Abragonense"],
+    },
+    {
+      date: "2024-09-08",
+      time: "15:00",
+      location: "Estádio F",
+      teams: ["Desp. Canelas", "SC Lagares"],
+    },
+    {
+      date: "2024-09-08",
+      time: "15:00",
+      location: "Estádio G",
+      teams: ["GRD Rans", "FC Boelhe"],
+    },
+  ],
+  3: [
+    {
+      date: "2025-02-02",
+      time: "17:00",
+      location: "Estádio A",
+      teams: ["GRD Rans", "Paço de Sousa"],
+    },
+    {
+      date: "2025-02-02",
+      time: "17:00",
+      location: "Estádio B",
+      teams: ["Rio Mau FC", "ADC Lodares"],
+    },
+    {
+      date: "2025-02-02",
+      time: "17:00",
+      location: "Estádio C",
+      teams: ["UD Abragonense", "ACDFC Calçada"],
+    },
+    {
+      date: "2025-02-02",
+      time: "17:00",
+      location: "Estádio D",
+      teams: ["ADCR Eja", "SC Lagares"],
+    },
+    {
+      date: "2025-02-02",
+      time: "17:00",
+      location: "Estádio E",
+      teams: ["Desp. Canelas", "Cabeça Santa"],
+    },
+    {
+      date: "2025-02-02",
+      time: "17:00",
+      location: "Estádio F",
+      teams: ["GDCSS Castelões", "FC Boelhe"],
+    },
+    {
+      date: "2025-02-02",
+      time: "17:00",
+      location: "Estádio G",
+      teams: ["AC Croca", "GRD Rans"],
+    },
+  ],
+};
 
 const selectedJornada = ref(1);
-
-const filteredGames = computed(() =>
-  allGames.filter((game) => game.jornada === selectedJornada.value)
-);
+const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
 </script>
 
 <template>
   <LandingContainer>
     <LandingSectionhead>
-      <template v-slot:title>Calendário de Jogos</template>
-      <template v-slot:desc>
+      <template #title>Calendário de Jogos</template>
+      <template #desc>
         Consulta os próximos jogos e as equipas participantes.
       </template>
     </LandingSectionhead>
 
     <div class="max-w-7xl mx-auto px-4 mt-12">
-      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-4">
+      <!--  <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-4">
         Jornada {{ selectedJornada }}
-      </h2>
+      </h2> -->
 
       <div class="flex justify-center mb-10">
-        <select
-          v-model="selectedJornada"
-          class="text-lg font-medium rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-        >
-          <option v-for="j in 30" :key="j" :value="j">Jornada {{ j }}</option>
-        </select>
+        <div class="relative">
+          <select
+            v-model="selectedJornada"
+            class="appearance-none text-lg font-medium rounded-xl border border-gray-300 bg-white px-5 py-3 shadow-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
+          >
+            <option v-for="j in 26" :key="j" :value="j">Jornada {{ j }}</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
 
       <div
@@ -128,7 +215,7 @@ const filteredGames = computed(() =>
           <div class="flex justify-center items-center gap-6 mt-4">
             <div class="flex flex-col items-center">
               <img
-                :src="teams.find((t) => t.name === game.teams[0]).logo"
+                :src="teams.find((t) => t.name === game.teams[0])?.logo"
                 class="w-16 h-16 object-contain mb-2"
               />
               <p class="text-sm font-medium text-gray-700 text-center">
@@ -140,7 +227,7 @@ const filteredGames = computed(() =>
 
             <div class="flex flex-col items-center">
               <img
-                :src="teams.find((t) => t.name === game.teams[1]).logo"
+                :src="teams.find((t) => t.name === game.teams[1])?.logo"
                 class="w-16 h-16 object-contain mb-2"
               />
               <p class="text-sm font-medium text-gray-700 text-center">
