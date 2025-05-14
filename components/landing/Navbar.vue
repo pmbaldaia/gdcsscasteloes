@@ -36,7 +36,7 @@ const open = ref(false);
             height="80"
           />
         </a>
-        <div class="block lg:hidden">
+        <div class="block lg:hidden mr-5">
           <button @click="open = !open" class="text-gray-800">
             <svg
               fill="currentColor"
