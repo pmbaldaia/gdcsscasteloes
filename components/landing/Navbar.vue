@@ -73,7 +73,7 @@ const open = ref(false);
           <li v-for="item of menuitems" :key="item.path">
             <a
               :href="item.path"
-              class="flex lg:px-3 py-2 text-gray-600 hover:text-gray-900"
+              class="flex lg:px-3 py-2 text-gray-600 hover:text-green-900 border-b-2 border-transparent hover:border-red-800 transition-all duration-300"
             >
               {{ item.title }}
             </a>
