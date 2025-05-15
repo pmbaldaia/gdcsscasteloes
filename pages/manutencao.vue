@@ -28,7 +28,7 @@ onMounted(() => {
         class="flex justify-center items-center mt-4 sm:mt-6"
         v-if="isMounted"
       >
-        <button
+<!--         <button
           @click="toggleTheme"
           :aria-label="
             colorMode.preference === 'dark'
@@ -43,7 +43,7 @@ onMounted(() => {
             :class="'text-white'"
           />
           <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
-        </button>
+        </button> -->
       </div>
       <h1
         class="text-3xl sm:text-5xl font-extrabold mb-4 sm:mb-6 text-green-800 dark:text-green-400"
