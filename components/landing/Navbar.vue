@@ -64,7 +64,7 @@ onMounted(() => {
             class="flex items-center space-x-4 lg:hidden mr-5"
             v-if="isMounted"
           >
-            <!-- <button
+            <button
               @click="toggleTheme"
               :aria-label="
                 colorMode.preference === 'dark'
@@ -79,7 +79,7 @@ onMounted(() => {
                 :class="'text-white'"
               />
               <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
-            </button> -->
+            </button>
 
             <button
               @click="open = !open"
@@ -154,7 +154,7 @@ onMounted(() => {
           >
             <PhFacebookLogo class="w-6 h-6" />
           </a>
-          <!-- <button
+          <button
             @click="toggleTheme"
             :aria-label="
               colorMode.preference === 'dark'
@@ -169,7 +169,7 @@ onMounted(() => {
               :class="'text-white'"
             />
             <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
-          </button> -->
+          </button>
         </div>
       </div>
       <hr
