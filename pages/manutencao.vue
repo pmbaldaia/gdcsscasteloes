@@ -37,13 +37,12 @@ onMounted(() => {
           "
           class="hover:text-green-600 transition w-8 h-8 flex items-center justify-center"
         >
-          <component
-            :is="colorMode.preference === 'dark' ? PhSun : PhMoon"
-            :class="[
-              'w-6 h-6',
-              colorMode.preference === 'dark' ? 'text-white' : 'text-gray-900',
-            ]"
+          <PhSun
+            v-if="colorMode.preference === 'dark'"
+            class="w-6 h-6"
+            :class="'text-white'"
           />
+          <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
         </button>
       </div>
       <h1
