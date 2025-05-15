@@ -48,7 +48,7 @@ const eventos = [
       <div
         v-for="evento in eventos"
         :key="evento.nome"
-        class="bg-white shadow-lg rounded-lg overflow-hidden"
+        class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col"
       >
         <img
           :src="evento.imagem"
@@ -56,12 +56,19 @@ const eventos = [
           class="w-full h-56 object-cover"
         />
 
-        <div class="p-4">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">
+        <div class="p-4 flex flex-col flex-grow">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2 min-h-[3.5rem]">
             {{ evento.nome }}
           </h3>
-          <p class="text-sm text-gray-500 mb-2">Data: {{ evento.data }}</p>
-          <p class="text-base text-gray-700">{{ evento.descricao }}</p>
+
+          <div class="grid grid-rows-[auto_auto] gap-1">
+            <p class="text-sm text-gray-500 min-h-[1.5rem]">
+              Data: {{ evento.data }}
+            </p>
+            <p class="text-base text-gray-700 min-h-[4.5rem]">
+              {{ evento.descricao }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
