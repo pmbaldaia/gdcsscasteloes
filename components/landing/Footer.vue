@@ -6,29 +6,21 @@
     <div
       class="grid grid-cols-1 lg:grid-cols-4 gap-12 max-w-screen-xl mx-auto px-4"
     >
-      <div class="col-span-1 px-4">
-        <h3
-          class="text-lg font-semibold text-center lg:text-left dark:text-white"
-        >
-          Sobre
-        </h3>
-        <p
-          class="text-sm text-slate-500 dark:text-white mt-2 text-center lg:text-left"
-        >
+      <div class="col-span-1">
+        <h3 class="text-lg font-semibold text-left dark:text-white">Sobre</h3>
+        <p class="text-sm text-slate-500 dark:text-white mt-2 text-left">
           Nós, enquanto equipa, temos a visão de procurar sempre a vitória e
           sermos os melhores em tudo o que fazemos. Treinamos com dedicação e
           foco para alcançar o topo e demonstrar a nossa paixão pelo futebol em
           cada jogo.
         </p>
       </div>
-      <div class="col-span-1 px-4">
-        <h3
-          class="text-lg font-semibold text-center lg:text-left dark:text-white"
-        >
+      <div class="col-span-1">
+        <h3 class="text-lg font-semibold text-left dark:text-white">
           Links Úteis
         </h3>
         <ul
-          class="text-sm text-slate-500 dark:text-white mt-2 text-center lg:text-left space-y-2"
+          class="text-sm text-slate-500 dark:text-white mt-2 text-left space-y-2"
         >
           <li>
             <a
@@ -56,14 +48,12 @@
           </li>
         </ul>
       </div>
-      <div class="col-span-1 px-4">
-        <h3
-          class="text-lg font-semibold text-center lg:text-left dark:text-white"
-        >
+      <div class="col-span-1">
+        <h3 class="text-lg font-semibold text-left dark:text-white">
           Redes Sociais
         </h3>
         <ul
-          class="text-sm text-slate-500 dark:text-white mt-2 text-center lg:text-left space-y-2"
+          class="text-sm text-slate-500 dark:text-white mt-2 text-left space-y-2"
         >
           <li>
             <a
@@ -83,15 +73,11 @@
           </li>
         </ul>
       </div>
-      <div class="col-span-1 px-4">
-        <h3
-          class="text-lg font-semibold text-center lg:text-left dark:text-white"
-        >
+      <div class="col-span-1">
+        <h3 class="text-lg font-semibold text-left dark:text-white">
           Contacto
         </h3>
-        <p
-          class="text-sm text-slate-500 dark:text-white mt-2 text-center lg:text-left"
-        >
+        <p class="text-sm text-slate-500 dark:text-white mt-2 text-left">
           Email:<br />
           <a
             href="mailto:gdcsscasteloes1984@gmail.com"
@@ -105,7 +91,7 @@
     <hr
       class="border-t-2 border-gray-100 dark:border-gray-700 my-4 w-[65%] mx-auto"
     />
-    <p class="text-center text-sm text-slate-500 dark:text-white mt-10">
+    <p class="text-center text-sm text-slate-500 dark:text-white mt-10 px-1">
       Copyright © {{ new Date().getFullYear() }} GDCSSCastelões. Todos os
       direitos reservados.
     </p>
