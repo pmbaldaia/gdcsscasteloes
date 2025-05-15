@@ -18,6 +18,13 @@ const eventos = [
       "Vem celebrar o tradicional São João connosco! Vai ser uma noite de festa, música, fogos de artifício e muita animação para todos!",
     imagem: "/eventos/saojoao.jpg",
   },
+  {
+    nome: "Des’Banda em Castelões",
+    data: "12 e 13 de Setembro de 2025",
+    descricao:
+      "Vamos estar presentes na Des’Banda para viver dois dias de muita música, festa e animação em Castelões!",
+    imagem: "/eventos/desbanda.jpg",
+  },
 ];
 </script>
 
