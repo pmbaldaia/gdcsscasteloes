@@ -1,6 +1,12 @@
 <template>
-  <LandingNavbar></LandingNavbar>
-  <hr class="border-t-2 border-gray-100 my-4 w-[60%] mx-auto" />
-  <slot></slot>
-  <LandingFooter></LandingFooter>
+  <div
+    class="bg-white text-black dark:bg-gray-900 dark:text-white min-h-screen transition-colors duration-300"
+  >
+    <LandingNavbar />
+    <hr
+      class="border-t-2 border-gray-200 dark:border-gray-700 my-4 w-[60%] mx-auto"
+    />
+    <slot />
+    <LandingFooter />
+  </div>
 </template>

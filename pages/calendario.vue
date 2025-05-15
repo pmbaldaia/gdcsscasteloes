@@ -209,30 +209,33 @@ const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
             {{ game.date }}
           </h3>
 
-          <div class="flex justify-center items-center gap-4 mt-4">
-            <div class="flex flex-col items-center">
+          <div class="flex justify-center gap-4 mt-4 items-center">
+            <div class="flex flex-col items-center w-24 sm:w-28 text-center">
               <img
                 :src="teams.find((t) => t.name === game.teams[0])?.logo"
                 class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
               />
-              <p class="text-sm font-medium text-gray-700 text-center">
+              <p class="text-sm font-medium text-gray-700">
                 {{ game.teams[0] }}
               </p>
             </div>
 
-            <span class="text-xl sm:text-2xl font-bold text-gray-800">vs</span>
+            <div class="flex items-center justify-center h-full">
+              <span class="text-xl sm:text-2xl font-bold text-gray-800"
+                >vs</span
+              >
+            </div>
 
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center w-24 sm:w-28 text-center">
               <img
                 :src="teams.find((t) => t.name === game.teams[1])?.logo"
                 class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
               />
-              <p class="text-sm font-medium text-gray-700 text-center">
+              <p class="text-sm font-medium text-gray-700">
                 {{ game.teams[1] }}
               </p>
             </div>
           </div>
-
           <p class="mt-4 text-gray-600 text-lg">{{ game.time }}</p>
           <p class="text-sm text-gray-400">{{ game.location }}</p>
         </div>

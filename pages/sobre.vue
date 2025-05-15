@@ -17,9 +17,13 @@ const campo = {
 <template>
   <LandingContainer>
     <LandingSectionhead>
-      <template v-slot:title>Sobre nós</template>
+      <template v-slot:title>
+        <span class="text-slate-800 dark:text-white">Sobre nós</span>
+      </template>
       <template v-slot:desc>
-        Localização e imagem do campo do Castelões
+        <span class="text-slate-600 dark:text-gray-300">
+          Localização e imagem do campo do Castelões
+        </span>
       </template>
     </LandingSectionhead>
 
@@ -36,7 +40,7 @@ const campo = {
 
       <div class="w-full md:w-1/2 p-4 flex justify-center items-center">
         <div
-          class="text-2xl text-slate-800 leading-relaxed text-center md:text-left"
+          class="text-2xl leading-relaxed text-center md:text-left text-slate-800 dark:text-white"
         >
           <strong>{{ campo.nome }}</strong>
           <p class="mt-2">{{ campo.rua }}</p>

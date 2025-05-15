@@ -1,12 +1,16 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  modules: ["@nuxtjs/color-mode", "nuxt-icon"],
   css: ["~/assets/css/main.css"],
+  devtools: { enabled: true },
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
-  modules: ["nuxt-icon"],
+  colorMode: {
+    classSuffix: "",
+    preference: "system",
+    fallback: "light",
+  },
 });

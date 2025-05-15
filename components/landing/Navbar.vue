@@ -1,29 +1,25 @@
 <script setup>
-const menuitems = [
-  {
-    title: "Início",
-    path: "/",
-  },
+import { ref, onMounted } from "vue";
+import { Moon, Sun } from "lucide-vue-next";
+const colorMode = useColorMode();
+const open = ref(false);
+const isMounted = ref(false);
 
-  {
-    title: "Calendário",
-    path: "/calendario",
-  },
-  {
-    title: "Eventos",
-    path: "/eventos",
-  },
-  {
-    title: "Sobre nós",
-    path: "/sobre",
-  },
-  {
-    title: "Contactos",
-    path: "/contacto",
-  },
+const toggleTheme = () => {
+  colorMode.preference = colorMode.preference === "dark" ? "light" : "dark";
+};
+
+const menuitems = [
+  { title: "Início", path: "/" },
+  { title: "Calendário", path: "/calendario" },
+  { title: "Eventos", path: "/eventos" },
+  { title: "Sobre nós", path: "/sobre" },
+  { title: "Contactos", path: "/contacto" },
 ];
 
-const open = ref(false);
+onMounted(() => {
+  isMounted.value = true;
+});
 </script>
 
 <template>
@@ -41,8 +37,13 @@ const open = ref(false);
             height="80"
           />
         </a>
-        <div class="block lg:hidden mr-5">
-          <button @click="open = !open" class="text-gray-800">
+        <div class="block lg:hidden mr-5" v-if="isMounted">
+          <button
+            @click="open = !open"
+            :class="
+              colorMode.preference === 'dark' ? 'text-white' : 'text-gray-800'
+            "
+          >
             <svg
               fill="currentColor"
               class="w-4 h-4"
@@ -55,17 +56,18 @@ const open = ref(false);
                 fill-rule="evenodd"
                 clip-rule="evenodd"
                 d="M18.278 16.864a1 1 0 01-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 01-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 011.414-1.414l4.829 4.828 4.828-4.828a1 1 0 111.414 1.414l-4.828 4.829 4.828 4.828z"
-              ></path>
+              />
               <path
                 v-show="!open"
                 fill-rule="evenodd"
                 d="M4 5h16a1 1 0 010 2H4a1 1 0 110-2zm0 6h16a1 1 0 010 2H4a1 1 0 010-2zm0 6h16a1 1 0 010 2H4a1 1 0 010-2z"
-              ></path>
+              />
             </svg>
           </button>
         </div>
       </div>
       <nav
+        v-if="isMounted"
         class="w-full lg:w-auto mt-2 lg:flex lg:mt-0"
         :class="{ block: open, hidden: !open }"
       >
@@ -73,7 +75,7 @@ const open = ref(false);
           <li v-for="item of menuitems" :key="item.path">
             <a
               :href="item.path"
-              class="flex lg:px-3 py-2 text-gray-600 hover:text-green-900 border-b-2 border-transparent hover:border-red-800 transition-all duration-300"
+              class="flex lg:px-3 py-2 border-b-2 border-transparent hover:border-red-800 transition-all duration-300 text-black dark:text-white hover:text-green-900 dark:hover:text-green-400"
             >
               {{ item.title }}
             </a>
@@ -182,21 +184,25 @@ const open = ref(false);
             />
           </svg>
         </a>
+        <button
+          @click="toggleTheme"
+          :aria-label="
+            colorMode.preference === 'dark'
+              ? 'Alternar para tema claro'
+              : 'Alternar para tema escuro'
+          "
+          class="hover:text-green-700 transition w-6 h-6"
+        >
+          <component
+            v-if="isMounted"
+            :is="colorMode.preference === 'dark' ? Sun : Moon"
+            :class="[
+              'w-6 h-6',
+              colorMode.preference === 'dark' ? 'text-white' : 'text-gray-900',
+            ]"
+          />
+        </button>
       </div>
-
-      <!--  <div class="lg:hidden flex items-center mt-3 gap-4">
-          <LandingLink href="#" styleName="muted" block size="md"
-            >Instagram</LandingLink
-          >
-          <LandingLink href="#" size="md" block>Facebook</LandingLink>
-        </div>
-      </nav>
-      <div>
-        <div class="hidden lg:flex items-center gap-4">
-          <a href="#">Instagram</a>
-          <LandingLink href="#" size="md">Facebook</LandingLink>
-        </div>
-      </div> -->
     </header>
   </LandingContainer>
 </template>
