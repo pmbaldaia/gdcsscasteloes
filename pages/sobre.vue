@@ -43,7 +43,7 @@ const campo = {
           class="text-2xl leading-relaxed text-center md:text-left text-slate-800 dark:text-white"
         >
           <strong>{{ campo.nome }}</strong>
-          <p class="mt-2">{{ campo.rua }}</p>
+          <p class="text-slate-600 dark:text-gray-300 mt-2">{{ campo.rua }}</p>
         </div>
       </div>
     </div>

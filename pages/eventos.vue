@@ -24,10 +24,14 @@ const eventos = [
 <template>
   <LandingContainer>
     <LandingSectionhead>
-      <template v-slot:title>Próximos Eventos</template>
+      <template v-slot:title>
+        <span class="text-gray-900 dark:text-white">Próximos Eventos</span>
+      </template>
       <template v-slot:desc>
-        Não percas as nossas próximas festas e eventos! Vem divertir-te
-        connosco!
+        <span class="text-slate-600 dark:text-gray-300">
+          Não percas as nossas próximas festas e eventos! Vem divertir-te
+          connosco!
+        </span>
       </template>
     </LandingSectionhead>
 

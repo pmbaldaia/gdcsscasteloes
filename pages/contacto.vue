@@ -43,21 +43,28 @@ const handleSubmit = () => {
 <template>
   <LandingContainer>
     <LandingSectionhead>
-      <template v-slot:title>Contacto</template>
+      <template v-slot:title>
+        <span class="text-gray-900 dark:text-white">Contacto</span>
+      </template>
       <template v-slot:desc>
-        Preenche o formulário e entra em contacto connosco.
-        <p class="text-lg text-gray-600 leading-relaxed">
+        <p class="text-slate-600 dark:text-gray-300">
+          Preenche o formulário e entra em contacto connosco.
+        </p>
+        <p class="text-slate-600 dark:text-gray-300 mt-2">
           Envia-nos uma mensagem ou email. Respondemos o mais rápido possível!
         </p>
       </template>
     </LandingSectionhead>
 
     <div class="mx-auto mt-16 max-w-full px-4">
-      <div class="bg-white rounded-2xl shadow-md p-6 w-full">
+      <div
+        class="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6 w-full border border-gray-200 dark:border-gray-700"
+      >
         <form @submit.prevent="handleSubmit">
           <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1"
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >Nome</label
               >
               <input
@@ -65,11 +72,12 @@ const handleSubmit = () => {
                 type="text"
                 required
                 placeholder="Primeiro nome"
-                class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1"
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >Apelido</label
               >
               <input
@@ -77,13 +85,14 @@ const handleSubmit = () => {
                 type="text"
                 required
                 placeholder="Último nome"
-                class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
           </div>
 
           <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 mb-1"
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >O teu Email</label
             >
             <input
@@ -91,12 +100,13 @@ const handleSubmit = () => {
               type="email"
               required
               placeholder="teuemail@exemplo.com"
-              class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
           <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 mb-1"
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >Assunto</label
             >
             <input
@@ -104,12 +114,13 @@ const handleSubmit = () => {
               type="text"
               required
               placeholder="Assunto da mensagem"
-              class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
           <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 mb-1"
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >Mensagem</label
             >
             <textarea
@@ -117,7 +128,7 @@ const handleSubmit = () => {
               rows="5"
               required
               placeholder="Escreve aqui a tua mensagem..."
-              class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
             ></textarea>
           </div>
 
@@ -130,13 +141,16 @@ const handleSubmit = () => {
         </form>
       </div>
     </div>
-    <div class="space-y-4 text-gray-700 mt-3 px-5">
+    <div class="space-y-4 text-gray-700 dark:text-gray-300 mt-3 px-5">
       <div
         class="grid grid-cols-1 gap-4 md:flex md:justify-between md:items-center md:gap-2 md:px-0 justify-center items-center"
       >
         <div class="flex items-center gap-2 justify-center">
           <Icon name="uil:envelope" class="text-blue-500 w-5 h-5" />
-          <a href="mailto:gdcsscasteloes1984@gmail.com" class="hover:underline">
+          <a
+            href="mailto:gdcsscasteloes1984@gmail.com"
+            class="hover:underline dark:text-gray-300"
+          >
             gdcsscasteloes1984@gmail.com
           </a>
         </div>

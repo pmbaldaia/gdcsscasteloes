@@ -162,9 +162,13 @@ const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
 <template>
   <LandingContainer>
     <LandingSectionhead>
-      <template #title>Calendário de Jogos</template>
+      <template #title>
+        <span class="text-gray-900 dark:text-white">Calendário de Jogos</span>
+      </template>
       <template #desc>
-        Consulta os próximos jogos e as equipas participantes.
+        <span class="text-slate-600 dark:text-gray-300">
+          Consulta os próximos jogos e as equipas participantes.
+        </span>
       </template>
     </LandingSectionhead>
 
@@ -173,12 +177,12 @@ const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
         <div class="relative">
           <select
             v-model="selectedJornada"
-            class="appearance-none text-lg font-medium rounded-xl border border-gray-300 bg-white px-5 py-3 shadow-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
+            class="appearance-none text-lg font-medium rounded-xl border border-white bg-white dark:bg-gray-900 text-gray-800 dark:text-white px-5 py-3 shadow-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
           >
             <option v-for="j in 26" :key="j" :value="j">Jornada {{ j }}</option>
           </select>
           <div
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 dark:text-gray-400"
           >
             <svg
               class="w-5 h-5"
@@ -203,9 +207,11 @@ const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
         <div
           v-for="(game, index) in filteredGames"
           :key="index"
-          class="bg-white p-3 rounded-2xl shadow-lg text-center w-full"
+          class="bg-white dark:bg-gray-900 p-3 rounded-2xl shadow-lg text-center w-full border border-white"
         >
-          <h3 class="text-lg sm:text-xl font-bold text-gray-800">
+          <h3
+            class="text-lg sm:text-xl font-bold text-gray-800 dark:text-white"
+          >
             {{ game.date }}
           </h3>
 
@@ -215,15 +221,17 @@ const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
                 :src="teams.find((t) => t.name === game.teams[0])?.logo"
                 class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
               />
-              <p class="text-sm font-medium text-gray-700">
+              <p class="text-sm font-medium text-gray-700 dark:text-gray-300">
                 {{ game.teams[0] }}
               </p>
             </div>
 
             <div class="flex items-center justify-center h-full">
-              <span class="text-xl sm:text-2xl font-bold text-gray-800"
-                >vs</span
+              <span
+                class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white"
               >
+                vs
+              </span>
             </div>
 
             <div class="flex flex-col items-center w-24 sm:w-28 text-center">
@@ -231,13 +239,18 @@ const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
                 :src="teams.find((t) => t.name === game.teams[1])?.logo"
                 class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
               />
-              <p class="text-sm font-medium text-gray-700">
+              <p class="text-sm font-medium text-gray-700 dark:text-gray-300">
                 {{ game.teams[1] }}
               </p>
             </div>
           </div>
-          <p class="mt-4 text-gray-600 text-lg">{{ game.time }}</p>
-          <p class="text-sm text-gray-400">{{ game.location }}</p>
+
+          <p class="mt-4 text-gray-600 dark:text-gray-400 text-lg">
+            {{ game.time }}
+          </p>
+          <p class="text-sm text-gray-400 dark:text-gray-500">
+            {{ game.location }}
+          </p>
         </div>
       </div>
     </div>
