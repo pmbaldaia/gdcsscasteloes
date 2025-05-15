@@ -8,9 +8,16 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  vite: {
+    optimizeDeps: {
+      include: ["@phosphor-icons/vue"],
+    },
+    ssr: {
+      noExternal: ["@phosphor-icons/vue"],
+    },
+  },
   colorMode: {
     classSuffix: "",
     preference: "system",
-    fallback: "light",
   },
 });

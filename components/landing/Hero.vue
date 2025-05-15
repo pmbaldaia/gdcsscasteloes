@@ -5,7 +5,7 @@
     >
       <img
         class="rounded-full transition-transform transform hover:scale-125 w-2/3 max-w-[200px] md:w-full md:max-w-[300px] lg:max-w-[400px]"
-        src="~/assets/img/20252026.jpg"
+        src="/assets/img/20252026.jpg"
         alt="Época 2025/2026"
         loading="eager"
         format="avif"

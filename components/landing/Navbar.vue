@@ -47,14 +47,14 @@ onMounted(() => {
             <img
               v-if="isMounted && colorMode.value !== 'dark'"
               class="transition-transform transform hover:scale-125 w-16 h-16 lg:w-20 lg:h-20"
-              src="~/assets/img/logowbg.png"
+              src="/assets/img/logowbg.png"
               alt="Logo GDCSSCastelões"
               loading="eager"
             />
             <img
               v-else-if="isMounted && colorMode.value === 'dark'"
               class="transition-transform transform hover:scale-125 w-16 h-16 lg:w-20 lg:h-20"
-              src="~/assets/img/logotipo.png"
+              src="/assets/img/logotipo.png"
               alt="Logo GDCSSCastelões (Dark)"
               loading="eager"
             />
@@ -75,10 +75,9 @@ onMounted(() => {
             >
               <PhSun
                 v-if="colorMode.preference === 'dark'"
-                class="w-6 h-6"
-                :class="'text-white'"
+                class="w-6 h-6 text-white"
               />
-              <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
+              <PhMoon v-else class="w-6 h-6 text-gray-900" />
             </button>
 
             <button
@@ -155,6 +154,7 @@ onMounted(() => {
             <PhFacebookLogo class="w-6 h-6" />
           </a>
           <button
+            v-if="isMounted"
             @click="toggleTheme"
             :aria-label="
               colorMode.preference === 'dark'
@@ -165,10 +165,9 @@ onMounted(() => {
           >
             <PhSun
               v-if="colorMode.preference === 'dark'"
-              class="w-6 h-6"
-              :class="'text-white'"
+              class="w-6 h-6 text-white"
             />
-            <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
+            <PhMoon v-else class="w-6 h-6 text-gray-900" />
           </button>
         </div>
       </div>
