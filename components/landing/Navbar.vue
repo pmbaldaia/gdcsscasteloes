@@ -88,7 +88,8 @@ onMounted(() => {
               "
               aria-label="Menu"
             >
-              <component :is="open ? PhX : PhList" class="w-6 h-6" />
+              <PhX v-if="open" class="w-6 h-6" />
+              <PhList v-else class="w-6 h-6" />
             </button>
           </div>
         </div>
