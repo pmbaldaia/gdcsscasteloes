@@ -72,8 +72,15 @@ const handleSubmit = () => {
   <LandingContainer>
     <LandingSectionhead>
       <template v-slot:title>
-        <span class="text-gray-900 dark:text-white">Contacto</span>
+        <div class="flex flex-col items-center">
+          <span class="text-gray-900 dark:text-white">Contacto</span>
+          <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
+            <div class="w-1/2 bg-red-600"></div>
+            <div class="w-1/2 bg-green-600"></div>
+          </div>
+        </div>
       </template>
+
       <template v-slot:desc>
         <p class="text-slate-600 dark:text-gray-300">
           Preenche o formulário e entra em contacto connosco.
@@ -84,7 +91,7 @@ const handleSubmit = () => {
       </template>
     </LandingSectionhead>
 
-    <div class="mx-auto mt-16 max-w-full px-4">
+    <div class="mx-auto mt-16 max-w-full">
       <div
         class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 w-full border border-gray-200 dark:border-gray-700"
       >
@@ -187,12 +194,14 @@ const handleSubmit = () => {
           <div v-if="formError" class="mb-2 text-red-600 font-semibold">
             *Preencher campo(s) obrigatório(s)
           </div>
-          <button
-            type="submit"
-            class="bg-green-800 hover:bg-red-800 hover:text-white border border-green-800 hover:border-white w-full text-white py-2 px-4 rounded-lg font-medium transition"
-          >
-            Enviar Email
-          </button>
+          <div class="flex justify-end">
+            <button
+              type="submit"
+              class="bg-red-800 text-white hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto inline-block text-center px-4 py-2 rounded"
+            >
+              Enviar Email
+            </button>
+          </div>
         </form>
       </div>
     </div>

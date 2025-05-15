@@ -32,8 +32,15 @@ const eventos = [
   <LandingContainer>
     <LandingSectionhead>
       <template v-slot:title>
-        <span class="text-gray-900 dark:text-white">Próximos Eventos</span>
+        <div class="flex flex-col items-center">
+          <span class="text-gray-900 dark:text-white">Próximos Eventos</span>
+          <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
+            <div class="w-1/2 bg-red-600"></div>
+            <div class="w-1/2 bg-green-600"></div>
+          </div>
+        </div>
       </template>
+
       <template v-slot:desc>
         <span class="text-slate-600 dark:text-gray-300">
           Não percas as nossas próximas festas e eventos! Vem divertir-te

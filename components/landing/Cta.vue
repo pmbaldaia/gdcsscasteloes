@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-black px-8 py-16 mt-20 mx-auto max-w-5xl rounded-2xl flex flex-col items-center text-center shadow-xl"
+    class="bg-black px-4 py-16 mt-20 mx-auto max-w-5xl rounded-2xl flex flex-col items-center text-center shadow-xl"
   >
     <h2 class="text-white text-3xl md:text-5xl font-bold">
       Junta-te à nossa paixão pelo desporto
@@ -13,23 +13,19 @@
     <div
       class="mt-6 flex flex-col sm:flex-row gap-3 justify-start items-center"
     >
-      <LandingLink
-        size="lg"
-        class="bg-green-800 text-black hover:bg-black hover:text-white border border-green-800 hover:border-white w-full sm:w-auto"
-        rel="noopener"
-        href="/"
+      <a
+        href="/sobre/"
+        class="bg-green-800 text-white hover:bg-black hover:text-white border border-green-800 hover:border-white w-full sm:w-auto inline-block text-center px-4 py-2 rounded"
       >
         Conhecer o Clube
-      </LandingLink>
+      </a>
 
-      <LandingLink
-        size="lg"
-        class="bg-red-800 text-black hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto"
-        rel="noopener"
-        href="/contacto"
+      <a
+        href="/contacto/"
+        class="bg-red-800 text-white hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto inline-block text-center px-4 py-2 rounded"
       >
         Torna-te Sócio
-      </LandingLink>
+      </a>
     </div>
   </div>
 </template>

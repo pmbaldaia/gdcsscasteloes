@@ -14,10 +14,11 @@ const toggleTheme = () => {
 
 const menuitems = [
   { title: "Início", path: "/" },
-  { title: "Calendário", path: "/calendario" },
+  { title: "Calendário", path: "/calendario/" },
   { title: "Eventos", path: "/eventos/" },
-  { title: "Sobre nós", path: "/sobre" },
-  { title: "Contactos", path: "/contacto" },
+  { title: "Galeria", path: "/galeria/" },
+  { title: "Sobre nós", path: "/sobre/" },
+  { title: "Contactos", path: "/contacto/" },
 ];
 
 onMounted(() => {
@@ -31,27 +32,23 @@ onMounted(() => {
       class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md"
     >
       <div
-        class="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row justify-between items-center pt-5 pb-5"
+        class="max-w-7xl mx-auto px-8 flex flex-col lg:flex-row justify-between items-center pt-5 pb-5"
       >
         <div class="flex w-full lg:w-auto items-center justify-between">
           <a href="/" class="text-lg">
             <img
               v-if="isMounted && colorMode.value !== 'dark'"
-              class="transition-transform transform hover:scale-125"
+              class="transition-transform transform hover:scale-125 w-16 h-16 lg:w-20 lg:h-20"
               src="~/assets/img/logowbg.png"
               alt="Logo GDCSSCastelões"
               loading="eager"
-              width="80"
-              height="80"
             />
             <img
               v-else-if="isMounted && colorMode.value === 'dark'"
-              class="transition-transform transform hover:scale-125"
+              class="transition-transform transform hover:scale-125 w-16 h-16 lg:w-20 lg:h-20"
               src="~/assets/img/logotipo.png"
               alt="Logo GDCSSCastelões (Dark)"
               loading="eager"
-              width="80"
-              height="80"
             />
           </a>
 

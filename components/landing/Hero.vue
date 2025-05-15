@@ -1,5 +1,5 @@
 <template>
-  <main class="grid lg:grid-cols-2 place-items-center pt-5 pb-8 md:pt-8">
+  <main class="grid lg:grid-cols-2 place-items-center pt-5 pb-8 md:pt-8 mt-8">
     <div
       class="pt-0 pb-5 px-5 order-first md:order-2 w-full flex justify-center"
     >
@@ -30,23 +30,19 @@
       <div
         class="mt-6 flex flex-col sm:flex-row gap-3 justify-start items-center"
       >
-        <LandingLink
-          size="lg"
-          class="bg-red-800 text-black hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto"
-          rel="noopener"
+        <a
+          class="bg-red-800 text-white hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto inline-block text-center px-4 py-2 rounded"
           href="/eventos/"
         >
           Ver Eventos
-        </LandingLink>
+        </a>
 
-        <LandingLink
-          size="lg"
-          class="bg-green-800 text-black hover:bg-black hover:text-white border border-green-800 hover:border-white w-full sm:w-auto"
-          rel="noopener"
-          href="/calendario"
+        <a
+          class="bg-green-800 text-white hover:bg-black hover:text-white border border-green-800 hover:border-white w-full sm:w-auto inline-block text-center px-4 py-2 rounded"
+          href="/calendario/"
         >
           Ver Calendário
-        </LandingLink>
+        </a>
       </div>
     </div>
   </main>
