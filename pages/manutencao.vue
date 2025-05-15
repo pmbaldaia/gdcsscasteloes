@@ -3,7 +3,7 @@ definePageMeta({
   layout: "blank",
 });
 
-import { Moon, Sun } from "@phosphor-icons/vue";
+import { PhMoon, PhSun } from "@phosphor-icons/vue";
 
 const colorMode = useColorMode();
 const isMounted = ref(false);
@@ -38,7 +38,7 @@ onMounted(() => {
           class="hover:text-green-600 transition w-8 h-8 flex items-center justify-center"
         >
           <component
-            :is="colorMode.preference === 'dark' ? Sun : Moon"
+            :is="colorMode.preference === 'dark' ? PhSun : PhMoon"
             :class="[
               'w-6 h-6',
               colorMode.preference === 'dark' ? 'text-white' : 'text-gray-900',
