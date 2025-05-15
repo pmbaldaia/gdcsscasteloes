@@ -1,7 +1,7 @@
 <template>
   <footer class="mt-24 mb-8 mx-8 lg:mx-20">
     <hr
-      class="border-t-2 border-gray-100 dark:border-gray-700 my-4 w-[65%] mx-auto"
+      class="border-t-2 border-gray-100 dark:border-gray-700 my-4 w-[70%] mx-auto"
     />
     <div
       class="grid grid-cols-1 lg:grid-cols-4 gap-12 max-w-screen-xl mx-auto"
@@ -89,7 +89,7 @@
       </div>
     </div>
     <hr
-      class="border-t-2 border-gray-100 dark:border-gray-700 my-4 w-[65%] mx-auto"
+      class="border-t-2 border-gray-100 dark:border-gray-700 my-4 w-[70%] mx-auto"
     />
     <p class="text-center text-sm text-slate-500 dark:text-white mt-10">
       Copyright © {{ new Date().getFullYear() }} GDCSSCastelões. Todos os

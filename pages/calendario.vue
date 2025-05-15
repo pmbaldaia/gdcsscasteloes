@@ -207,7 +207,7 @@ const filteredGames = computed(() => jornadas[selectedJornada.value] || []);
         <div
           v-for="(game, index) in filteredGames"
           :key="index"
-          class="bg-white dark:bg-gray-900 p-3 rounded-2xl shadow-lg text-center w-full border border-white"
+          class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg text-center w-full"
         >
           <h3
             class="text-lg sm:text-xl font-bold text-gray-800 dark:text-white"

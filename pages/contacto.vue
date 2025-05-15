@@ -86,7 +86,7 @@ const handleSubmit = () => {
 
     <div class="mx-auto mt-16 max-w-full px-4">
       <div
-        class="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6 w-full border border-gray-200 dark:border-gray-700"
+        class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 w-full border border-gray-200 dark:border-gray-700"
       >
         <form @submit.prevent="handleSubmit">
           <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
