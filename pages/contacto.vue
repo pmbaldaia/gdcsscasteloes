@@ -89,10 +89,6 @@ const handleSubmit = () => {
         class="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6 w-full border border-gray-200 dark:border-gray-700"
       >
         <form @submit.prevent="handleSubmit">
-          <div v-if="formError" class="mb-4 text-red-600 font-semibold">
-            *Preencher campo(s) obrigatório(s)
-          </div>
-
           <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <div>
               <label
@@ -188,7 +184,9 @@ const handleSubmit = () => {
               ]"
             ></textarea>
           </div>
-
+          <div v-if="formError" class="mb-2 text-red-600 font-semibold">
+            *Preencher campo(s) obrigatório(s)
+          </div>
           <button
             type="submit"
             class="bg-green-800 hover:bg-red-800 hover:text-white border border-green-800 hover:border-white w-full text-white py-2 px-4 rounded-lg font-medium transition"
