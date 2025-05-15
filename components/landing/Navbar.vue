@@ -24,20 +24,53 @@ onMounted(() => {
 
 <template>
   <LandingContainer>
-    <header class="flex flex-col lg:flex-row justify-between items-center my-5">
+    <header class="flex flex-col lg:flex-row justify-between items-center pt-5">
       <div class="flex w-full lg:w-auto items-center justify-between">
         <a href="/" class="text-lg">
           <img
+            v-if="isMounted && colorMode.value !== 'dark'"
             class="transition-transform transform hover:scale-125"
             src="~/assets/img/logowbg.png"
             alt="Logo GDCSSCastelões"
             loading="eager"
-            format="avif"
+            width="80"
+            height="80"
+          />
+          <img
+            v-else-if="isMounted && colorMode.value === 'dark'"
+            class="transition-transform transform hover:scale-125"
+            src="~/assets/img/logotipo.png"
+            alt="Logo GDCSSCastelões (Dark)"
+            loading="eager"
             width="80"
             height="80"
           />
         </a>
-        <div class="block lg:hidden mr-5" v-if="isMounted">
+
+        <div
+          class="flex items-center space-x-4 lg:hidden mr-5"
+          v-if="isMounted"
+        >
+          <button
+            @click="toggleTheme"
+            :aria-label="
+              colorMode.preference === 'dark'
+                ? 'Alternar para tema claro'
+                : 'Alternar para tema escuro'
+            "
+            class="hover:text-green-700 transition w-6 h-6 flex items-center justify-center"
+          >
+            <component
+              :is="colorMode.preference === 'dark' ? Sun : Moon"
+              :class="[
+                'w-6 h-6',
+                colorMode.preference === 'dark'
+                  ? 'text-white'
+                  : 'text-gray-900',
+              ]"
+            />
+          </button>
+
           <button
             @click="open = !open"
             :class="
@@ -46,7 +79,7 @@ onMounted(() => {
           >
             <svg
               fill="currentColor"
-              class="w-4 h-4"
+              class="w-6 h-6"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
             >

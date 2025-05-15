@@ -11,6 +11,16 @@ const senderEmail = ref("");
 const subject = ref("");
 const message = ref("");
 
+const errors = ref({
+  firstName: false,
+  lastName: false,
+  senderEmail: false,
+  subject: false,
+  message: false,
+});
+
+const touched = ref(false);
+
 const mailtoLink = computed(() => {
   const name = `${firstName.value} ${lastName.value}`.trim();
   const body = `Prezado(a),
@@ -35,8 +45,26 @@ ${name}
   return `mailto:gdcsscasteloes1984@gmail.com?subject=${mailSubject}&body=${mailBody}`;
 });
 
+const validateFields = () => {
+  errors.value.firstName = firstName.value.trim() === "";
+  errors.value.lastName = lastName.value.trim() === "";
+  errors.value.senderEmail = senderEmail.value.trim() === "";
+  errors.value.subject = subject.value.trim() === "";
+  errors.value.message = message.value.trim() === "";
+
+  return !Object.values(errors.value).includes(true);
+};
+
+const formError = ref(false);
+
 const handleSubmit = () => {
-  window.location.href = mailtoLink.value;
+  touched.value = true;
+  formError.value = false;
+  if (validateFields()) {
+    window.location.href = mailtoLink.value;
+  } else {
+    formError.value = true;
+  }
 };
 </script>
 
@@ -61,31 +89,45 @@ const handleSubmit = () => {
         class="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6 w-full border border-gray-200 dark:border-gray-700"
       >
         <form @submit.prevent="handleSubmit">
+          <div v-if="formError" class="mb-4 text-red-600 font-semibold">
+            *Preencher campo(s) obrigatório(s)
+          </div>
+
           <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <div>
               <label
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >Nome</label
               >
+                Nome <span class="text-red-600">*</span>
+              </label>
               <input
                 v-model="firstName"
                 type="text"
-                required
                 placeholder="Primeiro nome"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
+                :class="[
+                  'w-full px-4 py-2 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500',
+                  touched && errors.firstName
+                    ? 'border-2 border-red-600 focus:border-red-600 focus:ring-red-600'
+                    : 'border border-gray-300 dark:border-gray-600',
+                ]"
               />
             </div>
             <div>
               <label
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >Apelido</label
               >
+                Apelido <span class="text-red-600">*</span>
+              </label>
               <input
                 v-model="lastName"
                 type="text"
-                required
                 placeholder="Último nome"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
+                :class="[
+                  'w-full px-4 py-2 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500',
+                  touched && errors.lastName
+                    ? 'border-2 border-red-600 focus:border-red-600 focus:ring-red-600'
+                    : 'border border-gray-300 dark:border-gray-600',
+                ]"
               />
             </div>
           </div>
@@ -93,42 +135,57 @@ const handleSubmit = () => {
           <div class="mb-4">
             <label
               class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >O teu Email</label
             >
+              O teu Email <span class="text-red-600">*</span>
+            </label>
             <input
               v-model="senderEmail"
               type="email"
-              required
               placeholder="teuemail@exemplo.com"
-              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
+              :class="[
+                'w-full px-4 py-2 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500',
+                touched && errors.senderEmail
+                  ? 'border-2 border-red-600 focus:border-red-600 focus:ring-red-600'
+                  : 'border border-gray-300 dark:border-gray-600',
+              ]"
             />
           </div>
 
           <div class="mb-4">
             <label
               class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >Assunto</label
             >
+              Assunto <span class="text-red-600">*</span>
+            </label>
             <input
               v-model="subject"
               type="text"
-              required
               placeholder="Assunto da mensagem"
-              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
+              :class="[
+                'w-full px-4 py-2 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500',
+                touched && errors.subject
+                  ? 'border-2 border-red-600 focus:border-red-600 focus:ring-red-600'
+                  : 'border border-gray-300 dark:border-gray-600',
+              ]"
             />
           </div>
 
           <div class="mb-4">
             <label
               class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >Mensagem</label
             >
+              Mensagem <span class="text-red-600">*</span>
+            </label>
             <textarea
               v-model="message"
               rows="5"
-              required
               placeholder="Escreve aqui a tua mensagem..."
-              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
+              :class="[
+                'w-full px-4 py-2 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500',
+                touched && errors.message
+                  ? 'border-2 border-red-600 focus:border-red-600 focus:ring-red-600'
+                  : 'border border-gray-300 dark:border-gray-600',
+              ]"
             ></textarea>
           </div>
 
@@ -141,6 +198,7 @@ const handleSubmit = () => {
         </form>
       </div>
     </div>
+
     <div class="space-y-4 text-gray-700 dark:text-gray-300 mt-3 px-5">
       <div
         class="grid grid-cols-1 gap-4 md:flex md:justify-between md:items-center md:gap-2 md:px-0 justify-center items-center"

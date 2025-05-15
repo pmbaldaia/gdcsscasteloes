@@ -4,7 +4,7 @@
       class="pt-0 pb-5 px-5 order-first md:order-2 w-full flex justify-center"
     >
       <img
-        class="rounded-full transition-transform transform hover:scale-125 w-2/3 max-w-[200px] md:w-full md:max-w-none"
+        class="rounded-full transition-transform transform hover:scale-125 w-2/3 max-w-[200px] md:w-full md:max-w-[300px] lg:max-w-[400px]"
         src="~/assets/img/20252026.jpg"
         alt="Época 2025/2026"
         loading="eager"
