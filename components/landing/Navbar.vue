@@ -73,15 +73,12 @@ onMounted(() => {
               "
               class="hover:text-green-700 transition w-6 h-6 flex items-center justify-center"
             >
-              <component
-                :is="colorMode.preference === 'dark' ? PhSun : PhMoon"
+              <PhSun
+                v-if="colorMode.preference === 'dark'"
                 class="w-6 h-6"
-                :class="
-                  colorMode.preference === 'dark'
-                    ? 'text-white'
-                    : 'text-gray-900'
-                "
+                :class="'text-white'"
               />
+              <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
             </button>
 
             <button
@@ -109,7 +106,11 @@ onMounted(() => {
                 :href="item.path"
                 :class="[
                   'flex lg:px-3 py-2 border-b-2 border-transparent transition-all duration-300 text-black dark:text-white hover:text-green-900 dark:hover:text-green-400',
-                  route.path === item.path ? 'border-b-2 border-white' : '',
+                  route.path === item.path
+                    ? colorMode.preference === 'dark'
+                      ? 'border-b-2 border-white'
+                      : 'border-b-2 border-black'
+                    : '',
                 ]"
               >
                 {{ item.title }}
@@ -161,13 +162,12 @@ onMounted(() => {
             "
             class="hover:text-green-700 transition w-6 h-6 flex items-center justify-center"
           >
-            <component
-              :is="colorMode.preference === 'dark' ? PhSun : PhMoon"
+            <PhSun
+              v-if="colorMode.preference === 'dark'"
               class="w-6 h-6"
-              :class="
-                colorMode.preference === 'dark' ? 'text-white' : 'text-gray-900'
-              "
+              :class="'text-white'"
             />
+            <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
           </button>
         </div>
       </div>
