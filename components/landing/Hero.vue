@@ -34,7 +34,7 @@
           size="lg"
           class="bg-red-800 text-black hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto"
           rel="noopener"
-          href="/eventos"
+          href="/eventos/"
         >
           Ver Eventos
         </LandingLink>
