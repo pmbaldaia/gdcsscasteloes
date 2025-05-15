@@ -42,13 +42,14 @@ const eventos = [
       </template>
     </LandingSectionhead>
 
+    <
     <div
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-screen-lg mt-12"
     >
       <div
         v-for="evento in eventos"
         :key="evento.nome"
-        class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col"
+        class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex flex-col"
       >
         <img
           :src="evento.imagem"
@@ -57,15 +58,19 @@ const eventos = [
         />
 
         <div class="p-4 flex flex-col flex-grow">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2 min-h-[3.5rem]">
+          <h3
+            class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2 min-h-[3.5rem]"
+          >
             {{ evento.nome }}
           </h3>
 
           <div class="grid grid-rows-[auto_auto] gap-1">
-            <p class="text-sm text-gray-500 min-h-[1.5rem]">
+            <p class="text-sm text-gray-500 dark:text-gray-400 min-h-[1.5rem]">
               Data: {{ evento.data }}
             </p>
-            <p class="text-base text-gray-700 min-h-[4.5rem]">
+            <p
+              class="text-base text-gray-700 dark:text-gray-300 min-h-[4.5rem] text-justify"
+            >
               {{ evento.descricao }}
             </p>
           </div>
