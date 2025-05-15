@@ -13,7 +13,7 @@ const eventos = [
   },
   {
     nome: "São João no Complexo Desportivo de Castelões",
-    data: "23 de Junho de 2025",
+    data: "21 de Junho de 2025",
     descricao:
       "Vem celebrar o tradicional São João connosco! Vai ser uma noite de festa, música, fogos de artifício e muita animação para todos!",
     imagem: "/eventos/saojoao.jpg",
