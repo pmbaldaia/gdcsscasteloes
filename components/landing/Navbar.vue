@@ -64,7 +64,7 @@ onMounted(() => {
             class="flex items-center space-x-4 lg:hidden mr-5"
             v-if="isMounted"
           >
-            <button
+            <!-- <button
               @click="toggleTheme"
               :aria-label="
                 colorMode.preference === 'dark'
@@ -79,7 +79,7 @@ onMounted(() => {
                 :class="'text-white'"
               />
               <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
-            </button>
+            </button> -->
 
             <button
               @click="open = !open"
@@ -106,12 +106,12 @@ onMounted(() => {
               <a
                 :href="item.path"
                 :class="[
-                  'flex lg:px-3 py-2 border-b-2 border-transparent transition-all duration-300 text-black dark:text-white hover:text-green-900 dark:hover:text-green-400',
+                  'flex lg:px-3 py-2 transition-all duration-300 text-black dark:text-white hover:text-green-900 dark:hover:text-green-400',
                   route.path === item.path
                     ? colorMode.preference === 'dark'
                       ? 'border-b-2 border-white'
                       : 'border-b-2 border-black'
-                    : '',
+                    : 'border-b-2 border-transparent',
                 ]"
               >
                 {{ item.title }}
@@ -154,7 +154,7 @@ onMounted(() => {
           >
             <PhFacebookLogo class="w-6 h-6" />
           </a>
-          <button
+          <!-- <button
             @click="toggleTheme"
             :aria-label="
               colorMode.preference === 'dark'
@@ -169,7 +169,7 @@ onMounted(() => {
               :class="'text-white'"
             />
             <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
-          </button>
+          </button> -->
         </div>
       </div>
       <hr
