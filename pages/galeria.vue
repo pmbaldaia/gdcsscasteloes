@@ -3,7 +3,7 @@ definePageMeta({
   layout: "landing",
 });
 
-import { ref, nextTick } from "vue";
+import { ref, onMounted, nextTick } from "vue";
 
 const categories = ref([
   {
@@ -54,6 +54,19 @@ const closeDialog = () => {
   dialogRef.value?.close();
   selectedImage.value = null;
 };
+
+const preloadImages = () => {
+  categories.value.forEach((category) => {
+    category.images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  });
+};
+
+onMounted(() => {
+  preloadImages();
+});
 </script>
 
 <template>
