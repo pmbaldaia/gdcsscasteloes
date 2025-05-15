@@ -3,7 +3,7 @@ definePageMeta({
   layout: "blank",
 });
 
-import { Moon, Sun } from "lucide-vue-next";
+import { Moon, Sun } from "@phosphor-icons/vue";
 
 const colorMode = useColorMode();
 const isMounted = ref(false);
