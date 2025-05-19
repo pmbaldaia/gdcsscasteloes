@@ -320,20 +320,9 @@ onBeforeUnmount(() => {
 
       <div
         v-else
-        class="flex flex-col items-center justify-center py-20 space-y-6 text-center"
+        class="flex flex-col items-center justify-center py-8 space-y-6 text-center"
       >
-        <div class="w-16 h-16">
-          <div class="text-5xl animate-bounce">⚽</div>
-        </div>
-
-        <div>
-          <p class="text-xl font-semibold text-gray-800 dark:text-white">
-            A carregar o calendário da nova época…
-          </p>
-          <p class="text-gray-600 dark:text-gray-400 text-base mt-2">
-            Prepara-te para grandes emoções no futebol distrital!
-          </p>
-        </div>
+        <div class="text-9xl animate-bounce">⚽</div>
       </div>
     </div>
   </LandingContainer>
