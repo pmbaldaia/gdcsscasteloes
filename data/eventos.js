@@ -1,9 +1,8 @@
-// /data/eventos.js
 export const eventos = [
   {
     nome: "41 Anos do G.D.C.S.S. Castelões",
     slug: "41-anos-do-gdcss-casteloes",
-    data: "11 de Abril de 2025",
+    data: "11/04/2025",
     descricao:
       "Venha celebrar conosco os 41 anos de história, conquistas e dedicação do nosso clube!",
     imagem: "/eventos/41anos.jpg",
@@ -16,7 +15,7 @@ export const eventos = [
   {
     nome: "São João no Complexo Desportivo de Castelões",
     slug: "sao-joao-complexo-desportivo-casteloes",
-    data: "21 de Junho de 2025",
+    data: "21/06/2025",
     descricao: "Vem celebrar o tradicional São João connosco!",
     imagem: "/eventos/saojoao.jpg",
     detalhes: `
@@ -27,7 +26,7 @@ export const eventos = [
   {
     nome: "Master Castelões vs Jovens Maduros",
     slug: "jogo-dos-veteranos-2025",
-    data: "24 de Maio de 2025",
+    data: "24/05/2025",
     descricao:
       "Não faltes ao grande duelo entre os Master Castelões e os Jovens Maduros!",
     imagem: "/eventos/veteranos.jpg",
@@ -38,7 +37,7 @@ export const eventos = [
   {
     nome: "Encerramento da Época 2024/2025",
     slug: "encerramento-epoca-2024-2025",
-    data: "22 de Junho de 2025",
+    data: "22/06/2025",
     descricao: "Um dia para celebrar conquistas e reconhecer esforços.",
     imagem: "/eventos/encerramento.jpg",
     detalhes: `
@@ -55,7 +54,7 @@ export const eventos = [
   {
     nome: "Des'Banda em Castelões",
     slug: "desbanda-em-casteloes",
-    data: "5 e 6 de Setembro de 2025",
+    data: "05/09/2025",
     descricao: "Dois dias de música, festa e animação em Castelões!",
     imagem: "/eventos/desbanda.jpg",
     detalhes: `
