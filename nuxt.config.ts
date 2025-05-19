@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/color-mode", "nuxt-icon"],
+  modules: ["@nuxtjs/color-mode", "nuxt-icon", "@pinia/nuxt"],
   css: ["~/assets/css/main.css"],
   devtools: { enabled: true },
   postcss: {
