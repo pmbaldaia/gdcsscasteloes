@@ -150,12 +150,14 @@ onMounted(() => {
         <div class="hidden lg:flex items-center gap-4">
           <a
             href="https://www.instagram.com/gdcsscasteloes/"
+            target="_blank"
             aria-label="Instagram"
           >
             <PhInstagramLogo class="w-6 h-6" />
           </a>
           <a
             href="https://www.facebook.com/gdcscasteloes/"
+            target="_blank"
             aria-label="Facebook"
           >
             <PhFacebookLogo class="w-6 h-6" />

@@ -35,23 +35,29 @@ import { eventos } from "~/data/eventos";
         :key="evento.slug"
         class="bg-white dark:bg-zinc-800 rounded-2xl shadow-md overflow-hidden flex flex-col"
       >
-        <img
-          :src="evento.imagem"
-          :alt="evento.nome"
-          class="w-full h-64 object-cover"
-        />
+        <div class="w-full aspect-square overflow-hidden">
+          <img
+            :src="evento.imagem"
+            :alt="evento.nome"
+            class="w-full h-full object-cover"
+          />
+        </div>
 
         <div class="p-4 flex flex-col justify-between flex-1">
-          <div>
-            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+          <div class="flex-1 flex flex-col">
+            <h2
+              class="text-xl font-bold text-gray-900 dark:text-white mb-2 leading-snug min-h-[3rem]"
+            >
               {{ evento.nome }}
             </h2>
 
-            <p class="text-sm text-gray-700 dark:text-gray-400 mb-1">
+            <p class="text-sm text-gray-700 dark:text-gray-400 mb-2">
               <strong>Data:</strong> {{ evento.data }}
             </p>
 
-            <p class="text-gray-800 dark:text-gray-300 text-sm line-clamp-3">
+            <p
+              class="text-gray-800 dark:text-gray-300 text-sm line-clamp-3 flex-grow"
+            >
               {{ evento.descricao }}
             </p>
           </div>
