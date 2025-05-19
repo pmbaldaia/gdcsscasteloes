@@ -25,6 +25,7 @@ const menuitems = [
   { title: "Calendário", path: "/calendario/" },
   { title: "Eventos", path: "/eventos/" },
   { title: "Galeria", path: "/galeria/" },
+  { title: "Oportunidades", path: "/oportunidades/" },
   { title: "Sobre nós", path: "/sobre/" },
   { title: "Contactos", path: "/contacto/" },
 ];
@@ -101,12 +102,18 @@ onMounted(() => {
           <ul
             class="flex flex-col items-center text-center lg:flex-row lg:gap-3"
           >
-            <li v-for="item of menuitems" :key="item.path">
-              <a
-                :href="item.path"
+            <li v-for="item in menuitems" :key="item.path">
+              <NuxtLink
+                :to="item.path"
+                @click="open = false"
                 :class="[
                   'flex lg:px-3 py-2 transition-all duration-300 text-black dark:text-white hover:text-green-900 dark:hover:text-green-400',
-                  route.path === item.path
+                  (
+                    item.path === '/eventos/'
+                      ? route.path === '/eventos/' ||
+                        route.path.startsWith('/eventos/')
+                      : route.path === item.path
+                  )
                     ? colorMode.preference === 'dark'
                       ? 'border-b-2 border-white'
                       : 'border-b-2 border-black'
@@ -114,7 +121,7 @@ onMounted(() => {
                 ]"
               >
                 {{ item.title }}
-              </a>
+              </NuxtLink>
             </li>
           </ul>
 

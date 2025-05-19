@@ -4,8 +4,9 @@
   >
     <LandingNavbar />
     <main class="flex-grow pt-24 px-8">
-      <slot />
+      <NuxtPage />
     </main>
+
     <LandingFooter />
   </div>
 </template>
