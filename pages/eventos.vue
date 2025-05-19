@@ -20,7 +20,7 @@ const eventos = [
   },
   {
     nome: "Des’Banda em Castelões",
-    data: "12 e 13 de Setembro de 2025",
+    data: "2 e 3 de Setembro de 2025",
     descricao:
       "Vamos estar presentes na Des’Banda para viver dois dias de muita música, festa e animação em Castelões!",
     imagem: "/eventos/desbanda.jpg",

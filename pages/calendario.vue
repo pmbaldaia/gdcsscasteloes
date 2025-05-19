@@ -25,7 +25,7 @@ const teams = [
 ];
 
 const jornadas = {
-  1: [
+  /* 1: [
     {
       date: "2024-10-06",
       time: "15:00",
@@ -156,7 +156,7 @@ const jornadas = {
       location: "Estádio G",
       teams: ["AC Croca", "GRD Rans"],
     },
-  ],
+  ], */
 };
 
 const availableJornadas = Object.keys(jornadas)
@@ -206,14 +206,23 @@ onBeforeUnmount(() => {
       </template>
 
       <template #desc>
-        <span class="text-slate-600 dark:text-gray-300">
+        <span
+          class="text-slate-600 dark:text-gray-300"
+          v-if="availableJornadas.length > 0"
+        >
           Consulta os próximos jogos e as equipas participantes.
+        </span>
+        <span class="text-slate-600 dark:text-gray-300" v-else>
+          A época 2025/2026 será carregada em breve.
         </span>
       </template>
     </LandingSectionhead>
 
     <div class="max-w-7xl mx-auto px-4 mt-12">
-      <div class="flex justify-center mb-10">
+      <div
+        class="flex justify-center mb-10"
+        v-if="availableJornadas.length > 0"
+      >
         <div class="relative w-64" ref="dropdownRef">
           <button
             @click="open = !open"
@@ -256,6 +265,7 @@ onBeforeUnmount(() => {
       </div>
 
       <div
+        v-if="filteredGames.length > 0"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
       >
         <div
@@ -304,6 +314,24 @@ onBeforeUnmount(() => {
           </p>
           <p class="text-sm text-gray-400 dark:text-gray-500">
             {{ game.location }}
+          </p>
+        </div>
+      </div>
+
+      <div
+        v-else
+        class="flex flex-col items-center justify-center py-20 space-y-6 text-center"
+      >
+        <div class="w-16 h-16">
+          <div class="text-5xl animate-bounce">⚽</div>
+        </div>
+
+        <div>
+          <p class="text-xl font-semibold text-gray-800 dark:text-white">
+            A carregar o calendário da nova época…
+          </p>
+          <p class="text-gray-600 dark:text-gray-400 text-base mt-2">
+            Prepara-te para grandes emoções no futebol distrital!
           </p>
         </div>
       </div>
