@@ -1,4 +1,4 @@
-export default {
+export default {/* 
   1: [
     {
       date: "2024-10-06",
@@ -130,5 +130,5 @@ export default {
       location: "Estádio G",
       teams: ["AC Croca", "GRD Rans"],
     },
-  ],
+  ], */
 };
