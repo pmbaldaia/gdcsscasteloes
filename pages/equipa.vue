@@ -57,7 +57,7 @@ function onImgError(event) {
             :src="membro.img || '/equipa/default.jpg'"
             :alt="formatarNome(membro.nome)"
             data-fallback="/equipa/default.jpg"
-            class="w-40 aspect-square object-cover rounded-lg mb-4 mx-auto"
+            class="w-full h-72 object-cover rounded-t-xl"
             @error="onImgError"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
@@ -86,7 +86,7 @@ function onImgError(event) {
             :src="membro.img || '/equipa/default.jpg'"
             :alt="formatarNome(membro.nome)"
             data-fallback="/equipa/default.jpg"
-            class="w-40 aspect-square object-cover rounded-lg mb-4 mx-auto"
+            class="w-full h-72 object-cover rounded-t-xl"
             @error="onImgError"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
@@ -115,7 +115,7 @@ function onImgError(event) {
             :src="membro.img || '/equipa/default.jpg'"
             :alt="formatarNome(membro.nome)"
             data-fallback="/equipa/default.jpg"
-            class="w-40 aspect-square object-cover rounded-lg mb-4 mx-auto"
+            class="w-full h-72 object-cover rounded-t-xl"
             @error="onImgError"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
@@ -148,7 +148,7 @@ function onImgError(event) {
             :src="jogador.img || '/equipa/default.jpg'"
             :alt="formatarNome(jogador.nome)"
             data-fallback="/equipa/default.jpg"
-            class="w-40 aspect-square object-cover rounded-lg mb-4 mx-auto"
+            class="w-full h-72 object-cover rounded-t-xl"
             @error="onImgError"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
