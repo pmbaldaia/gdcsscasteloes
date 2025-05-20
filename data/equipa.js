@@ -40,12 +40,12 @@ export const direcao = [
   {
     nome: "Maria da Conceição Teixeira Ribeiro",
     funcao: "1º Vogal",
-    img: "",
+    img: "/equipa/direcao/Maria Ribeiro.jpeg",
   },
   {
     nome: "Serafim Miguel Teixeira Mendes",
     funcao: "2º Vogal",
-    img: "",
+    img: "/equipa/direcao/Miguel Teixeira.jpeg",
   },
   {
     nome: "Pedro Miguel Baldaia Almeida e Sousa",

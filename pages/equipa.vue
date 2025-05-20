@@ -57,7 +57,7 @@ function onImgError(event) {
             :src="membro.img || '/equipa/default.jpg'"
             :alt="formatarNome(membro.nome)"
             data-fallback="/equipa/default.jpg"
-            class="w-full h-72 object-cover rounded-t-xl"
+            class="w-full h-96 object-cover rounded-t-xl"
             @error="onImgError"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
@@ -86,7 +86,7 @@ function onImgError(event) {
             :src="membro.img || '/equipa/default.jpg'"
             :alt="formatarNome(membro.nome)"
             data-fallback="/equipa/default.jpg"
-            class="w-full h-72 object-cover rounded-t-xl"
+            class="w-full h-96 object-cover rounded-t-xl"
             @error="onImgError"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
@@ -107,7 +107,7 @@ function onImgError(event) {
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div
-          v-for="membro in conselhoFiscal"
+          v-for="(membro, index) in conselhoFiscal"
           :key="membro.nome"
           class="bg-white dark:bg-slate-800 pb-2 rounded-xl shadow flex flex-col items-center justify-between text-center h-full min-h-[300px]"
         >
@@ -115,9 +115,17 @@ function onImgError(event) {
             :src="membro.img || '/equipa/default.jpg'"
             :alt="formatarNome(membro.nome)"
             data-fallback="/equipa/default.jpg"
-            class="w-full h-72 object-cover rounded-t-xl"
+            class="w-full h-96 object-cover rounded-t-xl"
+            :style="
+              index === 0
+                ? 'object-position: center top;'
+                : index === 1
+                ? 'object-position: center 30%;'
+                : 'object-position: center 45%;'
+            "
             @error="onImgError"
           />
+
           <div class="flex-1 flex flex-col justify-end mt-4">
             <p class="text-xl font-semibold text-slate-900 dark:text-white">
               {{ formatarNome(membro.nome) }}
@@ -148,7 +156,7 @@ function onImgError(event) {
             :src="jogador.img || '/equipa/default.jpg'"
             :alt="formatarNome(jogador.nome)"
             data-fallback="/equipa/default.jpg"
-            class="w-full h-72 object-cover rounded-t-xl"
+            class="w-full h-96 object-cover rounded-t-xl"
             @error="onImgError"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
