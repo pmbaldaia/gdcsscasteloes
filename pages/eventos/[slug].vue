@@ -48,6 +48,33 @@ watch(() => route.params.slug, carregarEvento);
           class="flex items-center gap-2 text-gray-700 dark:text-gray-400 mb-4"
         >
           <svg
+            class="w-5 h-5 text-red-500 flex-shrink-0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 6v6l4 2"
+            />
+          </svg>
+          <strong>Hora:</strong> {{ evento.hora || "17h00" }}
+        </p>
+
+        <p
+          class="flex items-center gap-2 text-gray-700 dark:text-gray-400 mb-4"
+        >
+          <svg
             class="w-5 h-5 text-blue-500 flex-shrink-0"
             fill="none"
             stroke="currentColor"
@@ -83,7 +110,7 @@ watch(() => route.params.slug, carregarEvento);
               d="M12 22s8-4.5 8-11a8 8 0 10-16 0c0 6.5 8 11 8 11z"
             />
           </svg>
-          {{ evento.local }}
+          <strong>Local:</strong> {{ evento.local }}
         </p>
 
         <p class="text-gray-800 dark:text-gray-200 leading-relaxed mb-4">

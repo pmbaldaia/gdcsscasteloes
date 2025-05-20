@@ -26,13 +26,18 @@ export const eventos = [
   {
     nome: "Master Castelões vs Jovens Maduros",
     slug: "jogo-dos-veteranos-2025",
+    hora: "17:00h",
     data: "24/05/2025",
     descricao:
       "Não faltes ao grande duelo entre os Master Castelões e os Jovens Maduros!",
     imagem: "/eventos/veteranos.jpg",
     local: "Complexo Desportivo de Castelões",
-    detalhes:
-      "Vem assistir a um jogo repleto de nostalgia, rivalidade saudável e muita emoção! O campo volta a receber lendas locais num confronto entre experiência e vitalidade. Os Master Castelões, com a sua sabedoria e tática apurada, enfrentam os irreverentes Jovens Maduros, cheios de energia e vontade de vencer.\n\n📅 Data: 24 de Maio de 2025\n🕒 Hora: 17h00\n📍 Local: Complexo Desportivo de Castelões\n🎟️ Entrada livre\n\nTraga a família e os amigos para uma tarde de futebol, convívio e boas memórias!",
+    detalhes: `
+Prepare-se para uma tarde inesquecível de futebol e emoção!  
+O campo do Complexo Desportivo de Castelões volta a ser palco de um confronto cheio de história e energia, onde os experientes Master Castelões mostrarão toda a sua sabedoria tática frente aos irreverentes Jovens Maduros, carregados de vontade e vitalidade.
+
+Traga família e amigos para celebrar o espírito desportivo, reviver memórias e desfrutar de muita emoção num ambiente de convívio e amizade. Não perca este duelo que promete nostalgia, rivalidade saudável e momentos inesquecíveis!
+`,
   },
   {
     nome: "Encerramento da Época 2024/2025",

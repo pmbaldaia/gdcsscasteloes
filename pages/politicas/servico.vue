@@ -1,15 +1,32 @@
+<script setup>
+definePageMeta({
+  layout: "landing",
+});
+</script>
+
 <template>
   <LandingContainer>
     <LandingSectionhead>
-      <template v-slot:title>Termos de Serviço</template>
-      <template v-slot:desc>
-        Os Termos de Serviço estabelecem as condições para o uso do site do
-        G.D.C.S.S. Castelões. Ao aceder ou utilizar o nosso site, você concorda
-        em cumprir os termos e condições descritos abaixo.
+      <template #title>
+        <div class="flex flex-col items-center">
+          <span class="text-gray-900 dark:text-white">Termos de Serviço</span>
+          <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
+            <div class="w-1/2 bg-red-600"></div>
+            <div class="w-1/2 bg-green-600"></div>
+          </div>
+        </div>
+      </template>
+
+      <template #desc>
+        <span class="text-slate-600 dark:text-gray-300">
+          Os Termos de Serviço estabelecem as condições para o uso do site do
+          G.D.C.S.S. Castelões. Ao aceder ou utilizar o nosso site, você
+          concorda em cumprir os termos e condições descritos abaixo.
+        </span>
       </template>
     </LandingSectionhead>
 
-    <div class="mt-8 max-w-3xl mx-auto text-lg text-slate-600">
+    <div class="mt-8 text-lg text-slate-600">
       <p class="mb-6">
         Estes Termos de Serviço regulam o acesso e a utilização do site do
         G.D.C.S.S. Castelões. Ao utilizar o nosso site, você concorda em cumprir

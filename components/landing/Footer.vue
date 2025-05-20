@@ -8,8 +8,9 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
   >
     <div class="max-w-screen-xl mx-auto px-4">
       <hr
-        class="border-t-2 border-gray-300 dark:border-gray-700 my-6 w-[100%] mx-auto"
+        class="border-t-2 border-gray-300 dark:border-gray-700 my-6 w-full mx-auto"
       />
+
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-8">
         <div class="flex flex-col h-full justify-start text-left">
           <h3 class="text-xl font-bold mb-1">Sobre</h3>
@@ -52,7 +53,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
             </li>
             <li>
               <a
-                href="/politica/servico"
+                href="/politicas/servico"
                 class="hover:text-red-500 transition-colors duration-300 text-gray-700 dark:text-white"
               >
                 Termos de Serviço
@@ -104,7 +105,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
       </div>
 
       <hr
-        class="border-t-2 border-gray-300 dark:border-gray-700 my-6 w-[100%] mx-auto"
+        class="border-t-2 border-gray-300 dark:border-gray-700 my-6 w-full mx-auto"
       />
 
       <p class="text-center text-xs text-gray-700 dark:text-white mt-8">
