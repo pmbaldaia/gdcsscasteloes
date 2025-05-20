@@ -28,6 +28,14 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
           <ul class="space-y-3 text-sm">
             <li>
               <a
+                href="/contacto"
+                class="hover:text-red-500 transition-colors duration-300 text-gray-700 dark:text-white"
+              >
+                Contactos
+              </a>
+            </li>
+            <li>
+              <a
                 href="/politicas/cookies"
                 class="hover:text-red-500 transition-colors duration-300 text-gray-700 dark:text-white"
               >

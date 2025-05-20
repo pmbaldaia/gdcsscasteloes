@@ -21,13 +21,12 @@ const toggleTheme = () => {
 };
 
 const menuitems = [
-  { title: "Início", path: "/" },
+  { title: "Sobre nós", path: "/sobre/" },
+  { title: "Equipa", path: "/equipa/" },
   { title: "Calendário", path: "/calendario/" },
   { title: "Eventos", path: "/eventos/" },
   { title: "Galeria", path: "/galeria/" },
   { title: "Oportunidades", path: "/oportunidades/" },
-  { title: "Sobre nós", path: "/sobre/" },
-  { title: "Contactos", path: "/contacto/" },
 ];
 
 onMounted(() => {
