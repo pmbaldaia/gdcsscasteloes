@@ -4,9 +4,9 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
 
 <template>
   <footer
-    class="w-full mt-12 mb-2 rounded-lg p-8 text-gray-900 dark:text-white px-4"
+    class="w-full mt-12 mb-2 rounded-lg py-8 text-gray-900 dark:text-white px-4 sm:px-6 md:px-8"
   >
-    <div class="max-w-screen-xl mx-auto px-4">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8">
       <hr
         class="border-t-2 border-gray-300 dark:border-gray-700 my-6 w-full mx-auto"
       />
