@@ -20,6 +20,10 @@ function onImgError(event) {
     event.target.src = fallback;
   }
 }
+
+function getImagem(src) {
+  return src && src.trim() !== "" ? src : "/equipa/default.jpg";
+}
 </script>
 
 <template>
@@ -112,7 +116,7 @@ function onImgError(event) {
           class="bg-white dark:bg-slate-800 pb-2 rounded-xl shadow flex flex-col items-center justify-between text-center h-full min-h-[300px]"
         >
           <img
-            :src="membro.img || '/equipa/default.jpg'"
+            :src="getImagem(membro.img)"
             :alt="formatarNome(membro.nome)"
             data-fallback="/equipa/default.jpg"
             class="w-full h-96 object-cover rounded-t-xl"
@@ -153,7 +157,7 @@ function onImgError(event) {
           class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow flex flex-col items-center justify-between text-center h-full min-h-[300px]"
         >
           <img
-            :src="jogador.img || '/equipa/default.jpg'"
+            :src="getImagem(jogador.img)"
             :alt="formatarNome(jogador.nome)"
             data-fallback="/equipa/default.jpg"
             class="w-full h-96 object-cover rounded-t-xl"
