@@ -26,7 +26,7 @@ export const eventos = [
   {
     nome: "Master Castelões vs Jovens Maduros",
     slug: "jogo-dos-veteranos-2025",
-    hora: "17:00h",
+    hora: "18:00h",
     data: "24/05/2025",
     descricao:
       "Não faltes ao grande duelo entre os Master Castelões e os Jovens Maduros!",
