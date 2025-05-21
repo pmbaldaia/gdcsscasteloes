@@ -1,5 +1,7 @@
 <template>
-  <main class="grid lg:grid-cols-2 place-items-center pt-5 pb-8 md:pt-8 mt-8">
+  <main
+    class="grid lg:grid-cols-2 place-items-center pt-5 pb-8 md:pt-8 mt-8 px-4 sm:px-6 md:px-8 max-w-screen-xl mx-auto"
+  >
     <div
       class="pt-0 pb-5 md:px-5 order-first md:order-2 w-full flex justify-center"
     >
@@ -23,12 +25,14 @@
       />
     </div>
 
-    <div class="order-last md:order-1">
-      <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight">
+    <div class="order-last md:order-1 w-full">
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight"
+      >
         Bem-vindo ao site oficial do G.D.C.S.S. Castelões
       </h1>
       <p
-        class="text-lg mt-4 text-slate-600 dark:text-white max-w-xl text-justify"
+        class="text-base md:text-lg mt-4 text-slate-600 dark:text-white max-w-xl text-justify"
       >
         Celebrando com orgulho 41 anos de história, dedicação e conquistas, o
         G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada
