@@ -29,7 +29,7 @@ definePageMeta({
       </template>
     </LandingSectionhead>
 
-    <div class="mt-8 text-lg text-slate-600">
+    <div class="mt-8 text-lg text-slate-600 dark:text-gray-200">
       <p class="mb-6">
         O G.D.C.S.S. Castelões está comprometido com a proteção da sua
         privacidade. Esta Política de Privacidade foi desenvolvida para informar
@@ -38,7 +38,9 @@ definePageMeta({
         suas informações.
       </p>
 
-      <h3 class="text-xl font-semibold">1. Dados Pessoais Recolhidos</h3>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        1. Dados Pessoais Recolhidos
+      </h3>
       <p class="mb-4">
         Recolhemos informações pessoais, como nome, endereço de e-mail, dados de
         contacto e informações necessárias para a inscrição em eventos ou outros
@@ -47,8 +49,10 @@ definePageMeta({
         comportamento de navegação.
       </p>
 
-      <h3 class="text-xl font-semibold">2. Finalidade da Recolha dos Dados</h3>
-      <span class="mb-4">
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        2. Finalidade da Recolha dos Dados
+      </h3>
+      <div class="mb-4">
         Os dados pessoais recolhidos são utilizados para as seguintes
         finalidades:
         <ul class="list-disc pl-6 mb-4">
@@ -66,9 +70,11 @@ definePageMeta({
           </li>
           <li>Cumprimento de obrigações legais e regulatórias.</li>
         </ul>
-      </span>
+      </div>
 
-      <h3 class="text-xl font-semibold">3. Proteção dos Dados Pessoais</h3>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        3. Proteção dos Dados Pessoais
+      </h3>
       <p class="mb-4">
         O G.D.C.S.S. Castelões adota as melhores práticas de segurança para
         proteger os dados pessoais dos nossos utilizadores. Implementamos
@@ -77,7 +83,9 @@ definePageMeta({
         perda ou alteração indevida.
       </p>
 
-      <h3 class="text-xl font-semibold">4. Direitos dos Utilizadores</h3>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        4. Direitos dos Utilizadores
+      </h3>
       <p class="mb-4">
         De acordo com a legislação em vigor, os utilizadores têm o direito de
         acessar, corrigir, atualizar ou excluir os seus dados pessoais. Caso
@@ -86,11 +94,15 @@ definePageMeta({
         do nosso canal de suporte.
       </p>
 
-      <h3 class="text-xl font-semibold">5. Cookies</h3>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        5. Cookies
+      </h3>
       <p class="mb-4">
         Utilizamos cookies para melhorar a sua experiência no nosso site. Para
         mais informações sobre como utilizamos cookies, consulte a nossa
-        <a href="/cookies" class="text-red-800">Política de Cookies</a>.
+        <a href="/cookies" class="text-red-800 dark:text-red-400"
+          >Política de Cookies</a
+        >.
       </p>
 
       <p class="mt-6">

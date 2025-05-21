@@ -26,7 +26,7 @@ definePageMeta({
       </template>
     </LandingSectionhead>
 
-    <div class="mt-8 text-lg text-slate-600">
+    <div class="mt-8 text-lg text-slate-600 dark:text-gray-200">
       <p class="mb-6">
         A utilização de cookies no site do G.D.C.S.S. Castelões tem como
         objetivo garantir a melhor experiência de navegação, permitindo-nos
@@ -35,7 +35,9 @@ definePageMeta({
         política.
       </p>
 
-      <h3 class="text-xl font-semibold">1. O que são Cookies?</h3>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        1. O que são Cookies?
+      </h3>
       <p class="mb-4">
         Cookies são pequenos ficheiros de texto que são armazenados no seu
         dispositivo quando você visita um site. Estes ficheiros contêm
@@ -44,8 +46,10 @@ definePageMeta({
         e os itens selecionados.
       </p>
 
-      <h3 class="text-xl font-semibold">2. Tipos de Cookies Utilizados</h3>
-      <span class="mb-4">
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        2. Tipos de Cookies Utilizados
+      </h3>
+      <div class="mb-4">
         Utilizamos diferentes tipos de cookies para as seguintes finalidades:
         <ul class="list-disc pl-6 mb-4">
           <li>
@@ -64,9 +68,11 @@ definePageMeta({
             utilizadores.
           </li>
         </ul>
-      </span>
+      </div>
 
-      <h3 class="text-xl font-semibold">3. Como Gerir os Cookies</h3>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        3. Como Gerir os Cookies
+      </h3>
       <p class="mb-4">
         Você pode alterar as configurações do seu navegador para recusar cookies
         ou alertá-lo sempre que um cookie for enviado para o seu dispositivo. No
@@ -74,7 +80,7 @@ definePageMeta({
         funcionalidades do nosso site.
       </p>
 
-      <h3 class="text-xl font-semibold">
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
         4. Consentimento para Utilização de Cookies
       </h3>
       <p class="mb-4">

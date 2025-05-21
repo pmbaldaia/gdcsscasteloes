@@ -26,7 +26,7 @@ definePageMeta({
       </template>
     </LandingSectionhead>
 
-    <div class="mt-8 text-lg text-slate-600">
+    <div class="mt-8 text-lg text-slate-600 dark:text-gray-200">
       <p class="mb-6">
         Estes Termos de Serviço regulam o acesso e a utilização do site do
         G.D.C.S.S. Castelões. Ao utilizar o nosso site, você concorda em cumprir
@@ -34,7 +34,9 @@ definePageMeta({
         periodicamente.
       </p>
 
-      <h3 class="text-xl font-semibold">1. Aceitação dos Termos</h3>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        1. Aceitação dos Termos
+      </h3>
       <p class="mb-4">
         Ao acessar e utilizar este site, o utilizador reconhece que leu,
         compreendeu e concorda com os Termos de Serviço descritos nesta página.
@@ -42,7 +44,7 @@ definePageMeta({
         utilizar o nosso site.
       </p>
 
-      <h3 class="text-xl font-semibold">
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
         2. Direitos de Propriedade Intelectual
       </h3>
       <p class="mb-4">
@@ -52,7 +54,9 @@ definePageMeta({
         estritamente proibido, salvo em caso de permissão explícita.
       </p>
 
-      <h3 class="text-xl font-semibold">3. Responsabilidades do Utilizador</h3>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        3. Responsabilidades do Utilizador
+      </h3>
       <p class="mb-4">
         O utilizador compromete-se a utilizar o site de forma responsável,
         respeitando as leis aplicáveis e não prejudicando a experiência de
@@ -61,7 +65,9 @@ definePageMeta({
         ações legais.
       </p>
 
-      <h3 class="text-xl font-semibold">4. Limitação de Responsabilidade</h3>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        4. Limitação de Responsabilidade
+      </h3>
       <p class="mb-4">
         O G.D.C.S.S. Castelões não se responsabiliza por quaisquer danos diretos
         ou indiretos resultantes da utilização do site, incluindo, mas não se
@@ -69,7 +75,9 @@ definePageMeta({
         incorretos.
       </p>
 
-      <h3 class="text-xl font-semibold">5. Modificação dos Termos</h3>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        5. Modificação dos Termos
+      </h3>
       <p class="mb-4">
         O G.D.C.S.S. Castelões reserva-se o direito de modificar estes Termos de
         Serviço a qualquer momento. Quaisquer alterações serão publicadas nesta
