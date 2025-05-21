@@ -40,7 +40,9 @@ const features = [
 </script>
 
 <template>
-  <div class="mt-16">
+  <div
+    class="mt-16 pt-5 pb-8 md:pt-8 mt-8 px-4 sm:px-4 md:px-8 max-w-screen-xl mx-auto"
+  >
     <h2
       class="text-2xl lg:text-3xl font-bold lg:tracking-tight text-gray-900 dark:text-white"
     >
@@ -52,7 +54,9 @@ const features = [
     </p>
   </div>
 
-  <div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
+  <div
+    class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16 pt-5 pb-8 md:pt-8 mt-8 px-4 sm:px-4 md:px-8 max-w-screen-xl mx-auto"
+  >
     <div
       v-for="(item, index) in features"
       :key="item.title"

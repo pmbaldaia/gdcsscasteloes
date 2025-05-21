@@ -1,6 +1,6 @@
 <template>
   <main
-    class="grid lg:grid-cols-2 place-items-center pt-5 pb-8 md:pt-8 mt-8 px-4 sm:px-6 md:px-8 max-w-screen-xl mx-auto"
+    class="grid lg:grid-cols-2 place-items-center pt-5 pb-8 md:pt-8 mt-8 px-4 sm:px-4 md:px-8 max-w-screen-xl mx-auto"
   >
     <div
       class="pt-0 pb-5 md:px-5 order-first md:order-2 w-full flex justify-center"
