@@ -15,7 +15,7 @@
         height="512"
       /> -->
       <img
-        class="w-full md:w-full max-w-full md:max-w-[600px] lg:max-w-[700px] rounded-none md:rounded-lg transition-transform md:hover:scale-125"
+        class="w-full md:w-full max-w-full md:max-w-[600px] lg:max-w-[700px] rounded-none md:rounded-lg transition-transform"
         src="/assets/img/gdcss-castelões-tarja.png"
         alt="Época 2025/2026"
         loading="eager"

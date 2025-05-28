@@ -53,12 +53,12 @@ export const direcao = [
     img: "/equipa/direcao/Pedro Sousa.jpeg",
   },
   {
-    nome: "Adriano Miguel Penetro Gonçalves",
+    nome: "Adriano Miguel Penetro",
     funcao: "4º Vogal",
     img: "/equipa/direcao/Adriano Penetro.jpeg",
   },
   {
-    nome: "Rosário Fernanda Pinheiro Correira",
+    nome: "Fernanda Pinheiro Correira",
     funcao: "5º Vogal",
     img: "/equipa/direcao/Fernanda Correia.jpg",
   },
@@ -83,13 +83,8 @@ export const direcao = [
     img: "/equipa/direcao/Tânia Ribeiro.jpeg",
   },
   {
-    nome: "José Paulo Ferreira Teixeira",
-    funcao: "10º Vogal",
-    img: "",
-  },
-  {
     nome: "César Daniel Moreira da Silva",
-    funcao: "11º Vogal",
+    funcao: "10º Vogal",
     img: "/equipa/direcao/César Silva.jpg",
   },
 ];
