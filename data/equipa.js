@@ -43,7 +43,7 @@ export const direcao = [
     img: "/equipa/direcao/Maria Ribeiro.jpeg",
   },
   {
-    nome: "Serafim Miguel Teixeira Mendes",
+    nome: "Miguel Teixeira",
     funcao: "2º Vogal",
     img: "/equipa/direcao/Miguel Teixeira.jpeg",
   },
