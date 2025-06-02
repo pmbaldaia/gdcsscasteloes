@@ -1,11 +1,11 @@
 <template>
   <div
-    class="bg-black px-4 py-16 mt-20 mx-auto max-w-5xl rounded-2xl flex flex-col items-center text-center shadow-xl"
+    class="bg-white dark:bg-black px-4 py-16 mt-20 mx-auto max-w-5xl rounded-2xl flex flex-col items-center text-center shadow-xl"
   >
-    <h2 class="text-white text-3xl md:text-5xl font-bold">
+    <h2 class="text-gray-900 dark:text-white text-3xl md:text-5xl font-bold">
       Junta-te à nossa paixão pelo desporto
     </h2>
-    <p class="text-slate-400 mt-4 text-lg md:text-xl max-w-2xl">
+    <p class="text-gray-700 dark:text-slate-400 mt-4 text-lg md:text-xl max-w-2xl">
       No GDCSS Castelões, promovemos o espírito de equipa, o desenvolvimento dos
       jovens e o orgulho na nossa freguesia. Seja como atleta, sócio ou
       apoiador, há um lugar para ti no nosso clube.
