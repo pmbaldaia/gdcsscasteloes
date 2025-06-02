@@ -6,6 +6,7 @@ export const eventos = [
     descricao:
       "Venha celebrar conosco os 41 anos de história, conquistas e dedicação do nosso clube!",
     imagem: "/eventos/41anos.jpg",
+    local: "Complexo Desportivo de Castelões",
     detalhes: `
       Este evento marca mais de quatro décadas de dedicação, paixão e comunidade.
       Teremos música ao vivo, homenagens, jogos amigáveis e um jantar convívio.
@@ -17,6 +18,7 @@ export const eventos = [
     slug: "sao-joao-complexo-desportivo-casteloes",
     data: "21/06/2025",
     descricao: "Vem celebrar o tradicional São João connosco!",
+    local: "Complexo Desportivo de Castelões",
     imagem: "/eventos/saojoao.jpg",
     detalhes: `
       O São João promete muita animação, sardinhas, bifanas, fogo de artifício e música até de madrugada.
@@ -43,6 +45,7 @@ Traga família e amigos para celebrar o espírito desportivo, reviver memórias 
     nome: "Encerramento da Época 2024/2025",
     slug: "encerramento-epoca-2024-2025",
     data: "22/06/2025",
+    local: "Quinta Água Levada",
     descricao: "Um dia para celebrar conquistas e reconhecer esforços.",
     imagem: "/eventos/encerramento.jpg",
     detalhes: `
@@ -61,6 +64,7 @@ Traga família e amigos para celebrar o espírito desportivo, reviver memórias 
     slug: "desbanda-em-casteloes",
     data: "05/09/2025",
     descricao: "Dois dias de música, festa e animação em Castelões!",
+    local: "A anunciar",
     imagem: "/eventos/desbanda.jpg",
     detalhes: `
       A Des'Banda volta em força com bandas locais, barraquinhas, DJ's convidados
