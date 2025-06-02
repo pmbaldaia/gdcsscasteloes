@@ -32,7 +32,9 @@ watch(() => route.params.slug, carregarEvento);
       v-if="evento"
       class="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900 overflow-hidden transition-colors"
     >
-      <div class="w-full relative h-64 sm:h-96">
+      <div
+        class="w-full max-w-xl sm:max-w-3xl mx-auto relative aspect-square rounded-t-lg overflow-hidden"
+      >
         <img
           :src="evento.imagem"
           :alt="evento.nome"
