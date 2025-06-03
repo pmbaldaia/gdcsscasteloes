@@ -20,4 +20,21 @@ export default defineNuxtConfig({
     classSuffix: "",
     preference: "system",
   },
+  app: {
+    head: {
+      title: "GDCSS Castelões",
+      link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
+      meta: [
+        { name: "description", content: "Site oficial do GDCSS Castelões" },
+        { property: "og:title", content: "GDCSS Castelões" },
+        {
+          property: "og:description",
+          content: "Site oficial do GDCSS Castelões",
+        },
+        { property: "og:image", content: "/favicon.ico" },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: "https://gdcsscasteloes.pt" },
+      ],
+    },
+  },
 });
