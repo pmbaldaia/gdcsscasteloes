@@ -1,8 +1,13 @@
 <script setup>
 const sponsors = [
+  { src: "/patrocinios/mpinto.jpeg", alt: "M Pinto" },
+  { src: "/patrocinios/cfds-logo-white.svg", alt: "CFDS" },
+  { src: "/patrocinios/fronteiratenciosa.png", alt: "FronteiraTenciosa" },
+  { src: "/patrocinios/casacarreira.jpeg", alt: "Casa da Carreira" },
   { src: "/patrocinios/carvalhaparque.png", alt: "Carvalha Parque" },
   { src: "/patrocinios/fontevelha.png", alt: "Fonte Velha" },
   { src: "/patrocinios/construcao.png", alt: "Construção" },
+  { src: "/patrocinios/luis moreira.jpg", alt: "Muis Moreira" },
   { src: "/patrocinios/sofas.png", alt: "Sofas" },
 ];
 </script>
@@ -22,7 +27,14 @@ const sponsors = [
         :key="i"
         :src="sponsor.src"
         :alt="sponsor.alt"
-        class="h-[120px] max-w-[160px] object-contain"
+        :class="[
+          'object-contain',
+          sponsor.alt === 'CFDS'
+            ? 'h-[120px] max-w-[160px] bg-black p-2 dark:bg-transparent'
+            : sponsor.alt === 'M Pinto'
+            ? 'h-[180px] max-w-[220px]'
+            : 'h-[120px] max-w-[160px]',
+        ]"
       />
 
       <div
