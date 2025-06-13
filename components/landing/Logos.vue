@@ -1,5 +1,6 @@
 <script setup>
 const sponsors = [
+  { src: "/patrocinios/garage649.jpeg", alt: "M Pinto" },
   { src: "/patrocinios/mpinto.jpeg", alt: "M Pinto" },
   { src: "/patrocinios/cfds-logo-white.svg", alt: "CFDS" },
   { src: "/patrocinios/fronteiratenciosa.png", alt: "FronteiraTenciosa" },
@@ -58,8 +59,14 @@ const sponsors = [
         :key="i"
         :src="sponsor.src"
         :alt="sponsor.alt"
-        class="object-contain h-[120px] w-full max-w-[160px] mx-auto"
+        class="object-contain h-[120px] w-full max-w-[160px] mx-auto transition-transform duration-300 hover:scale-150"
+        :class="{
+          'bg-black':
+            sponsor.alt === 'CFDS' && !$colorMode?.value?.includes('dark'),
+          'p-2': sponsor.alt === 'CFDS',
+        }"
       />
     </div>
   </section>
 </template>
+
