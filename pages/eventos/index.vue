@@ -12,6 +12,7 @@ function parseDateBr(dataStr) {
 }
 
 const hoje = new Date();
+hoje.setHours(0, 0, 0, 0);
 
 const eventosFuturos = computed(() =>
   eventosOriginais
