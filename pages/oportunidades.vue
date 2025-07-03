@@ -37,7 +37,7 @@ definePageMeta({
             class="p-6 rounded-xl border-2 border-black dark:border-white text-center text-green-700 dark:text-green-400 transition flex flex-col justify-between hover:shadow-lg hover:scale-[1.03] hover:duration-300"
           >
             <p class="text-2xl font-semibold tracking-wide mb-6">Só Cotas</p>
-            <p class="text-4xl font-extrabold tracking-tight">20,00€</p>
+            <p class="text-4xl font-extrabold tracking-tight">25,00€</p>
           </div>
 
           <div
@@ -46,7 +46,7 @@ definePageMeta({
             <p class="text-xl font-semibold tracking-wide mb-6">
               Cotas + Cachecol
             </p>
-            <p class="text-4xl font-extrabold tracking-tight">25,00€</p>
+            <p class="text-4xl font-extrabold tracking-tight">30,00€</p>
           </div>
 
           <div
@@ -55,14 +55,14 @@ definePageMeta({
             <p class="text-xl font-semibold tracking-wide mb-6">
               Cotas + Camisola
             </p>
-            <p class="text-4xl font-extrabold tracking-tight">35,00€</p>
+            <p class="text-4xl font-extrabold tracking-tight">40,00€</p>
           </div>
 
           <div
             class="p-6 rounded-xl border-2 border-black dark:border-white text-center text-green-700 dark:text-green-400 transition flex flex-col justify-between hover:shadow-lg hover:scale-[1.03] hover:duration-300"
           >
             <p class="text-xl font-semibold tracking-wide mb-6">Kit Completo</p>
-            <p class="text-4xl font-extrabold tracking-tight">40,00€</p>
+            <p class="text-4xl font-extrabold tracking-tight">45,00€</p>
           </div>
         </div>
 
