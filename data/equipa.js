@@ -107,4 +107,149 @@ export const conselhoFiscal = [
   },
 ];
 
-export const plantel = [];
+export const plantel = [
+  {
+    id: 1,
+    nome: "César Silva",
+    posicao: "Médio",
+    img: "/equipa/plantel/1.jpg",
+  },
+  {
+    id: 2,
+    nome: "Rui Teixeira",
+    posicao: "Médio",
+    img: "/equipa/plantel/2.jpg",
+  },
+  {
+    id: 3,
+    nome: "Gustavo Teixeira",
+    posicao: "Defesa",
+    img: "/equipa/plantel/3.jpg",
+  },
+  {
+    id: 4,
+    nome: "Diogo Ganilho",
+    posicao: "Defesa",
+    img: "/equipa/plantel/4.jpg",
+  },
+  {
+    id: 5,
+    nome: "Dani Freitas",
+    posicao: "Guarda-Redes",
+    img: "/equipa/plantel/5.jpg",
+  },
+  {
+    id: 6,
+    nome: "Américo",
+    posicao: "Médio",
+    img: "/equipa/plantel/6.jpg",
+  },
+  {
+    id: 7,
+    nome: "João Fibras",
+    posicao: "Defesa",
+    img: "/equipa/plantel/7.jpg",
+  },
+  {
+    id: 8,
+    nome: "Bruno Oliveira",
+    posicao: "Avançado",
+    img: "/equipa/plantel/8.jpg",
+  },
+  {
+    id: 9,
+    nome: "Pedro Fraga",
+    posicao: "Médio",
+    img: "/equipa/plantel/9.jpg",
+  },
+  {
+    id: 10,
+    nome: "Kiko Sousa",
+    posicao: "Guarda-Redes",
+    img: "/equipa/plantel/10.jpg",
+  },
+  {
+    id: 11,
+    nome: "João Oliveira",
+    posicao: "Defesa",
+    img: "/equipa/plantel/11.jpg",
+  },
+  {
+    id: 12,
+    nome: "Gui Mesquita",
+    posicao: "Avançado",
+    img: "/equipa/plantel/12.jpg",
+  },
+  {
+    id: 13,
+    nome: "Diogo Novais",
+    posicao: "Médio",
+    img: "/equipa/plantel/13.jpg",
+  },
+  {
+    id: 14,
+    nome: "João Pedro",
+    posicao: "Avançado",
+    img: "/equipa/plantel/14.jpg",
+  },
+  {
+    id: 15,
+    nome: "Nuno Sousa",
+    posicao: "Médio",
+    img: "/equipa/plantel/15.jpg",
+  },
+  {
+    id: 16,
+    nome: "Zé Tó",
+    posicao: "Defesa",
+    img: "/equipa/plantel/16.jpg",
+  },
+  {
+    id: 17,
+    nome: "Pedro Morais",
+    posicao: "Médio",
+    img: "/equipa/plantel/17.jpg",
+  },
+  {
+    id: 18,
+    nome: "Zé Miguel",
+    posicao: "Avançado",
+    img: "/equipa/plantel/18.jpg",
+  },
+  {
+    id: 19,
+    nome: "Luís Moreira",
+    posicao: "Defesa",
+    img: "/equipa/plantel/19.jpg",
+  },
+  {
+    id: 19,
+    nome: "Tiago Ribeiro",
+    posicao: "Avançado",
+    img: "/equipa/plantel/19.jpg",
+  },
+  {
+    id: 19,
+    nome: "Rodrigo Moreira",
+    posicao: "Avançado",
+    img: "/equipa/plantel/19.jpg",
+  },
+  {
+    id: 20,
+    nome: "Gustavo Silva",
+    posicao: "Médio",
+    img: "/equipa/plantel/20.jpg",
+  },
+  {
+    id: 21,
+    nome: "Miguel Coelho",
+    posicao: "Médio",
+    img: "/equipa/plantel/21.jpg",
+  },
+  {
+    id: 21,
+    nome: "Pedro Cunha",
+    posicao: "Médio",
+    img: "/equipa/plantel/21.jpg",
+  },
+];
