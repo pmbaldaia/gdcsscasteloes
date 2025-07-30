@@ -8,7 +8,7 @@ function close() {
   emit("close");
 }
 
-const dataBase = new Date("2025-07-29T21:30:00"); 
+const dataBase = new Date("2025-07-29T21:30:00");
 const agora = new Date();
 
 const umDiaMs = 1000 * 60 * 60 * 24;
@@ -16,9 +16,11 @@ const diffMs = agora.getTime() - dataBase.getTime();
 
 const diasPassados = Math.floor(diffMs / umDiaMs);
 
+const jogadorIndex = Math.floor(diasPassados / 2);
+
 const jogador =
-  diasPassados >= 0 && diasPassados < fullPlantel.length
-    ? fullPlantel[diasPassados]
+  jogadorIndex >= 0 && jogadorIndex < fullPlantel.length
+    ? fullPlantel[jogadorIndex]
     : null;
 </script>
 
