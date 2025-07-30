@@ -28,28 +28,21 @@ function getImagem(src) {
 const dataBase = new Date("2025-07-29T21:30:00");
 const agora = new Date();
 
-const diffMs = agora.getTime() - dataBase.getTime();
-
 const umDiaMs = 1000 * 60 * 60 * 24;
 
-const diasPassados = Math.floor(diffMs / umDiaMs);
+let diasPassados = 0;
+let dataAtual = new Date(dataBase);
 
-const jogadorIndex = Math.floor(diasPassados / 2);
-
-let plantel = [];
-if (jogadorIndex >= 0 && jogadorIndex < fullPlantel.length) {
-  plantel = [fullPlantel[jogadorIndex]];
+while (dataAtual <= agora) {
+  if (dataAtual.getDay() !== 0) {
+    diasPassados++;
+  }
+  dataAtual = new Date(dataAtual.getTime() + umDiaMs);
 }
 
-//Para consultar todos existente
-/* const plantel = [];
+const jogadorIndex = diasPassados - 1;
 
-for (let i = 0; i < fullPlantel.length; i++) {
-  const data = new Date(dataBase);
-  data.setDate(dataBase.getDate() + i);
-  const jogador = { ...fullPlantel[i], dia: data.toLocaleDateString("pt-PT") };
-  plantel.push(jogador);
-}  */
+const plantel = fullPlantel.slice(0, jogadorIndex + 1);
 </script>
 
 <template>

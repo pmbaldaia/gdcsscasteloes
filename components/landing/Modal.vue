@@ -12,11 +12,18 @@ const dataBase = new Date("2025-07-29T21:30:00");
 const agora = new Date();
 
 const umDiaMs = 1000 * 60 * 60 * 24;
-const diffMs = agora.getTime() - dataBase.getTime();
 
-const diasPassados = Math.floor(diffMs / umDiaMs);
+let dataAtual = new Date(dataBase);
+let diasValidos = 0;
 
-const jogadorIndex = Math.floor(diasPassados / 2);
+while (dataAtual <= agora) {
+  if (dataAtual.getDay() !== 0) {
+    diasValidos++;
+  }
+  dataAtual = new Date(dataAtual.getTime() + umDiaMs);
+}
+
+const jogadorIndex = diasValidos - 1;
 
 const jogador =
   jogadorIndex >= 0 && jogadorIndex < fullPlantel.length
