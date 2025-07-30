@@ -34,9 +34,11 @@ const umDiaMs = 1000 * 60 * 60 * 24;
 
 const diasPassados = Math.floor(diffMs / umDiaMs);
 
+const jogadorIndex = Math.floor(diasPassados / 2);
+
 let plantel = [];
-if (diasPassados >= 0 && diasPassados < fullPlantel.length) {
-  plantel = [fullPlantel[diasPassados]];
+if (jogadorIndex >= 0 && jogadorIndex < fullPlantel.length) {
+  plantel = [fullPlantel[jogadorIndex]];
 }
 
 //Para consultar todos existente
