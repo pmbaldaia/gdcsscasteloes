@@ -10,6 +10,16 @@ export default defineNuxtConfig({
   site: {
     url: "https://gdcsscasteloes.pt",
     name: "GDCSS Castelões",
+    exclude: ["/admin/**", "/auth/**", "/manutencao"],
+  },
+  robots: {
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+      },
+    ],
+    sitemap: "https://gdcsscasteloes.pt/sitemap.xml",
   },
   app: {
     head: {
