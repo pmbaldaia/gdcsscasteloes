@@ -72,8 +72,4 @@ export default defineNuxtConfig({
     classSuffix: "",
     preference: "system",
   },
-
-  routeRules: {
-    "/*": { redirect: { to: "/:splat/", statusCode: 301 } },
-  },
 });
