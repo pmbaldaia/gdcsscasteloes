@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxtjs/sitemap": "^7.4.3",
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.16",
     "nuxt": "^3.9.0",
