@@ -42,13 +42,13 @@ const isActive = (to) => route.path === to;
     >
       <img
         v-if="collapsed"
-        src="/assets/img/logotipo.png"
+        src="/assets/img/logotipo.webp"
         alt="Logo pequeno"
         class="w-8 h-8 object-contain"
       />
       <img
         v-else
-        src="/assets/img/logotipo.png"
+        src="/assets/img/logotipo.webp"
         alt="Logo médio"
         class="w-16 h-auto object-contain"
       />

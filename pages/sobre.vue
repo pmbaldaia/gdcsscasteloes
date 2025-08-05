@@ -7,7 +7,7 @@ const campo = {
   nome: "Campo Desportivo de Castelões",
   rua: "Rua do Complexo Desportivo, Castelões",
   imagem: {
-    src: "/campo/campo.jpg",
+    src: "/campo/campo.webp",
     width: 600,
     height: 400,
   },

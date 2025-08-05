@@ -7,20 +7,25 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
   ],
 
-  site: {
-    url: "https://gdcsscasteloes.pt",
-    name: "GDCSS Castelões",
-    exclude: ["/admin/**", "/auth/**", "/manutencao"],
-  },
-  robots: {
-    rules: [
-      {
-        userAgent: "*",
-        allow: "/",
+  runtimeConfig: {
+    public: {
+      siteUrl: "https://gdcsscasteloes.pt",
+      sitemap: {
+        hostname: "https://gdcsscasteloes.pt",
+        exclude: ["/admin/**", "/auth/**", "/manutencao"],
       },
-    ],
-    sitemap: "https://gdcsscasteloes.pt/sitemap.xml",
+      robots: {
+        rules: [
+          {
+            userAgent: "*",
+            allow: "/",
+          },
+        ],
+        sitemap: "https://gdcsscasteloes.pt/sitemap.xml",
+      },
+    },
   },
+
   app: {
     head: {
       title: "GDCSS Castelões",
@@ -56,6 +61,12 @@ export default defineNuxtConfig({
         },
       ],
     },
+  },
+
+  sitemap: {
+    // redundante se usares runtimeConfig, mas podes deixar aqui por segurança
+    hostname: "https://gdcsscasteloes.pt",
+    exclude: ["/admin/**", "/auth/**", "/manutencao"],
   },
 
   css: ["~/assets/css/main.css"],

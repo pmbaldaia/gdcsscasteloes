@@ -6,7 +6,7 @@ const error = useError();
 <template>
   <div
     class="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-cover bg-center bg-no-repeat relative text-gray-900 dark:text-gray-100"
-    :style="{ backgroundImage: 'url(/campo/campo.jpg)' }"
+    :style="{ backgroundImage: 'url(/campo/campo.webp)' }"
   >
     <div class="absolute inset-0 bg-black/50"></div>
 

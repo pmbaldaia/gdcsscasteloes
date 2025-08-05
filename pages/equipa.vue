@@ -22,7 +22,7 @@ function onImgError(event) {
 }
 
 function getImagem(src) {
-  return src && src.trim() !== "" ? src : "/equipa/default.jpg";
+  return src && src.trim() !== "" ? src : "/equipa/default.webp";
 }
 
 const dataBase = new Date("2025-07-29T21:30:00");
@@ -76,7 +76,7 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           <img
             :src="getImagem(jogador.img)"
             :alt="formatarNome(jogador.nome)"
-            data-fallback="/equipa/default.jpg"
+            data-fallback="/equipa/default.webp"
             class="object-contain rounded-t-xl mx-auto"
             style="max-width: 320px; height: auto"
             @error="onImgError"
@@ -131,9 +131,9 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           class="bg-white dark:bg-slate-800 pb-2 rounded-xl shadow flex flex-col items-center justify-between text-center h-full min-h-[300px]"
         >
           <img
-            :src="membro.img || '/equipa/default.jpg'"
+            :src="membro.img || '/equipa/default.webp'"
             :alt="formatarNome(membro.nome)"
-            data-fallback="/equipa/default.jpg"
+            data-fallback="/equipa/default.webp"
             class="w-full h-96 object-cover rounded-t-xl"
             @error="onImgError"
           />
@@ -160,9 +160,9 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           class="bg-white dark:bg-slate-800 pb-2 rounded-xl shadow flex flex-col items-center justify-between text-center h-full min-h-[300px]"
         >
           <img
-            :src="membro.img || '/equipa/default.jpg'"
+            :src="membro.img || '/equipa/default.webp'"
             :alt="formatarNome(membro.nome)"
-            data-fallback="/equipa/default.jpg"
+            data-fallback="/equipa/default.webp"
             class="w-full h-96 object-cover rounded-t-xl"
             @error="onImgError"
           />
@@ -191,7 +191,7 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           <img
             :src="getImagem(membro.img)"
             :alt="formatarNome(membro.nome)"
-            data-fallback="/equipa/default.jpg"
+            data-fallback="/equipa/default.webp"
             class="w-full h-96 object-cover rounded-t-xl"
             :style="
               index === 0

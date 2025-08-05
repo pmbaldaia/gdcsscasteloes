@@ -5,7 +5,7 @@ export const eventos = [
     data: "11/04/2025",
     descricao:
       "Venha celebrar conosco os 41 anos de história, conquistas e dedicação do nosso clube!",
-    imagem: "/eventos/41anos.jpg",
+    imagem: "/eventos/41anos.webp",
     local: "Complexo Desportivo de Castelões",
     detalhes: `
       Este evento marca mais de quatro décadas de dedicação, paixão e comunidade.
@@ -19,7 +19,7 @@ export const eventos = [
     data: "21/06/2025",
     descricao: "Vem celebrar o tradicional São João connosco!",
     local: "Complexo Desportivo de Castelões",
-    imagem: "/eventos/saojoao.jpg",
+    imagem: "/eventos/saojoao.webp",
     detalhes: `
       O São João promete muita animação, sardinhas, bifanas, fogo de artifício e música até de madrugada.
       Uma noite mágica que junta tradição e diversão num só lugar!
@@ -32,7 +32,7 @@ export const eventos = [
     data: "24/05/2025",
     descricao:
       "Não faltes ao grande duelo entre os Master Castelões e os Jovens Maduros!",
-    imagem: "/eventos/veteranos.jpg",
+    imagem: "/eventos/veteranos.webp",
     local: "Complexo Desportivo de Castelões",
     detalhes: `
 Prepare-se para uma tarde inesquecível de futebol e emoção!  
@@ -47,7 +47,7 @@ Traga família e amigos para celebrar o espírito desportivo, reviver memórias 
     data: "22/06/2025",
     local: "Quinta Água Levada",
     descricao: "Um dia para celebrar conquistas e reconhecer esforços.",
-    imagem: "/eventos/encerramento.jpg",
+    imagem: "/eventos/encerramento.webp",
     detalhes: `
 <p>O encerramento será na <strong>Quinta Água Levada</strong>, das <strong>16h00 até à meia-noite</strong>.</p>
 
@@ -65,7 +65,7 @@ Traga família e amigos para celebrar o espírito desportivo, reviver memórias 
     data: "05/09/2025",
     descricao: "Dois dias de música, festa e animação em Castelões!",
     local: "A anunciar",
-    imagem: "/eventos/desbanda.jpg",
+    imagem: "/eventos/desbanda.webp",
     detalhes: `
       A Des'Banda volta em força com bandas locais, barraquinhas, DJ's convidados
       e muito mais! Marca já na agenda porque vais querer estar lá!

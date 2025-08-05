@@ -1,7 +1,7 @@
 <template>
   <div
     class="min-h-screen text-gray-900 dark:text-gray-100 flex flex-col bg-cover bg-center bg-no-repeat relative"
-    :style="{ backgroundImage: 'url(/campo/campo.jpg)' }"
+    :style="{ backgroundImage: 'url(/campo/campo.webp)' }"
   >
     <div class="absolute inset-0 pointer-events-none bg-black/50"></div>
 
