@@ -146,8 +146,8 @@ export const plantel = [
   },
   {
     id: 7,
-    nome: "João Fibras",
-    posicao: "Defesa",
+    nome: "Pedro Fraga",
+    posicao: "Médio",
     img: "/equipa/plantel/7.webp",
   },
   {
@@ -158,8 +158,8 @@ export const plantel = [
   },
   {
     id: 9,
-    nome: "Pedro Fraga",
-    posicao: "Médio",
+    nome: "João Fibras",
+    posicao: "Defesa",
     img: "/equipa/plantel/9.webp",
   },
   {
