@@ -31,6 +31,10 @@ export default defineNuxtConfig({
       title: "GDCSS Castelões",
       link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
       meta: [
+        {
+          name: "google-site-verification",
+          content: "6IHqvKCdIFhd3KMvHoKemuKEa60Uk4EaRrEkGVqPeFI",
+        },
         { name: "description", content: "Site oficial do GDCSS Castelões" },
         {
           name: "keywords",
