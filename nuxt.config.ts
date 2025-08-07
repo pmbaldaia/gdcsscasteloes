@@ -29,7 +29,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "GDCSS Castelões",
-      link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
       meta: [
         {
           name: "google-site-verification",
@@ -68,8 +68,6 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    // redundante se usares runtimeConfig, mas podes deixar aqui por segurança
-    hostname: "https://gdcsscasteloes.pt",
     exclude: ["/admin/**", "/auth/**", "/manutencao"],
   },
 
