@@ -54,7 +54,7 @@ const sponsors = [
       Patrocínios
     </h2>
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-10 mt-10 px-4">
-      <img
+      <NuxtImg
         v-for="(sponsor, i) in sponsors"
         :key="i"
         :src="sponsor.src"
@@ -65,8 +65,12 @@ const sponsors = [
             sponsor.alt === 'CFDS' && !$colorMode?.value?.includes('dark'),
           'p-2': sponsor.alt === 'CFDS',
         }"
+        format="webp"
+        sizes="100px sm:120px md:160px"
+        densities="1x 2x"
+        loading="lazy"
+        placeholder="blur"
       />
     </div>
   </section>
 </template>
-

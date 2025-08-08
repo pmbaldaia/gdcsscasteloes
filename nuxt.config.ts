@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/sitemap",
     "@nuxtjs/robots",
+    "@nuxt/image",
   ],
 
   runtimeConfig: {
