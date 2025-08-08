@@ -70,10 +70,7 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           <NuxtImg
             :src="getImagem(jogador.img)"
             :alt="formatarNome(jogador.nome)"
-            format="auto"
             placeholder="blur"
-            sizes="sm:300px md:320px"
-            densities="1x 2x"
             class="object-contain rounded-t-xl mx-auto"
             style="max-width: 320px; height: auto"
           />
