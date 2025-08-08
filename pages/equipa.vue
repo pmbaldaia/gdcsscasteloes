@@ -127,7 +127,6 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           <NuxtImg
             :src="membro.img || '/equipa/default.webp'"
             :alt="formatarNome(membro.nome)"
-            format="auto"
             placeholder="blur"
             class="w-full h-96 object-cover rounded-t-xl"
           />
@@ -157,7 +156,6 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           <NuxtImg
             :src="membro.img || '/equipa/default.webp'"
             :alt="formatarNome(membro.nome)"
-            format="auto"
             placeholder="blur"
             class="w-full h-96 object-cover rounded-t-xl"
           />
@@ -187,7 +185,6 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           <NuxtImg
             :src="getImagem(membro.img)"
             :alt="formatarNome(membro.nome)"
-            format="auto"
             placeholder="blur"
             class="w-full h-96 object-cover rounded-t-xl"
             :style="

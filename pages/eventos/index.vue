@@ -62,7 +62,6 @@ const eventosPassados = computed(() =>
           <NuxtImg
             :src="evento.imagem"
             :alt="evento.nome"
-            format="auto"
             placeholder="blur"
             class="w-full h-full object-cover"
           />
@@ -115,7 +114,6 @@ const eventosPassados = computed(() =>
             <NuxtImg
               :src="evento.imagem"
               :alt="evento.nome"
-              format="auto"
               placeholder="blur"
               class="w-full h-full object-cover"
             />

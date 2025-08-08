@@ -86,7 +86,6 @@ onMounted(() => {
             <NuxtImg
               :src="src"
               alt="Foto da galeria"
-              format="auto"
               placeholder="blur"
               class="w-full h-full object-cover hover:scale-[1.02] transition-transform rounded-lg"
             />
@@ -113,7 +112,6 @@ onMounted(() => {
           :src="selectedImage"
           :key="selectedImage"
           alt="Imagem ampliada"
-          format="auto"
           placeholder="blur"
           class="zoomed-image"
         />

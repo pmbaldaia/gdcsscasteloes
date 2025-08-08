@@ -41,7 +41,6 @@ const campo = {
           :width="campo.imagem.width"
           :height="campo.imagem.height"
           alt="Campo Desportivo de Castelões"
-          format="auto"
           placeholder="blur"
           loading="eager"
           width="2056"
