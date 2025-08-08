@@ -67,7 +67,7 @@ onMounted(() => {
         class="mb-6 sm:mb-8 mx-auto w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 animate-bounce"
       >
         <img
-          src="/assets/img/bola.svg"
+          src="/img/bola.svg"
           alt="Bola de futebol"
           class="w-full h-full filter dark:invert"
         />

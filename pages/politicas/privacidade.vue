@@ -100,7 +100,10 @@ definePageMeta({
       <p class="mb-4">
         Utilizamos cookies para melhorar a sua experiência no nosso site. Para
         mais informações sobre como utilizamos cookies, consulte a nossa
-        <a href="/cookies" class="text-red-800 dark:text-red-400"
+        <a
+          href="/cookies"
+          class="text-red-800 dark:text-red-400"
+          aria-label="Aceda aqui à Política de Cookies"
           >Política de Cookies</a
         >.
       </p>

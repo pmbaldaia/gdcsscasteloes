@@ -43,8 +43,10 @@ const campo = {
           alt="Campo Desportivo de Castelões"
           format="auto"
           placeholder="blur"
-          sizes="(max-width: 768px) 100vw, 50vw"
+          loading="eager"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 600px, 700px"
           densities="1x 2x"
+          width="2056"
           class="rounded shadow-lg w-full h-auto max-w-full"
         />
       </div>

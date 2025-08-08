@@ -15,7 +15,7 @@ const error = useError();
     >
       <div class="w-28 h-28 md:w-36 md:h-36 animate-bounce mb-6">
         <img
-          src="/assets/img/bola.svg"
+          src="/img/bola.svg"
           alt="Bola de futebol"
           class="w-full h-full filter dark:invert"
         />

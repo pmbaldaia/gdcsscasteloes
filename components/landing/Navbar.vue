@@ -48,7 +48,7 @@ onMounted(() => {
             <NuxtImg
               v-if="isMounted && colorMode.value !== 'dark'"
               class="transition-transform transform hover:scale-125 w-16 h-16 lg:w-20 lg:h-20"
-              src="/assets/img/logowbg.webp"
+              src="/img/logowbg.webp"
               alt="Logo GDCSSCastelões"
               loading="eager"
               format="auto"
@@ -60,7 +60,7 @@ onMounted(() => {
             <NuxtImg
               v-else-if="isMounted && colorMode.value === 'dark'"
               class="transition-transform transform hover:scale-125 w-16 h-16 lg:w-20 lg:h-20"
-              src="/assets/img/logotipo.webp"
+              src="/img/logotipo.webp"
               alt="Logo GDCSSCastelões (Dark)"
               loading="eager"
               format="auto"

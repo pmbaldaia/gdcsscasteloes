@@ -8,7 +8,7 @@
       <!--
         <NuxtImg
           class="rounded-full transition-transform transform hover:scale-125 w-2/3 max-w-[200px] md:w-full md:max-w-[300px] lg:max-w-[400px]"
-          src="/assets/img/20252026.webp"
+          src="/img/20252026.webp"
           alt="Época 2025/2026"
           loading="eager"
           format="auto"
@@ -20,8 +20,8 @@
         />
       -->
       <NuxtImg
-        class="w-full md:w-full max-w-full md:max-w-[600px] lg:max-w-[700px] rounded-none md:rounded-lg transition-transform"
-        src="/assets/img/gdcss-castelões-tarja.webp"
+        class="w-full md:max-w-[600px] lg:max-w-[700px] rounded-none md:rounded-lg transition-transform"
+        src="/img/gdcss-castelões-tarja.webp"
         alt="Época 2025/2026"
         loading="eager"
         format="auto"
@@ -29,7 +29,6 @@
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 600px, 700px"
         densities="1x 2x"
         width="2056"
-        height="2056"
       />
     </div>
 

@@ -9,12 +9,18 @@ export default defineNuxtConfig({
   ],
 
   image: {
-    provider: "static",
-    static: {
-      baseURL: "/",
+    dir: "public",
+    domains: [],
+    format: ["webp", "avif"],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
     },
   },
-
   runtimeConfig: {
     public: {
       siteUrl: "https://gdcsscasteloes.pt",
@@ -45,7 +51,7 @@ export default defineNuxtConfig({
         {
           rel: "preload",
           as: "image",
-          href: "/assets/img/gdcss-castelões-tarja.webp",
+          href: "/img/gdcss-castelões-tarja.webp",
           fetchpriority: "high",
         },
         {
