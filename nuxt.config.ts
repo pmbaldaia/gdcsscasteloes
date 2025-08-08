@@ -9,10 +9,9 @@ export default defineNuxtConfig({
   ],
 
   image: {
-    provider: "static",
-    dir: "public",
+    provider: "ipx",
     domains: [],
-    format: ["webp", "avif"],
+    formats: ["webp", "avif"],
     screens: {
       xs: 320,
       sm: 640,
@@ -21,7 +20,9 @@ export default defineNuxtConfig({
       xl: 1280,
       xxl: 1536,
     },
+    staticFilename: "[publicPath]/images/[name]-[hash][ext]",
   },
+
   runtimeConfig: {
     public: {
       siteUrl: "https://gdcsscasteloes.pt",
@@ -47,26 +48,7 @@ export default defineNuxtConfig({
         lang: "pt-PT",
       },
       title: "GDCSS Castelões",
-      link: [
-        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        {
-          rel: "preload",
-          as: "image",
-          href: "/img/gdcss-castelões-tarja.webp",
-          fetchpriority: "high",
-        },
-        {
-          rel: "preload",
-          as: "style",
-          href: "~/assets/css/main.css",
-        },
-        {
-          rel: "stylesheet",
-          href: "~/assets/css/main.css",
-          media: "print",
-          onload: "this.media='all'",
-        },
-      ],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
       meta: [
         {
           name: "google-site-verification",
@@ -101,10 +83,6 @@ export default defineNuxtConfig({
           content: "https://gdcsscasteloes.pt/favicon.ico",
         },
       ],
-      // Caso uses scripts externos que bloqueiam renderização, adiciona defer aqui
-      // script: [
-      //   { src: 'https://exemplo.com/script.js', defer: true }
-      // ]
     },
   },
 
@@ -128,22 +106,7 @@ export default defineNuxtConfig({
       include: ["@phosphor-icons/vue"],
     },
     ssr: {
-      noExternal: ["@phosphor-icons/vue"],
-    },
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes("node_modules")) {
-              const directories = id.split("node_modules/")[1].split("/");
-              const pkgName = directories[0].startsWith("@")
-                ? directories.slice(0, 2).join("/")
-                : directories[0];
-              return `vendor-${pkgName}`;
-            }
-          },
-        },
-      },
+      noExternal: [],
     },
   },
 

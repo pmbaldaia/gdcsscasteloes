@@ -21,7 +21,7 @@
       -->
       <NuxtImg
         class="w-full md:max-w-[600px] lg:max-w-[700px] rounded-none md:rounded-lg transition-transform"
-        src="/img/gdcss-castelões-tarja.webp"
+        src="/img/gdcss-casteloes-tarja.webp"
         alt="Época 2025/2026"
         loading="eager"
         format="auto"

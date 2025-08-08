@@ -56,7 +56,7 @@ const jogador =
             </button>
           </div>
 
-          <img
+          <NuxtImg
             :src="jogador.img || '/equipa/default.webp'"
             :alt="jogador.nome"
             class="w-full h-auto rounded-md mb-6 object-cover"
