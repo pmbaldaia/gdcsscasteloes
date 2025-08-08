@@ -8,6 +8,13 @@ export default defineNuxtConfig({
     "@nuxt/image",
   ],
 
+  image: {
+    provider: "static",
+    static: {
+      baseURL: "/",
+    },
+  },
+
   runtimeConfig: {
     public: {
       siteUrl: "https://gdcsscasteloes.pt",
