@@ -31,7 +31,7 @@ const eventosPassados = computed(() =>
 <template>
   <LandingContainer>
     <LandingSectionhead>
-      <template v-slot:title>
+      <template #title>
         <div class="flex flex-col items-center">
           <span class="text-gray-900 dark:text-white">Próximos Eventos</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
@@ -41,7 +41,7 @@ const eventosPassados = computed(() =>
         </div>
       </template>
 
-      <template v-slot:desc>
+      <template #desc>
         <span class="text-slate-600 dark:text-gray-300">
           Não percas as nossas próximas festas e eventos! Vem divertir-te
           connosco!
@@ -49,6 +49,7 @@ const eventosPassados = computed(() =>
       </template>
     </LandingSectionhead>
 
+    <!-- Eventos Futuros -->
     <div
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-xl mx-auto mt-12 px-4"
     >
@@ -58,9 +59,13 @@ const eventosPassados = computed(() =>
         class="bg-white dark:bg-zinc-800 rounded-2xl shadow-md overflow-hidden flex flex-col"
       >
         <div class="w-full aspect-square overflow-hidden">
-          <img
+          <NuxtImg
             :src="evento.imagem"
             :alt="evento.nome"
+            format="auto"
+            placeholder="blur"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            densities="1x 2x"
             class="w-full h-full object-cover"
           />
         </div>
@@ -94,6 +99,7 @@ const eventosPassados = computed(() =>
       </div>
     </div>
 
+    <!-- Eventos Passados -->
     <div
       v-if="eventosPassados.length"
       class="max-w-screen-xl mx-auto mt-16 px-4"
@@ -108,9 +114,13 @@ const eventosPassados = computed(() =>
           class="bg-white dark:bg-zinc-800 rounded-2xl shadow-md overflow-hidden flex flex-col opacity-80 grayscale-[30%]"
         >
           <div class="w-full aspect-square overflow-hidden">
-            <img
+            <NuxtImg
               :src="evento.imagem"
               :alt="evento.nome"
+              format="auto"
+              placeholder="blur"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              densities="1x 2x"
               class="w-full h-full object-cover"
             />
           </div>

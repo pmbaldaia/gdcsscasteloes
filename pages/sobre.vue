@@ -17,7 +17,7 @@ const campo = {
 <template>
   <LandingContainer>
     <LandingSectionhead>
-      <template v-slot:title>
+      <template #title>
         <div class="flex flex-col items-center">
           <span class="text-slate-800 dark:text-white">Sobre nós</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
@@ -27,7 +27,7 @@ const campo = {
         </div>
       </template>
 
-      <template v-slot:desc>
+      <template #desc>
         <span class="text-slate-600 dark:text-gray-300">
           Localização e imagem do campo do Castelões
         </span>
@@ -36,11 +36,15 @@ const campo = {
 
     <div class="flex flex-wrap md:flex-nowrap mt-12 w-full">
       <div class="w-full md:w-1/2 flex justify-center items-center">
-        <img
+        <NuxtImg
           :src="campo.imagem.src"
           :width="campo.imagem.width"
           :height="campo.imagem.height"
           alt="Campo Desportivo de Castelões"
+          format="auto"
+          placeholder="blur"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          densities="1x 2x"
           class="rounded shadow-lg w-full h-auto max-w-full"
         />
       </div>

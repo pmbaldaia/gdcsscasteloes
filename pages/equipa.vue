@@ -14,13 +14,6 @@ function formatarNome(nome) {
   return `${partes[0]} ${partes[partes.length - 1]}`;
 }
 
-function onImgError(event) {
-  const fallback = event.target.dataset.fallback;
-  if (fallback && event.target.src !== fallback) {
-    event.target.src = fallback;
-  }
-}
-
 function getImagem(src) {
   return src && src.trim() !== "" ? src : "/equipa/default.webp";
 }
@@ -29,7 +22,6 @@ const dataBase = new Date("2025-07-29T21:30:00");
 const agora = new Date();
 
 const umDiaMs = 1000 * 60 * 60 * 24;
-
 let diasPassados = 0;
 let dataAtual = new Date(dataBase);
 
@@ -41,14 +33,14 @@ while (dataAtual <= agora) {
 }
 
 const jogadorIndex = diasPassados - 1;
-
 const plantel = fullPlantel.slice(0, jogadorIndex + 1);
 </script>
 
 <template>
   <LandingContainer>
+    <!-- Cabeçalho Plantel -->
     <LandingSectionhead>
-      <template v-slot:title>
+      <template #title>
         <div class="flex flex-col items-center">
           <span class="text-slate-800 dark:text-white">Plantel 2025/2026</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
@@ -57,12 +49,14 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           </div>
         </div>
       </template>
-      <template v-slot:desc>
+      <template #desc>
         <span class="text-slate-600 dark:text-gray-300">
           Conheça o plantel para a época 2025/2026
         </span>
       </template>
     </LandingSectionhead>
+
+    <!-- Plantel -->
     <div class="mt-16 w-full">
       <div
         v-if="plantel.length > 0"
@@ -71,15 +65,17 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
         <div
           v-for="jogador in plantel"
           :key="jogador.nome"
-          class="bg-white dark:bg-slate-800 py-6 rounded-xl shadow flex flex-col items-center justify-between text-center h-full min-h-[350px]"
+          class="bg-white dark:bg-slate-800 py-6 rounded-xl shadow flex flex-col items-center text-center h-full min-h-[350px]"
         >
-          <img
+          <NuxtImg
             :src="getImagem(jogador.img)"
             :alt="formatarNome(jogador.nome)"
-            data-fallback="/equipa/default.webp"
+            format="auto"
+            placeholder="blur"
+            sizes="sm:300px md:320px"
+            densities="1x 2x"
             class="object-contain rounded-t-xl mx-auto"
             style="max-width: 320px; height: auto"
-            @error="onImgError"
           />
 
           <div class="flex-1 flex flex-col justify-end mt-6">
@@ -92,7 +88,6 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           </div>
         </div>
       </div>
-
       <div
         v-else
         class="text-center py-12 bg-slate-100 dark:bg-slate-700 rounded-xl text-slate-600 dark:text-gray-300"
@@ -101,8 +96,9 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
       </div>
     </div>
 
+    <!-- Órgãos Sociais -->
     <LandingSectionhead>
-      <template v-slot:title>
+      <template #title>
         <div class="flex flex-col items-center">
           <span class="text-slate-800 dark:text-white">Órgãos Sociais</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
@@ -111,13 +107,14 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
           </div>
         </div>
       </template>
-      <template v-slot:desc>
+      <template #desc>
         <span class="text-slate-600 dark:text-gray-300">
           Conheça os responsáveis da época 2025/2026
         </span>
       </template>
     </LandingSectionhead>
 
+    <!-- Assembleia Geral -->
     <div class="mt-12 w-full">
       <h2
         class="text-2xl font-bold text-center text-slate-800 dark:text-white mb-6"
@@ -128,14 +125,16 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
         <div
           v-for="membro in assembleiaGeral"
           :key="membro.nome"
-          class="bg-white dark:bg-slate-800 pb-2 rounded-xl shadow flex flex-col items-center justify-between text-center h-full min-h-[300px]"
+          class="bg-white dark:bg-slate-800 pb-2 rounded-xl shadow flex flex-col items-center text-center h-full min-h-[300px]"
         >
-          <img
+          <NuxtImg
             :src="membro.img || '/equipa/default.webp'"
             :alt="formatarNome(membro.nome)"
-            data-fallback="/equipa/default.webp"
+            format="auto"
+            placeholder="blur"
+            sizes="sm:300px md:320px"
+            densities="1x 2x"
             class="w-full h-96 object-cover rounded-t-xl"
-            @error="onImgError"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
             <p class="text-xl font-semibold text-slate-900 dark:text-white">
@@ -147,6 +146,7 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
       </div>
     </div>
 
+    <!-- Direção -->
     <div class="mt-16 w-full">
       <h2
         class="text-2xl font-bold text-center text-slate-800 dark:text-white mb-6"
@@ -157,14 +157,16 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
         <div
           v-for="membro in direcao"
           :key="membro.nome + membro.funcao"
-          class="bg-white dark:bg-slate-800 pb-2 rounded-xl shadow flex flex-col items-center justify-between text-center h-full min-h-[300px]"
+          class="bg-white dark:bg-slate-800 pb-2 rounded-xl shadow flex flex-col items-center text-center h-full min-h-[300px]"
         >
-          <img
+          <NuxtImg
             :src="membro.img || '/equipa/default.webp'"
             :alt="formatarNome(membro.nome)"
-            data-fallback="/equipa/default.webp"
+            format="auto"
+            placeholder="blur"
+            sizes="sm:300px md:320px"
+            densities="1x 2x"
             class="w-full h-96 object-cover rounded-t-xl"
-            @error="onImgError"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
             <p class="text-xl font-semibold text-slate-900 dark:text-white">
@@ -176,6 +178,7 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
       </div>
     </div>
 
+    <!-- Conselho Fiscal -->
     <div class="mt-16 w-full">
       <h2
         class="text-2xl font-bold text-center text-slate-800 dark:text-white mb-6"
@@ -186,12 +189,15 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
         <div
           v-for="(membro, index) in conselhoFiscal"
           :key="membro.nome"
-          class="bg-white dark:bg-slate-800 pb-2 rounded-xl shadow flex flex-col items-center justify-between text-center h-full min-h-[300px]"
+          class="bg-white dark:bg-slate-800 pb-2 rounded-xl shadow flex flex-col items-center text-center h-full min-h-[300px]"
         >
-          <img
+          <NuxtImg
             :src="getImagem(membro.img)"
             :alt="formatarNome(membro.nome)"
-            data-fallback="/equipa/default.webp"
+            format="auto"
+            placeholder="blur"
+            sizes="sm:300px md:320px"
+            densities="1x 2x"
             class="w-full h-96 object-cover rounded-t-xl"
             :style="
               index === 0
@@ -200,9 +206,7 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
                 ? 'object-position: center 30%;'
                 : 'object-position: center 45%;'
             "
-            @error="onImgError"
           />
-
           <div class="flex-1 flex flex-col justify-end mt-4">
             <p class="text-xl font-semibold text-slate-900 dark:text-white">
               {{ formatarNome(membro.nome) }}

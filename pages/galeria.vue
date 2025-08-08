@@ -27,6 +27,7 @@ const closeDialog = () => {
   selectedImage.value = null;
 };
 
+// Se quiser mesmo manter pré-carregamento
 const preloadImages = () => {
   categories.value.forEach((category) => {
     category.images.forEach((src) => {
@@ -44,7 +45,7 @@ onMounted(() => {
 <template>
   <LandingContainer>
     <LandingSectionhead>
-      <template v-slot:title>
+      <template #title>
         <div class="flex flex-col items-center">
           <span class="text-gray-900 dark:text-white">Galeria</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
@@ -53,7 +54,7 @@ onMounted(() => {
           </div>
         </div>
       </template>
-      <template v-slot:desc>
+      <template #desc>
         <p class="text-slate-600 dark:text-gray-300">
           Espreita alguns dos momentos que captámos em imagens!
         </p>
@@ -82,12 +83,14 @@ onMounted(() => {
             @click="openImage(src)"
             class="cursor-pointer overflow-hidden rounded-lg shadow hover:shadow-lg transition duration-300 h-48"
           >
-            <img
+            <NuxtImg
               :src="src"
               alt="Foto da galeria"
+              format="auto"
+              placeholder="blur"
+              sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 20vw"
+              densities="1x 2x"
               class="w-full h-full object-cover hover:scale-[1.02] transition-transform rounded-lg"
-              loading="lazy"
-              decoding="async"
             />
           </div>
         </div>
@@ -108,10 +111,14 @@ onMounted(() => {
         >
           ✕
         </button>
-        <img
+        <NuxtImg
           :src="selectedImage"
           :key="selectedImage"
           alt="Imagem ampliada"
+          format="auto"
+          placeholder="blur"
+          sizes="100vw"
+          densities="1x 2x"
           class="zoomed-image"
         />
       </div>
