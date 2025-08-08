@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   ],
 
   image: {
-    provider: "static",
+    provider: "ipx",
     domains: [],
     formats: ["webp", "png"],
     screens: {
