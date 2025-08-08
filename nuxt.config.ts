@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   ],
 
   image: {
+    provider: "netlifyImageCdn",
     domains: [],
     formats: ["webp", "png"],
     screens: {
