@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   image: {
     provider: "static",
     domains: [],
-    formats: ["webp", "avif"],
+    formats: ["webp", "png"],
     screens: {
       xs: 320,
       sm: 640,
