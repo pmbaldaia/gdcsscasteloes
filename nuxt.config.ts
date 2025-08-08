@@ -32,22 +32,20 @@ export default defineNuxtConfig({
       title: "GDCSS Castelões",
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        // Preload da imagem principal para melhorar LCP
         {
           rel: "preload",
           as: "image",
           href: "/assets/img/gdcss-castelões-tarja.webp",
           fetchpriority: "high",
         },
-        // Preload do CSS global, com carregamento assíncrono para reduzir bloqueio
         {
           rel: "preload",
           as: "style",
-          href: "/_nuxt/assets/css/main.css", // Verifica caminho correto do CSS compilado
+          href: "~/assets/css/main.css",
         },
         {
           rel: "stylesheet",
-          href: "/_nuxt/assets/css/main.css",
+          href: "~/assets/css/main.css",
           media: "print",
           onload: "this.media='all'",
         },
