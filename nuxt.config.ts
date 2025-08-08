@@ -106,7 +106,22 @@ export default defineNuxtConfig({
       include: ["@phosphor-icons/vue"],
     },
     ssr: {
-      noExternal: [],
+      noExternal: ["@phosphor-icons/vue"],
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              const directories = id.split("node_modules/")[1].split("/");
+              const pkgName = directories[0].startsWith("@")
+                ? directories.slice(0, 2).join("/")
+                : directories[0];
+              return `vendor-${pkgName}`;
+            }
+          },
+        },
+      },
     },
   },
 
