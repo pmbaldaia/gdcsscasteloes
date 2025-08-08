@@ -39,12 +39,17 @@ export default defineNuxtConfig({
           href: "/assets/img/gdcss-castelões-tarja.webp",
           fetchpriority: "high",
         },
-        // Preload + carregamento assíncrono do CSS global para reduzir bloqueio
+        // Preload do CSS global, com carregamento assíncrono para reduzir bloqueio
         {
           rel: "preload",
           as: "style",
-          href: "/_nuxt/assets/css/main.css", // Ajusta o caminho correto do CSS compilado se necessário
-          onload: "this.onload=null;this.rel='stylesheet'",
+          href: "/_nuxt/assets/css/main.css", // Verifica caminho correto do CSS compilado
+        },
+        {
+          rel: "stylesheet",
+          href: "/_nuxt/assets/css/main.css",
+          media: "print",
+          onload: "this.media='all'",
         },
       ],
       meta: [
@@ -109,6 +114,21 @@ export default defineNuxtConfig({
     },
     ssr: {
       noExternal: ["@phosphor-icons/vue"],
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              const directories = id.split("node_modules/")[1].split("/");
+              const pkgName = directories[0].startsWith("@")
+                ? directories.slice(0, 2).join("/")
+                : directories[0];
+              return `vendor-${pkgName}`;
+            }
+          },
+        },
+      },
     },
   },
 
