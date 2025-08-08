@@ -30,7 +30,23 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "GDCSS Castelões",
-      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        // Preload da imagem principal para melhorar LCP
+        {
+          rel: "preload",
+          as: "image",
+          href: "/assets/img/gdcss-castelões-tarja.webp",
+          fetchpriority: "high",
+        },
+        // Preload + carregamento assíncrono do CSS global para reduzir bloqueio
+        {
+          rel: "preload",
+          as: "style",
+          href: "/_nuxt/assets/css/main.css", // Ajusta o caminho correto do CSS compilado se necessário
+          onload: "this.onload=null;this.rel='stylesheet'",
+        },
+      ],
       meta: [
         {
           name: "google-site-verification",
@@ -65,6 +81,10 @@ export default defineNuxtConfig({
           content: "https://gdcsscasteloes.pt/favicon.ico",
         },
       ],
+      // Caso uses scripts externos que bloqueiam renderização, adiciona defer aqui
+      // script: [
+      //   { src: 'https://exemplo.com/script.js', defer: true }
+      // ]
     },
   },
 
