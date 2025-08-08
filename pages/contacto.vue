@@ -215,6 +215,7 @@ const handleSubmit = () => {
           <a
             href="mailto:gdcsscasteloes1984@gmail.com"
             class="hover:underline dark:text-gray-300"
+            aria-label="Clica aqui para mandar email"
           >
             gdcsscasteloes1984@gmail.com
           </a>

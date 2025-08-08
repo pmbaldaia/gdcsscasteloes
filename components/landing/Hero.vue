@@ -54,6 +54,7 @@
         <a
           class="bg-red-800 text-white hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto inline-block text-center px-4 py-2 rounded"
           href="/eventos/"
+          aria-label="Clica aqui para ver Eventos"
         >
           Ver Eventos
         </a>
@@ -61,6 +62,7 @@
         <a
           class="bg-green-800 text-white hover:bg-black hover:text-white border border-green-800 hover:border-white w-full sm:w-auto inline-block text-center px-4 py-2 rounded"
           href="/calendario/"
+          aria-label="Clica aqui para ver Calendário"
         >
           Ver Calendário
         </a>

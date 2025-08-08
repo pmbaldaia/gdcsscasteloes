@@ -43,7 +43,7 @@ onMounted(() => {
         class="max-w-7xl mx-auto px-8 flex flex-col lg:flex-row justify-between items-center pt-5 pb-5"
       >
         <div class="flex w-full lg:w-auto items-center justify-between">
-          <a href="/" class="text-lg">
+          <a href="/" class="text-lg" aria-label="Logo Castelões">
             <!-- Logo clara -->
             <NuxtImg
               v-if="isMounted && colorMode.value !== 'dark'"

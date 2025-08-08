@@ -31,6 +31,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
               <a
                 href="/contacto"
                 class="transition-colors duration-300 text-gray-700 dark:text-gray-300 hover:text-red-500 hover:underline"
+                aria-label="Clica aqui para ver os contactos"
               >
                 Contactos
               </a>
@@ -39,6 +40,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
               <a
                 href="/politicas/cookies"
                 class="transition-colors duration-300 text-gray-700 dark:text-gray-300 hover:text-red-500 hover:underline"
+                aria-label="Clica aqui para ver a política de cookies"
               >
                 Política de Cookies
               </a>
@@ -47,6 +49,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
               <a
                 href="/politicas/privacidade"
                 class="transition-colors duration-300 text-gray-700 dark:text-gray-300 hover:text-red-500 hover:underline"
+                aria-label="Clica aqui para ver a política de privacidade"
               >
                 Política de Privacidade
               </a>
@@ -55,6 +58,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
               <a
                 href="/politicas/servico"
                 class="transition-colors duration-300 text-gray-700 dark:text-gray-300 hover:text-red-500 hover:underline"
+                aria-label="Clica aqui para ver os termos de serviço"
               >
                 Termos de Serviço
               </a>
@@ -71,6 +75,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
                 href="https://www.facebook.com/gdcscasteloes/"
                 target="_blank"
                 class="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-red-500 hover:underline transition-colors duration-300"
+                aria-label="Clica aqui para aceder ao Facebook"
               >
                 <PhFacebookLogo class="w-6 h-6 fill-current" />
                 <span>Facebook</span>
@@ -81,6 +86,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
                 href="https://www.instagram.com/gdcsscasteloes/"
                 target="_blank"
                 class="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-red-500 hover:underline transition-colors duration-300"
+                aria-label="Clica aqui para aceder ao Instagram"
               >
                 <PhInstagramLogo class="w-6 h-6 fill-current" />
                 <span>Instagram</span>
@@ -97,6 +103,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
             <a
               href="mailto:gdcsscasteloes1984@gmail.com"
               class="underline transition-colors duration-300 text-gray-700 dark:text-gray-300 hover:text-red-500 hover:underline"
+              aria-label="Clica aqui para mandar email"
             >
               gdcsscasteloes1984@gmail.com
             </a>
@@ -120,6 +127,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
           target="_blank"
           rel="noopener"
           class="hover:text-red-500 hover:underline transition-colors duration-300 text-gray-700 dark:text-gray-300"
+          aria-label="Desenvolvedor do site"
         >
           Webcreaterpt
         </a>
