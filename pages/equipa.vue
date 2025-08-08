@@ -129,8 +129,6 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
             :alt="formatarNome(membro.nome)"
             format="auto"
             placeholder="blur"
-            sizes="sm:300px md:320px"
-            densities="1x 2x"
             class="w-full h-96 object-cover rounded-t-xl"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
@@ -161,8 +159,6 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
             :alt="formatarNome(membro.nome)"
             format="auto"
             placeholder="blur"
-            sizes="sm:300px md:320px"
-            densities="1x 2x"
             class="w-full h-96 object-cover rounded-t-xl"
           />
           <div class="flex-1 flex flex-col justify-end mt-4">
@@ -193,8 +189,6 @@ const plantel = fullPlantel.slice(0, jogadorIndex + 1);
             :alt="formatarNome(membro.nome)"
             format="auto"
             placeholder="blur"
-            sizes="sm:300px md:320px"
-            densities="1x 2x"
             class="w-full h-96 object-cover rounded-t-xl"
             :style="
               index === 0

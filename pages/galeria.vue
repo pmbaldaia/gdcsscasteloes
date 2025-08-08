@@ -88,8 +88,6 @@ onMounted(() => {
               alt="Foto da galeria"
               format="auto"
               placeholder="blur"
-              sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 20vw"
-              densities="1x 2x"
               class="w-full h-full object-cover hover:scale-[1.02] transition-transform rounded-lg"
             />
           </div>
@@ -117,8 +115,6 @@ onMounted(() => {
           alt="Imagem ampliada"
           format="auto"
           placeholder="blur"
-          sizes="100vw"
-          densities="1x 2x"
           class="zoomed-image"
         />
       </div>

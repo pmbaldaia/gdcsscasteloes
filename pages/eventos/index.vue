@@ -64,8 +64,6 @@ const eventosPassados = computed(() =>
             :alt="evento.nome"
             format="auto"
             placeholder="blur"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            densities="1x 2x"
             class="w-full h-full object-cover"
           />
         </div>
@@ -119,8 +117,6 @@ const eventosPassados = computed(() =>
               :alt="evento.nome"
               format="auto"
               placeholder="blur"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              densities="1x 2x"
               class="w-full h-full object-cover"
             />
           </div>
