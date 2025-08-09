@@ -1,3 +1,21 @@
+import fs from "fs";
+import path from "path";
+
+function getAllImages(dir: string, baseUrl: string): { loc: string }[] {
+  const files = fs.readdirSync(dir, { withFileTypes: true });
+  let images: { loc: string }[] = [];
+
+  for (const file of files) {
+    const fullPath = path.join(dir, file.name);
+    if (file.isDirectory()) {
+      images = images.concat(getAllImages(fullPath, baseUrl + "/" + file.name));
+    } else if (/\.(jpe?g|png|webp|gif|avif)$/i.test(file.name)) {
+      images.push({ loc: `${baseUrl}/${file.name}` });
+    }
+  }
+  return images;
+}
+
 export default defineNuxtConfig({
   modules: [
     "@nuxtjs/color-mode",
@@ -88,6 +106,20 @@ export default defineNuxtConfig({
 
   sitemap: {
     exclude: ["/admin/**", "/auth/**", "/manutencao"],
+    urls: async () => {
+      const publicPath = path.join(process.cwd(), "public");
+      const baseUrl = "https://gdcsscasteloes.pt";
+
+      // Busca todas as imagens no /public e subpastas
+      const images = getAllImages(publicPath, baseUrl);
+
+      return [
+        {
+          loc: "https://gdcsscasteloes.pt/",
+          images,
+        },
+      ];
+    },
   },
 
   css: ["~/assets/css/main.css"],
