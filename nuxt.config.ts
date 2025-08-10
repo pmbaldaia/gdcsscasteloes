@@ -66,7 +66,11 @@ export default defineNuxtConfig({
         lang: "pt-PT",
       },
       title: "GDCSS Castelões",
-      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: "canonical", href: "https://gdcsscasteloes.pt/" },
+      ],
+
       meta: [
         {
           name: "google-site-verification",
