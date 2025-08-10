@@ -52,7 +52,7 @@ export default defineNuxtConfig({
         rules: [
           {
             userAgent: "*",
-            allow: "/",
+            disallow: ["/_nuxt/", "/admin/**", "/auth/**", "/manutencao"],
           },
         ],
         sitemap: "https://gdcsscasteloes.pt/sitemap.xml",
