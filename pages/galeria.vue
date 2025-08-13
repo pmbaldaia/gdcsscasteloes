@@ -1,6 +1,6 @@
 <script setup>
 definePageMeta({
-  layout: "landing",
+  layout: "default",
 });
 
 import { ref, onMounted, nextTick } from "vue";

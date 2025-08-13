@@ -1,5 +1,5 @@
 <script setup>
-definePageMeta({ layout: "landing" });
+definePageMeta({ layout: "default" });
 
 import {
   assembleiaGeral,

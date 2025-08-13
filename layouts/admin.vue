@@ -71,7 +71,7 @@ onMounted(() => {
       </header>
 
       <main class="p-6 overflow-auto">
-        <slot />
+        <NuxtPage />
       </main>
     </div>
   </div>

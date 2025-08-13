@@ -230,8 +230,8 @@ export const plantel = [
   },
   {
     id: 21,
-    nome: "Rodrigo Moreira",
-    posicao: "Avançado",
+    nome: "Zé Rodrigues",
+    posicao: "Médio",
     img: "/equipa/plantel/21.webp",
   },
   {
@@ -242,14 +242,8 @@ export const plantel = [
   },
   {
     id: 23,
-    nome: "Miguel Coelho",
-    posicao: "Médio",
-    img: "/equipa/plantel/23.webp",
-  },
-  {
-    id: 24,
     nome: "Pedro Cunha",
     posicao: "Médio",
-    img: "/equipa/plantel/24.webp",
+    img: "/equipa/plantel/23.webp",
   },
 ];
