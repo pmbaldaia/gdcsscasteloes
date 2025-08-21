@@ -16,6 +16,8 @@ function getAllImages(dir: string, baseUrl: string): { loc: string }[] {
   return images;
 }
 
+const isProd = process.env.NODE_ENV === "production";
+
 export default defineNuxtConfig({
   modules: [
     "@nuxtjs/color-mode",
@@ -25,10 +27,8 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "@nuxt/image",
   ],
-
   image: {
-    provider: "netlifyImageCdn",
-    domains: [],
+    provider: isProd ? "netlify" : "ipx",
     formats: ["webp", "png"],
     screens: {
       xs: 320,
@@ -43,9 +43,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      siteUrl: "https://gdcsscasteloes.pt",
+      siteUrl: process.env.NUXT_SITE_URL || "http://localhost:3000",
       sitemap: {
-        hostname: "https://gdcsscasteloes.pt",
+        hostname: process.env.NUXT_SITE_URL || "http://localhost:3000",
         exclude: ["/admin/**", "/auth/**", "/manutencao"],
       },
       robots: {
@@ -65,7 +65,9 @@ export default defineNuxtConfig({
             allow: "/",
           },
         ],
-        sitemap: "https://gdcsscasteloes.pt/sitemap.xml",
+        sitemap: `${
+          process.env.NUXT_SITE_URL || "http://localhost:3000"
+        }/sitemap.xml`,
       },
     },
   },
@@ -80,7 +82,6 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: "canonical", href: "https://gdcsscasteloes.pt/" },
       ],
-
       meta: [
         {
           name: "google-site-verification",
@@ -122,14 +123,14 @@ export default defineNuxtConfig({
     exclude: ["/admin/**", "/auth/**", "/manutencao"],
     urls: async () => {
       const publicPath = path.join(process.cwd(), "public");
-      const baseUrl = "https://gdcsscasteloes.pt";
+      const baseUrl = process.env.NUXT_SITE_URL || "http://localhost:3000";
 
-      // Busca todas as imagens no /public e subpastas
+      // Buscar todas as imagens no /public
       const images = getAllImages(publicPath, baseUrl);
 
       return [
         {
-          loc: "https://gdcsscasteloes.pt/",
+          loc: baseUrl,
           images,
         },
       ];
