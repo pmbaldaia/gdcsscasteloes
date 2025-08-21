@@ -9,12 +9,8 @@ import teams from "~/data/equipas";
 
 const open = ref(false);
 const dropdownRef = ref(null);
-
-const availableJornadas = Object.keys(jornadas)
-  .map(Number)
-  .sort((a, b) => a - b);
-
-const selectedJornada = ref(availableJornadas[0] || 1);
+const availableVoltas = ["Todos", "1ª Volta", "2ª Volta"];
+const selectedVolta = ref("Todos");
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -25,8 +21,16 @@ function formatDate(dateString) {
 }
 
 const filteredGames = computed(() => {
-  const games = jornadas[selectedJornada.value] || [];
-  return games.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+  if (selectedVolta.value === "Todos") {
+    return Object.values(jornadas)
+      .flat()
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+  }
+  const voltaNumber = selectedVolta.value === "1ª Volta" ? 1 : 2;
+  return Object.values(jornadas)
+    .flat()
+    .filter((game) => game.volta === voltaNumber)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
 });
 
 const handleClickOutside = (event) => {
@@ -38,6 +42,7 @@ const handleClickOutside = (event) => {
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
 });
+
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
@@ -55,31 +60,22 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </template>
-
       <template #desc>
-        <span
-          class="text-slate-600 dark:text-gray-300"
-          v-if="availableJornadas.length > 0"
-        >
-          Consulta os próximos jogos e as equipas participantes.
-        </span>
-        <span class="text-slate-600 dark:text-gray-300" v-else>
-          A época 2025/2026 será carregada em breve.
+        <span class="text-slate-600 dark:text-gray-300">
+          ⚽ Prepara-te para a ação! Explora o calendário de jogos e acompanha a
+          tua equipa rumo à vitória! 🏆
         </span>
       </template>
     </LandingSectionhead>
 
     <div class="max-w-7xl mx-auto px-4 mt-12">
-      <div
-        class="flex justify-center mb-10"
-        v-if="availableJornadas.length > 0"
-      >
+      <div class="flex justify-center mb-10">
         <div class="relative w-64" ref="dropdownRef">
           <button
             @click="open = !open"
             class="w-full text-lg font-medium rounded-xl border border-white bg-white dark:bg-gray-900 text-gray-800 dark:text-white px-5 py-3 shadow-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 flex justify-between items-center"
           >
-            <span>Jornada {{ selectedJornada }}</span>
+            <span>{{ selectedVolta }}</span>
             <svg
               class="w-5 h-5 transform transition-transform"
               :class="{ 'rotate-180': open }"
@@ -101,15 +97,15 @@ onBeforeUnmount(() => {
             class="absolute z-50 mt-2 w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-60 overflow-y-auto"
           >
             <li
-              v-for="j in availableJornadas"
-              :key="j"
+              v-for="v in availableVoltas"
+              :key="v"
               @click="
-                selectedJornada = j;
+                selectedVolta = v;
                 open = false;
               "
               class="px-5 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer text-gray-800 dark:text-white"
             >
-              Jornada {{ j }}
+              {{ v }}
             </li>
           </ul>
         </div>
@@ -122,21 +118,37 @@ onBeforeUnmount(() => {
         <div
           v-for="(game, index) in filteredGames"
           :key="index"
-          class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg text-center w-full"
+          class="relative bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg text-center w-full"
         >
-          <h3
-            class="text-lg sm:text-xl font-bold text-gray-800 dark:text-white"
+          <div
+            class="absolute top-2 right-2 text-white text-xs px-2 py-1 rounded-full"
+            :style="{
+              backgroundColor: game.volta === 1 ? '#c53030' : '#2f855a',
+            }"
+          >
+            {{ game.volta }}ª Volta
+          </div>
+
+          <h4 class="text-sm text-gray-400 dark:text-gray-500 mb-1">
+            Jornada {{ game.jornada }}
+          </h4>
+          <span
+            class="text-sm sm:text-base font-medium text-gray-600 dark:text-gray-300"
           >
             {{ formatDate(game.date) }}
-          </h3>
+          </span>
 
           <div class="flex justify-center gap-4 mt-4 items-center">
-            <div class="flex flex-col items-center w-24 sm:w-28 text-center">
+            <div
+              class="flex flex-col items-center w-24 sm:w-28 text-center min-h-[110px]"
+            >
               <img
                 :src="teams.find((t) => t.name === game.teams[0])?.logo"
                 class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
               />
-              <p class="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <p
+                class="text-sm font-medium text-gray-700 dark:text-gray-300 text-center leading-tight"
+              >
                 {{ game.teams[0] }}
               </p>
             </div>
@@ -149,23 +161,20 @@ onBeforeUnmount(() => {
               </span>
             </div>
 
-            <div class="flex flex-col items-center w-24 sm:w-28 text-center">
+            <div
+              class="flex flex-col items-center w-24 sm:w-28 text-center min-h-[110px]"
+            >
               <img
                 :src="teams.find((t) => t.name === game.teams[1])?.logo"
                 class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
               />
-              <p class="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <p
+                class="text-sm font-medium text-gray-700 dark:text-gray-300 text-center leading-tight"
+              >
                 {{ game.teams[1] }}
               </p>
             </div>
           </div>
-
-          <p class="mt-4 text-gray-600 dark:text-gray-400 text-lg">
-            {{ game.time }}
-          </p>
-          <p class="text-sm text-gray-400 dark:text-gray-500">
-            {{ game.location }}
-          </p>
         </div>
       </div>
 
@@ -173,7 +182,20 @@ onBeforeUnmount(() => {
         v-else
         class="flex flex-col items-center justify-center py-8 space-y-6 text-center"
       >
-        <div class="text-9xl animate-bounce">⚽</div>
+        <img
+          v-if="selectedVolta === '2ª Volta'"
+          src="/img/bola.svg"
+          alt="Bola animada"
+          class="w-32 h-32 animate-bounce dark:invert"
+        />
+
+        <div class="text-gray-700 dark:text-gray-300 text-lg max-w-md">
+          {{
+            selectedVolta === "2ª Volta"
+              ? "Os jogos da 2ª volta ainda não existem de momento!"
+              : "Ainda não existem jogos disponíveis."
+          }}
+        </div>
       </div>
     </div>
   </LandingContainer>
