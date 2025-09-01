@@ -25,10 +25,18 @@ while (dataAtual <= agora) {
 
 const jogadorIndex = diasValidos - 1;
 
-const jogador =
-  jogadorIndex >= 0 && jogadorIndex < fullPlantel.length
-    ? fullPlantel[jogadorIndex]
-    : null;
+const dataAlvo = new Date("2025-09-01T21:30:00");
+
+let jogador = null;
+
+if (agora >= dataAlvo && agora < new Date(dataAlvo.getTime() + umDiaMs)) {
+  jogador = fullPlantel[24];
+} else {
+  jogador =
+    jogadorIndex >= 0 && jogadorIndex < fullPlantel.length
+      ? fullPlantel[jogadorIndex]
+      : null;
+}
 </script>
 
 <template>
