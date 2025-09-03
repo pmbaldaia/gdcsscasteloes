@@ -246,4 +246,10 @@ export const plantel = [
     posicao: "Médio",
     img: "/equipa/plantel/23.webp",
   },
+  {
+    id: 24,
+    nome: "Pedro Cunha",
+    posicao: "Médio",
+    img: "/equipa/plantel/24.webp",
+  },
 ];
