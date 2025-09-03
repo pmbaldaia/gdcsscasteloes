@@ -248,7 +248,7 @@ export const plantel = [
   },
   {
     id: 24,
-    nome: "Pedro Cunha",
+    nome: "Rodrigo Tanaka",
     posicao: "Médio",
     img: "/equipa/plantel/24.webp",
   },
