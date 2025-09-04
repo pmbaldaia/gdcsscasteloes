@@ -62,7 +62,7 @@ Traga família e amigos para celebrar o espírito desportivo, reviver memórias 
   {
     nome: "Des'Banda em Castelões",
     slug: "desbanda-em-casteloes",
-    data: "05/09/2025 e 06/09/2025",
+    data: "05/09/2025",
     descricao: "Dois dias de música, festa e animação em Castelões!",
     local: "A anunciar",
     imagem: "/eventos/DesBanda.webp",
