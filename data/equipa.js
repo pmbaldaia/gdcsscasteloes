@@ -252,4 +252,10 @@ export const plantel = [
     posicao: "Médio",
     img: "/equipa/plantel/24.webp",
   },
+  {
+    id: 25,
+    nome: "Bruno Mendes",
+    posicao: "Guarda-Redes",
+    img: "/equipa/plantel/25.webp",
+  },
 ];
