@@ -1,48 +1,18 @@
 <script setup>
 import { plantel as fullPlantel } from "@/data/equipa";
 
-const props = defineProps({ show: Boolean });
+const props = defineProps({
+  show: Boolean,
+  jogador: {
+    type: Object,
+    default: () => fullPlantel[0], // mostrar o primeiro jogador por padrão
+  },
+});
+
 const emit = defineEmits(["close"]);
 
 function close() {
   emit("close");
-}
-
-const dataBase = new Date("2025-07-29T21:30:00");
-const agora = new Date();
-
-const umDiaMs = 1000 * 60 * 60 * 24;
-
-let dataAtual = new Date(dataBase);
-let diasValidos = 0;
-
-while (dataAtual <= agora) {
-  if (dataAtual.getDay() !== 0) {
-    diasValidos++;
-  }
-  dataAtual = new Date(dataAtual.getTime() + umDiaMs);
-}
-
-const jogadorIndex = diasValidos - 1;
-
-const dataAlvoJogador25 = new Date("2025-09-08T21:30:00");
-
-let jogador = null;
-
-const exibirJogador25 =
-  agora.getFullYear() === dataAlvoJogador25.getFullYear() &&
-  agora.getMonth() === dataAlvoJogador25.getMonth() &&
-  agora.getDate() === dataAlvoJogador25.getDate() &&
-  agora.getHours() === dataAlvoJogador25.getHours() &&
-  agora.getMinutes() === dataAlvoJogador25.getMinutes();
-
-if (exibirJogador25) {
-  jogador = fullPlantel.find((j) => j.id === 25);
-} else {
-  jogador =
-    jogadorIndex >= 0 && jogadorIndex < fullPlantel.length
-      ? fullPlantel[jogadorIndex]
-      : null;
 }
 </script>
 
@@ -60,7 +30,7 @@ if (exibirJogador25) {
         >
           <div class="flex items-center justify-between mb-4">
             <div class="flex-1 text-center">
-              <h2 class="text-xl font-semibold">Destaque do dia</h2>
+              <h2 class="text-xl font-semibold">Destaque</h2>
             </div>
             <button
               @click="close"

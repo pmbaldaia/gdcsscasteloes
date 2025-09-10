@@ -18,39 +18,7 @@ function getImagem(src) {
   return src && src.trim() !== "" ? src : "/equipa/default.webp";
 }
 
-// Data base
-const dataBase = new Date("2025-07-29T21:30:00");
-const agora = new Date();
-
-const umDiaMs = 1000 * 60 * 60 * 24;
-let diasPassados = 0;
-let dataAtual = new Date(dataBase);
-
-while (dataAtual <= agora) {
-  if (dataAtual.getDay() !== 0) {
-    diasPassados++;
-  }
-  dataAtual = new Date(dataAtual.getTime() + umDiaMs);
-}
-
-const jogadorIndex = diasPassados - 1;
-let plantel = fullPlantel.slice(0, jogadorIndex + 1).filter((j) => j.id !== 25);
-
-const exibirJogador25 = (() => {
-  const dataAlvo = new Date("2025-09-08T21:30:00");
-  return (
-    agora.getFullYear() === dataAlvo.getFullYear() &&
-    agora.getMonth() === dataAlvo.getMonth() &&
-    agora.getDate() === dataAlvo.getDate() &&
-    agora.getHours() === dataAlvo.getHours() &&
-    agora.getMinutes() === dataAlvo.getMinutes()
-  );
-})();
-
-if (exibirJogador25) {
-  const jogador25 = fullPlantel.find((j) => j.id === 25);
-  if (jogador25) plantel.push(jogador25);
-}
+const plantel = fullPlantel;
 </script>
 
 <template>
