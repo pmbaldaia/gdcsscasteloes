@@ -8,39 +8,15 @@ function getAllImages(dir: string, baseUrl: string): { loc: string }[] {
   for (const file of files) {
     const fullPath = path.join(dir, file.name);
     if (file.isDirectory()) {
-      images = images.concat(getAllImages(fullPath, `${baseUrl}/${file.name}`));
+      images = images.concat(getAllImages(fullPath, baseUrl + "/" + file.name));
     } else if (/\.(jpe?g|png|webp|gif|avif)$/i.test(file.name)) {
       images.push({ loc: `${baseUrl}/${file.name}` });
     }
   }
-
   return images;
 }
 
-function getAllRoutes(dir: string, prefix = ""): string[] {
-  const files = fs.readdirSync(dir, { withFileTypes: true });
-  let routes: string[] = [];
-
-  for (const file of files) {
-    const fullPath = path.join(dir, file.name);
-
-    if (file.isDirectory()) {
-      routes = routes.concat(getAllRoutes(fullPath, `${prefix}/${file.name}`));
-    } else if (file.name.endsWith(".vue")) {
-      const name = file.name.replace(/\.vue$/, "");
-      if (name === "index") {
-        routes.push(prefix || "/");
-      } else {
-        routes.push(`${prefix}/${name}`);
-      }
-    }
-  }
-
-  return routes;
-}
-
 const isProd = process.env.NODE_ENV === "production";
-const siteUrl = process.env.NUXT_SITE_URL || "http://localhost:3000";
 
 export default defineNuxtConfig({
   modules: [
@@ -51,7 +27,6 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "@nuxt/image",
   ],
-
   image: {
     provider: isProd ? "netlify" : "ipx",
     formats: ["webp", "png"],
@@ -68,9 +43,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      siteUrl,
+      siteUrl: process.env.NUXT_SITE_URL || "http://localhost:3000",
       sitemap: {
-        hostname: siteUrl,
+        hostname: process.env.NUXT_SITE_URL || "http://localhost:3000",
         exclude: ["/admin/**", "/auth/**", "/manutencao"],
       },
       robots: {
@@ -90,18 +65,22 @@ export default defineNuxtConfig({
             allow: "/",
           },
         ],
-        sitemap: `${siteUrl}/sitemap.xml`,
+        sitemap: `${
+          process.env.NUXT_SITE_URL || "http://localhost:3000"
+        }/sitemap.xml`,
       },
     },
   },
 
   app: {
     head: {
-      htmlAttrs: { lang: "pt-PT" },
+      htmlAttrs: {
+        lang: "pt-PT",
+      },
       title: "GDCSS Castelões",
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        { rel: "canonical", href: siteUrl },
+        { rel: "canonical", href: "https://gdcsscasteloes.pt/" },
       ],
       meta: [
         {
@@ -120,43 +99,41 @@ export default defineNuxtConfig({
           property: "og:description",
           content: "Site oficial do GDCSS Castelões",
         },
-        { property: "og:image", content: `${siteUrl}/favicon.ico` },
+        {
+          property: "og:image",
+          content: "https://gdcsscasteloes.pt/favicon.ico",
+        },
         { property: "og:type", content: "website" },
-        { property: "og:url", content: siteUrl },
+        { property: "og:url", content: "https://gdcsscasteloes.pt" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: "GDCSS Castelões" },
         {
           name: "twitter:description",
           content: "Site oficial do GDCSS Castelões",
         },
-        { name: "twitter:image", content: `${siteUrl}/favicon.ico` },
+        {
+          name: "twitter:image",
+          content: "https://gdcsscasteloes.pt/favicon.ico",
+        },
       ],
     },
   },
 
   sitemap: {
-    hostname: siteUrl,
     exclude: ["/admin/**", "/auth/**", "/manutencao"],
     urls: async () => {
-      const pagesDir = path.join(process.cwd(), "pages");
-      const routes = getAllRoutes(pagesDir);
-
       const publicPath = path.join(process.cwd(), "public");
-      const images = getAllImages(publicPath, siteUrl);
+      const baseUrl = process.env.NUXT_SITE_URL || "http://localhost:3000";
 
-      const urls = routes.map((route) => ({
-        loc: `${siteUrl}${route}`,
-        lastmod: new Date().toISOString(),
-      }));
+      // Buscar todas as imagens no /public
+      const images = getAllImages(publicPath, baseUrl);
 
-      // Adicionar homepage com imagens
-      urls.push({
-        loc: siteUrl,
-        images,
-        lastmod: new Date().toISOString(),
-      });
-
-      return urls;
+      return [
+        {
+          loc: baseUrl,
+          images,
+        },
+      ];
     },
   },
 
@@ -172,9 +149,16 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    optimizeDeps: { include: ["@phosphor-icons/vue"] },
-    ssr: { noExternal: ["@phosphor-icons/vue"] },
+    optimizeDeps: {
+      include: ["@phosphor-icons/vue"],
+    },
+    ssr: {
+      noExternal: ["@phosphor-icons/vue"],
+    },
   },
 
-  colorMode: { classSuffix: "", preference: "system" },
+  colorMode: {
+    classSuffix: "",
+    preference: "system",
+  },
 });
