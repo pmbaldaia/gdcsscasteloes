@@ -44,7 +44,6 @@ const sponsors = [
   { src: "/patrocinios/tiagomoreira.webp", alt: "Tiago Moreira" },
   { src: "/patrocinios/triunfoclassico.webp", alt: "Triunfo Clássico" },
   { src: "/patrocinios/vataxi.webp", alt: "VA Táxi" },
-  { src: "/patrocinios/zecananda.webp", alt: "Zé Cananda" },
 ];
 </script>
 
