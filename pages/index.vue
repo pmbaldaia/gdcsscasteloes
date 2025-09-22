@@ -8,6 +8,7 @@ definePageMeta({
   <LandingContainer>
     <LandingHero />
     <LandingFeatures />
+    <LandingGames />
     <LandingLogos />
     <LandingCta />
   </LandingContainer>

@@ -6,6 +6,7 @@ export default [
   },
   { name: "CAÍDE REI SC", logo: "/logos/CAÍDE REI SC.webp" },
   { name: "AD VÁRZEA FC", logo: "/logos/AD VÁRZEA FC.webp" },
+  { name: "SC LAGARES", logo: "/logos/SC LAGARES.webp" },
   { name: "ASS NEVOGILDE", logo: "/logos/ASS NEVOGILDE.webp" },
   {
     name: "FC FELGUEIRAS “B” – SAD",

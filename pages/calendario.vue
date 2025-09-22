@@ -12,40 +12,46 @@ const dropdownRef = ref(null);
 const availableVoltas = ["Todos", "1ª Volta", "2ª Volta"];
 const selectedVolta = ref("Todos");
 
-function formatDate(dateString) {
-  const date = new Date(dateString);
+function parseGameDate(game) {
+  return new Date(`${game.date}T${game.time}:00`);
+}
+
+function formatDate(game) {
+  const date = parseGameDate(game);
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
 const filteredGames = computed(() => {
-  if (selectedVolta.value === "Todos") {
-    return Object.values(jornadas)
-      .flat()
-      .sort((a, b) => new Date(a.date) - new Date(b.date));
-  }
-  const voltaNumber = selectedVolta.value === "1ª Volta" ? 1 : 2;
-  return Object.values(jornadas)
+  const allGames = Object.values(jornadas)
     .flat()
-    .filter((game) => game.volta === voltaNumber)
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
+    .sort((a, b) => parseGameDate(a) - parseGameDate(b));
+  if (selectedVolta.value === "Todos") return allGames;
+  const voltaNumber = selectedVolta.value === "1ª Volta" ? 1 : 2;
+  return allGames.filter((game) => game.volta === voltaNumber);
+});
+
+const gamesWithStatus = computed(() => {
+  const now = new Date();
+  return filteredGames.value.map((game) => ({
+    ...game,
+    past: parseGameDate(game) < now,
+  }));
 });
 
 const handleClickOutside = (event) => {
-  if (dropdownRef.value && !dropdownRef.value.contains(event.target)) {
+  if (dropdownRef.value && !dropdownRef.value.contains(event.target))
     open.value = false;
-  }
 };
 
-onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener("click", handleClickOutside);
-});
+onMounted(() => document.addEventListener("click", handleClickOutside));
+onBeforeUnmount(() =>
+  document.removeEventListener("click", handleClickOutside)
+);
 </script>
 
 <template>
@@ -116,11 +122,15 @@ onBeforeUnmount(() => {
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
       >
         <div
-          v-for="(game, index) in filteredGames"
+          v-for="(game, index) in gamesWithStatus"
           :key="index"
-          class="relative bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg text-center w-full"
+          :class="[
+            'relative bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg text-center w-full',
+            game.past ? 'opacity-20' : 'opacity-100',
+          ]"
         >
           <div
+            v-if="game.jornada !== 'AF Porto Taça 25/26'"
             class="absolute top-2 right-2 text-white text-xs px-2 py-1 rounded-full"
             :style="{
               backgroundColor: game.volta === 1 ? '#c53030' : '#2f855a',
@@ -130,12 +140,13 @@ onBeforeUnmount(() => {
           </div>
 
           <h4 class="text-sm text-gray-400 dark:text-gray-500 mb-1">
-            Jornada {{ game.jornada }}
+            {{ game.jornada }}
           </h4>
+
           <span
             class="text-sm sm:text-base font-medium text-gray-600 dark:text-gray-300"
           >
-            {{ formatDate(game.date) }}
+            {{ formatDate(game) }}
           </span>
 
           <div class="flex justify-center gap-4 mt-4 items-center">
@@ -156,9 +167,8 @@ onBeforeUnmount(() => {
             <div class="flex items-center justify-center h-full">
               <span
                 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white"
+                >vs</span
               >
-                vs
-              </span>
             </div>
 
             <div
@@ -188,7 +198,6 @@ onBeforeUnmount(() => {
           alt="Bola animada"
           class="w-32 h-32 animate-bounce dark:invert"
         />
-
         <div class="text-gray-700 dark:text-gray-300 text-lg max-w-md">
           {{
             selectedVolta === "2ª Volta"
