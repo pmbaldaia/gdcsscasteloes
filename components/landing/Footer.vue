@@ -63,6 +63,26 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
                 Termos de Serviço
               </a>
             </li>
+            <li>
+              <a
+                href="/politicas/servico"
+                class="transition-colors duration-300 text-gray-700 dark:text-gray-300 hover:text-red-500 hover:underline"
+                aria-label="Clica aqui para ver os termos de serviço"
+              >
+                Termos de Serviço
+              </a>
+            </li>
+            <li>
+              <a
+                href="/pdf/manual-acolhimento-boas-praticas.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="transition-colors duration-300 text-gray-700 dark:text-gray-300 hover:text-red-500 hover:underline"
+                aria-label="Clica aqui para ver o Manual de Acolhimento e Boas Práticas"
+              >
+                Manual de Acolhimento e Boas Práticas
+              </a>
+            </li>
           </ul>
         </div>
 
