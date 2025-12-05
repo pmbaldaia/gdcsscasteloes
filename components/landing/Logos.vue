@@ -9,6 +9,7 @@ const sponsors = [
   { src: "/patrocinios/tochasbar.webp", alt: "Tochas Bar" },
   { src: "/patrocinios/carvalhaparque.webp", alt: "Carvalha Parque" },
   { src: "/patrocinios/fontevelha.webp", alt: "Fonte Velha" },
+  { src: "/patrocinios/controi-barros.webp", alt: "ConstroiBarros" },
   { src: "/patrocinios/allianz.webp", alt: "Allianz" },
   { src: "/patrocinios/amstransportes.webp", alt: "AMS Transportes" },
   { src: "/patrocinios/bjconstrucoes.webp", alt: "BJ Construções" },
