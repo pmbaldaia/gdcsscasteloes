@@ -185,7 +185,7 @@ export default {
       jornada: "Jornada 20",
       date: "2026-02-15",
       time: "15:30",
-      teams: ["GDCSS CASTELÉS", "FC FELGUEIRAS “B” – SAD"],
+      teams: ["GDCSS CASTELÕES", "FC FELGUEIRAS “B” – SAD"],
       volta: 2,
     },
   ],

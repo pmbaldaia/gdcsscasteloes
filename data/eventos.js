@@ -64,11 +64,27 @@ Traga família e amigos para celebrar o espírito desportivo, reviver memórias 
     slug: "desbanda-em-casteloes",
     data: "05/09/2025",
     descricao: "Dois dias de música, festa e animação em Castelões!",
-    local: "A anunciar",
+    local: "Rua da Igreja",
     imagem: "/eventos/DesBanda.webp",
     detalhes: `
       A Des'Banda volta em força com bandas locais, barraquinhas, DJ's convidados
       e muito mais! Marca já na agenda porque vais querer estar lá!
     `,
+  },
+  {
+    nome: "Jantar de Gala de Natal 2025",
+    slug: "jantar-de-gala-de-natal-2025",
+    hora: "20:00h",
+    data: "19/12/2025",
+    descricao:
+      "Uma noite elegante de celebração natalícia, convívio e boa gastronomia.",
+    local: "Olival da Cabana",
+    imagem: "/eventos/galanatal2025.webp",
+    detalhes: `
+    Celebra o Natal numa noite especial com um Jantar de Gala memorável.
+    O evento inclui menu requintado, ambiente sofisticado, animação ao vivo
+    e momentos pensados para celebrar a época natalícia em boa companhia.
+    Reserva já o teu lugar e vem brindar connosco ao Natal de 2025!
+  `,
   },
 ];
