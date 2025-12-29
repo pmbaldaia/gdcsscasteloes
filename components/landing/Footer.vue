@@ -143,7 +143,7 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
       <p class="text-center text-xs text-gray-700 dark:text-gray-300 mt-1">
         Feito por
         <a
-          href="https://instagram.com/webcreaterpt"
+          href="https://webcreaterpt.pt"
           target="_blank"
           rel="noopener"
           class="hover:text-red-500 hover:underline transition-colors duration-300 text-gray-700 dark:text-gray-300"
