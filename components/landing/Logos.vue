@@ -45,6 +45,10 @@ const sponsors = [
   { src: "/patrocinios/tiagomoreira.webp", alt: "Tiago Moreira" },
   { src: "/patrocinios/triunfoclassico.webp", alt: "Triunfo Clássico" },
   { src: "/patrocinios/vataxi.webp", alt: "VA Táxi" },
+  { src: "/patrocinios/habirobim.webp", alt: "HABIROBIM" },
+  { src: "/patrocinios/jotatek.webp", alt: "JOTA TEK REPARAÇÕES" },
+  { src: "/patrocinios/motorporusados.webp", alt: "MOTORPOR USADOS" },
+  { src: "/patrocinios/serralharia-judas.webp", alt: "Serralharia Judas" },
 ];
 </script>
 

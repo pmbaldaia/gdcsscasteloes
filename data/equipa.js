@@ -229,12 +229,6 @@ export const plantel = [
     img: "/equipa/plantel/20.webp",
   },
   {
-    id: 21,
-    nome: "Zé Rodrigues",
-    posicao: "Médio",
-    img: "/equipa/plantel/21.webp",
-  },
-  {
     id: 22,
     nome: "Gustavo Silva",
     posicao: "Médio",
