@@ -15,7 +15,7 @@ const sponsors = [
   { src: "/patrocinios/bjconstrucoes.webp", alt: "BJ Construções" },
   { src: "/patrocinios/carlosmorango.webp", alt: "Carlos Morango" },
   { src: "/patrocinios/cmcar.webp", alt: "CM Car" },
-  { src: "/patrocinios/construcao.webp", alt: "Construção" },
+  { src: "/patrocinios/simbolocordialunp.webp", alt: "Construção" },
   { src: "/patrocinios/farmaciamoreira.webp", alt: "Farmácia Moreira" },
   { src: "/patrocinios/fribeiro.webp", alt: "Fribeiro" },
   { src: "/patrocinios/idmconstruct.webp", alt: "IDM Construct" },
