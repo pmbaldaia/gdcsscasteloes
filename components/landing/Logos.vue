@@ -49,7 +49,7 @@ const sponsors = [
   { src: "/patrocinios/jotatek.webp", alt: "JOTA TEK REPARAÇÕES" },
   { src: "/patrocinios/motorporusados.webp", alt: "MOTORPOR USADOS" },
   { src: "/patrocinios/serralharia-judas.webp", alt: "Serralharia Judas" },
-  { src: "/patrocinios/argemperiferica.webp", alt: "Margem Periférica" },
+  { src: "/patrocinios/margemperiferica.webp", alt: "Margem Periférica" },
 ];
 </script>
 
