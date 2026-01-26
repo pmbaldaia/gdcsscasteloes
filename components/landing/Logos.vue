@@ -50,6 +50,7 @@ const sponsors = [
   { src: "/patrocinios/motorporusados.webp", alt: "MOTORPOR USADOS" },
   { src: "/patrocinios/serralharia-judas.webp", alt: "Serralharia Judas" },
   { src: "/patrocinios/margemperiferica.webp", alt: "Margem Periférica" },
+  { src: "/patrocinios/mcasaconstroi.webp", alt: "MCasa Constrói" },
 ];
 </script>
 
