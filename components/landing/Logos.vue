@@ -18,13 +18,13 @@ const sponsors = [
   { src: "/patrocinios/simbolocordialunp.webp", alt: "Construção" },
   { src: "/patrocinios/farmaciamoreira.webp", alt: "Farmácia Moreira" },
   { src: "/patrocinios/fribeiro.webp", alt: "Fribeiro" },
-  { src: "/patrocinios/idmconstruct.webp", alt: "IDM Construct" },
+  /* { src: "/patrocinios/idmconstruct.webp", alt: "IDM Construct" }, */
   { src: "/patrocinios/iluminacoescampos.webp", alt: "Iluminações Campos" },
   { src: "/patrocinios/jardeco.webp", alt: "Jardeco" },
   { src: "/patrocinios/luis moreira.webp", alt: "Luís Moreira" },
   { src: "/patrocinios/mocacar.webp", alt: "Mocacar" },
   { src: "/patrocinios/nortenha.webp", alt: "Nortenha" },
-  { src: "/patrocinios/oliveIrapadaria.webp", alt: "Oliveira Padaria" },
+  /* { src: "/patrocinios/oliveIrapadaria.webp", alt: "Oliveira Padaria" }, */
   { src: "/patrocinios/pardais.webp", alt: "Pardais" },
   { src: "/patrocinios/piscinaspaulo.webp", alt: "Piscinas Paulo" },
   { src: "/patrocinios/pizzariamoderna.webp", alt: "Pizzaria Moderna" },
@@ -35,7 +35,7 @@ const sponsors = [
     src: "/patrocinios/restauranterecesinhos.webp",
     alt: "Restaurante e Receisinhos",
   },
-  { src: "/patrocinios/rimaquinas.webp", alt: "Rimaquinas" },
+  /* { src: "/patrocinios/rimaquinas.webp", alt: "Rimaquinas" }, */
   { src: "/patrocinios/sigaseguro.webp", alt: "SigaSeguro" },
   { src: "/patrocinios/sofas.webp", alt: "Sofas" },
   { src: "/patrocinios/splcar.webp", alt: "SPL Car" },
@@ -51,6 +51,7 @@ const sponsors = [
   { src: "/patrocinios/serralharia-judas.webp", alt: "Serralharia Judas" },
   { src: "/patrocinios/margemperiferica.webp", alt: "Margem Periférica" },
   { src: "/patrocinios/mcasaconstroi.webp", alt: "MCasa Constrói" },
+  { src: "/patrocinios/larguideia.webp", alt: "Larguideia" },
 ];
 </script>
 
