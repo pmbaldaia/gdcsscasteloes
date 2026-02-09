@@ -37,10 +37,14 @@ const filteredGames = computed(() => {
 
 const gamesWithStatus = computed(() => {
   const now = new Date();
-  return filteredGames.value.map((game) => ({
+  const gamesWithPastInfo = filteredGames.value.map((game) => ({
     ...game,
     past: parseGameDate(game) < now,
   }));
+  return gamesWithPastInfo.sort((a, b) => {
+    if (a.past === b.past) return 0;
+    return a.past ? 1 : -1;
+  });
 });
 
 const handleClickOutside = (event) => {
