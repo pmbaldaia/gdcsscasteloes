@@ -241,12 +241,6 @@ export const plantel = [
     img: "/equipa/plantel/23.webp",
   },
   {
-    id: 24,
-    nome: "Rodrigo Tanaka",
-    posicao: "Médio",
-    img: "/equipa/plantel/24.webp",
-  },
-  {
     id: 25,
     nome: "Bruno Mendes",
     posicao: "Guarda-Redes",
