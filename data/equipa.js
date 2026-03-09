@@ -174,12 +174,12 @@ export const plantel = [
     posicao: "Defesa",
     img: "/equipa/plantel/11.webp",
   },
-  {
+ /*  {
     id: 12,
     nome: "Gui Mesquita",
     posicao: "Avançado",
     img: "/equipa/plantel/12.webp",
-  },
+  }, */
   {
     id: 13,
     nome: "Diogo Novais",
@@ -245,5 +245,17 @@ export const plantel = [
     nome: "Bruno Mendes",
     posicao: "Guarda-Redes",
     img: "/equipa/plantel/25.webp",
+  },
+  {
+    id: 26,
+    nome: "Jorginho",
+    posicao: "Médio",
+    img: "/equipa/plantel/26.webp",
+  },
+  {
+    id: 27,
+    nome: "Nuno Carneiro",
+    posicao: "Avançado",
+    img: "/equipa/plantel/27.webp",
   },
 ];

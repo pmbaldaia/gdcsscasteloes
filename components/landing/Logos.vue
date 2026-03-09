@@ -54,6 +54,7 @@ const sponsors = [
   { src: "/patrocinios/larguideia.webp", alt: "Larguideia" },
   { src: "/patrocinios/brunosport.webp", alt: "Bruno Sport" },
   { src: "/patrocinios/consfilwork.webp", alt: "Consfilwork" },
+  { src: "/patrocinios/terrafiel.webp", alt: "Terrafiel" },
 ];
 </script>
 
