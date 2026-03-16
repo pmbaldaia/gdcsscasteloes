@@ -24,7 +24,6 @@ const sponsors = [
   { src: "/patrocinios/luis moreira.webp", alt: "Luís Moreira" },
   { src: "/patrocinios/mocacar.webp", alt: "Mocacar" },
   { src: "/patrocinios/nortenha.webp", alt: "Nortenha" },
-  /* { src: "/patrocinios/oliveIrapadaria.webp", alt: "Oliveira Padaria" }, */
   { src: "/patrocinios/pardais.webp", alt: "Pardais" },
   { src: "/patrocinios/piscinaspaulo.webp", alt: "Piscinas Paulo" },
   { src: "/patrocinios/pizzariamoderna.webp", alt: "Pizzaria Moderna" },
@@ -35,7 +34,6 @@ const sponsors = [
     src: "/patrocinios/restauranterecesinhos.webp",
     alt: "Restaurante e Receisinhos",
   },
-  /* { src: "/patrocinios/rimaquinas.webp", alt: "Rimaquinas" }, */
   { src: "/patrocinios/sigaseguro.webp", alt: "SigaSeguro" },
   { src: "/patrocinios/sofas.webp", alt: "Sofas" },
   { src: "/patrocinios/splcar.webp", alt: "SPL Car" },
