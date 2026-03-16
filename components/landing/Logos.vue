@@ -41,13 +41,11 @@ const sponsors = [
   { src: "/patrocinios/splcar.webp", alt: "SPL Car" },
   { src: "/patrocinios/steelferreiro.webp", alt: "Steel Ferreiro" },
   { src: "/patrocinios/tabernacruz.webp", alt: "Taberna Cruz" },
-  { src: "/patrocinios/tamega.webp", alt: "Tâmega" },
   { src: "/patrocinios/tiagomoreira.webp", alt: "Tiago Moreira" },
   { src: "/patrocinios/triunfoclassico.webp", alt: "Triunfo Clássico" },
   { src: "/patrocinios/vataxi.webp", alt: "VA Táxi" },
   { src: "/patrocinios/habirobim.webp", alt: "HABIROBIM" },
   { src: "/patrocinios/jotatek.webp", alt: "JOTA TEK REPARAÇÕES" },
-  { src: "/patrocinios/motorporusados.webp", alt: "MOTORPOR USADOS" },
   { src: "/patrocinios/serralharia-judas.webp", alt: "Serralharia Judas" },
   { src: "/patrocinios/margemperiferica.webp", alt: "Margem Periférica" },
   { src: "/patrocinios/mcasaconstroi.webp", alt: "MCasa Constrói" },
@@ -55,6 +53,7 @@ const sponsors = [
   { src: "/patrocinios/brunosport.webp", alt: "Bruno Sport" },
   { src: "/patrocinios/consfilwork.webp", alt: "Consfilwork" },
   { src: "/patrocinios/terrafiel.webp", alt: "Terrafiel" },
+  { src: "/patrocinios/soaresribeiro.webp", alt: "Soares Ribeiro" },
 ];
 </script>
 
