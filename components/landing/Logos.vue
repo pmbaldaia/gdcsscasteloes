@@ -52,6 +52,8 @@ const sponsors = [
   { src: "/patrocinios/consfilwork.webp", alt: "Consfilwork" },
   { src: "/patrocinios/terrafiel.webp", alt: "Terrafiel" },
   { src: "/patrocinios/soaresribeiro.webp", alt: "Soares Ribeiro" },
+  { src: "/patrocinios/marcoarco.webp", alt: "Marco Arco" },
+  { src: "/patrocinios/bravosincriveis.webp", alt: "Bravos e Incríveis" },
 ];
 </script>
 
