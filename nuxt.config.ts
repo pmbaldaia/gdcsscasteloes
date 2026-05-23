@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2026-05-23",
 
   modules: [
+    "@nuxtjs/tailwindcss",
     "nuxt-icon",
     "@pinia/nuxt",
     "@nuxtjs/robots",
@@ -56,6 +57,7 @@ export default defineNuxtConfig({
       failOnError: false,
       crawlLinks: true,
     },
+    preset: "static",
   },
 
   runtimeConfig: {
@@ -75,6 +77,7 @@ export default defineNuxtConfig({
         { name: "robots", content: isProd ? "index, follow" : "noindex, nofollow" },
       ],
     },
+    baseURL: "/",
   },
 
   css: ["~/assets/css/main.css"],
