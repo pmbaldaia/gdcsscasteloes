@@ -34,7 +34,7 @@ function getAllRoutes(dir: string, prefix = ""): string[] {
   return routes;
 }
 
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.CONTEXT === "production";
 
 const PROD_URL = "https://gdcsscasteloes.pt";
 const DEV_URL  = "http://localhost:3000";
@@ -69,8 +69,6 @@ export default defineNuxtConfig({
   },
 
   image: {
-    // ✅ ipx funciona em dev e produção com imagens em /public
-    // O provider "netlify" requer Edge Functions e causa problemas de build
     provider: "static",
     format: ["webp"],
     quality: 80,

@@ -1,7 +1,7 @@
 [build]
-command = "npx nuxt build"
+command = "npx nuxi generate"
 publish = ".output/public"
 
 [build.environment]
 NODE_VERSION = "20"
-NITRO_PRESET = "netlify"
+NITRO_PRESET = "static"
