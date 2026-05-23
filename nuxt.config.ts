@@ -4,7 +4,6 @@ const isProd = process.env.CONTEXT === "production";
 
 const PROD_URL = "https://gdcsscasteloes.pt";
 const DEV_URL = "http://localhost:3000";
-const siteUrl = isProd ? PROD_URL : DEV_URL;
 
 export default defineNuxtConfig({
   compatibilityDate: "2026-05-23",
@@ -52,21 +51,14 @@ export default defineNuxtConfig({
     },
   },
 
-  nitro: {
-    prerender: {
-      failOnError: false,
-      crawlLinks: true,
-    },
-    preset: "static",
-  },
-
   runtimeConfig: {
     public: {
-      siteUrl,
+      siteUrl: isProd ? PROD_URL : DEV_URL,
     },
   },
 
   app: {
+    baseURL: "/",
     head: {
       htmlAttrs: { lang: "pt-PT" },
       title: "GDCSS Castelões",
@@ -74,10 +66,12 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       ],
       meta: [
-        { name: "robots", content: isProd ? "index, follow" : "noindex, nofollow" },
+        {
+          name: "robots",
+          content: isProd ? "index, follow" : "noindex, nofollow",
+        },
       ],
     },
-    baseURL: "/",
   },
 
   css: ["~/assets/css/main.css"],
