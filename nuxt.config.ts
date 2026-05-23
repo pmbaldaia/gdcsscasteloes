@@ -37,14 +37,7 @@ export default defineNuxtConfig({
     format: ["webp"],
     quality: 80,
     densities: [1],
-    screens: {
-      xs: 320,
-      sm: 640,
-      md: 768,
-      lg: 1024,
-      xl: 1280,
-      xxl: 1536,
-    },
+
     presets: {
       hero: { modifiers: { width: 700, fit: "inside", format: "webp", quality: 82 } },
       card: { modifiers: { width: 480, height: 480, fit: "cover", format: "webp", quality: 80 } },
@@ -55,6 +48,13 @@ export default defineNuxtConfig({
       logo: { modifiers: { width: 160, height: 120, fit: "inside", format: "webp", quality: 78 } },
       badge: { modifiers: { width: 80, height: 80, fit: "inside", format: "webp", quality: 80 } },
       sponsor: { modifiers: { width: 160, height: 120, fit: "inside", format: "webp", quality: 75 } },
+    },
+  },
+
+  nitro: {
+    prerender: {
+      failOnError: false,
+      crawlLinks: true,
     },
   },
 
@@ -70,26 +70,9 @@ export default defineNuxtConfig({
       title: "GDCSS Castelões",
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
-        },
       ],
       meta: [
-        { name: "google-site-verification", content: "6IHqvKCdIFhd3KMvHoKemuKEa60Uk4EaRrEkGVqPeFI" },
-        { name: "description", content: "Site oficial do GDCSS Castelões" },
-        { name: "keywords", content: "GDCSS, Castelões, futebol, desporto, clube" },
         { name: "robots", content: isProd ? "index, follow" : "noindex, nofollow" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { property: "og:title", content: "GDCSS Castelões" },
-        { property: "og:description", content: "Site oficial do GDCSS Castelões" },
-        { property: "og:image", content: `${PROD_URL}/favicon.ico` },
-        { property: "og:type", content: "website" },
-        { property: "og:url", content: PROD_URL },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "GDCSS Castelões" },
-        { name: "twitter:description", content: "Site oficial do GDCSS Castelões" },
-        { name: "twitter:image", content: `${PROD_URL}/favicon.ico` },
       ],
     },
   },
@@ -97,13 +80,6 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
 
   devtools: { enabled: true },
-
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
 
   vite: {
     optimizeDeps: {
