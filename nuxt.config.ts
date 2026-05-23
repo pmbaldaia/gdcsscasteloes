@@ -35,7 +35,10 @@ function getAllRoutes(dir: string, prefix = ""): string[] {
 }
 
 const isProd = process.env.NODE_ENV === "production";
-const siteUrl = process.env.NUXT_SITE_URL || "http://localhost:3000";
+
+const PROD_URL = "https://gdcsscasteloes.pt";
+const DEV_URL  = "http://localhost:3000";
+const siteUrl  = isProd ? PROD_URL : DEV_URL;
 
 export default defineNuxtConfig({
   compatibilityDate: "2026-05-23",
@@ -48,7 +51,6 @@ export default defineNuxtConfig({
     "@nuxt/image",
   ],
 
-  // ✅ strict: false — não diferenciar /page e /page/ em dev
   router: {
     options: {
       strict: false,
@@ -63,8 +65,7 @@ export default defineNuxtConfig({
         allow: "/",
       },
     ],
-    // Sitemap só em produção
-    sitemap: isProd ? `${siteUrl}/sitemap.xml` : false,
+    sitemap: isProd ? `${PROD_URL}/sitemap.xml` : false,
   },
 
   image: {
@@ -123,7 +124,6 @@ export default defineNuxtConfig({
       title: "GDCSS Castelões",
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        // ✅ Canonical removido do head global — define por página com useHead()
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
@@ -135,28 +135,18 @@ export default defineNuxtConfig({
           content: "6IHqvKCdIFhd3KMvHoKemuKEa60Uk4EaRrEkGVqPeFI",
         },
         { name: "description", content: "Site oficial do GDCSS Castelões" },
-        {
-          name: "keywords",
-          content: "GDCSS, Castelões, futebol, desporto, clube",
-        },
-        // ✅ noindex em dev
+        { name: "keywords", content: "GDCSS, Castelões, futebol, desporto, clube" },
         { name: "robots", content: isProd ? "index, follow" : "noindex, nofollow" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { property: "og:title", content: "GDCSS Castelões" },
-        {
-          property: "og:description",
-          content: "Site oficial do GDCSS Castelões",
-        },
-        { property: "og:image", content: `${siteUrl}/favicon.ico` },
+        { property: "og:description", content: "Site oficial do GDCSS Castelões" },
+        { property: "og:image", content: `${PROD_URL}/favicon.ico` },
         { property: "og:type", content: "website" },
-        { property: "og:url", content: siteUrl },
+        { property: "og:url", content: PROD_URL },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: "GDCSS Castelões" },
-        {
-          name: "twitter:description",
-          content: "Site oficial do GDCSS Castelões",
-        },
-        { name: "twitter:image", content: `${siteUrl}/favicon.ico` },
+        { name: "twitter:description", content: "Site oficial do GDCSS Castelões" },
+        { name: "twitter:image", content: `${PROD_URL}/favicon.ico` },
       ],
     },
   },
