@@ -1,17 +1,24 @@
 import fs from "fs";
 import path from "path";
 
-function getAllImages(dir: string, publicPath: string, baseUrl: string, relativePath = "") {
+function getAllImages(
+  dir: string,
+  publicPath: string,
+  baseUrl: string,
+  relativePath = "",
+) {
   const files = fs.readdirSync(dir, { withFileTypes: true });
   let images: { loc: string }[] = [];
 
   for (const file of files) {
     const fullPath = path.join(dir, file.name);
-    const fileRelativePath = path.join(relativePath, file.name).replace(/\\/g, "/");
+    const fileRelativePath = path
+      .join(relativePath, file.name)
+      .replace(/\\/g, "/");
 
     if (file.isDirectory()) {
       images = images.concat(
-        getAllImages(fullPath, publicPath, baseUrl, fileRelativePath)
+        getAllImages(fullPath, publicPath, baseUrl, fileRelativePath),
       );
     } else if (/\.(jpe?g|png|webp|gif|avif)$/i.test(file.name)) {
       images.push({
@@ -60,9 +67,8 @@ export default defineNuxtConfig({
   ],
 
   image: {
-    provider: isProd ? "netlify" : "ipx",
     format: ["webp"],
-    quality: 80,
+    quality: 100,
     densities: [1],
     screens: {
       xs: 320,
@@ -77,28 +83,76 @@ export default defineNuxtConfig({
         modifiers: { width: 700, fit: "inside", format: "webp", quality: 82 },
       },
       card: {
-        modifiers: { width: 480, height: 480, fit: "cover", format: "webp", quality: 80 },
+        modifiers: {
+          width: 480,
+          height: 480,
+          fit: "cover",
+          format: "webp",
+          quality: 80,
+        },
       },
       cardLg: {
-        modifiers: { width: 800, height: 800, fit: "cover", format: "webp", quality: 82 },
+        modifiers: {
+          width: 800,
+          height: 800,
+          fit: "cover",
+          format: "webp",
+          quality: 82,
+        },
       },
       avatar: {
-        modifiers: { width: 320, height: 400, fit: "inside", format: "webp", quality: 80 },
+        modifiers: {
+          width: 320,
+          height: 400,
+          fit: "inside",
+          format: "webp",
+          quality: 80,
+        },
       },
       portrait: {
-        modifiers: { width: 400, height: 384, fit: "cover", format: "webp", quality: 80 },
+        modifiers: {
+          width: 400,
+          height: 384,
+          fit: "cover",
+          format: "webp",
+          quality: 80,
+        },
       },
       thumb: {
-        modifiers: { width: 400, height: 192, fit: "cover", format: "webp", quality: 75 },
+        modifiers: {
+          width: 400,
+          height: 192,
+          fit: "cover",
+          format: "webp",
+          quality: 75,
+        },
       },
       logo: {
-        modifiers: { width: 160, height: 120, fit: "inside", format: "webp", quality: 78 },
+        modifiers: {
+          width: 160,
+          height: 120,
+          fit: "inside",
+          format: "webp",
+          quality: 78,
+        },
       },
       badge: {
-        modifiers: { width: 80, height: 80, fit: "inside", format: "webp", quality: 80 },
+        modifiers: {
+          width: 80,
+          height: 80,
+          fit: "inside",
+          format: "webp",
+          quality: 80,
+        },
       },
       sponsor: {
-        modifiers: { width: 160, height: 120, fit: "inside", format: "webp", quality: 75 },
+        modifiers: {
+          width: 160,
+          height: 120,
+          fit: "inside",
+          format: "webp",
+          quality: 75,
+        },
       },
     },
   },
@@ -220,5 +274,4 @@ export default defineNuxtConfig({
     },
     ssr: { noExternal: ["@phosphor-icons/vue"] },
   },
-
 });
