@@ -71,7 +71,7 @@ export default defineNuxtConfig({
   image: {
     // ✅ ipx funciona em dev e produção com imagens em /public
     // O provider "netlify" requer Edge Functions e causa problemas de build
-    provider: "ipx",
+    provider: "static",
     format: ["webp"],
     quality: 80,
     densities: [1],
@@ -160,7 +160,10 @@ export default defineNuxtConfig({
       const pagesDir = path.join(process.cwd(), "pages");
       const routes = getAllRoutes(pagesDir);
       const publicPath = path.join(process.cwd(), "public");
-      const images = getAllImages(publicPath, siteUrl);
+
+      const images = fs.existsSync(publicPath)
+        ? getAllImages(publicPath, siteUrl)
+        : [];
 
       const urls = routes.map((route) => ({
         loc: `${siteUrl}${route}`,
