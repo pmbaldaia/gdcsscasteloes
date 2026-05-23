@@ -22,12 +22,11 @@
         class="w-full md:max-w-[600px] lg:max-w-[700px] rounded-none md:rounded-lg transition-transform"
         src="/img/gdcss-casteloes-tarja.webp"
         alt="Época 2025/2026"
-        preset="hero"
-        preload
-        fetchpriority="high"
-        sizes="(max-width: 768px) 100vw, 700px"
-        width="700"
-        height="394"
+        loading="eager"
+        placeholder="blur"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 600px, 700px"
+        densities="1x 2x"
+        width="2056"
       />
     </div>
 
