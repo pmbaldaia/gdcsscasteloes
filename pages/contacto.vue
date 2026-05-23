@@ -73,7 +73,7 @@ const handleSubmit = () => {
     <LandingSectionhead>
       <template v-slot:title>
         <div class="flex flex-col items-center">
-          <span class="text-gray-900 dark:text-white">Contacto</span>
+          <span class="text-gray-900">Contacto</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
             <div class="w-1/2 bg-red-600"></div>
             <div class="w-1/2 bg-green-600"></div>
@@ -82,10 +82,10 @@ const handleSubmit = () => {
       </template>
 
       <template v-slot:desc>
-        <p class="text-slate-600 dark:text-gray-300">
+        <p class="text-slate-600">
           Preenche o formulário e entra em contacto connosco.
         </p>
-        <p class="text-slate-600 dark:text-gray-300 mt-2">
+        <p class="text-slate-600 mt-2">
           Envia-nos uma mensagem ou email. Respondemos o mais rápido possível!
         </p>
       </template>
@@ -93,13 +93,13 @@ const handleSubmit = () => {
 
     <div class="mx-auto mt-16 max-w-full">
       <div
-        class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full border border-gray-200 dark:border-gray-700"
+        class="bg-white rounded-2xl p-6 w-full border border-gray-200"
       >
         <form @submit.prevent="handleSubmit">
           <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <div>
               <label
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                class="block text-fluid-sm font-medium text-gray-700 mb-1"
               >
                 Nome <span class="text-red-600">*</span>
               </label>
@@ -108,16 +108,16 @@ const handleSubmit = () => {
                 type="text"
                 placeholder="Primeiro nome"
                 :class="[
-                  'w-full px-4 py-2 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500',
+                  'w-full px-4 py-2 rounded-md shadow-sm bg-white text-gray-900 focus:ring-blue-500 focus:border-blue-500',
                   touched && errors.firstName
                     ? 'border-2 border-red-600 focus:border-red-600 focus:ring-red-600'
-                    : 'border border-gray-300 dark:border-gray-600',
+                    : 'border border-gray-300',
                 ]"
               />
             </div>
             <div>
               <label
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                class="block text-fluid-sm font-medium text-gray-700 mb-1"
               >
                 Apelido <span class="text-red-600">*</span>
               </label>
@@ -126,10 +126,10 @@ const handleSubmit = () => {
                 type="text"
                 placeholder="Último nome"
                 :class="[
-                  'w-full px-4 py-2 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500',
+                  'w-full px-4 py-2 rounded-md shadow-sm bg-white text-gray-900 focus:ring-blue-500 focus:border-blue-500',
                   touched && errors.lastName
                     ? 'border-2 border-red-600 focus:border-red-600 focus:ring-red-600'
-                    : 'border border-gray-300 dark:border-gray-600',
+                    : 'border border-gray-300',
                 ]"
               />
             </div>
@@ -137,7 +137,7 @@ const handleSubmit = () => {
 
           <div class="mb-4">
             <label
-              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              class="block text-fluid-sm font-medium text-gray-700 mb-1"
             >
               O teu Email <span class="text-red-600">*</span>
             </label>
@@ -146,17 +146,17 @@ const handleSubmit = () => {
               type="email"
               placeholder="teuemail@exemplo.com"
               :class="[
-                'w-full px-4 py-2 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500',
+                'w-full px-4 py-2 rounded-md shadow-sm bg-white text-gray-900 focus:ring-blue-500 focus:border-blue-500',
                 touched && errors.senderEmail
                   ? 'border-2 border-red-600 focus:border-red-600 focus:ring-red-600'
-                  : 'border border-gray-300 dark:border-gray-600',
+                  : 'border border-gray-300',
               ]"
             />
           </div>
 
           <div class="mb-4">
             <label
-              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              class="block text-fluid-sm font-medium text-gray-700 mb-1"
             >
               Assunto <span class="text-red-600">*</span>
             </label>
@@ -165,17 +165,17 @@ const handleSubmit = () => {
               type="text"
               placeholder="Assunto da mensagem"
               :class="[
-                'w-full px-4 py-2 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500',
+                'w-full px-4 py-2 rounded-md shadow-sm bg-white text-gray-900 focus:ring-blue-500 focus:border-blue-500',
                 touched && errors.subject
                   ? 'border-2 border-red-600 focus:border-red-600 focus:ring-red-600'
-                  : 'border border-gray-300 dark:border-gray-600',
+                  : 'border border-gray-300',
               ]"
             />
           </div>
 
           <div class="mb-4">
             <label
-              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              class="block text-fluid-sm font-medium text-gray-700 mb-1"
             >
               Mensagem <span class="text-red-600">*</span>
             </label>
@@ -184,10 +184,10 @@ const handleSubmit = () => {
               rows="5"
               placeholder="Escreve aqui a tua mensagem..."
               :class="[
-                'w-full px-4 py-2 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500',
+                'w-full px-4 py-2 rounded-md shadow-sm bg-white text-gray-900 focus:ring-blue-500 focus:border-blue-500',
                 touched && errors.message
                   ? 'border-2 border-red-600 focus:border-red-600 focus:ring-red-600'
-                  : 'border border-gray-300 dark:border-gray-600',
+                  : 'border border-gray-300',
               ]"
             ></textarea>
           </div>
@@ -206,7 +206,7 @@ const handleSubmit = () => {
       </div>
     </div>
 
-    <div class="space-y-4 text-gray-700 dark:text-gray-300 mt-3 px-5">
+    <div class="space-y-4 text-gray-700 mt-3 px-5">
       <div
         class="grid grid-cols-1 gap-4 md:flex md:justify-between md:items-center md:gap-2 md:px-0 justify-center items-center"
       >
@@ -214,7 +214,7 @@ const handleSubmit = () => {
           <Icon name="uil:envelope" class="text-blue-500 w-5 h-5" />
           <a
             href="mailto:gdcsscasteloes1984@gmail.com"
-            class="hover:underline dark:text-gray-300"
+            class="hover:underline"
             aria-label="Clica aqui para mandar email"
           >
             gdcsscasteloes1984@gmail.com

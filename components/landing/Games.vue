@@ -40,12 +40,12 @@ const showVoltaBadge = computed(
 
 <template>
   <div class="max-w-3xl mx-auto mt-10">
-    <div v-if="nextGame" class="text-center relative">
-      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+    <div v-if="nextGame" class="card-surface p-6 sm:p-8 text-center relative">
+      <h3 class="text-fluid-2xl font-bold text-gray-900 mb-3">
         🎯 Próximo Jogo
       </h3>
 
-      <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+      <p class="text-fluid-lg text-gray-600 mb-6 leading-relaxed">
         <span class="font-semibold">
           {{ nextGame.jornada }}
         </span>
@@ -56,26 +56,38 @@ const showVoltaBadge = computed(
       <div class="flex justify-center gap-12 items-center">
         <!-- Time 1 -->
         <div class="flex flex-col items-center w-32">
-          <img
+          <NuxtImg
             :src="teams.find((t) => t.name === nextGame.teams[0])?.logo"
+            :alt="`Logo ${nextGame.teams[0]}`"
+            preset="badge"
+            width="80"
+            height="80"
+            sizes="80px"
+            loading="lazy"
             class="w-20 h-20 object-contain mb-3"
           />
-          <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+          <p class="text-fluid-lg font-semibold text-gray-800">
             {{ nextGame.teams[0] }}
           </p>
         </div>
 
-        <span class="text-2xl font-extrabold text-gray-900 dark:text-white"
+        <span class="text-fluid-2xl font-extrabold text-gray-900"
           >vs</span
         >
 
         <!-- Time 2 -->
         <div class="flex flex-col items-center w-32">
-          <img
+          <NuxtImg
             :src="teams.find((t) => t.name === nextGame.teams[1])?.logo"
+            :alt="`Logo ${nextGame.teams[1]}`"
+            preset="badge"
+            width="80"
+            height="80"
+            sizes="80px"
+            loading="lazy"
             class="w-20 h-20 object-contain mb-3"
           />
-          <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+          <p class="text-fluid-lg font-semibold text-gray-800">
             {{ nextGame.teams[1] }}
           </p>
         </div>
@@ -84,7 +96,7 @@ const showVoltaBadge = computed(
 
     <div
       v-else
-      class="text-center text-gray-700 dark:text-gray-300 py-10 text-xl"
+      class="text-center text-gray-700 py-10 text-fluid-xl"
     >
       🚫 Não há próximos jogos agendados.
     </div>

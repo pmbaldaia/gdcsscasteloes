@@ -1,11 +1,8 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
-import { useColorMode } from "#imports";
-import { PhSun, PhMoon, PhArrowLeft, PhArrowRight } from "@phosphor-icons/vue";
+import { PhArrowLeft, PhArrowRight } from "@phosphor-icons/vue";
 
-const colorMode = useColorMode();
 const sidebarCollapsed = ref(false);
-const isMounted = ref(false);
 
 onMounted(() => {
   const saved = localStorage.getItem("sidebar-collapsed");
@@ -14,10 +11,6 @@ onMounted(() => {
   }
 });
 
-const toggleTheme = () => {
-  colorMode.preference = colorMode.preference === "dark" ? "light" : "dark";
-};
-
 watch(sidebarCollapsed, (newVal) => {
   localStorage.setItem("sidebar-collapsed", newVal);
 });
@@ -25,52 +18,27 @@ watch(sidebarCollapsed, (newVal) => {
 const toggleSidebar = () => {
   sidebarCollapsed.value = !sidebarCollapsed.value;
 };
-
-onMounted(() => {
-  isMounted.value = true;
-});
 </script>
 
 <template>
-  <div
-    class="flex min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100"
-  >
+  <div class="flex min-h-screen bg-slate-100 text-slate-900">
     <LandingSidebar :collapsed="sidebarCollapsed" />
 
-    <div class="flex flex-col flex-1">
+    <div class="flex flex-col flex-1 min-w-0">
       <header
-        class="flex items-center justify-between bg-gray-200 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700 p-4 shadow-sm"
+        class="flex items-center justify-between bg-white border-b border-slate-200 px-4 py-3 shadow-sm"
       >
-        <div class="flex items-center gap-4">
-          <button
-            @click="toggleSidebar"
-            aria-label="Alternar sidebar"
-            class="transition w-8 h-8 flex items-center justify-center rounded focus:outline-none focus:ring-2"
-          >
-            <PhArrowLeft v-if="!sidebarCollapsed" class="w-6 h-6" />
-            <PhArrowRight v-else class="w-6 h-6" />
-          </button>
-        </div>
-
         <button
-          v-if="isMounted"
-          @click="toggleTheme"
-          :aria-label="
-            colorMode.preference === 'dark'
-              ? 'Alternar para tema claro'
-              : 'Alternar para tema escuro'
-          "
-          class="hover:text-green-700 transition w-6 h-6 flex items-center justify-center"
+          @click="toggleSidebar"
+          aria-label="Alternar menu lateral"
+          class="p-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-green-700"
         >
-          <PhSun
-            v-if="colorMode.preference === 'dark'"
-            class="w-6 h-6 text-white"
-          />
-          <PhMoon v-else class="w-6 h-6 text-gray-900" />
+          <PhArrowLeft v-if="!sidebarCollapsed" class="w-5 h-5" />
+          <PhArrowRight v-else class="w-5 h-5" />
         </button>
       </header>
 
-      <main class="p-6 overflow-auto">
+      <main class="p-4 sm:p-6 overflow-auto flex-1">
         <NuxtPage />
       </main>
     </div>

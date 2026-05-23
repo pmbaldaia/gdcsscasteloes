@@ -19,7 +19,7 @@ const campo = {
     <LandingSectionhead>
       <template #title>
         <div class="flex flex-col items-center">
-          <span class="text-slate-800 dark:text-white">Sobre nós</span>
+          <span class="text-slate-800">Sobre nós</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
             <div class="w-1/2 bg-red-600"></div>
             <div class="w-1/2 bg-green-600"></div>
@@ -28,7 +28,7 @@ const campo = {
       </template>
 
       <template #desc>
-        <span class="text-slate-600 dark:text-gray-300">
+        <span class="text-slate-600">
           Localização e imagem do campo do Castelões
         </span>
       </template>
@@ -38,22 +38,23 @@ const campo = {
       <div class="w-full md:w-1/2 flex justify-center items-center">
         <NuxtImg
           :src="campo.imagem.src"
-          :width="campo.imagem.width"
-          :height="campo.imagem.height"
           alt="Campo Desportivo de Castelões"
-          placeholder="blur"
-          loading="eager"
-          width="2056"
+          width="600"
+          height="400"
+          sizes="(max-width: 768px) 100vw, 600px"
+          quality="80"
+          loading="lazy"
+          decoding="async"
           class="rounded shadow-lg w-full h-auto max-w-full"
         />
       </div>
 
       <div class="w-full md:w-1/2 p-4 flex justify-center items-center">
         <div
-          class="text-2xl leading-relaxed text-center md:text-left text-slate-800 dark:text-white"
+          class="text-fluid-2xl leading-relaxed text-center md:text-left text-slate-800"
         >
           <strong>{{ campo.nome }}</strong>
-          <p class="text-slate-600 dark:text-gray-300 mt-2">{{ campo.rua }}</p>
+          <p class="text-slate-600 mt-2">{{ campo.rua }}</p>
         </div>
       </div>
     </div>

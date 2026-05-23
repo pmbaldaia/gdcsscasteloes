@@ -55,7 +55,7 @@ const editEvento = (evento) => {
 <template>
   <div class="p-4">
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+      <h1 class="text-fluid-3xl font-bold text-gray-900">
         Gestão de Eventos
       </h1>
       <button
@@ -67,79 +67,79 @@ const editEvento = (evento) => {
     </div>
 
     <div class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-        <thead class="bg-gray-50 dark:bg-gray-800">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
           <tr>
             <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              class="px-6 py-3 text-left text-fluid-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Nome
             </th>
             <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              class="px-6 py-3 text-left text-fluid-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Slug
             </th>
             <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              class="px-6 py-3 text-left text-fluid-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Data
             </th>
             <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              class="px-6 py-3 text-left text-fluid-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Imagem
             </th>
             <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              class="px-6 py-3 text-left text-fluid-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Descrição
             </th>
             <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              class="px-6 py-3 text-left text-fluid-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Detalhes
             </th>
             <th
-              class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              class="px-6 py-3 text-center text-fluid-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Ações
             </th>
           </tr>
         </thead>
         <tbody
-          class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700"
+          class="bg-white divide-y divide-gray-200"
         >
           <tr
             v-for="(evento, index) in editableEventos"
             :key="index"
-            class="hover:bg-gray-100 dark:hover:bg-gray-800"
+            class="hover:bg-gray-100"
           >
             <td class="px-6 py-4">
               <input
                 v-model="evento.nome"
-                class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 px-3 py-2 rounded w-full"
+                class="bg-gray-50 border border-gray-300 text-gray-900 px-3 py-2 rounded w-full"
                 placeholder="Nome do evento"
               />
             </td>
             <td class="px-6 py-4">
               <input
                 v-model="evento.slug"
-                class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 px-3 py-2 rounded w-full"
+                class="bg-gray-50 border border-gray-300 text-gray-900 px-3 py-2 rounded w-full"
                 placeholder="slug"
               />
             </td>
             <td class="px-6 py-4">
               <input
                 v-model="evento.data"
-                class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 px-3 py-2 rounded w-full"
+                class="bg-gray-50 border border-gray-300 text-gray-900 px-3 py-2 rounded w-full"
                 placeholder="Data"
               />
             </td>
             <td class="px-6 py-4">
               <input
                 v-model="evento.imagem"
-                class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 px-3 py-2 rounded w-full"
+                class="bg-gray-50 border border-gray-300 text-gray-900 px-3 py-2 rounded w-full"
                 placeholder="URL da imagem"
               />
             </td>
@@ -147,7 +147,7 @@ const editEvento = (evento) => {
               <textarea
                 v-model="evento.descricao"
                 rows="2"
-                class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 px-3 py-2 rounded w-full resize-none"
+                class="bg-gray-50 border border-gray-300 text-gray-900 px-3 py-2 rounded w-full resize-none"
                 placeholder="Descrição"
               ></textarea>
             </td>
@@ -155,7 +155,7 @@ const editEvento = (evento) => {
               <textarea
                 v-model="evento.detalhes"
                 rows="2"
-                class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 px-3 py-2 rounded w-full resize-none"
+                class="bg-gray-50 border border-gray-300 text-gray-900 px-3 py-2 rounded w-full resize-none"
                 placeholder="Detalhes"
               ></textarea>
             </td>
@@ -184,83 +184,83 @@ const editEvento = (evento) => {
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       >
         <div
-          class="bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-lg w-full p-6"
+          class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6"
           @click.stop
         >
-          <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+          <h2 class="text-fluid-xl font-semibold mb-4 text-gray-900">
             Adicionar Novo Evento
           </h2>
 
           <label
-            class="block mb-2 text-gray-700 dark:text-gray-300 font-medium"
+            class="block mb-2 text-gray-700 font-medium"
           >
             Nome
             <input
               v-model="newEvento.nome"
               type="text"
-              class="mt-1 w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2"
+              class="mt-1 w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
             />
           </label>
 
           <label
-            class="block mb-2 text-gray-700 dark:text-gray-300 font-medium"
+            class="block mb-2 text-gray-700 font-medium"
           >
             Slug
             <input
               v-model="newEvento.slug"
               type="text"
-              class="mt-1 w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2"
+              class="mt-1 w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
             />
           </label>
 
           <label
-            class="block mb-2 text-gray-700 dark:text-gray-300 font-medium"
+            class="block mb-2 text-gray-700 font-medium"
           >
             Data
             <input
               v-model="newEvento.data"
               type="text"
-              class="mt-1 w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2"
+              class="mt-1 w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
             />
           </label>
 
           <label
-            class="block mb-2 text-gray-700 dark:text-gray-300 font-medium"
+            class="block mb-2 text-gray-700 font-medium"
           >
             URL da Imagem
             <input
               v-model="newEvento.imagem"
               type="text"
-              class="mt-1 w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2"
+              class="mt-1 w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
             />
           </label>
 
           <label
-            class="block mb-2 text-gray-700 dark:text-gray-300 font-medium"
+            class="block mb-2 text-gray-700 font-medium"
           >
             Descrição
             <textarea
               v-model="newEvento.descricao"
               rows="3"
-              class="mt-1 w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2"
+              class="mt-1 w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
             ></textarea>
           </label>
 
           <label
-            class="block mb-4 text-gray-700 dark:text-gray-300 font-medium"
+            class="block mb-4 text-gray-700 font-medium"
           >
             Detalhes
             <textarea
               v-model="newEvento.detalhes"
               rows="3"
-              class="mt-1 w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2"
+              class="mt-1 w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
             ></textarea>
           </label>
 
           <div class="flex justify-end space-x-3">
             <button
               @click="closeModal"
-              class="px-4 py-2 rounded bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 transition"
+              class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition"
             >
               Cancelar
             </button>

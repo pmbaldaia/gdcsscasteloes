@@ -87,4 +87,25 @@ Traga família e amigos para celebrar o espírito desportivo, reviver memórias 
     Reserva já o teu lugar e vem brindar connosco ao Natal de 2025!
   `,
   },
+  {
+    nome: "Leilão G.D.C S.S.C 2025",
+    slug: "leilao-gdc-ssc-2025",
+    hora: "15:00h",
+    data: "07/06/2026",
+    descricao:
+      "Um leilão especial repleto de história, paixão e memórias que unem gerações do clube.",
+    local: "Centro Cívico de Castelões",
+    imagem: "/eventos/leilao.webp",
+    detalhes: `
+      Participe num evento único dedicado à tradição e ao futuro do clube.
+      O Leilão G.D.C S.S.C reúne objetos simbólicos, recordações históricas
+      e momentos especiais que fazem parte da nossa identidade.
+  
+      Entre camisolas, troféus e artigos memoráveis, esta será uma oportunidade
+      para celebrar o legado do clube e contribuir para a continuação da sua história.
+  
+      Junta-te a nós no Centro Cívico de Castelões no dia 07 de Junho às 15h00
+      e faz parte deste momento especial!
+    `,
+  },
 ];

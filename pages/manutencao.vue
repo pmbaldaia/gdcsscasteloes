@@ -2,19 +2,6 @@
 definePageMeta({
   layout: "blank",
 });
-
-import { PhMoon, PhSun } from "@phosphor-icons/vue";
-
-const colorMode = useColorMode();
-const isMounted = ref(false);
-
-const toggleTheme = () => {
-  colorMode.preference = colorMode.preference === "dark" ? "light" : "dark";
-};
-
-onMounted(() => {
-  isMounted.value = true;
-});
 </script>
 
 <template>
@@ -22,44 +9,19 @@ onMounted(() => {
     class="flex flex-col items-center justify-center min-h-screen text-center px-4 sm:px-6"
   >
     <div
-      class="w-full max-w-md sm:max-w-xl backdrop-blur-sm bg-white/80 dark:bg-black/40 p-6 sm:p-8 rounded-2xl shadow-lg"
+      class="w-full max-w-md sm:max-w-xl bg-white/95 backdrop-blur-sm p-6 sm:p-10 rounded-2xl shadow-xl border border-white/60"
     >
-      <div
-        class="flex justify-center items-center mt-4 sm:mt-6"
-        v-if="isMounted"
-      >
-        <button
-          @click="toggleTheme"
-          :aria-label="
-            colorMode.preference === 'dark'
-              ? 'Alternar para tema claro'
-              : 'Alternar para tema escuro'
-          "
-          class="hover:text-green-600 transition w-8 h-8 flex items-center justify-center"
-        >
-          <PhSun
-            v-if="colorMode.preference === 'dark'"
-            class="w-6 h-6"
-            :class="'text-white'"
-          />
-          <PhMoon v-else class="w-6 h-6" :class="'text-gray-900'" />
-        </button>
-      </div>
       <h1
-        class="text-3xl sm:text-5xl font-extrabold mb-4 sm:mb-6 text-green-800 dark:text-green-400"
+        class="text-fluid-4xl font-extrabold mb-4 sm:mb-6 text-green-800 tracking-tight"
       >
         O jogo está interrompido!
       </h1>
 
-      <p
-        class="text-base sm:text-lg text-gray-800 dark:text-gray-200 mb-6 sm:mb-8"
-      >
+      <p class="text-fluid-lg text-slate-700 mb-6 sm:mb-8 leading-relaxed">
         O nosso site está em manutenção. Voltaremos em breve com melhorias.
       </p>
 
-      <p
-        class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-8 sm:mb-12 italic"
-      >
+      <p class="text-fluid-sm text-slate-600 mb-8 sm:mb-12 italic">
         “Até os melhores jogadores precisam de uma pausa para dar o seu melhor.”
       </p>
 
@@ -69,13 +31,11 @@ onMounted(() => {
         <img
           src="/img/bola.svg"
           alt="Bola de futebol"
-          class="w-full h-full filter dark:invert"
+          class="w-full h-full"
         />
       </div>
 
-      <p
-        class="text-sm sm:text-base text-gray-800 dark:text-gray-200 font-semibold mb-4"
-      >
+      <p class="text-fluid-sm text-slate-800 font-semibold">
         Entretanto, aproveita para descansar e regressar com energia!
       </p>
     </div>

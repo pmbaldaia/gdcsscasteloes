@@ -44,12 +44,12 @@ const features = [
     class="mt-16 pt-5 pb-8 md:pt-8 mt-8 px-4 sm:px-4 md:px-8 max-w-screen-xl mx-auto"
   >
     <h2
-      class="text-2xl lg:text-3xl font-bold lg:tracking-tight text-gray-900 dark:text-white"
+      class="text-fluid-2xl font-bold lg:tracking-tight text-gray-900"
     >
       Vive o Clube. Dá Tudo em Campo.
     </h2>
 
-    <p class="text-slate-600 dark:text-gray-300 mt-2">
+    <p class="text-slate-600 mt-2">
       Conhece o que te espera quando vestes esta camisola. Aqui jogas com garra.
     </p>
   </div>
@@ -71,10 +71,10 @@ const features = [
         <Icon class="text-white" :name="item.icon" />
       </div>
       <div>
-        <h3 class="font-semibold text-lg text-gray-800 dark:text-white">
+        <h3 class="font-semibold text-fluid-lg text-gray-800">
           {{ item.title }}
         </h3>
-        <p class="text-slate-500 dark:text-slate-300 mt-2 leading-relaxed">
+        <p class="text-slate-500 mt-2 leading-relaxed">
           {{ item.description }}
         </p>
       </div>

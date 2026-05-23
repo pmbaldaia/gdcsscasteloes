@@ -9,7 +9,7 @@ definePageMeta({
     <LandingSectionhead>
       <template #title>
         <div class="flex flex-col items-center">
-          <span class="text-gray-900 dark:text-white">Política de Cookies</span>
+          <span class="text-gray-900">Política de Cookies</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
             <div class="w-1/2 bg-red-600"></div>
             <div class="w-1/2 bg-green-600"></div>
@@ -18,7 +18,7 @@ definePageMeta({
       </template>
 
       <template #desc>
-        <span class="text-slate-600 dark:text-gray-300">
+        <span class="text-slate-600">
           O G.D.C.S.S. Castelões utiliza cookies para proporcionar uma navegação
           mais eficiente e personalizada. A nossa Política de Cookies visa
           esclarecer como e por que motivo utilizamos cookies no nosso site.
@@ -26,7 +26,7 @@ definePageMeta({
       </template>
     </LandingSectionhead>
 
-    <div class="mt-8 text-lg text-slate-600 dark:text-gray-200">
+    <div class="mt-8 text-fluid-lg text-slate-600">
       <p class="mb-6">
         A utilização de cookies no site do G.D.C.S.S. Castelões tem como
         objetivo garantir a melhor experiência de navegação, permitindo-nos
@@ -35,7 +35,7 @@ definePageMeta({
         política.
       </p>
 
-      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+      <h3 class="text-fluid-xl font-semibold text-gray-900">
         1. O que são Cookies?
       </h3>
       <p class="mb-4">
@@ -46,7 +46,7 @@ definePageMeta({
         e os itens selecionados.
       </p>
 
-      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+      <h3 class="text-fluid-xl font-semibold text-gray-900">
         2. Tipos de Cookies Utilizados
       </h3>
       <div class="mb-4">
@@ -70,7 +70,7 @@ definePageMeta({
         </ul>
       </div>
 
-      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+      <h3 class="text-fluid-xl font-semibold text-gray-900">
         3. Como Gerir os Cookies
       </h3>
       <p class="mb-4">
@@ -80,7 +80,7 @@ definePageMeta({
         funcionalidades do nosso site.
       </p>
 
-      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+      <h3 class="text-fluid-xl font-semibold text-gray-900">
         4. Consentimento para Utilização de Cookies
       </h3>
       <p class="mb-4">

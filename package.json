@@ -5,16 +5,18 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "dev:clean": "node scripts/clean-dev-cache.mjs && nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "predev": "node scripts/clean-dev-cache.mjs"
   },
   "devDependencies": {
     "@nuxt/image": "^1.11.0",
     "@nuxtjs/sitemap": "^7.4.3",
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.16",
-    "nuxt": "^3.9.0",
+    "nuxt": "^3.16.0",
     "nuxt-icon": "^0.6.8",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
@@ -22,7 +24,6 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/robots": "^5.4.0",
     "@phosphor-icons/vue": "^2.2.1",
     "@pinia/nuxt": "^0.11.0",

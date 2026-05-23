@@ -3,7 +3,7 @@ definePageMeta({
   layout: "default",
 });
 
-import { ref, onMounted, nextTick } from "vue";
+import { ref, nextTick } from "vue";
 import { categories as importedCategories } from "~/data/galeria.js";
 
 import "~/assets/css/galeria.css";
@@ -12,13 +12,9 @@ const categories = ref(importedCategories);
 const selectedImage = ref(null);
 const dialogRef = ref(null);
 
-const openImage = async (img) => {
-  selectedImage.value = null;
+const openImage = async (src) => {
+  selectedImage.value = src;
   await nextTick();
-
-  const timestamp = new Date().getTime();
-  selectedImage.value = `${img}?t=${timestamp}`;
-
   dialogRef.value?.showModal();
 };
 
@@ -26,20 +22,6 @@ const closeDialog = () => {
   dialogRef.value?.close();
   selectedImage.value = null;
 };
-
-// Se quiser mesmo manter pré-carregamento
-const preloadImages = () => {
-  categories.value.forEach((category) => {
-    category.images.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  });
-};
-
-onMounted(() => {
-  preloadImages();
-});
 </script>
 
 <template>
@@ -47,7 +29,7 @@ onMounted(() => {
     <LandingSectionhead>
       <template #title>
         <div class="flex flex-col items-center">
-          <span class="text-gray-900 dark:text-white">Galeria</span>
+          <span class="text-gray-900">Galeria</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
             <div class="w-1/2 bg-red-600"></div>
             <div class="w-1/2 bg-green-600"></div>
@@ -55,7 +37,7 @@ onMounted(() => {
         </div>
       </template>
       <template #desc>
-        <p class="text-slate-600 dark:text-gray-300">
+        <p class="text-slate-600">
           Espreita alguns dos momentos que captámos em imagens!
         </p>
       </template>
@@ -65,10 +47,10 @@ onMounted(() => {
       <section v-for="(category, index) in categories" :key="index">
         <h2
           :class="[
-            'text-2xl font-bold tracking-tight mb-10',
+            'text-fluid-2xl font-bold tracking-tight mb-10',
             index === 0 || index >= categories.length - 3
-              ? 'text-left mt-6 text-gray-800 dark:text-white'
-              : 'text-center text-gray-800 dark:text-white',
+              ? 'text-left mt-6 text-gray-800'
+              : 'text-center text-gray-800',
           ]"
         >
           {{ category.title }}
@@ -77,19 +59,25 @@ onMounted(() => {
         <div
           class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto"
         >
-          <div
+          <button
             v-for="(src, i) in category.images"
-            :key="i"
+            :key="`${index}-${i}`"
+            type="button"
             @click="openImage(src)"
-            class="cursor-pointer overflow-hidden rounded-lg shadow hover:shadow-lg transition duration-300 h-48"
+            class="cursor-pointer overflow-hidden rounded-lg shadow hover:shadow-lg transition duration-300 h-48 w-full text-left"
           >
             <NuxtImg
               :src="src"
               alt="Foto da galeria"
-              placeholder="blur"
+              preset="thumb"
+              width="400"
+              height="192"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 400px"
+              loading="lazy"
+              decoding="async"
               class="w-full h-full object-cover hover:scale-[1.02] transition-transform rounded-lg"
             />
-          </div>
+          </button>
         </div>
       </section>
     </div>
@@ -110,9 +98,12 @@ onMounted(() => {
         </button>
         <NuxtImg
           :src="selectedImage"
-          :key="selectedImage"
           alt="Imagem ampliada"
-          placeholder="blur"
+          preset="cardLg"
+          width="800"
+          height="800"
+          sizes="(max-width: 1024px) 90vw, 800px"
+          loading="eager"
           class="zoomed-image"
         />
       </div>

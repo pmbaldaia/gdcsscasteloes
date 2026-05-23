@@ -25,16 +25,16 @@ function close() {
         @click="close"
       >
         <div
-          class="bg-white dark:bg-gray-900 text-black dark:text-white rounded-xl shadow-2xl max-w-lg w-full mx-4 p-4 relative animate-popup"
+          class="bg-white text-black rounded-xl shadow-2xl max-w-lg w-full mx-4 p-4 relative animate-popup"
           @click.stop
         >
           <div class="flex items-center justify-between mb-4">
             <div class="flex-1 text-center">
-              <h2 class="text-xl font-semibold">Destaque</h2>
+              <h2 class="text-fluid-xl font-semibold">Destaque</h2>
             </div>
             <button
               @click="close"
-              class="absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl font-bold"
+              class="absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-800 text-fluid-2xl font-bold"
               aria-label="Fechar modal"
             >
               ×
@@ -44,12 +44,17 @@ function close() {
           <NuxtImg
             :src="jogador.img || '/equipa/default.webp'"
             :alt="jogador.nome"
+            preset="avatar"
+            width="320"
+            height="400"
+            sizes="(max-width: 512px) 100vw, 320px"
+            loading="lazy"
             class="w-full h-auto rounded-md mb-6 object-cover"
           />
 
           <div class="text-center mb-4">
-            <p class="text-xl font-bold">{{ jogador.nome }}</p>
-            <p class="text-sm text-gray-600 dark:text-gray-300">
+            <p class="text-fluid-xl font-bold">{{ jogador.nome }}</p>
+            <p class="text-fluid-sm text-gray-600">
               {{ jogador.funcao }}
             </p>
           </div>

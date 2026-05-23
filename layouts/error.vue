@@ -5,28 +5,28 @@ const error = useError();
 
 <template>
   <div
-    class="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-cover bg-center bg-no-repeat relative text-gray-900 dark:text-gray-100"
+    class="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-cover bg-center bg-no-repeat relative text-gray-900"
     :style="{ backgroundImage: 'url(/campo/campo.webp)' }"
   >
     <div class="absolute inset-0 bg-black/50"></div>
 
     <div
-      class="relative z-10 max-w-md w-full bg-white/90 dark:bg-black/70 backdrop-blur-md rounded-2xl p-8 shadow-lg flex flex-col items-center"
+      class="relative z-10 max-w-md w-full bg-white/90 backdrop-blur-md rounded-2xl p-8 shadow-lg flex flex-col items-center"
     >
       <div class="w-28 h-28 md:w-36 md:h-36 animate-bounce mb-6">
         <img
           src="/img/bola.svg"
           alt="Bola de futebol"
-          class="w-full h-full filter dark:invert"
+          class="w-full h-full filter"
         />
       </div>
 
-      <h1 class="text-6xl font-extrabold dark:text-green-400 mb-2">
+      <h1 class="text-fluid-hero font-extrabold mb-2">
         <span class="text-green-700" v-html="error?.statusCode || '404'"></span>
       </h1>
 
-      <p class="text-2xl font-semibold mb-1">Página fora de jogo!</p>
-      <p class="text-gray-700 dark:text-gray-300 text-base mb-8 max-w-xs px-4">
+      <p class="text-fluid-2xl font-semibold mb-1">Página fora de jogo!</p>
+      <p class="text-gray-700 text-fluid-base mb-8 max-w-xs px-4">
         {{
           error?.statusMessage || "Algo correu mal. Tenta novamente mais tarde."
         }}

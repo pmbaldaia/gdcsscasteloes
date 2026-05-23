@@ -23,34 +23,40 @@ watch(() => route.params.slug, carregarEvento);
   <div class="max-w-5xl mx-auto mt-12 px-4 sm:px-6 lg:px-8">
     <NuxtLink
       to="/eventos"
-      class="inline-block mb-8 text-blue-500 dark:text-blue-400 hover:underline font-medium transition-colors"
+      class="inline-block mb-8 text-blue-500 hover:underline font-medium transition-colors"
     >
       ← Voltar aos eventos
     </NuxtLink>
 
     <div
       v-if="evento"
-      class="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900 overflow-hidden transition-colors"
+      class="card-surface overflow-hidden"
     >
       <div
         class="w-full max-w-xl sm:max-w-3xl mx-auto relative aspect-square rounded-t-lg overflow-hidden"
       >
-        <img
+        <NuxtImg
           :src="evento.imagem"
           :alt="evento.nome"
+          preset="cardLg"
+          width="800"
+          height="800"
+          sizes="(max-width: 768px) 100vw, 800px"
+          loading="eager"
+          fetchpriority="high"
           class="w-full h-full object-cover object-center"
         />
       </div>
 
       <div class="p-6 sm:p-10">
         <h1
-          class="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-6 transition-colors"
+          class="text-fluid-3xl font-extrabold text-gray-900 mb-6 transition-colors"
         >
           {{ evento.nome }}
         </h1>
 
         <div
-          class="flex flex-col sm:flex-row sm:space-x-10 text-gray-700 dark:text-gray-300 mb-8"
+          class="flex flex-col sm:flex-row sm:space-x-10 text-gray-700 mb-8"
         >
           <p class="flex items-center mb-3 sm:mb-0 gap-2">
             <svg
@@ -119,20 +125,20 @@ watch(() => route.params.slug, carregarEvento);
         </div>
 
         <p
-          class="text-gray-800 dark:text-gray-200 leading-relaxed mb-6 transition-colors"
+          class="text-gray-800 leading-relaxed mb-6 transition-colors"
         >
           {{ evento.descricao }}
         </p>
 
         <div
           v-if="evento.detalhes"
-          class="prose prose-gray dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed"
+          class="prose-fluid text-slate-700 leading-relaxed"
           v-html="evento.detalhes"
         ></div>
       </div>
     </div>
 
-    <p v-else class="text-red-500 mt-6 text-center font-semibold text-lg">
+    <p v-else class="text-red-500 mt-6 text-center font-semibold text-fluid-lg">
       Evento não encontrado.
     </p>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <section class="mt-16">
-    <h2 class="text-3xl font-bold text-center">Galeria de Momentos</h2>
+    <h2 class="text-fluid-3xl font-bold text-center">Galeria de Momentos</h2>
     <div class="mt-8 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       <img
         src="path-to-image.webp"

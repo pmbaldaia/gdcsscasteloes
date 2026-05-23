@@ -66,7 +66,7 @@ const removeGame = (jornada, index) => {
 <template>
   <div class="p-4">
     <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+      <h1 class="text-fluid-3xl font-bold text-gray-900">
         Gestão de Jornadas
       </h1>
       <button
@@ -79,7 +79,7 @@ const removeGame = (jornada, index) => {
 
     <div
       v-if="Object.keys(editableJornadas).length === 0"
-      class="text-gray-500 dark:text-gray-400"
+      class="text-gray-500"
     >
       Nenhuma jornada disponível.
     </div>
@@ -90,7 +90,7 @@ const removeGame = (jornada, index) => {
       class="mb-12"
     >
       <h2
-        class="text-2xl font-semibold text-gray-800 dark:text-gray-200 border-b border-gray-300 dark:border-gray-700 pb-2"
+        class="text-fluid-2xl font-semibold text-gray-800 border-b border-gray-300 pb-2"
       >
         Jornada {{ jornada }}
       </h2>
@@ -99,7 +99,7 @@ const removeGame = (jornada, index) => {
         <div
           v-for="(game, index) in games"
           :key="index"
-          class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-5 shadow hover:shadow-lg transition relative"
+          class="bg-white border border-gray-200 rounded-lg p-5 shadow hover:shadow-lg transition relative"
         >
           <button
             @click="removeGame(jornada, index)"
@@ -110,17 +110,17 @@ const removeGame = (jornada, index) => {
             ✕
           </button>
 
-          <div class="mb-3 text-sm text-gray-500 dark:text-gray-400">
+          <div class="mb-3 text-fluid-sm text-gray-500">
             <span class="mr-4"><strong>Data:</strong> {{ game.date }}</span>
             <span><strong>Hora:</strong> {{ game.time }}</span>
           </div>
 
-          <div class="mb-4 font-semibold text-gray-700 dark:text-gray-300">
+          <div class="mb-4 font-semibold text-gray-700">
             Local: {{ game.location }}
           </div>
 
           <div
-            class="flex items-center justify-center gap-3 font-bold text-lg text-gray-900 dark:text-gray-100"
+            class="flex items-center justify-center gap-3 font-bold text-fluid-lg text-gray-900"
           >
             <div class="flex flex-col items-center max-w-[200px] text-center">
               <img
@@ -131,7 +131,7 @@ const removeGame = (jornada, index) => {
               />
               <span>{{ game.teams[0] }}</span>
             </div>
-            <div class="text-gray-600 dark:text-gray-400">vs</div>
+            <div class="text-gray-600">vs</div>
             <div class="flex flex-col items-center max-w-[200px] text-center">
               <img
                 v-if="teamLogoMap[game.teams[1]]"
@@ -151,20 +151,20 @@ const removeGame = (jornada, index) => {
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
     >
       <div
-        class="bg-white dark:bg-gray-900 rounded-lg shadow-lg max-w-md w-full p-6 relative"
+        class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative"
         @click.stop
       >
-        <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+        <h3 class="text-fluid-xl font-semibold mb-4 text-gray-900">
           Adicionar Jogo
         </h3>
 
         <label
-          class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+          class="block mb-2 text-fluid-sm font-medium text-gray-700"
         >
           Jornada
           <select
             v-model.number="newGame.jornada"
-            class="mt-1 block w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2"
+            class="mt-1 block w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
           >
             <option
               v-for="j in Object.keys(editableJornadas).sort((a, b) => a - b)"
@@ -177,67 +177,67 @@ const removeGame = (jornada, index) => {
         </label>
 
         <label
-          class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+          class="block mb-2 text-fluid-sm font-medium text-gray-700"
         >
           Data
           <input
             type="date"
             v-model="newGame.date"
-            class="mt-1 block w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2"
+            class="mt-1 block w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
           />
         </label>
 
         <label
-          class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+          class="block mb-2 text-fluid-sm font-medium text-gray-700"
         >
           Hora
           <input
             type="time"
             v-model="newGame.time"
-            class="mt-1 block w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2"
+            class="mt-1 block w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
           />
         </label>
 
         <label
-          class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+          class="block mb-2 text-fluid-sm font-medium text-gray-700"
         >
           Local
           <input
             type="text"
             v-model="newGame.location"
             placeholder="Estádio, cidade, etc."
-            class="mt-1 block w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2"
+            class="mt-1 block w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
           />
         </label>
 
         <label
-          class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+          class="block mb-2 text-fluid-sm font-medium text-gray-700"
         >
           Equipa 1
           <input
             type="text"
             v-model="newGame.teams[0]"
             placeholder="Nome da equipa 1"
-            class="mt-1 block w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2"
+            class="mt-1 block w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
           />
         </label>
 
         <label
-          class="block mb-4 text-sm font-medium text-gray-700 dark:text-gray-300"
+          class="block mb-4 text-fluid-sm font-medium text-gray-700"
         >
           Equipa 2
           <input
             type="text"
             v-model="newGame.teams[1]"
             placeholder="Nome da equipa 2"
-            class="mt-1 block w-full rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2"
+            class="mt-1 block w-full rounded border border-gray-300 bg-gray-50 text-gray-900 px-3 py-2"
           />
         </label>
 
         <div class="flex justify-end gap-3">
           <button
             @click="closeModal"
-            class="px-4 py-2 rounded bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-400 dark:hover:bg-gray-600 transition"
+            class="px-4 py-2 rounded bg-gray-300 text-gray-800 hover:bg-gray-400 transition"
           >
             Cancelar
           </button>

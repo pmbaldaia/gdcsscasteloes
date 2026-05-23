@@ -4,7 +4,6 @@ import path from "path";
 function getAllImages(dir: string, baseUrl: string): { loc: string }[] {
   const files = fs.readdirSync(dir, { withFileTypes: true });
   let images: { loc: string }[] = [];
-
   for (const file of files) {
     const fullPath = path.join(dir, file.name);
     if (file.isDirectory()) {
@@ -13,17 +12,14 @@ function getAllImages(dir: string, baseUrl: string): { loc: string }[] {
       images.push({ loc: `${baseUrl}/${file.name}` });
     }
   }
-
   return images;
 }
 
 function getAllRoutes(dir: string, prefix = ""): string[] {
   const files = fs.readdirSync(dir, { withFileTypes: true });
   let routes: string[] = [];
-
   for (const file of files) {
     const fullPath = path.join(dir, file.name);
-
     if (file.isDirectory()) {
       routes = routes.concat(getAllRoutes(fullPath, `${prefix}/${file.name}`));
     } else if (file.name.endsWith(".vue")) {
@@ -35,7 +31,6 @@ function getAllRoutes(dir: string, prefix = ""): string[] {
       }
     }
   }
-
   return routes;
 }
 
@@ -43,8 +38,9 @@ const isProd = process.env.NODE_ENV === "production";
 const siteUrl = process.env.NUXT_SITE_URL || "http://localhost:3000";
 
 export default defineNuxtConfig({
+  compatibilityDate: "2026-05-23",
+
   modules: [
-    "@nuxtjs/color-mode",
     "nuxt-icon",
     "@pinia/nuxt",
     "@nuxtjs/sitemap",
@@ -52,9 +48,30 @@ export default defineNuxtConfig({
     "@nuxt/image",
   ],
 
+  // ✅ strict: false — não diferenciar /page e /page/ em dev
+  router: {
+    options: {
+      strict: false,
+    },
+  },
+
+  robots: {
+    rules: [
+      {
+        userAgent: "*",
+        disallow: ["/_nuxt/", "/admin/", "/auth/", "/manutencao"],
+        allow: "/",
+      },
+    ],
+    // Sitemap só em produção
+    sitemap: isProd ? `${siteUrl}/sitemap.xml` : false,
+  },
+
   image: {
     provider: isProd ? "netlify" : "ipx",
-    formats: ["webp", "png"],
+    format: ["webp"],
+    quality: 80,
+    densities: [1],
     screens: {
       xs: 320,
       sm: 640,
@@ -63,35 +80,40 @@ export default defineNuxtConfig({
       xl: 1280,
       xxl: 1536,
     },
-    staticFilename: "[publicPath]/images/[name]-[hash][ext]",
+    presets: {
+      hero: {
+        modifiers: { width: 700, fit: "inside", format: "webp", quality: 82 },
+      },
+      card: {
+        modifiers: { width: 480, height: 480, fit: "cover", format: "webp", quality: 80 },
+      },
+      cardLg: {
+        modifiers: { width: 800, height: 800, fit: "cover", format: "webp", quality: 82 },
+      },
+      avatar: {
+        modifiers: { width: 320, height: 400, fit: "inside", format: "webp", quality: 80 },
+      },
+      portrait: {
+        modifiers: { width: 400, height: 384, fit: "cover", format: "webp", quality: 80 },
+      },
+      thumb: {
+        modifiers: { width: 400, height: 192, fit: "cover", format: "webp", quality: 75 },
+      },
+      logo: {
+        modifiers: { width: 160, height: 120, fit: "inside", format: "webp", quality: 78 },
+      },
+      badge: {
+        modifiers: { width: 80, height: 80, fit: "inside", format: "webp", quality: 80 },
+      },
+      sponsor: {
+        modifiers: { width: 160, height: 120, fit: "inside", format: "webp", quality: 75 },
+      },
+    },
   },
 
   runtimeConfig: {
     public: {
       siteUrl,
-      sitemap: {
-        hostname: siteUrl,
-        exclude: ["/admin/**", "/auth/**", "/manutencao"],
-      },
-      robots: {
-        rules: [
-          {
-            userAgent: "*",
-            disallow: [
-              "/_nuxt/",
-              "/admin/**",
-              "/auth/**",
-              "/manutencao",
-              "/sitemap.xml",
-            ],
-          },
-          {
-            userAgent: "*",
-            allow: "/",
-          },
-        ],
-        sitemap: `${siteUrl}/sitemap.xml`,
-      },
     },
   },
 
@@ -101,7 +123,11 @@ export default defineNuxtConfig({
       title: "GDCSS Castelões",
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        { rel: "canonical", href: siteUrl },
+        // ✅ Canonical removido do head global — define por página com useHead()
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
+        },
       ],
       meta: [
         {
@@ -113,7 +139,8 @@ export default defineNuxtConfig({
           name: "keywords",
           content: "GDCSS, Castelões, futebol, desporto, clube",
         },
-        { name: "robots", content: "index, follow" },
+        // ✅ noindex em dev
+        { name: "robots", content: isProd ? "index, follow" : "noindex, nofollow" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { property: "og:title", content: "GDCSS Castelões" },
         {
@@ -140,7 +167,6 @@ export default defineNuxtConfig({
     urls: async () => {
       const pagesDir = path.join(process.cwd(), "pages");
       const routes = getAllRoutes(pagesDir);
-
       const publicPath = path.join(process.cwd(), "public");
       const images = getAllImages(publicPath, siteUrl);
 
@@ -149,7 +175,6 @@ export default defineNuxtConfig({
         lastmod: new Date().toISOString(),
       }));
 
-      // Adicionar homepage com imagens
       urls.push({
         loc: siteUrl,
         images,
@@ -172,9 +197,10 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    optimizeDeps: { include: ["@phosphor-icons/vue"] },
+    optimizeDeps: {
+      include: ["@phosphor-icons/vue"],
+      exclude: ["nuxt"],
+    },
     ssr: { noExternal: ["@phosphor-icons/vue"] },
   },
-
-  colorMode: { classSuffix: "", preference: "system" },
 });

@@ -22,22 +22,23 @@
         class="w-full md:max-w-[600px] lg:max-w-[700px] rounded-none md:rounded-lg transition-transform"
         src="/img/gdcss-casteloes-tarja.webp"
         alt="Época 2025/2026"
-        loading="eager"
-        placeholder="blur"
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 600px, 700px"
-        densities="1x 2x"
-        width="2056"
+        preset="hero"
+        preload
+        fetchpriority="high"
+        sizes="(max-width: 768px) 100vw, 700px"
+        width="700"
+        height="394"
       />
     </div>
 
     <div class="order-last md:order-1 w-full">
       <h1
-        class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight"
+        class="text-fluid-hero font-bold lg:tracking-tight text-slate-900"
       >
         Bem-vindo ao site oficial do G.D.C.S.S. Castelões
       </h1>
       <p
-        class="text-base md:text-lg mt-4 text-slate-600 dark:text-white max-w-xl text-justify"
+        class="text-fluid-base mt-4 text-slate-600 max-w-xl text-justify leading-relaxed"
       >
         Celebrando com orgulho 41 anos de história, dedicação e conquistas, o
         G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada
@@ -49,7 +50,7 @@
         class="mt-6 flex flex-col sm:flex-row gap-3 justify-start items-center"
       >
         <a
-          class="bg-red-800 text-white hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto inline-block text-center px-4 py-2 rounded"
+          class="btn-club-red w-full sm:w-auto"
           href="/eventos/"
           aria-label="Clica aqui para ver Eventos"
         >
@@ -57,7 +58,7 @@
         </a>
 
         <a
-          class="bg-green-800 text-white hover:bg-black hover:text-white border border-green-800 hover:border-white w-full sm:w-auto inline-block text-center px-4 py-2 rounded"
+          class="btn-club-green w-full sm:w-auto"
           href="/calendario/"
           aria-label="Clica aqui para ver Calendário"
         >

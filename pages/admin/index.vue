@@ -19,23 +19,23 @@ const totalSocios = computed(() => socios.length);
 
 <template>
   <div
-    class="p-8 bg-white dark:bg-gray-900 rounded-xl shadow transition-colors space-y-8"
+    class="p-8 bg-white rounded-xl shadow transition-colors space-y-8"
   >
-    <h1 class="text-3xl font-bold text-gray-800 dark:text-white">
+    <h1 class="text-fluid-3xl font-bold text-gray-800">
       Painel de Administração
     </h1>
-    <p class="w-full text-gray-600 dark:text-gray-400 text-lg">
+    <p class="w-full text-gray-600 text-fluid-lg">
       Usa o menu lateral para gerir os dados da aplicação. Aqui tens um resumo
       rápido:
     </p>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
       <div
-        class="bg-blue-600 dark:bg-blue-700 text-white rounded-lg p-6 shadow hover:bg-blue-700 transition cursor-pointer"
+        class="bg-blue-600 text-white rounded-lg p-6 shadow hover:bg-blue-700 transition cursor-pointer"
       >
-        <h2 class="text-xl font-semibold mb-2">Sócios</h2>
-        <p class="text-4xl font-bold">{{ totalSocios }}</p>
-        <p class="mt-1 text-sm">Sócios registados</p>
+        <h2 class="text-fluid-xl font-semibold mb-2">Sócios</h2>
+        <p class="text-fluid-4xl font-bold">{{ totalSocios }}</p>
+        <p class="mt-1 text-fluid-sm">Sócios registados</p>
         <NuxtLink
           to="/admin/socios"
           class="mt-4 inline-block underline text-white hover:text-gray-200"
@@ -44,11 +44,11 @@ const totalSocios = computed(() => socios.length);
       </div>
 
       <div
-        class="bg-indigo-600 dark:bg-indigo-700 text-white rounded-lg p-6 shadow hover:bg-indigo-700 transition cursor-pointer"
+        class="bg-indigo-600 text-white rounded-lg p-6 shadow hover:bg-indigo-700 transition cursor-pointer"
       >
-        <h2 class="text-xl font-semibold mb-2">Equipas</h2>
-        <p class="text-4xl font-bold">{{ totalEquipas }}</p>
-        <p class="mt-1 text-sm">Equipas registadas</p>
+        <h2 class="text-fluid-xl font-semibold mb-2">Equipas</h2>
+        <p class="text-fluid-4xl font-bold">{{ totalEquipas }}</p>
+        <p class="mt-1 text-fluid-sm">Equipas registadas</p>
         <NuxtLink
           to="/admin/equipas"
           class="mt-4 inline-block underline text-white hover:text-gray-200"
@@ -57,11 +57,11 @@ const totalSocios = computed(() => socios.length);
       </div>
 
       <div
-        class="bg-pink-600 dark:bg-pink-700 text-white rounded-lg p-6 shadow hover:bg-pink-700 transition cursor-pointer"
+        class="bg-pink-600 text-white rounded-lg p-6 shadow hover:bg-pink-700 transition cursor-pointer"
       >
-        <h2 class="text-xl font-semibold mb-2">Jornadas</h2>
-        <p class="text-4xl font-bold">{{ totalJornadas }}</p>
-        <p class="mt-1 text-sm">Jornadas registadas</p>
+        <h2 class="text-fluid-xl font-semibold mb-2">Jornadas</h2>
+        <p class="text-fluid-4xl font-bold">{{ totalJornadas }}</p>
+        <p class="mt-1 text-fluid-sm">Jornadas registadas</p>
         <NuxtLink
           to="/admin/jornadas"
           class="mt-4 inline-block underline text-white hover:text-gray-200"
@@ -70,11 +70,11 @@ const totalSocios = computed(() => socios.length);
       </div>
 
       <div
-        class="bg-yellow-600 dark:bg-yellow-700 text-white rounded-lg p-6 shadow hover:bg-yellow-700 transition cursor-pointer"
+        class="bg-yellow-600 text-white rounded-lg p-6 shadow hover:bg-yellow-700 transition cursor-pointer"
       >
-        <h2 class="text-xl font-semibold mb-2">Eventos</h2>
-        <p class="text-4xl font-bold">{{ totalEventos }}</p>
-        <p class="mt-1 text-sm">Eventos registados</p>
+        <h2 class="text-fluid-xl font-semibold mb-2">Eventos</h2>
+        <p class="text-fluid-4xl font-bold">{{ totalEventos }}</p>
+        <p class="mt-1 text-fluid-sm">Eventos registados</p>
         <NuxtLink
           to="/admin/eventos"
           class="mt-4 inline-block underline text-white hover:text-gray-200"
@@ -83,11 +83,11 @@ const totalSocios = computed(() => socios.length);
       </div>
 
       <div
-        class="bg-green-600 dark:bg-green-700 text-white rounded-lg p-6 shadow hover:bg-green-700 transition cursor-pointer"
+        class="bg-green-600 text-white rounded-lg p-6 shadow hover:bg-green-700 transition cursor-pointer"
       >
-        <h2 class="text-xl font-semibold mb-2">Galeria</h2>
-        <p class="text-4xl font-bold">{{ totalCategorias }}</p>
-        <p class="mt-1 text-sm">Categorias na galeria</p>
+        <h2 class="text-fluid-xl font-semibold mb-2">Galeria</h2>
+        <p class="text-fluid-4xl font-bold">{{ totalCategorias }}</p>
+        <p class="mt-1 text-fluid-sm">Categorias na galeria</p>
         <NuxtLink
           to="/admin/galeria"
           class="mt-4 inline-block underline text-white hover:text-gray-200"

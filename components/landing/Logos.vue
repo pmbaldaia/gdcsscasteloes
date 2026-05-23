@@ -60,7 +60,7 @@ const sponsors = [
 <template>
   <section class="mt-24">
     <h2
-      class="text-black dark:text-white text-3xl md:text-4xl font-bold text-center"
+      class="text-slate-900 text-fluid-3xl font-bold text-center tracking-tight"
     >
       Patrocínios
     </h2>
@@ -70,17 +70,17 @@ const sponsors = [
         :key="i"
         :src="sponsor.src"
         :alt="sponsor.alt"
-        class="object-contain h-[120px] w-full max-w-[160px] mx-auto transition-transform duration-300 hover:scale-150"
+        preset="sponsor"
+        width="160"
+        height="120"
+        sizes="120px"
+        loading="lazy"
+        fetchpriority="low"
+        class="object-contain h-[120px] w-full max-w-[160px] mx-auto transition-transform duration-300 hover:scale-110"
         :class="{
-          'bg-black':
-            sponsor.alt === 'CFDS' && !$colorMode?.value?.includes('dark'),
+          'bg-black rounded-lg': sponsor.alt === 'CFDS',
           'p-2': sponsor.alt === 'CFDS',
         }"
-        format="webp"
-        sizes="100px sm:120px md:160px"
-        densities="1x 2x"
-        loading="lazy"
-        placeholder="blur"
       />
     </div>
   </section>
