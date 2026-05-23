@@ -1,16 +1,22 @@
 import fs from "fs";
 import path from "path";
 
-function getAllImages(dir: string, baseUrl: string): { loc: string }[] {
+function getAllImages(dir: string, publicPath: string, baseUrl: string, relativePath = "") {
   const files = fs.readdirSync(dir, { withFileTypes: true });
   let images: { loc: string }[] = [];
 
   for (const file of files) {
     const fullPath = path.join(dir, file.name);
+    const fileRelativePath = path.join(relativePath, file.name).replace(/\\/g, "/");
+
     if (file.isDirectory()) {
-      images = images.concat(getAllImages(fullPath, `${baseUrl}/${file.name}`));
+      images = images.concat(
+        getAllImages(fullPath, publicPath, baseUrl, fileRelativePath)
+      );
     } else if (/\.(jpe?g|png|webp|gif|avif)$/i.test(file.name)) {
-      images.push({ loc: `${baseUrl}/${file.name}` });
+      images.push({
+        loc: `${baseUrl}/${fileRelativePath}`,
+      });
     }
   }
 
