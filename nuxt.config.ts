@@ -69,7 +69,9 @@ export default defineNuxtConfig({
   },
 
   image: {
-    provider: isProd ? "netlify" : "ipx",
+    // ✅ ipx funciona em dev e produção com imagens em /public
+    // O provider "netlify" requer Edge Functions e causa problemas de build
+    provider: "ipx",
     format: ["webp"],
     quality: 80,
     densities: [1],
