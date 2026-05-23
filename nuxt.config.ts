@@ -1,44 +1,10 @@
-import fs from "fs";
-import path from "path";
-
-function getAllImages(dir: string, baseUrl: string): { loc: string }[] {
-  const files = fs.readdirSync(dir, { withFileTypes: true });
-  let images: { loc: string }[] = [];
-  for (const file of files) {
-    const fullPath = path.join(dir, file.name);
-    if (file.isDirectory()) {
-      images = images.concat(getAllImages(fullPath, `${baseUrl}/${file.name}`));
-    } else if (/\.(jpe?g|png|webp|gif|avif)$/i.test(file.name)) {
-      images.push({ loc: `${baseUrl}/${file.name}` });
-    }
-  }
-  return images;
-}
-
-function getAllRoutes(dir: string, prefix = ""): string[] {
-  const files = fs.readdirSync(dir, { withFileTypes: true });
-  let routes: string[] = [];
-  for (const file of files) {
-    const fullPath = path.join(dir, file.name);
-    if (file.isDirectory()) {
-      routes = routes.concat(getAllRoutes(fullPath, `${prefix}/${file.name}`));
-    } else if (file.name.endsWith(".vue")) {
-      const name = file.name.replace(/\.vue$/, "");
-      if (name === "index") {
-        routes.push(prefix || "/");
-      } else {
-        routes.push(`${prefix}/${name}`);
-      }
-    }
-  }
-  return routes;
-}
+import { defineNuxtConfig } from "nuxt/config";
 
 const isProd = process.env.CONTEXT === "production";
 
 const PROD_URL = "https://gdcsscasteloes.pt";
-const DEV_URL  = "http://localhost:3000";
-const siteUrl  = isProd ? PROD_URL : DEV_URL;
+const DEV_URL = "http://localhost:3000";
+const siteUrl = isProd ? PROD_URL : DEV_URL;
 
 export default defineNuxtConfig({
   compatibilityDate: "2026-05-23",
@@ -46,7 +12,6 @@ export default defineNuxtConfig({
   modules: [
     "nuxt-icon",
     "@pinia/nuxt",
-    "@nuxtjs/sitemap",
     "@nuxtjs/robots",
     "@nuxt/image",
   ],
@@ -65,11 +30,10 @@ export default defineNuxtConfig({
         allow: "/",
       },
     ],
-    sitemap: isProd ? `${PROD_URL}/sitemap.xml` : false,
   },
 
   image: {
-    provider: "static",
+    provider: "ipx",
     format: ["webp"],
     quality: 80,
     densities: [1],
@@ -82,33 +46,15 @@ export default defineNuxtConfig({
       xxl: 1536,
     },
     presets: {
-      hero: {
-        modifiers: { width: 700, fit: "inside", format: "webp", quality: 82 },
-      },
-      card: {
-        modifiers: { width: 480, height: 480, fit: "cover", format: "webp", quality: 80 },
-      },
-      cardLg: {
-        modifiers: { width: 800, height: 800, fit: "cover", format: "webp", quality: 82 },
-      },
-      avatar: {
-        modifiers: { width: 320, height: 400, fit: "inside", format: "webp", quality: 80 },
-      },
-      portrait: {
-        modifiers: { width: 400, height: 384, fit: "cover", format: "webp", quality: 80 },
-      },
-      thumb: {
-        modifiers: { width: 400, height: 192, fit: "cover", format: "webp", quality: 75 },
-      },
-      logo: {
-        modifiers: { width: 160, height: 120, fit: "inside", format: "webp", quality: 78 },
-      },
-      badge: {
-        modifiers: { width: 80, height: 80, fit: "inside", format: "webp", quality: 80 },
-      },
-      sponsor: {
-        modifiers: { width: 160, height: 120, fit: "inside", format: "webp", quality: 75 },
-      },
+      hero: { modifiers: { width: 700, fit: "inside", format: "webp", quality: 82 } },
+      card: { modifiers: { width: 480, height: 480, fit: "cover", format: "webp", quality: 80 } },
+      cardLg: { modifiers: { width: 800, height: 800, fit: "cover", format: "webp", quality: 82 } },
+      avatar: { modifiers: { width: 320, height: 400, fit: "inside", format: "webp", quality: 80 } },
+      portrait: { modifiers: { width: 400, height: 384, fit: "cover", format: "webp", quality: 80 } },
+      thumb: { modifiers: { width: 400, height: 192, fit: "cover", format: "webp", quality: 75 } },
+      logo: { modifiers: { width: 160, height: 120, fit: "inside", format: "webp", quality: 78 } },
+      badge: { modifiers: { width: 80, height: 80, fit: "inside", format: "webp", quality: 80 } },
+      sponsor: { modifiers: { width: 160, height: 120, fit: "inside", format: "webp", quality: 75 } },
     },
   },
 
@@ -130,10 +76,7 @@ export default defineNuxtConfig({
         },
       ],
       meta: [
-        {
-          name: "google-site-verification",
-          content: "6IHqvKCdIFhd3KMvHoKemuKEa60Uk4EaRrEkGVqPeFI",
-        },
+        { name: "google-site-verification", content: "6IHqvKCdIFhd3KMvHoKemuKEa60Uk4EaRrEkGVqPeFI" },
         { name: "description", content: "Site oficial do GDCSS Castelões" },
         { name: "keywords", content: "GDCSS, Castelões, futebol, desporto, clube" },
         { name: "robots", content: isProd ? "index, follow" : "noindex, nofollow" },
@@ -151,33 +94,6 @@ export default defineNuxtConfig({
     },
   },
 
-  sitemap: {
-    hostname: siteUrl,
-    exclude: ["/admin/**", "/auth/**", "/manutencao"],
-    urls: async () => {
-      const pagesDir = path.join(process.cwd(), "pages");
-      const routes = getAllRoutes(pagesDir);
-      const publicPath = path.join(process.cwd(), "public");
-
-      const images = fs.existsSync(publicPath)
-        ? getAllImages(publicPath, siteUrl)
-        : [];
-
-      const urls = routes.map((route) => ({
-        loc: `${siteUrl}${route}`,
-        lastmod: new Date().toISOString(),
-      }));
-
-      urls.push({
-        loc: siteUrl,
-        images,
-        lastmod: new Date().toISOString(),
-      });
-
-      return urls;
-    },
-  },
-
   css: ["~/assets/css/main.css"],
 
   devtools: { enabled: true },
@@ -192,8 +108,9 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: ["@phosphor-icons/vue"],
-      exclude: ["nuxt"],
     },
-    ssr: { noExternal: ["@phosphor-icons/vue"] },
+    ssr: {
+      noExternal: ["@phosphor-icons/vue"],
+    },
   },
 });

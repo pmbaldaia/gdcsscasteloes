@@ -3,10 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxi generate",
+    "build": "nuxt build",
     "dev": "nuxt dev",
+    "dev:clean": "node scripts/clean-dev-cache.mjs && nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "predev": "node scripts/clean-dev-cache.mjs"
   },
   "devDependencies": {
     "@nuxt/image": "^1.11.0",
