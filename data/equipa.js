@@ -43,49 +43,49 @@ export const direcao = [
     img: "/equipa/direcao/Maria Ribeiro.webp",
   },
   {
-    nome: "Miguel Teixeira",
+    nome: "Tânia Filipa Sousa Ribeiro",
     funcao: "2º Vogal",
-    img: "/equipa/direcao/Miguel Teixeira.webp",
+    img: "/equipa/direcao/Tânia Ribeiro.webp",
   },
   {
-    nome: "Pedro Miguel Baldaia Almeida e Sousa",
+    nome: "Cecília Silva Sousa",
     funcao: "3º Vogal",
-    img: "/equipa/direcao/Pedro Sousa.webp",
-  },
-  {
-    nome: "Adriano Miguel Penetro",
-    funcao: "4º Vogal",
-    img: "/equipa/direcao/Adriano Penetro.webp",
+    img: "/equipa/direcao/Cecília Sousa.webp",
   },
   {
     nome: "Fernanda Pinheiro Correira",
-    funcao: "5º Vogal",
+    funcao: "4º Vogal",
     img: "/equipa/direcao/Fernanda Correia.webp",
   },
   {
-    nome: "Manuela Maria Silva Pereira",
-    funcao: "6º Vogal",
-    img: "/equipa/direcao/Manuela Pereira.webp",
+    nome: "Pedro Miguel Baldaia Almeida e Sousa",
+    funcao: "5º Vogal",
+    img: "/equipa/direcao/Pedro Sousa.webp",
   },
   {
     nome: "Augusto Pinheiro Teixeira",
-    funcao: "7º Vogal",
+    funcao: "6º Vogal",
     img: "/equipa/direcao/Augusto Teixeira.webp",
   },
   {
     nome: "Artur Moreira Ribeiro",
-    funcao: "8º Vogal",
+    funcao: "7º Vogal",
     img: "/equipa/direcao/Artur Ribeiro.webp",
   },
   {
     nome: "Tânia Filipa Sousa Ribeiro",
-    funcao: "9º Vogal",
+    funcao: "8º Vogal",
     img: "/equipa/direcao/Tânia Ribeiro.webp",
   },
   {
     nome: "César Daniel Moreira da Silva",
-    funcao: "10º Vogal",
+    funcao: "9º Vogal",
     img: "/equipa/direcao/César Silva.webp",
+  },
+  {
+    nome: "Diogo Manuel Teixeira Magalhães",
+    funcao: "10º Vogal",
+    img: "/equipa/direcao/Diogo Ganilho.webp",
   },
 ];
 
