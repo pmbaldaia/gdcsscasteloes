@@ -1,4 +1,7 @@
 <script setup>
+import { ref, nextTick } from "vue";
+import "~/assets/css/galeria.css";
+
 const sponsors = [
   { src: "/patrocinios/garage649.webp", alt: "M Pinto" },
   { src: "/patrocinios/mpinto.webp", alt: "M Pinto" },
@@ -54,7 +57,22 @@ const sponsors = [
   { src: "/patrocinios/soaresribeiro.webp", alt: "Soares Ribeiro" },
   { src: "/patrocinios/marcoarco.webp", alt: "Marco Arco" },
   { src: "/patrocinios/bravosincriveis.webp", alt: "Bravos e Incríveis" },
+  { src: "/patrocinios/fernandosousa.webp", alt: "Fernando Sousa" },
 ];
+
+const selectedSponsor = ref(null);
+const dialogRef = ref(null);
+
+const openSponsor = async (sponsor) => {
+  selectedSponsor.value = sponsor;
+  await nextTick();
+  dialogRef.value?.showModal();
+};
+
+const closeDialog = () => {
+  dialogRef.value?.close();
+  selectedSponsor.value = null;
+};
 </script>
 
 <template>
@@ -65,22 +83,86 @@ const sponsors = [
       Patrocínios
     </h2>
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-10 mt-10 px-4">
-      <NuxtImg
+      <button
         v-for="(sponsor, i) in sponsors"
         :key="i"
-        :src="sponsor.src"
-        :alt="sponsor.alt"
-        class="object-contain h-[120px] w-full max-w-[160px] mx-auto transition-transform duration-300 hover:scale-150"
-        :class="{
-          'bg-black rounded-lg': sponsor.alt === 'CFDS',
-          'p-2': sponsor.alt === 'CFDS',
-        }"
-        format="webp"
-        sizes="100px sm:120px md:160px"
-        densities="1x 2x"
-        loading="lazy"
-        placeholder="blur"
-      />
+        type="button"
+        :aria-label="`Ampliar logo ${sponsor.alt}`"
+        class="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 rounded-lg"
+        @click="openSponsor(sponsor)"
+      >
+        <NuxtImg
+          :src="sponsor.src"
+          :alt="sponsor.alt"
+          class="object-contain h-[120px] w-full max-w-[160px] mx-auto transition-transform duration-300 hover:scale-110"
+          :class="{
+            'bg-black rounded-lg': sponsor.alt === 'CFDS',
+            'p-2': sponsor.alt === 'CFDS',
+          }"
+          format="webp"
+          sizes="100px sm:120px md:160px"
+          densities="1x 2x"
+          loading="lazy"
+          placeholder="blur"
+        />
+      </button>
     </div>
+
+    <dialog
+      v-if="selectedSponsor"
+      ref="dialogRef"
+      class="dialog-zoom"
+      @click.self="closeDialog"
+    >
+      <div class="dialog-content dialog-content-logos">
+        <button
+          type="button"
+          aria-label="Fechar imagem"
+          class="close-btn"
+          @click="closeDialog"
+        >
+          ✕
+        </button>
+        <NuxtImg
+          :src="selectedSponsor.src"
+          :alt="selectedSponsor.alt"
+          format="webp"
+          width="1600"
+          fit="inside"
+          sizes="(max-width: 768px) 90vw, 1600px"
+          densities="1x 2x"
+          loading="eager"
+          class="zoomed-image zoomed-image-logos"
+          :class="{
+            'bg-black rounded-lg p-4': selectedSponsor.alt === 'CFDS',
+          }"
+        />
+      </div>
+    </dialog>
   </section>
 </template>
+
+<style scoped>
+.dialog-content-logos {
+  overflow: visible;
+  width: auto;
+  height: auto;
+  max-width: 95vw;
+  max-height: 92vh;
+}
+
+.zoomed-image-logos {
+  width: auto;
+  height: auto;
+  max-width: 95vw;
+  max-height: 88vh;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .zoomed-image-logos {
+    max-width: min(95vw, 1600px);
+    max-height: 90vh;
+  }
+}
+</style>
