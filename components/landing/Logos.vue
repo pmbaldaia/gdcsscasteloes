@@ -1,6 +1,5 @@
 <script setup>
-import { ref, nextTick } from "vue";
-import "~/assets/css/galeria.css";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const sponsors = [
   { src: "/patrocinios/garage649.webp", alt: "M Pinto" },
@@ -61,18 +60,37 @@ const sponsors = [
 ];
 
 const selectedSponsor = ref(null);
-const dialogRef = ref(null);
 
-const openSponsor = async (sponsor) => {
+const openSponsor = (sponsor) => {
   selectedSponsor.value = sponsor;
-  await nextTick();
-  dialogRef.value?.showModal();
+  if (import.meta.client) {
+    document.body.style.overflow = "hidden";
+  }
 };
 
-const closeDialog = () => {
-  dialogRef.value?.close();
+const closeZoom = () => {
   selectedSponsor.value = null;
+  if (import.meta.client) {
+    document.body.style.overflow = "";
+  }
 };
+
+const onKeydown = (event) => {
+  if (event.key === "Escape") {
+    closeZoom();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("keydown", onKeydown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("keydown", onKeydown);
+  if (import.meta.client) {
+    document.body.style.overflow = "";
+  }
+});
 </script>
 
 <template>
@@ -108,61 +126,30 @@ const closeDialog = () => {
       </button>
     </div>
 
-    <dialog
-      v-if="selectedSponsor"
-      ref="dialogRef"
-      class="dialog-zoom"
-      @click.self="closeDialog"
-    >
-      <div class="dialog-content dialog-content-logos">
+    <Teleport to="body">
+      <div
+        v-if="selectedSponsor"
+        class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 p-4"
+        @click="closeZoom"
+      >
         <button
           type="button"
           aria-label="Fechar imagem"
-          class="close-btn"
-          @click="closeDialog"
+          class="absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-red-600 text-lg font-bold text-white shadow-md transition-colors hover:bg-red-700"
+          @click="closeZoom"
         >
           ✕
         </button>
-        <NuxtImg
+        <img
           :src="selectedSponsor.src"
           :alt="selectedSponsor.alt"
-          format="webp"
-          width="1600"
-          fit="inside"
-          sizes="(max-width: 768px) 90vw, 1600px"
-          densities="1x 2x"
-          loading="eager"
-          class="zoomed-image zoomed-image-logos"
+          class="max-h-[88vh] max-w-[95vw] w-auto h-auto object-contain md:max-h-[90vh] md:max-w-[min(95vw,1600px)]"
           :class="{
-            'bg-black rounded-lg p-4': selectedSponsor.alt === 'CFDS',
+            'rounded-lg bg-black p-4': selectedSponsor.alt === 'CFDS',
           }"
+          @click.stop
         />
       </div>
-    </dialog>
+    </Teleport>
   </section>
 </template>
-
-<style scoped>
-.dialog-content-logos {
-  overflow: visible;
-  width: auto;
-  height: auto;
-  max-width: 95vw;
-  max-height: 92vh;
-}
-
-.zoomed-image-logos {
-  width: auto;
-  height: auto;
-  max-width: 95vw;
-  max-height: 88vh;
-  object-fit: contain;
-}
-
-@media (min-width: 768px) {
-  .zoomed-image-logos {
-    max-width: min(95vw, 1600px);
-    max-height: 90vh;
-  }
-}
-</style>
