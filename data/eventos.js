@@ -112,6 +112,7 @@ Traga família e amigos para celebrar o espírito desportivo, reviver memórias 
     nome: "Festa de São João",
     slug: "festa-sao-joao-2026",
     data: "20/06/2026",
+    hora: "19:00h",
     descricao: "Com sardinhas, caldo verde, bebida, sobremesa e muita animação!",
     local: "Complexo Desportivo Castelões",
     imagem: "/eventos/saojoao26.webp",
