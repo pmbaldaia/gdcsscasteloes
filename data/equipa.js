@@ -73,9 +73,9 @@ export const direcao = [
     img: "/equipa/direcao/Artur Ribeiro.webp",
   },
   {
-    nome: "Tânia Filipa Sousa Ribeiro",
+    nome: "Adriano Miguel Penetro",
     funcao: "8º Vogal",
-    img: "/equipa/direcao/Tânia Ribeiro.webp",
+    img: "/equipa/direcao/Adriano Penetro.webp",
   },
   {
     nome: "César Daniel Moreira da Silva",
@@ -174,7 +174,7 @@ export const plantel = [
     posicao: "Defesa",
     img: "/equipa/plantel/11.webp",
   },
- /*  {
+  /*  {
     id: 12,
     nome: "Gui Mesquita",
     posicao: "Avançado",
