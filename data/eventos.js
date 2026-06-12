@@ -108,4 +108,35 @@ Traga família e amigos para celebrar o espírito desportivo, reviver memórias 
       e faz parte deste momento especial!
     `,
   },
+  {
+    nome: "Festa de São João",
+    slug: "festa-sao-joao-2026",
+    data: "20/06/2026",
+    descricao: "Com sardinhas, caldo verde, bebida, sobremesa e muita animação!",
+    local: "Complexo Desportivo Castelões",
+    imagem: "/eventos/saojoao26.webp",
+    detalhes: `
+      <p>Com o cheiro da sardinha a pairar e o talento a brilhar, celebramos o São João sem vacilar!</p>
+  
+      <p><strong>Preço:</strong> 15€ por pessoa</p>
+      <p><strong>Crianças até aos 6 anos:</strong> Grátis</p>
+      <p><strong>Crianças dos 7 aos 12 anos:</strong> 7,50€</p>
+  
+      <ul>
+        <li>3 sardinhas ou 2 féveras</li>
+        <li>Acompanhamento</li>
+        <li>Bebida</li>
+        <li>Caldo verde</li>
+        <li>Sobremesa</li>
+      </ul>
+  
+      <p><strong>Contactos para reservas:</strong></p>
+      <ul>
+        <li>Luísa: 936 614 628</li>
+        <li>Filipa: 917 881 878</li>
+        <li>Joana: 918 539 653</li>
+        <li>Andreia: 917 928 498</li>
+      </ul>
+    `,
+  },
 ];
