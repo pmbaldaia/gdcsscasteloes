@@ -3,6 +3,7 @@ import { ref } from "vue";
 import {
   PhInstagramLogo,
   PhFacebookLogo,
+  PhTiktokLogo,
   PhList,
   PhX,
 } from "@phosphor-icons/vue";
@@ -105,6 +106,15 @@ const isActive = (item) =>
             >
               <PhFacebookLogo class="w-6 h-6" />
             </a>
+            <a
+              href="https://www.tiktok.com/@gdcss.casteloes"
+              aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-slate-600 hover:text-green-800 transition-colors"
+            >
+              <PhTiktokLogo class="w-6 h-6" />
+            </a>
           </div>
         </nav>
 
@@ -124,6 +134,14 @@ const isActive = (item) =>
             class="text-slate-600 hover:text-green-800 transition-colors"
           >
             <PhFacebookLogo class="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.tiktok.com/@gdcss.casteloes"
+            target="_blank"
+            aria-label="Instagram"
+            class="text-slate-600 hover:text-green-800 transition-colors"
+          >
+            <PhTiktokLogo class="w-5 h-5" />
           </a>
         </div>
       </div>
