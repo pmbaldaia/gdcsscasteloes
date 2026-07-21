@@ -4,7 +4,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 const sponsors = [
   { src: "/patrocinios/garage649.webp", alt: "M Pinto" },
   { src: "/patrocinios/mpinto.webp", alt: "M Pinto" },
-  { src: "/patrocinios/cfds-logo-white.webp", alt: "CFDS" },
+  { src: "/patrocinios/vistara.webp", alt: "Vistara" },
   { src: "/patrocinios/docemel.webp", alt: "Doce Mel" },
   { src: "/patrocinios/casacarreira.webp", alt: "Casa da Carreira" },
   { src: "/patrocinios/cafesantoantonio.webp", alt: "Café Santo António" },
