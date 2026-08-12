@@ -193,7 +193,7 @@ function getConselhoFiscalPosition(index) {
         </span>
       </div>
 
-      <section class="w-full">
+      <section id="equipa-tecnica" class="w-full scroll-mt-28">
         <h2 class="mb-6 text-center text-2xl font-bold text-slate-800">
           Equipa Técnica
         </h2>
@@ -223,7 +223,7 @@ function getConselhoFiscalPosition(index) {
         </div>
       </section>
 
-      <section class="mt-16 w-full">
+      <section id="plantel" class="mt-16 w-full scroll-mt-28">
         <h2 class="mb-6 text-center text-2xl font-bold text-slate-800">
           Plantel
         </h2>

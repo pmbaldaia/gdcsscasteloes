@@ -50,18 +50,18 @@
       >
         <a
           class="btn-club-red w-full sm:w-auto"
-          href="/eventos/"
-          aria-label="Clica aqui para ver Eventos"
+          href="/equipa#plantel"
+          aria-label="Clica aqui para ver o Plantel"
         >
-          Ver Eventos
+          Plantel
         </a>
 
         <a
           class="btn-club-green w-full sm:w-auto"
-          href="/calendario/"
-          aria-label="Clica aqui para ver Calendário"
+          href="/equipa#equipa-tecnica"
+          aria-label="Clica aqui para ver a Equipa Técnica"
         >
-          Ver Calendário
+          Equipa Técnica
         </a>
       </div>
     </div>
