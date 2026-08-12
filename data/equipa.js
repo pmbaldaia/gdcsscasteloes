@@ -107,155 +107,45 @@ export const conselhoFiscal = [
   },
 ];
 
+export const EQUIPA_REVEAL_FROM_ID = 18;
+export const EQUIPA_REVEAL_START = "2026-08-13T21:00:00+01:00";
+
+export function getEquipaRevealDate(id) {
+  if (id < EQUIPA_REVEAL_FROM_ID) return null;
+
+  const revealDate = new Date(EQUIPA_REVEAL_START);
+  revealDate.setDate(revealDate.getDate() + (id - EQUIPA_REVEAL_FROM_ID));
+  return revealDate;
+}
+
+export function isEquipaRevealed(id, now = new Date()) {
+  const revealDate = getEquipaRevealDate(id);
+  return revealDate === null || now >= revealDate;
+}
+
+export const equipaTecnica = [
+  { id: 1, img: "/equipa/tecnica/1.png" },
+  { id: 2, img: "/equipa/tecnica/2.png" },
+  { id: 3, img: "/equipa/tecnica/3.png" },
+];
+
 export const plantel = [
-  {
-    id: 1,
-    nome: "César Silva",
-    posicao: "Médio",
-    img: "/equipa/plantel/1.webp",
-  },
-  {
-    id: 2,
-    nome: "Rui Teixeira",
-    posicao: "Médio",
-    img: "/equipa/plantel/2.webp",
-  },
-  {
-    id: 3,
-    nome: "Gustavo Teixeira",
-    posicao: "Defesa",
-    img: "/equipa/plantel/3.webp",
-  },
-  {
-    id: 4,
-    nome: "Diogo Ganilho",
-    posicao: "Defesa",
-    img: "/equipa/plantel/4.webp",
-  },
-  {
-    id: 5,
-    nome: "Dani Freitas",
-    posicao: "Guarda-Redes",
-    img: "/equipa/plantel/5.webp",
-  },
-  {
-    id: 6,
-    nome: "Américo",
-    posicao: "Médio",
-    img: "/equipa/plantel/6.webp",
-  },
-  {
-    id: 7,
-    nome: "Pedro Fraga",
-    posicao: "Médio",
-    img: "/equipa/plantel/7.webp",
-  },
-  {
-    id: 8,
-    nome: "Bruno Oliveira",
-    posicao: "Avançado",
-    img: "/equipa/plantel/8.webp",
-  },
-  {
-    id: 9,
-    nome: "João Fibras",
-    posicao: "Defesa",
-    img: "/equipa/plantel/9.webp",
-  },
-  {
-    id: 10,
-    nome: "Kiko Sousa",
-    posicao: "Guarda-Redes",
-    img: "/equipa/plantel/10.webp",
-  },
-  {
-    id: 11,
-    nome: "João Oliveira",
-    posicao: "Defesa",
-    img: "/equipa/plantel/11.webp",
-  },
-  /*  {
-    id: 12,
-    nome: "Gui Mesquita",
-    posicao: "Avançado",
-    img: "/equipa/plantel/12.webp",
-  }, */
-  {
-    id: 13,
-    nome: "Diogo Novais",
-    posicao: "Médio",
-    img: "/equipa/plantel/13.webp",
-  },
-  {
-    id: 14,
-    nome: "João Pedro",
-    posicao: "Avançado",
-    img: "/equipa/plantel/14.webp",
-  },
-  {
-    id: 15,
-    nome: "Nuno Sousa",
-    posicao: "Médio",
-    img: "/equipa/plantel/15.webp",
-  },
-  {
-    id: 16,
-    nome: "Zé Tó",
-    posicao: "Defesa",
-    img: "/equipa/plantel/16.webp",
-  },
-  {
-    id: 17,
-    nome: "Pedro Morais",
-    posicao: "Médio",
-    img: "/equipa/plantel/17.webp",
-  },
-  {
-    id: 18,
-    nome: "Zé Miguel",
-    posicao: "Avançado",
-    img: "/equipa/plantel/18.webp",
-  },
-  {
-    id: 19,
-    nome: "Luís Moreira",
-    posicao: "Defesa",
-    img: "/equipa/plantel/19.webp",
-  },
-  {
-    id: 20,
-    nome: "Tiago Ribeiro",
-    posicao: "Avançado",
-    img: "/equipa/plantel/20.webp",
-  },
-  {
-    id: 22,
-    nome: "Gustavo Silva",
-    posicao: "Médio",
-    img: "/equipa/plantel/22.webp",
-  },
-  {
-    id: 23,
-    nome: "Pedro Cunha",
-    posicao: "Médio",
-    img: "/equipa/plantel/23.webp",
-  },
-  {
-    id: 25,
-    nome: "Bruno Mendes",
-    posicao: "Guarda-Redes",
-    img: "/equipa/plantel/25.webp",
-  },
-  {
-    id: 26,
-    nome: "Jorginho",
-    posicao: "Médio",
-    img: "/equipa/plantel/26.webp",
-  },
-  {
-    id: 27,
-    nome: "Nuno Carneiro",
-    posicao: "Avançado",
-    img: "/equipa/plantel/27.webp",
-  },
+  { id: 1, img: "/equipa/plantel/1.jpeg" },
+  { id: 2, img: "/equipa/plantel/2.png" },
+  { id: 3, img: "/equipa/plantel/3.png" },
+  { id: 4, img: "/equipa/plantel/4.png" },
+  { id: 5, img: "/equipa/plantel/5.png" },
+  { id: 6, img: "/equipa/plantel/6.png" },
+  { id: 7, img: "/equipa/plantel/7.png" },
+  { id: 8, img: "/equipa/plantel/8.jpeg" },
+  { id: 9, img: "/equipa/plantel/9.png" },
+  { id: 10, img: "/equipa/plantel/10.png" },
+  { id: 11, img: "/equipa/plantel/11.png" },
+  { id: 12, img: "/equipa/plantel/12.png" },
+  { id: 13, img: "/equipa/plantel/13.png" },
+  { id: 14, img: "/equipa/plantel/14.png" },
+  { id: 15, img: "/equipa/plantel/15.png" },
+  { id: 16, img: "/equipa/plantel/16.png" },
+  { id: 17, img: "/equipa/plantel/17.png" },
+  { id: 18, img: "/equipa/plantel/18.png" },
 ];

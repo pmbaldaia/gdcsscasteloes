@@ -1,11 +1,13 @@
 <script setup>
-import { plantel as fullPlantel } from "@/data/equipa";
+import { plantel as fullPlantel, isEquipaRevealed } from "@/data/equipa";
 
 const props = defineProps({
   show: Boolean,
   jogador: {
     type: Object,
-    default: () => fullPlantel[0], // mostrar o primeiro jogador por padrão
+    default: () =>
+      fullPlantel.find((jogador) => isEquipaRevealed(jogador.id)) ??
+      fullPlantel[0],
   },
 });
 
@@ -43,7 +45,7 @@ function close() {
 
           <NuxtImg
             :src="jogador.img || '/equipa/default.webp'"
-            :alt="jogador.nome"
+            alt="Jogador do plantel"
             preset="avatar"
             width="320"
             height="400"
@@ -51,13 +53,6 @@ function close() {
             loading="lazy"
             class="w-full h-auto rounded-md mb-6 object-cover"
           />
-
-          <div class="text-center mb-4">
-            <p class="text-fluid-xl font-bold">{{ jogador.nome }}</p>
-            <p class="text-fluid-sm text-gray-600">
-              {{ jogador.funcao }}
-            </p>
-          </div>
 
           <div class="flex justify-center">
             <NuxtLink

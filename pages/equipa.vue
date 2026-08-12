@@ -1,10 +1,38 @@
 <script setup>
-import { assembleiaGeral, direcao, conselhoFiscal } from "@/data/equipa";
+import {
+  assembleiaGeral,
+  direcao,
+  conselhoFiscal,
+  equipaTecnica,
+  plantel,
+  isEquipaRevealed,
+} from "@/data/equipa";
+
+import "~/assets/css/galeria.css";
 
 definePageMeta({ layout: "default" });
 
 const season = "2026/2027";
 const fallbackImage = "/equipa/default.jpg";
+const selectedImage = ref(null);
+const dialogRef = ref(null);
+const equipaTecnicaVisivel = computed(() =>
+  equipaTecnica.filter((membro) => isEquipaRevealed(membro.id)),
+);
+const plantelVisivel = computed(() =>
+  plantel.filter((jogador) => isEquipaRevealed(jogador.id)),
+);
+
+async function openImage(src) {
+  selectedImage.value = src;
+  await nextTick();
+  dialogRef.value?.showModal();
+}
+
+function closeDialog() {
+  dialogRef.value?.close();
+  selectedImage.value = null;
+}
 
 function formatarNome(nome) {
   const partes = nome.trim().split(" ");
@@ -170,11 +198,29 @@ function getConselhoFiscalPosition(index) {
           Equipa Técnica
         </h2>
 
-        <LandingSeasonNotice
-          :season="season"
-          title="Equipa técnica em preparação"
-          description="A equipa técnica da época 2026/2027 será brevemente apresentada. Volte a visitar esta página para conhecer o nosso staff."
-        />
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <button
+            v-for="membro in equipaTecnicaVisivel"
+            :key="membro.id"
+            type="button"
+            class="card-surface flex cursor-pointer items-center justify-center overflow-hidden bg-slate-50 p-2 transition-shadow hover:shadow-lg"
+            @click="openImage(getImagem(membro.img))"
+          >
+            <NuxtImg
+              :src="getImagem(membro.img)"
+              alt="Membro da equipa técnica"
+              preset="avatar"
+              width="320"
+              height="400"
+              sizes="(max-width: 768px) 100vw, 400px"
+              loading="lazy"
+              decoding="async"
+              :data-fallback="fallbackImage"
+              class="h-auto w-full object-contain"
+              @error="onImgError"
+            />
+          </button>
+        </div>
       </section>
 
       <section class="mt-16 w-full">
@@ -182,12 +228,58 @@ function getConselhoFiscalPosition(index) {
           Plantel
         </h2>
 
-        <LandingSeasonNotice
-          :season="season"
-          title="Plantel em preparação"
-          description="O plantel da época 2026/2027 será brevemente apresentado. Volte a visitar esta página para conhecer os nossos jogadores."
-        />
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <button
+            v-for="jogador in plantelVisivel"
+            :key="jogador.id"
+            type="button"
+            class="card-surface flex cursor-pointer items-center justify-center overflow-hidden bg-slate-50 p-2 transition-shadow hover:shadow-lg"
+            @click="openImage(getImagem(jogador.img))"
+          >
+            <NuxtImg
+              :src="getImagem(jogador.img)"
+              alt="Jogador do plantel"
+              preset="avatar"
+              width="320"
+              height="400"
+              sizes="(max-width: 768px) 100vw, 400px"
+              loading="lazy"
+              decoding="async"
+              :data-fallback="fallbackImage"
+              class="h-auto w-full object-contain"
+              @error="onImgError"
+            />
+          </button>
+        </div>
       </section>
     </section>
+
+    <dialog
+      v-if="selectedImage"
+      ref="dialogRef"
+      class="dialog-zoom"
+      @click.self="closeDialog"
+    >
+      <div class="dialog-content">
+        <button
+          type="button"
+          aria-label="Fechar imagem"
+          class="close-btn"
+          @click="closeDialog"
+        >
+          ✕
+        </button>
+        <NuxtImg
+          :src="selectedImage"
+          alt="Imagem ampliada"
+          preset="cardLg"
+          width="800"
+          height="800"
+          sizes="(max-width: 1024px) 90vw, 800px"
+          loading="eager"
+          class="zoomed-image"
+        />
+      </div>
+    </dialog>
   </LandingContainer>
 </template>
