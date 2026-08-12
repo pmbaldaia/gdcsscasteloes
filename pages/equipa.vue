@@ -13,7 +13,7 @@ import "~/assets/css/galeria.css";
 definePageMeta({ layout: "default" });
 
 const season = "2026/2027";
-const fallbackImage = "/equipa/default.jpg";
+const fallbackImage = "/equipa/default.webp";
 const selectedImage = ref(null);
 const dialogRef = ref(null);
 const equipaTecnicaVisivel = computed(() =>
@@ -199,27 +199,23 @@ function getConselhoFiscalPosition(index) {
         </h2>
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <button
+          <div
             v-for="membro in equipaTecnicaVisivel"
             :key="membro.id"
-            type="button"
             class="card-surface flex cursor-pointer items-center justify-center overflow-hidden bg-slate-50 p-2 transition-shadow hover:shadow-lg"
+            role="button"
+            tabindex="0"
             @click="openImage(getImagem(membro.img))"
+            @keydown.enter="openImage(getImagem(membro.img))"
           >
-            <NuxtImg
+            <img
               :src="getImagem(membro.img)"
               alt="Membro da equipa técnica"
-              preset="avatar"
-              width="320"
-              height="400"
-              sizes="(max-width: 768px) 100vw, 400px"
-              loading="lazy"
-              decoding="async"
               :data-fallback="fallbackImage"
               class="h-auto w-full object-contain"
               @error="onImgError"
             />
-          </button>
+          </div>
         </div>
       </section>
 
@@ -229,27 +225,23 @@ function getConselhoFiscalPosition(index) {
         </h2>
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <button
+          <div
             v-for="jogador in plantelVisivel"
             :key="jogador.id"
-            type="button"
             class="card-surface flex cursor-pointer items-center justify-center overflow-hidden bg-slate-50 p-2 transition-shadow hover:shadow-lg"
+            role="button"
+            tabindex="0"
             @click="openImage(getImagem(jogador.img))"
+            @keydown.enter="openImage(getImagem(jogador.img))"
           >
-            <NuxtImg
+            <img
               :src="getImagem(jogador.img)"
               alt="Jogador do plantel"
-              preset="avatar"
-              width="320"
-              height="400"
-              sizes="(max-width: 768px) 100vw, 400px"
-              loading="lazy"
-              decoding="async"
               :data-fallback="fallbackImage"
               class="h-auto w-full object-contain"
               @error="onImgError"
             />
-          </button>
+          </div>
         </div>
       </section>
     </section>
@@ -269,14 +261,9 @@ function getConselhoFiscalPosition(index) {
         >
           ✕
         </button>
-        <NuxtImg
+        <img
           :src="selectedImage"
           alt="Imagem ampliada"
-          preset="cardLg"
-          width="800"
-          height="800"
-          sizes="(max-width: 1024px) 90vw, 800px"
-          loading="eager"
           class="zoomed-image"
         />
       </div>

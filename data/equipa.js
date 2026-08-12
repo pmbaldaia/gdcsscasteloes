@@ -113,14 +113,14 @@ export const EQUIPA_REVEAL_START = "2026-08-13T21:00:00+01:00";
 export function getEquipaRevealDate(id) {
   if (id < EQUIPA_REVEAL_FROM_ID) return null;
 
-  const revealDate = new Date(EQUIPA_REVEAL_START);
-  revealDate.setDate(revealDate.getDate() + (id - EQUIPA_REVEAL_FROM_ID));
-  return revealDate;
+  const startMs = new Date(EQUIPA_REVEAL_START).getTime();
+  const dayMs = 24 * 60 * 60 * 1000;
+  return new Date(startMs + (id - EQUIPA_REVEAL_FROM_ID) * dayMs);
 }
 
 export function isEquipaRevealed(id, now = new Date()) {
   const revealDate = getEquipaRevealDate(id);
-  return revealDate === null || now >= revealDate;
+  return revealDate === null || now.getTime() >= revealDate.getTime();
 }
 
 export const equipaTecnica = [
