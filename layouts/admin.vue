@@ -13,5 +13,7 @@ const sidebarOpen = ref(false)
         <slot />
       </main>
     </div>
+      <CmsConfirmDialog />
+      <CmsToasts />
   </div>
 </template>

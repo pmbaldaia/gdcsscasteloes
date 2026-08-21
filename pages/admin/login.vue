@@ -5,6 +5,7 @@ const password = ref("");
 const pending = ref(false);
 const error = ref("");
 const { login } = useAuth();
+const toast = useToast();
 onMounted(async () => {
   const raw = window.location.hash.startsWith("#token=")
     ? decodeURIComponent(window.location.hash.slice(7))
@@ -30,10 +31,12 @@ async function submit() {
   pending.value = true;
   try {
     await login(email.value, password.value);
+    toast.success('Sessão iniciada', 'Bem-vindo à gestão do GDCSS Castelões.');
     await navigateTo("/admin");
   } catch (e: any) {
     error.value =
       e?.data?.message || e?.message || "Não foi possível iniciar sessão";
+    toast.error('Login inválido', error.value);
   } finally {
     pending.value = false;
   }

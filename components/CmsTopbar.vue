@@ -4,10 +4,16 @@ const search = ref("");
 const menuOpen = ref(false);
 const router = useRouter();
 const { user, logout } = useAuth();
+const toast = useToast();
 const roleLabel = computed(() => ({ admin: 'Administrador', editor: 'Editor', viewer: 'Leitor' } as Record<string,string>)[user.value?.role || ''] || 'Utilizador')
 function submitSearch() {
   const q = search.value.trim();
   if (q) router.push({ path: "/admin/pesquisa", query: { q } });
+}
+async function handleLogout() {
+  menuOpen.value = false;
+  toast.info('Sessão terminada', 'Até breve.')
+  await logout()
 }
 function help() {
   window.open(
@@ -62,7 +68,7 @@ function help() {
       <div v-if="menuOpen" class="user-dropdown">
         <NuxtLink to="/admin/definicoes" @click="menuOpen = false"
           ><Icon name="lucide:settings" /> Definições</NuxtLink
-        ><button type="button" @click="logout">
+        ><button type="button" @click="handleLogout">
           <Icon name="lucide:log-out" /> Terminar sessão
         </button>
       </div>

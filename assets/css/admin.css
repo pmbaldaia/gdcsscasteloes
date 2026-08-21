@@ -275,3 +275,255 @@ button { color: inherit; }
 .table-image-preview{display:block;width:64px;height:48px;object-fit:contain;border:1px solid var(--color-border);border-radius:7px;background:var(--color-surface-alt)}
 @keyframes cms-spin{to{transform:rotate(360deg)}}
 @media(max-width:620px){.image-preview-card{grid-template-columns:1fr}.image-preview-card .image-preview{max-width:100%;height:180px}}
+
+
+/* =========================================================
+   TOASTS — notificações globais do CMS
+   ========================================================= */
+.cms-toast-viewport{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:10000;
+  width:min(390px,calc(100vw - 32px));
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  pointer-events:none;
+}
+.cms-toast{
+  --toast-accent:var(--color-info);
+  position:relative;
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr) 32px;
+  align-items:start;
+  gap:12px;
+  overflow:hidden;
+  padding:15px 13px 17px 14px;
+  border:1px solid var(--color-border);
+  border-left:4px solid var(--toast-accent);
+  border-radius:14px;
+  background:rgba(255,255,255,.98);
+  box-shadow:0 16px 48px rgba(43,42,40,.16),0 3px 10px rgba(43,42,40,.08);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  pointer-events:auto;
+}
+.cms-toast--success{--toast-accent:var(--color-accent)}
+.cms-toast--error{--toast-accent:var(--color-danger)}
+.cms-toast--warning{--toast-accent:var(--color-warning)}
+.cms-toast--info{--toast-accent:var(--color-info)}
+.cms-toast__icon{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  color:var(--toast-accent);
+  background:color-mix(in srgb,var(--toast-accent) 12%,white);
+}
+.cms-toast__content{
+  min-width:0;
+  padding-top:1px;
+}
+.cms-toast__content strong{
+  display:block;
+  margin:0 0 3px;
+  font-family:var(--font-display);
+  font-size:14px;
+  line-height:1.35;
+  color:var(--color-ink);
+}
+.cms-toast__content p{
+  margin:0;
+  font-size:13px;
+  line-height:1.45;
+  color:var(--color-ink-soft);
+}
+.cms-toast__close{
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:var(--color-ink-faint);
+  cursor:pointer;
+  transition:background .15s ease,color .15s ease;
+}
+.cms-toast__close:hover{
+  background:var(--color-bg);
+  color:var(--color-ink);
+}
+.cms-toast__progress{
+  position:absolute;
+  left:0;
+  bottom:0;
+  height:3px;
+  width:100%;
+  transform-origin:left;
+  background:var(--toast-accent);
+  animation:cms-toast-progress linear forwards;
+  opacity:.72;
+}
+.cms-toast-enter-active,
+.cms-toast-leave-active{
+  transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);
+}
+.cms-toast-enter-from,
+.cms-toast-leave-to,
+.cms-toast.is-leaving{
+  opacity:0;
+  transform:translateX(28px) scale(.97);
+}
+.cms-toast-move{transition:transform .22s ease}
+@keyframes cms-toast-progress{
+  from{transform:scaleX(1)}
+  to{transform:scaleX(0)}
+}
+@media(max-width:620px){
+  .cms-toast-viewport{
+    top:12px;
+    right:12px;
+    left:12px;
+    width:auto;
+  }
+  .cms-toast{
+    grid-template-columns:38px minmax(0,1fr) 30px;
+    padding:13px 11px 16px 12px;
+  }
+  .cms-toast__icon{
+    width:34px;
+    height:34px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .cms-toast-enter-active,
+  .cms-toast-leave-active,
+  .cms-toast-move{transition:none}
+  .cms-toast__progress{animation:none}
+}
+
+
+/* =========================================================
+   CONFIRMAÇÃO DE AÇÕES DESTRUTIVAS
+   ========================================================= */
+.cms-confirm-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:rgba(28,27,25,.38);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+.cms-confirm-dialog{
+  width:min(470px,100%);
+  display:grid;
+  grid-template-columns:52px minmax(0,1fr);
+  gap:16px;
+  padding:24px;
+  border:1px solid var(--color-border);
+  border-radius:18px;
+  background:var(--color-surface);
+  box-shadow:0 24px 70px rgba(43,42,40,.22);
+}
+.cms-confirm-dialog__icon{
+  width:50px;
+  height:50px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+}
+.cms-confirm-dialog__icon--danger{
+  color:var(--color-danger);
+  background:var(--color-danger-tint);
+}
+.cms-confirm-dialog__icon--warning{
+  color:#94611f;
+  background:var(--color-warning-tint);
+}
+.cms-confirm-dialog__copy .eyebrow{
+  margin:0 0 5px;
+}
+.cms-confirm-dialog__copy h2{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:20px;
+  line-height:1.25;
+  color:var(--color-ink);
+}
+.cms-confirm-dialog__copy > p:last-child{
+  margin:9px 0 0;
+  color:var(--color-ink-soft);
+  font-size:14px;
+  line-height:1.55;
+}
+.cms-confirm-dialog__actions{
+  grid-column:1/-1;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  padding-top:5px;
+}
+.cms-confirm-dialog__confirm{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid transparent;
+  color:#fff;
+}
+.cms-confirm-dialog__confirm--danger{
+  background:var(--color-danger);
+}
+.cms-confirm-dialog__confirm--danger:hover{
+  background:#b85d54;
+}
+.cms-confirm-dialog__confirm--warning{
+  background:var(--color-warning);
+}
+.cms-confirm-dialog__confirm--warning:hover{
+  filter:brightness(.94);
+}
+.cms-confirm-enter-active,
+.cms-confirm-leave-active{
+  transition:opacity .18s ease;
+}
+.cms-confirm-enter-active .cms-confirm-dialog,
+.cms-confirm-leave-active .cms-confirm-dialog{
+  transition:transform .2s cubic-bezier(.2,.8,.2,1),opacity .18s ease;
+}
+.cms-confirm-enter-from,
+.cms-confirm-leave-to{
+  opacity:0;
+}
+.cms-confirm-enter-from .cms-confirm-dialog,
+.cms-confirm-leave-to .cms-confirm-dialog{
+  opacity:0;
+  transform:translateY(10px) scale(.975);
+}
+@media(max-width:560px){
+  .cms-confirm-backdrop{padding:14px}
+  .cms-confirm-dialog{
+    grid-template-columns:44px minmax(0,1fr);
+    gap:13px;
+    padding:19px;
+    border-radius:16px;
+  }
+  .cms-confirm-dialog__icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+  }
+  .cms-confirm-dialog__actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .cms-confirm-dialog__actions .btn{
+    justify-content:center;
+  }
+}

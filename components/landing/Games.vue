@@ -56,7 +56,7 @@ const showVoltaBadge = computed(
       <div class="flex justify-center gap-12 items-center">
         <!-- Time 1 -->
         <div class="flex flex-col items-center w-32">
-          <NuxtImg
+          <SiteImage
             :src="teams.find((t) => t.name === nextGame.teams[0])?.logo"
             :alt="`Logo ${nextGame.teams[0]}`"
             preset="badge"
@@ -77,7 +77,7 @@ const showVoltaBadge = computed(
 
         <!-- Time 2 -->
         <div class="flex flex-col items-center w-32">
-          <NuxtImg
+          <SiteImage
             :src="teams.find((t) => t.name === nextGame.teams[1])?.logo"
             :alt="`Logo ${nextGame.teams[1]}`"
             preset="badge"

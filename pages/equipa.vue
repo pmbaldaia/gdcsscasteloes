@@ -36,11 +36,11 @@ function formatarNome(nome) {
 }
 
 function onImgError(event) {
-  const fallback = event.target.dataset.fallback;
-
-  if (fallback && event.target.src !== fallback) {
-    event.target.src = fallback;
-  }
+  const image = event.target;
+  const fallback = image.dataset.fallback;
+  if (!fallback || image.dataset.fallbackApplied === "1") return;
+  image.dataset.fallbackApplied = "1";
+  image.src = fallback;
 }
 
 function getImagem(src) {

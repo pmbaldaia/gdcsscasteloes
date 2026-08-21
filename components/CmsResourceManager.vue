@@ -41,7 +41,8 @@ const router=useRouter()
 const items=ref<any[]>([])
 const pending=ref(false)
 const error=ref('')
-const success=ref('')
+const toast=useToast()
+const confirmDialog=useConfirm()
 const query=ref('')
 const filters=ref<Record<string, any>>(Object.fromEntries(props.fields.filter(f=>f.filterable).map(f=>[f.key,''])))
 const editing=ref<any|null>(null)
@@ -110,7 +111,7 @@ const filteredItems=computed(()=>{
 async function load(){
   pending.value=true; error.value=''
   try{ items.value=await props.service.list() }
-  catch(e:any){ error.value=e?.data?.message||e?.statusMessage||e?.message||'Erro ao carregar os dados.' }
+  catch(e:any){ const message=e?.data?.message||e?.statusMessage||e?.message||'Erro ao carregar os dados.'; error.value=message; toast.error('Não foi possível carregar', message) }
   finally{ pending.value=false }
 }
 function empty(){
@@ -168,24 +169,47 @@ async function submit(){
     if(f.type==='datetime-local') payload[f.key]=payload[f.key]?new Date(payload[f.key]).toISOString():null
   }
   const validation=validate(payload)
-  if(validation){ error.value=validation; return }
+  if(validation){ error.value=validation; toast.warning('Verifica o formulário', validation); return }
   saving.value=true; error.value=''
   try{
     if(editingId.value!==null) await props.service.update(editingId.value,payload)
     else await props.service.create(payload)
     await load()
-    success.value=editingId.value!==null?'Registo atualizado com sucesso.':'Registo criado com sucesso.'
+    const wasEditing=editingId.value!==null
     close()
-    setTimeout(()=>success.value='',3000)
+    toast.success(
+      wasEditing ? 'Alterações guardadas' : 'Registo adicionado',
+      wasEditing ? 'O registo foi atualizado com sucesso.' : 'O novo registo foi criado com sucesso.'
+    )
   }catch(e:any){
-    error.value=e?.data?.message||e?.statusMessage||e?.message||'Não foi possível guardar as alterações.'
+    const message=e?.data?.message||e?.statusMessage||e?.message||'Não foi possível guardar as alterações.'
+    error.value=message
+    toast.error('Erro ao guardar', message)
   }finally{ saving.value=false }
 }
 async function del(item:any){
-  if(!confirm('Tens a certeza de que queres eliminar este registo? Esta ação não pode ser anulada.')) return
+  const label = display(item, visibleColumns.value[0])
+  const accepted = await confirmDialog.ask({
+    title: 'Eliminar registo?',
+    message: label && label !== '—'
+      ? `Vais eliminar “${label}”. Esta ação não pode ser anulada.`
+      : 'Este registo será eliminado de forma permanente. Esta ação não pode ser anulada.',
+    confirmLabel: 'Sim, eliminar',
+    cancelLabel: 'Cancelar',
+    tone: 'danger',
+  })
+  if(!accepted) return
   error.value=''
-  try{ await props.service.remove(item.id); await load(); success.value='Registo eliminado com sucesso.'; setTimeout(()=>success.value='',3000) }
-  catch(e:any){ error.value=e?.data?.message||e?.statusMessage||e?.message||'Não foi possível eliminar o registo.' }
+  try{
+    await props.service.remove(item.id)
+    await load()
+    toast.success('Registo eliminado', 'O registo foi removido com sucesso.')
+  }
+  catch(e:any){
+    const message=e?.data?.message||e?.statusMessage||e?.message||'Não foi possível eliminar o registo.'
+    error.value=message
+    toast.error('Erro ao eliminar', message)
+  }
 }
 async function togglePublish(item:any){
   const key=props.publishKey
@@ -194,11 +218,14 @@ async function togglePublish(item:any){
   try{
     await props.service.update(item.id,{...item,[key]:next})
     await load()
-    if(next==='draft') success.value='Conteúdo despublicado.'
-    else if(item.publishedAt && new Date(item.publishedAt).getTime()>Date.now()) success.value=`Conteúdo agendado para ${formatDateTime(item.publishedAt)}.`
-    else success.value='Conteúdo publicado.'
-    setTimeout(()=>success.value='',3000)
-  }catch(e:any){ error.value=e?.data?.message||e?.statusMessage||e?.message||'Não foi possível alterar o estado de publicação.' }
+    if(next==='draft') toast.info('Conteúdo despublicado', 'O conteúdo deixou de estar visível no site público.')
+    else if(item.publishedAt && new Date(item.publishedAt).getTime()>Date.now()) toast.success('Publicação agendada', `O conteúdo será publicado em ${formatDateTime(item.publishedAt)}.`)
+    else toast.success('Conteúdo publicado', 'O conteúdo já está disponível no site público.')
+  }catch(e:any){
+    const message=e?.data?.message||e?.statusMessage||e?.message||'Não foi possível alterar o estado de publicação.'
+    error.value=message
+    toast.error('Erro ao alterar publicação', message)
+  }
 }
 function arrayInput(key:string,event:Event){ editing.value[key]=(event.target as HTMLTextAreaElement).value }
 async function uploadImage(field:Field,event:Event){
@@ -216,13 +243,13 @@ async function uploadImage(field:Field,event:Event){
     const media=mediaService()
     const result=await media.upload(file)
     editing.value[field.key]=result.url
-    success.value='Imagem carregada com sucesso. Confirma a pré-visualização e guarda o registo.'
-    setTimeout(()=>success.value='',3500)
+    toast.success('Imagem carregada', 'Confirma a pré-visualização e guarda o registo para aplicar a alteração.')
   }catch(e:any){
     const preview=localImagePreviews.value[field.key]
     if(preview?.startsWith('blob:')) URL.revokeObjectURL(preview)
     delete localImagePreviews.value[field.key]
     error.value=e?.data?.message||e?.message||'Não foi possível carregar a imagem.'
+    toast.error('Erro no upload', error.value)
   }finally{
     uploadBusy.value[field.key]=false
     input.value=''
@@ -246,7 +273,6 @@ onBeforeUnmount(revokeLocalPreviews)
       <div v-if="allowCreate" class="page-heading__actions"><button class="btn btn--primary" @click="create"><Icon name="lucide:plus"/> Adicionar</button></div>
     </header>
 
-    <p v-if="success" class="cms-alert cms-alert--success">{{success}}</p>
     <p v-if="error" class="cms-alert cms-alert--danger">{{error}}</p>
 
     <section class="panel content-panel">
