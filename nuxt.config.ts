@@ -58,6 +58,10 @@ const siteUrl = process.env.NUXT_SITE_URL || "http://localhost:3000";
 export default defineNuxtConfig({
   compatibilityDate: "2026-05-23",
 
+  nitro: {
+    preset: "netlify",
+  },
+
   modules: [
     "nuxt-icon",
     "@pinia/nuxt",

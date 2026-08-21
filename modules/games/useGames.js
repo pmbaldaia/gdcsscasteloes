@@ -1,5 +1,3 @@
-import fallbackGames from '~/data/jornadas'
-import fallbackTeams from '~/data/equipas'
 import { createPublicRepository } from '~/modules/core/repository/public.repository'
 
 function toLegacyJornadas(rows) {
@@ -7,12 +5,15 @@ function toLegacyJornadas(rows) {
 }
 
 export async function useGames() {
-  const gameFallback = Object.values(fallbackGames).flat()
-  const gamesRepository = createPublicRepository('games', gameFallback)
-  const teamsRepository = createPublicRepository('teams', fallbackTeams)
+  const gamesRepository = createPublicRepository('games')
+  const teamsRepository = createPublicRepository('teams')
   const [{ data: games }, { data: teams }] = await Promise.all([
-    useAsyncData('gdcss-public-games', () => gamesRepository.list(), { default: () => gameFallback }),
-    useAsyncData('gdcss-public-teams', () => teamsRepository.list(), { default: () => fallbackTeams }),
+    useAsyncData('gdcss-public-games', () => gamesRepository.list(), { default: () => [] }),
+    useAsyncData('gdcss-public-teams', () => teamsRepository.list(), { default: () => [] }),
   ])
-  return { jornadas: computed(() => toLegacyJornadas(games.value || gameFallback)), teams }
+
+  return {
+    jornadas: computed(() => toLegacyJornadas(games.value || [])),
+    teams,
+  }
 }

@@ -1,25 +1,108 @@
-# GDCSS Castelões — aplicação única
+# GDCSS Castelões — aplicação única com MongoDB
 
-Uma única aplicação Nuxt contém o site público, CMS em `/admin`, API Nitro em `/api` e persistência em `storage/`.
+Este projeto contém, na mesma aplicação Nuxt, o site público, o CMS em `/admin`, a API Nitro e a persistência MongoDB.
 
-## Desenvolvimento
+## Fonte única de dados
+
+Em runtime, o frontend e o Admin usam exclusivamente a API interna `/api/*`, e todos os repositories do backend usam MongoDB Atlas. Não existe fallback para `data/*.js` ou `storage/data/*.json` na aplicação em execução.
+
+Os dados atuais do projeto foram preservados em `server/backend/core/seed-data.mjs` apenas como fonte da migração inicial.
+
+## Base de testes configurada
+
+O ficheiro `.env` incluído neste ZIP aponta para o cluster de testes fornecido e utiliza a base:
+
+```text
+gdcsscasteloes_test
+```
+
+`.env` está ignorado pelo Git.
+
+## Instalação
+
 ```bash
 npm install
+```
+
+## Migrar os dados atuais para MongoDB
+
+O comando abaixo limpa apenas as coleções da base indicada em `MONGODB_DB` e volta a preenchê-las com os dados atuais do projeto:
+
+```bash
+npm run mongo:migrate
+```
+
+É idempotente para esta base de testes: cada execução recria as coleções de conteúdo a partir dos dados atuais.
+
+Depois confirma os dados:
+
+```bash
+npm run mongo:check
+```
+
+As coleções migradas incluem:
+
+- games
+- teams
+- events
+- gallery
+- members
+- board
+- staff
+- players
+- users
+- messages
+- settings
+- sponsors
+- opportunities
+
+## Executar localmente
+
+```bash
 npm run dev
 ```
 
-- Site: http://localhost:3000
-- Admin: http://localhost:3000/admin
-- Login: http://localhost:3000/admin/login
-- API: http://localhost:3000/api/...
+- Site: `http://localhost:3000`
+- Admin: `http://localhost:3000/admin`
+- Login: `http://localhost:3000/admin/login`
+- Health MongoDB: `http://localhost:3000/api/health`
 
-Os dados persistentes ficam em `storage/data` e uploads em `storage/uploads`. Configure `AUTH_SECRET` em produção.
+## Fluxo de dados
 
-## Ajustes — sidebar e agendamento do plantel
+```text
+Frontend ─┐
+          ├── /api/* ── MongoDB Atlas
+/admin ───┘
+```
 
-- A navegação lateral do Admin possui scroll vertical próprio em ecrãs com pouca altura.
-- O campo `Publicar em` do Plantel usa `datetime-local` e é opcional.
-- Sem data e com estado `Publicado`, o jogador fica disponível imediatamente no endpoint público.
-- Com uma data/hora futura, o jogador só é devolvido pelo endpoint público quando esse instante chegar.
-- O campo `Ordem` continua a definir a sequência apresentada no frontend e, em novos jogadores, sugere automaticamente a próxima posição.
-- O backend mantém `Nome` ao editar Plantel e Equipa Técnica.
+O frontend não lê diretamente ficheiros JSON para obter jogos, equipas, eventos, galeria, plantel, direção, equipa técnica, patrocinadores, oportunidades ou definições.
+
+## Media / uploads
+
+Os assets que já pertencem ao site continuam em `/public` e mantêm os seus URLs atuais. Novos uploads feitos pelo CMS são guardados em MongoDB GridFS e servidos por `/uploads/:id`.
+
+## Netlify
+
+O projeto usa Nitro/SSR, não geração estática:
+
+```toml
+[build]
+command = "npm run build"
+publish = "dist"
+
+[build.environment]
+NODE_VERSION = "20"
+NITRO_PRESET = "netlify"
+```
+
+Na Netlify devem existir as variáveis:
+
+- `MONGODB_URI`
+- `MONGODB_DB=gdcsscasteloes_test` (ou a base de produção quando chegar a altura)
+- `AUTH_SECRET`
+- `AUTH_TTL_SECONDS`
+- `NUXT_SITE_URL`
+
+## Produção
+
+Antes de passar a produção, usar outra base (`gdcsscasteloes`) e alterar `AUTH_SECRET` e a credencial MongoDB usada nos testes.

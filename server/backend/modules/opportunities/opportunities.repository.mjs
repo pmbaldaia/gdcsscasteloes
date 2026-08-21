@@ -1,1 +1,1 @@
-import {createJsonRepository} from '../../core/json.repository.mjs';export const opportunitiesRepository=createJsonRepository('opportunities')
+import {createMongoRepository} from '../../core/mongo.repository.mjs';export const opportunitiesRepository=createMongoRepository('opportunities')

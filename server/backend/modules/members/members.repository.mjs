@@ -1,3 +1,3 @@
-import { createJsonRepository } from '../../core/json.repository.mjs'
+import { createMongoRepository } from '../../core/mongo.repository.mjs'
 import { membersResource } from './members.model.mjs'
-export const membersRepository = createJsonRepository(membersResource)
+export const membersRepository = createMongoRepository(membersResource)

@@ -1,12 +1,8 @@
-export function createPublicRepository(resource, fallback) {
+export function createPublicRepository(resource) {
   return {
     async list() {
       const config = useRuntimeConfig()
-      try {
-        return await $fetch(`${config.public.apiBase}/api/public/${resource}`)
-      } catch {
-        return fallback
-      }
+      return await $fetch(`${config.public.apiBase}/api/public/${resource}`)
     },
   }
 }
