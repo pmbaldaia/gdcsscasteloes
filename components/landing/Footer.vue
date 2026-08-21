@@ -120,7 +120,7 @@ const { settings } = await useSiteSettings();
         <div class="flex flex-col h-full justify-start text-left">
           <h3 class="text-fluid-xl font-bold mb-1">Contacto</h3>
           <div class="w-[10%] border-b-2 border-red-500 mb-3"></div>
-          <p class="text-fluid-sm leading-relaxed text-gray-700">
+          <p v-if="settings.contactEmail" class="text-fluid-sm leading-relaxed text-gray-700">
             Email:<br />
             <a
               :href="`mailto:${settings.contactEmail}`"

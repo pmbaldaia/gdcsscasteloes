@@ -67,7 +67,7 @@ const closeDialog = () => {
             @click="openImage(src)"
             class="cursor-pointer overflow-hidden rounded-lg shadow hover:shadow-lg transition duration-300 h-48 w-full text-left"
           >
-            <NuxtImg
+            <SiteImage
               :src="src"
               alt="Foto da galeria"
               preset="thumb"
@@ -97,7 +97,7 @@ const closeDialog = () => {
         >
           ✕
         </button>
-        <NuxtImg
+        <SiteImage
           :src="selectedImage"
           alt="Imagem ampliada"
           preset="cardLg"

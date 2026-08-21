@@ -106,3 +106,14 @@ Na Netlify devem existir as variáveis:
 ## Produção
 
 Antes de passar a produção, usar outra base (`gdcsscasteloes`) e alterar `AUTH_SECRET` e a credencial MongoDB usada nos testes.
+
+
+## Imagens carregadas pelo CMS
+
+Os ficheiros enviados pelo Admin são guardados em MongoDB GridFS e expostos em `/uploads/:id`.
+
+O componente `components/SiteImage.vue` distingue automaticamente:
+- `/uploads/...` → `<img>` direto, sem passar pelo IPX do Nuxt Image;
+- assets estáticos (`/eventos/...`, `/equipa/...`, etc.) → `NuxtImg`, mantendo otimização.
+
+Isto evita URLs `/_ipx/.../uploads/...` que não conseguem processar corretamente streams GridFS em produção.

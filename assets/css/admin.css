@@ -258,3 +258,20 @@ button { color: inherit; }
 @media(max-width:760px){.resource-filter-wrap{flex:1 1 160px}.resource-filter-wrap .resource-filter{width:100%}}
 
 .form-field__hint { display:block; margin-top:6px; color:var(--color-ink-faint); font-size:11px; line-height:1.4; }
+
+
+.image-field{display:grid;gap:10px}
+.image-preview-card{display:grid;grid-template-columns:minmax(120px,220px) 1fr;gap:14px;align-items:center;padding:12px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-alt)}
+.image-preview-card .image-preview{width:100%;max-width:220px;height:150px;max-height:none;object-fit:contain;padding:0;border:0;border-radius:8px;background:var(--color-surface)}
+.image-preview-card__meta{display:flex;flex-direction:column;gap:6px;color:var(--color-ink-soft);font-size:var(--text-sm)}
+.image-preview-card__meta span{font-weight:600;color:var(--color-ink)}
+.image-preview-card__meta a{color:var(--color-primary);font-weight:600}
+.image-preview-empty{height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-alt);color:var(--color-ink-faint)}
+.image-upload-button{display:inline-flex;width:max-content;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--radius-sm);background:var(--color-primary-tint);color:var(--color-primary-dark);font-size:var(--text-sm);font-weight:700;cursor:pointer}
+.image-upload-button:hover{background:#e2e6fb}
+.image-upload-button.is-loading{opacity:.65;cursor:wait}
+.image-upload-button.is-loading svg{animation:cms-spin .8s linear infinite}
+.image-remove-button{width:max-content;padding-left:0}
+.table-image-preview{display:block;width:64px;height:48px;object-fit:contain;border:1px solid var(--color-border);border-radius:7px;background:var(--color-surface-alt)}
+@keyframes cms-spin{to{transform:rotate(360deg)}}
+@media(max-width:620px){.image-preview-card{grid-template-columns:1fr}.image-preview-card .image-preview{max-width:100%;height:180px}}

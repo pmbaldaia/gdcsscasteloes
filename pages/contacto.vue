@@ -152,7 +152,7 @@ async function handleSubmit(){touched.value=true;formError.value=false;submitSuc
       <div
         class="grid grid-cols-1 gap-4 md:flex md:justify-between md:items-center md:gap-2 md:px-0 justify-center items-center"
       >
-        <div class="flex items-center gap-2 justify-center">
+        <div v-if="settings.contactEmail" class="flex items-center gap-2 justify-center">
           <Icon name="uil:envelope" class="text-blue-500 w-5 h-5" />
           <a
             :href="`mailto:${settings.contactEmail}`"

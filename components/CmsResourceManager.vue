@@ -49,6 +49,7 @@ const editingId=ref<string|number|null>(null)
 const modalOpen=ref(false)
 const saving=ref(false)
 const uploadBusy=ref<Record<string,boolean>>({})
+const localImagePreviews=ref<Record<string,string>>({})
 
 const visibleColumns=computed(()=>props.columns?.length?props.columns:props.fields.slice(0,4).map(f=>f.key))
 const filterFields=computed(()=>props.fields.filter(f=>f.filterable))
@@ -85,6 +86,15 @@ const display=(item:any,key:string)=>{
   return v??'—'
 }
 
+const isImageColumn=(key:string)=>props.fields.find(f=>f.key===key)?.type==='image'
+const imagePreviewFor=(field:Field)=>localImagePreviews.value[field.key]||editing.value?.[field.key]||''
+const revokeLocalPreviews=()=>{
+  for(const url of Object.values(localImagePreviews.value)){
+    if(url?.startsWith('blob:')) URL.revokeObjectURL(url)
+  }
+  localImagePreviews.value={}
+}
+
 const filteredItems=computed(()=>{
   const q=query.value.trim().toLowerCase()
   return items.value.filter(item=>{
@@ -114,12 +124,14 @@ function empty(){
   }))
 }
 function create(){
+  revokeLocalPreviews()
   editingId.value=null
   editing.value=empty()
   modalOpen.value=true
   error.value=''
 }
 function edit(item:any){
+  revokeLocalPreviews()
   editingId.value=item.id
   editing.value=JSON.parse(JSON.stringify(item))
   for(const field of props.fields){
@@ -129,6 +141,7 @@ function edit(item:any){
   error.value=''
 }
 function close(){
+  revokeLocalPreviews()
   modalOpen.value=false
   editing.value=null
   editingId.value=null
@@ -189,15 +202,41 @@ async function togglePublish(item:any){
 }
 function arrayInput(key:string,event:Event){ editing.value[key]=(event.target as HTMLTextAreaElement).value }
 async function uploadImage(field:Field,event:Event){
-  const file=(event.target as HTMLInputElement).files?.[0]
+  const input=event.target as HTMLInputElement
+  const file=input.files?.[0]
   if(!file)return
-  uploadBusy.value[field.key]=true; error.value=''
-  try{ const media=mediaService(); const result=await media.upload(file); editing.value[field.key]=result.url; success.value='Imagem carregada com sucesso.' }
-  catch(e:any){ error.value=e?.data?.message||e?.message||'Não foi possível carregar a imagem.' }
-  finally{ uploadBusy.value[field.key]=false }
+
+  const previous=localImagePreviews.value[field.key]
+  if(previous?.startsWith('blob:')) URL.revokeObjectURL(previous)
+  localImagePreviews.value[field.key]=URL.createObjectURL(file)
+
+  uploadBusy.value[field.key]=true
+  error.value=''
+  try{
+    const media=mediaService()
+    const result=await media.upload(file)
+    editing.value[field.key]=result.url
+    success.value='Imagem carregada com sucesso. Confirma a pré-visualização e guarda o registo.'
+    setTimeout(()=>success.value='',3500)
+  }catch(e:any){
+    const preview=localImagePreviews.value[field.key]
+    if(preview?.startsWith('blob:')) URL.revokeObjectURL(preview)
+    delete localImagePreviews.value[field.key]
+    error.value=e?.data?.message||e?.message||'Não foi possível carregar a imagem.'
+  }finally{
+    uploadBusy.value[field.key]=false
+    input.value=''
+  }
+}
+function clearImage(field:Field){
+  const preview=localImagePreviews.value[field.key]
+  if(preview?.startsWith('blob:')) URL.revokeObjectURL(preview)
+  delete localImagePreviews.value[field.key]
+  if(editing.value) editing.value[field.key]=''
 }
 function clearFilters(){ query.value=''; filters.value=Object.fromEntries(filterFields.value.map(f=>[f.key,''])) }
 onMounted(async()=>{ await load(); if(route.query.new==='1') create() })
+onBeforeUnmount(revokeLocalPreviews)
 </script>
 
 <template>
@@ -232,7 +271,11 @@ onMounted(async()=>{ await load(); if(route.query.new==='1') create() })
       <div v-else class="table-scroll">
         <table class="data-table"><thead><tr><th v-for="c in visibleColumns" :key="c">{{fieldLabel(c)}}</th><th>Ações</th></tr></thead>
           <tbody><tr v-for="item in filteredItems" :key="item.id">
-            <td v-for="c in visibleColumns" :key="c"><strong v-if="c===visibleColumns[0]">{{display(item,c)}}</strong><template v-else>{{display(item,c)}}</template></td>
+            <td v-for="c in visibleColumns" :key="c">
+              <img v-if="isImageColumn(c) && item[c]" :src="item[c]" :alt="`Imagem de ${display(item,visibleColumns[0])}`" class="table-image-preview" loading="lazy">
+              <strong v-else-if="c===visibleColumns[0]">{{display(item,c)}}</strong>
+              <template v-else>{{display(item,c)}}</template>
+            </td>
             <td><div class="row-actions">
               <button v-if="isPublishable" class="icon-button icon-button--small" @click="togglePublish(item)" :title="item[publishKey]==='draft'?'Publicar':'Despublicar'"><Icon :name="item[publishKey]==='draft'?'lucide:eye':'lucide:eye-off'"/></button>
               <button v-if="allowEdit" class="icon-button icon-button--small" @click="edit(item)" title="Ver / atualizar"><Icon name="lucide:eye"/></button>
@@ -252,7 +295,31 @@ onMounted(async()=>{ await load(); if(route.query.new==='1') create() })
             <textarea v-if="field.type==='textarea'" v-model="editing[field.key]" rows="5" :placeholder="field.placeholder" :readonly="field.readonly"/>
             <textarea v-else-if="field.type==='array'" :value="Array.isArray(editing[field.key])?editing[field.key].join('\n'):editing[field.key]" rows="5" placeholder="Um item por linha" @input="arrayInput(field.key,$event)"/>
             <select v-else-if="field.type==='select'" v-model="editing[field.key]" :disabled="field.readonly"><option value="">Selecionar…</option><option v-for="option in field.options" :key="String(normalizedOption(option).value)" :value="normalizedOption(option).value">{{normalizedOption(option).label}}</option></select>
-            <template v-else-if="field.type==='image'"><input v-model="editing[field.key]" type="text" :placeholder="field.placeholder||'URL ou caminho da imagem'"><input type="file" accept="image/*" @change="uploadImage(field,$event)"><small v-if="uploadBusy[field.key]">A carregar imagem…</small><img v-if="editing[field.key]" :src="editing[field.key]" alt="Pré-visualização" class="image-preview"></template>
+            <template v-else-if="field.type==='image'">
+              <div class="image-field">
+                <div v-if="imagePreviewFor(field)" class="image-preview-card">
+                  <img :src="imagePreviewFor(field)" :alt="`Pré-visualização de ${field.label}`" class="image-preview">
+                  <div class="image-preview-card__meta">
+                    <span>{{ localImagePreviews[field.key] ? 'Nova imagem selecionada' : 'Imagem atual' }}</span>
+                    <a v-if="editing[field.key] && !localImagePreviews[field.key]" :href="editing[field.key]" target="_blank" rel="noopener">Abrir imagem</a>
+                  </div>
+                </div>
+                <div v-else class="image-preview-empty">
+                  <Icon name="lucide:image" size="28"/>
+                  <span>Ainda não existe imagem.</span>
+                </div>
+                <input v-model="editing[field.key]" type="text" :placeholder="field.placeholder||'URL ou caminho da imagem'">
+                <label class="image-upload-button" :class="{'is-loading':uploadBusy[field.key]}">
+                  <Icon :name="uploadBusy[field.key]?'lucide:loader-circle':'lucide:upload'" />
+                  {{ uploadBusy[field.key] ? 'A carregar…' : imagePreviewFor(field) ? 'Substituir imagem' : 'Carregar imagem' }}
+                  <input type="file" accept="image/*" hidden :disabled="uploadBusy[field.key]" @change="uploadImage(field,$event)">
+                </label>
+                <button v-if="imagePreviewFor(field)" type="button" class="btn btn--ghost image-remove-button" :disabled="uploadBusy[field.key]" @click="clearImage(field)">
+                  <Icon name="lucide:x"/> Remover imagem
+                </button>
+                <small class="form-field__hint">A pré-visualização é atualizada assim que selecionas o ficheiro. O URL final é guardado no MongoDB depois de guardares o registo.</small>
+              </div>
+            </template>
             <input v-else v-model="editing[field.key]" :type="field.type||'text'" :placeholder="field.placeholder" :required="field.required!==false" :readonly="field.readonly"/>
             <small v-if="field.hint" class="form-field__hint">{{field.hint}}</small>
           </label>

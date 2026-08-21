@@ -36,7 +36,7 @@ watch(() => route.params.slug, carregarEvento);
       <div
         class="w-full max-w-xl sm:max-w-3xl mx-auto relative aspect-square rounded-t-lg overflow-hidden"
       >
-        <NuxtImg
+        <SiteImage
           :src="evento.imagem"
           :alt="evento.nome"
           preset="cardLg"

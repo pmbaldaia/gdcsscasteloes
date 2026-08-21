@@ -26,7 +26,7 @@ onUnmounted(()=>{window.removeEventListener('keydown',onKeydown);if(import.meta.
         class="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 rounded-lg"
         @click="openSponsor(sponsor)"
       >
-        <NuxtImg
+        <SiteImage
           :src="sponsor.src"
           :alt="sponsor.alt"
           class="object-contain h-[120px] w-full max-w-[160px] mx-auto transition-transform duration-300 hover:scale-110"

@@ -11,7 +11,8 @@
     "postinstall": "nuxt prepare",
     "predev": "node scripts/clean-dev-cache.mjs",
     "mongo:check": "node --env-file=.env scripts/check-mongodb.mjs",
-    "mongo:migrate": "node --env-file=.env scripts/migrate-to-mongodb.mjs"
+    "mongo:migrate": "node --env-file=.env scripts/migrate-to-mongodb.mjs",
+    "mongo:check-settings": "node --env-file=.env scripts/check-settings.mjs"
   },
   "devDependencies": {
     "@nuxt/image": "^1.11.0",

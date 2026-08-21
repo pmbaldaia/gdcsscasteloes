@@ -60,7 +60,7 @@ const eventosPassados = computed(() =>
         class="card-surface overflow-hidden flex flex-col hover:shadow-card-hover transition-shadow duration-300"
       >
         <div class="w-full aspect-square overflow-hidden">
-          <NuxtImg
+          <SiteImage
             :src="evento.imagem"
             :alt="evento.nome"
             preset="card"
@@ -117,7 +117,7 @@ const eventosPassados = computed(() =>
           class="card-surface overflow-hidden flex flex-col opacity-80 grayscale-[30%]"
         >
           <div class="w-full aspect-square overflow-hidden">
-            <NuxtImg
+            <SiteImage
               :src="evento.imagem"
               :alt="evento.nome"
               preset="card"
