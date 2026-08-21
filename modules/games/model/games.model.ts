@@ -1,0 +1,1 @@
+export interface Game { id?:string; season:string; jornada:string; date:string; time:string; teams:string[]; volta:number; status:'scheduled'|'finished'|'cancelled'|'draft'; publicationStatus:'published'|'draft' }

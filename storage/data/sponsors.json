@@ -1,0 +1,359 @@
+[
+  {
+    "id": "1",
+    "src": "/patrocinios/garage649.webp",
+    "alt": "M Pinto",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "2",
+    "src": "/patrocinios/mpinto.webp",
+    "alt": "M Pinto",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "3",
+    "src": "/patrocinios/vistara.webp",
+    "alt": "Vistara",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "4",
+    "src": "/patrocinios/docemel.webp",
+    "alt": "Doce Mel",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "5",
+    "src": "/patrocinios/casacarreira.webp",
+    "alt": "Casa da Carreira",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "6",
+    "src": "/patrocinios/cafesantoantonio.webp",
+    "alt": "Café Santo António",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "7",
+    "src": "/patrocinios/tochasbar.webp",
+    "alt": "Tochas Bar",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "8",
+    "src": "/patrocinios/carvalhaparque.webp",
+    "alt": "Carvalha Parque",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "9",
+    "src": "/patrocinios/fontevelha.webp",
+    "alt": "Fonte Velha",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "10",
+    "src": "/patrocinios/controi-barros.webp",
+    "alt": "ConstroiBarros",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "11",
+    "src": "/patrocinios/allianz.webp",
+    "alt": "Allianz",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "12",
+    "src": "/patrocinios/amstransportes.webp",
+    "alt": "AMS Transportes",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "13",
+    "src": "/patrocinios/bjconstrucoes.webp",
+    "alt": "BJ Construções",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "14",
+    "src": "/patrocinios/carlosmorango.webp",
+    "alt": "Carlos Morango",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "15",
+    "src": "/patrocinios/cmcar.webp",
+    "alt": "CM Car",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "16",
+    "src": "/patrocinios/simbolocordialunp.webp",
+    "alt": "Construção",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "17",
+    "src": "/patrocinios/farmaciamoreira.webp",
+    "alt": "Farmácia Moreira",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "18",
+    "src": "/patrocinios/fribeiro.webp",
+    "alt": "Fribeiro",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "19",
+    "src": "/patrocinios/idmconstruct.webp",
+    "alt": "IDM Construct",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "20",
+    "src": "/patrocinios/iluminacoescampos.webp",
+    "alt": "Iluminações Campos",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "21",
+    "src": "/patrocinios/jardeco.webp",
+    "alt": "Jardeco",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "22",
+    "src": "/patrocinios/luis moreira.webp",
+    "alt": "Luís Moreira",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "23",
+    "src": "/patrocinios/mocacar.webp",
+    "alt": "Mocacar",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "24",
+    "src": "/patrocinios/nortenha.webp",
+    "alt": "Nortenha",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "25",
+    "src": "/patrocinios/pardais.webp",
+    "alt": "Pardais",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "26",
+    "src": "/patrocinios/piscinaspaulo.webp",
+    "alt": "Piscinas Paulo",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "27",
+    "src": "/patrocinios/pizzariamoderna.webp",
+    "alt": "Pizzaria Moderna",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "28",
+    "src": "/patrocinios/pneusribeiro.webp",
+    "alt": "Pneus Ribeiro",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "29",
+    "src": "/patrocinios/quintaagualeveda.webp",
+    "alt": "Quinta Água Levada",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "30",
+    "src": "/patrocinios/realcafes.webp",
+    "alt": "Real Cafés",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "31",
+    "src": "/patrocinios/sigaseguro.webp",
+    "alt": "SigaSeguro",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "32",
+    "src": "/patrocinios/sofas.webp",
+    "alt": "Sofas",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "33",
+    "src": "/patrocinios/splcar.webp",
+    "alt": "SPL Car",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "34",
+    "src": "/patrocinios/steelferreiro.webp",
+    "alt": "Steel Ferreiro",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "35",
+    "src": "/patrocinios/tabernacruz.webp",
+    "alt": "Taberna Cruz",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "36",
+    "src": "/patrocinios/tiagomoreira.webp",
+    "alt": "Tiago Moreira",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "37",
+    "src": "/patrocinios/triunfoclassico.webp",
+    "alt": "Triunfo Clássico",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "38",
+    "src": "/patrocinios/vataxi.webp",
+    "alt": "VA Táxi",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "39",
+    "src": "/patrocinios/habirobim.webp",
+    "alt": "HABIROBIM",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "40",
+    "src": "/patrocinios/jotatek.webp",
+    "alt": "JOTA TEK REPARAÇÕES",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "41",
+    "src": "/patrocinios/serralharia-judas.webp",
+    "alt": "Serralharia Judas",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "42",
+    "src": "/patrocinios/margemperiferica.webp",
+    "alt": "Margem Periférica",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "43",
+    "src": "/patrocinios/mcasaconstroi.webp",
+    "alt": "MCasa Constrói",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "44",
+    "src": "/patrocinios/larguideia.webp",
+    "alt": "Larguideia",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "45",
+    "src": "/patrocinios/brunosport.webp",
+    "alt": "Bruno Sport",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "46",
+    "src": "/patrocinios/consfilwork.webp",
+    "alt": "Consfilwork",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "47",
+    "src": "/patrocinios/terrafiel.webp",
+    "alt": "Terrafiel",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "48",
+    "src": "/patrocinios/soaresribeiro.webp",
+    "alt": "Soares Ribeiro",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "49",
+    "src": "/patrocinios/marcoarco.webp",
+    "alt": "Marco Arco",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "50",
+    "src": "/patrocinios/bravosincriveis.webp",
+    "alt": "Bravos e Incríveis",
+    "url": "",
+    "status": "published"
+  },
+  {
+    "id": "51",
+    "src": "/patrocinios/fernandosousa.webp",
+    "alt": "Fernando Sousa",
+    "url": "",
+    "status": "published"
+  }
+]

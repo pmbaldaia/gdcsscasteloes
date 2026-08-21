@@ -1,0 +1,1 @@
+import {createPublicRepository} from '~/modules/core/repository/public.repository';export async function useSponsors(){const repo=createPublicRepository('sponsors',[]);const {data:sponsors}=await useAsyncData('gdcss-public-sponsors',()=>repo.list(),{default:()=>[]});return {sponsors:computed(()=>[...(sponsors.value||[])].sort((a,b)=>(a.order||0)-(b.order||0)))}}

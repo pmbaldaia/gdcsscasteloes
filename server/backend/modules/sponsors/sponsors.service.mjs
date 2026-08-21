@@ -1,0 +1,1 @@
+import {createCrudService} from '../../core/crud.service.mjs';import {sponsorsRepository} from './sponsors.repository.mjs';export const sponsorsService=createCrudService(sponsorsRepository,{normalize:p=>({src:p.src??'',alt:p.alt??'',url:p.url??'',order:Number(p.order??0),status:p.status??'published'})})

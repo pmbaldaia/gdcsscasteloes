@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "img": "/equipa/tecnica/1.webp",
+    "status": "published",
+    "name": "Edmundo Costa"
+  },
+  {
+    "id": 2,
+    "img": "/equipa/tecnica/2.webp",
+    "status": "published",
+    "name": "Gabriel Moreira"
+  },
+  {
+    "id": 3,
+    "img": "/equipa/tecnica/3.webp",
+    "status": "published",
+    "name": "Paulo Ferreira"
+  }
+]

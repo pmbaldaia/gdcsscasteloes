@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from "vue";
-import jornadas from "~/data/jornadas";
-import teams from "~/data/equipas";
+import { useGames } from "~/modules/games/useGames";
+const { jornadas, teams } = await useGames();
 
 function parseGameDate(game) {
   return new Date(`${game.date}T${game.time}:00`);
@@ -25,7 +25,7 @@ function formatTime(game) {
 const now = new Date();
 
 const nextGame = computed(() => {
-  const allGames = Object.values(jornadas)
+  const allGames = Object.values(jornadas.value)
     .flat()
     .sort((a, b) => parseGameDate(a) - parseGameDate(b));
 

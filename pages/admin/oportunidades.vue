@@ -1,0 +1,3 @@
+<script setup lang="ts">
+definePageMeta({ layout: 'admin' });
+import {opportunitiesService} from '~/modules/opportunities/service/opportunities.service';const service=opportunitiesService();const fields=[{key:'title',label:'Oferta'},{key:'price',label:'Preço'},{key:'order',label:'Ordem',type:'number',required:false},{key:'status',label:'Estado',type:'select',options:[{value:'published',label:'Publicado'},{value:'draft',label:'Rascunho'}]}];</script><template><CmsResourceManager :service="service" title="Oportunidades" description="Ofertas e valores apresentados aos sócios no site." :fields="fields" :columns="['title','price','order','status']"/></template>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "admin",
+    "name": "Administrador",
+    "email": "admin@gdcsscasteloes.pt",
+    "role": "admin",
+    "active": true,
+    "passwordHash": "4ef22b257a6757a03ccdd17e59686f1d:fb9afa7e5ba3f7495f0fd96e9114c473ce6ebed26564d8a8fa5e5b16434f3809",
+    "createdAt": "2026-08-21T13:18:07.096Z",
+    "updatedAt": "2026-08-21T13:18:07.096Z"
+  },
+  {
+    "id": "dc977af8-69f7-464d-9c76-5bba53474b74",
+    "name": "Pedro Baldaia",
+    "email": "pbaldaia25@gmail.com",
+    "role": "admin",
+    "active": true,
+    "passwordHash": "1a85eeaaae01f0f983f7e626bd4e6156:67d7f7e293951255848b08903a426089451d92f5885c3dec50c7f79ed3b3a159",
+    "createdAt": "2026-08-21T15:33:15.719Z",
+    "updatedAt": "2026-08-21T15:33:15.720Z"
+  }
+]

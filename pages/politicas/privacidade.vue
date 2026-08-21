@@ -101,7 +101,7 @@ definePageMeta({
         Utilizamos cookies para melhorar a sua experiência no nosso site. Para
         mais informações sobre como utilizamos cookies, consulte a nossa
         <a
-          href="/cookies"
+          href="/politicas/cookies"
           class="text-red-800"
           aria-label="Aceda aqui à Política de Cookies"
           >Política de Cookies</a

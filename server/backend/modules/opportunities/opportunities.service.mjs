@@ -1,0 +1,1 @@
+import {createCrudService} from '../../core/crud.service.mjs';import {opportunitiesRepository} from './opportunities.repository.mjs';export const opportunitiesService=createCrudService(opportunitiesRepository,{normalize:p=>({title:p.title??'',price:p.price??'',order:Number(p.order??0),status:p.status??'published'})})

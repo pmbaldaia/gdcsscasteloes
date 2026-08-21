@@ -1,0 +1,162 @@
+[
+  {
+    "id": "ag1",
+    "nome": "Joel Augusto Pinheiro Ferreira",
+    "funcao": "Presidente",
+    "img": "/equipa/direcao/Joel Ferreira.webp",
+    "status": "published",
+    "group": "Assembleia Geral"
+  },
+  {
+    "id": "ag2",
+    "nome": "Bruno Micael de Sousa Moreira",
+    "funcao": "1º Secretário",
+    "img": "/equipa/direcao/Micael Moreira.webp",
+    "status": "published",
+    "group": "Assembleia Geral"
+  },
+  {
+    "id": "ag3",
+    "nome": "Vítor Manuel Bessa Ribeiro",
+    "funcao": "2º Secretário",
+    "img": "/equipa/direcao/Vitor Ribeiro.webp",
+    "status": "published",
+    "group": "Assembleia Geral"
+  },
+  {
+    "id": "d1",
+    "nome": "Luísa Manuela Ribeiro Teixeira de Almeida",
+    "funcao": "Presidente",
+    "img": "/equipa/direcao/Luísa Teixeira.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d2",
+    "nome": "Andreia Marina Sousa Pereira",
+    "funcao": "Vice-Presidente",
+    "img": "/equipa/direcao/Andreia Pereira.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d3",
+    "nome": "Joana Alexandra Cunha Teixeira",
+    "funcao": "Secretário",
+    "img": "/equipa/direcao/Joana Teixeira.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d4",
+    "nome": "Filipa Daniela Teixeira de Sousa",
+    "funcao": "Tesoureiro",
+    "img": "/equipa/direcao/Daniela Sousa.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d5",
+    "nome": "Maria da Conceição Teixeira Ribeiro",
+    "funcao": "1º Vogal",
+    "img": "/equipa/direcao/Maria Ribeiro.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d6",
+    "nome": "Tânia Filipa Sousa Ribeiro",
+    "funcao": "2º Vogal",
+    "img": "/equipa/direcao/Tânia Ribeiro.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d7",
+    "nome": "Cecília Silva Sousa",
+    "funcao": "3º Vogal",
+    "img": "/equipa/direcao/Cecília Sousa.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d8",
+    "nome": "Fernanda Pinheiro Correira",
+    "funcao": "4º Vogal",
+    "img": "/equipa/direcao/Fernanda Correia.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d9",
+    "nome": "Pedro Miguel Baldaia Almeida e Sousa",
+    "funcao": "5º Vogal",
+    "img": "/equipa/direcao/Pedro Sousa.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d10",
+    "nome": "Augusto Pinheiro Teixeira",
+    "funcao": "6º Vogal",
+    "img": "/equipa/direcao/Augusto Teixeira.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d11",
+    "nome": "Artur Moreira Ribeiro",
+    "funcao": "7º Vogal",
+    "img": "/equipa/direcao/Artur Ribeiro.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d12",
+    "nome": "Adriano Miguel Penetro",
+    "funcao": "8º Vogal",
+    "img": "/equipa/direcao/Adriano Penetro.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d13",
+    "nome": "César Daniel Moreira da Silva",
+    "funcao": "9º Vogal",
+    "img": "/equipa/direcao/César Silva.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "d14",
+    "nome": "Diogo Manuel Teixeira Magalhães",
+    "funcao": "10º Vogal",
+    "img": "/equipa/direcao/Diogo Ganilho.webp",
+    "status": "published",
+    "group": "Direção"
+  },
+  {
+    "id": "cf1",
+    "nome": "Rui Filipe Mendes Coelho de Almeida",
+    "funcao": "Presidente",
+    "img": "/equipa/direcao/Rui Almeida.webp",
+    "status": "published",
+    "group": "Conselho Fiscal"
+  },
+  {
+    "id": "cf2",
+    "nome": "Carlos Miguel Teixeira Pereira da Mota",
+    "funcao": "1º Secretário",
+    "img": "/equipa/direcao/Carlos Teixeira.webp",
+    "status": "published",
+    "group": "Conselho Fiscal"
+  },
+  {
+    "id": "cf3",
+    "nome": "Jorge Manuel Teixeira Rebelo",
+    "funcao": "2º Secretário",
+    "img": "/equipa/direcao/Jorge Rebelo.webp",
+    "status": "published",
+    "group": "Conselho Fiscal"
+  }
+]

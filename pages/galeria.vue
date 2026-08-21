@@ -4,11 +4,12 @@ definePageMeta({
 });
 
 import { ref, nextTick } from "vue";
-import { categories as importedCategories } from "~/data/galeria.js";
+import { useGallery } from "~/modules/gallery/useGallery";
+const { categories: importedCategories } = await useGallery();
 
 import "~/assets/css/galeria.css";
 
-const categories = ref(importedCategories);
+const categories = importedCategories;
 const selectedImage = ref(null);
 const dialogRef = ref(null);
 

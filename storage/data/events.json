@@ -1,0 +1,94 @@
+[
+  {
+    "id": "1",
+    "nome": "41 Anos do G.D.C.S.S. Castelões",
+    "slug": "41-anos-do-gdcss-casteloes",
+    "data": "11/04/2025",
+    "descricao": "Venha celebrar conosco os 41 anos de história, conquistas e dedicação do nosso clube!",
+    "imagem": "/eventos/41anos.webp",
+    "local": "Complexo Desportivo de Castelões",
+    "detalhes": "\n      Este evento marca mais de quatro décadas de dedicação, paixão e comunidade.\n      Teremos música ao vivo, homenagens, jogos amigáveis e um jantar convívio.\n      Traga sua família e venha fazer parte desta celebração histórica!\n    ",
+    "status": "published"
+  },
+  {
+    "id": "2",
+    "nome": "São João no Complexo Desportivo de Castelões",
+    "slug": "sao-joao-complexo-desportivo-casteloes",
+    "data": "21/06/2025",
+    "descricao": "Vem celebrar o tradicional São João connosco!",
+    "local": "Complexo Desportivo de Castelões",
+    "imagem": "/eventos/saojoao.webp",
+    "detalhes": "\n      O São João promete muita animação, sardinhas, bifanas, fogo de artifício e música até de madrugada.\n      Uma noite mágica que junta tradição e diversão num só lugar!\n    ",
+    "status": "published"
+  },
+  {
+    "id": "3",
+    "nome": "Master Castelões vs Jovens Maduros",
+    "slug": "jogo-dos-veteranos-2025",
+    "hora": "18:00h",
+    "data": "24/05/2025",
+    "descricao": "Não faltes ao grande duelo entre os Master Castelões e os Jovens Maduros!",
+    "imagem": "/eventos/veteranos.webp",
+    "local": "Complexo Desportivo de Castelões",
+    "detalhes": "\nPrepare-se para uma tarde inesquecível de futebol e emoção!  \nO campo do Complexo Desportivo de Castelões volta a ser palco de um confronto cheio de história e energia, onde os experientes Master Castelões mostrarão toda a sua sabedoria tática frente aos irreverentes Jovens Maduros, carregados de vontade e vitalidade.\n\nTraga família e amigos para celebrar o espírito desportivo, reviver memórias e desfrutar de muita emoção num ambiente de convívio e amizade. Não perca este duelo que promete nostalgia, rivalidade saudável e momentos inesquecíveis!\n",
+    "status": "published"
+  },
+  {
+    "id": "4",
+    "nome": "Encerramento da Época 2024/2025",
+    "slug": "encerramento-epoca-2024-2025",
+    "data": "22/06/2025",
+    "local": "Quinta Água Levada",
+    "descricao": "Um dia para celebrar conquistas e reconhecer esforços.",
+    "imagem": "/eventos/encerramento.webp",
+    "detalhes": "\n<p>O encerramento será na <strong>Quinta Água Levada</strong>, das <strong>16h00 até à meia-noite</strong>.</p>\n\n<p>Um verdadeiro <em>sunset</em> para todos — direção, equipa técnica, jogadores, fisioterapeutas e quem mais quiser juntar-se à festa!</p>\n\n<p>🎟️ A pulseira com direito a comida e bebida tem um custo de <strong>30,00€</strong>.</p>\n<p>🎫 Se quiseres apenas a pulseira de entrada, também é possível — valor a confirmar</p>\n\n<p><strong>Marca já na tua agenda!</strong></p>\n",
+    "status": "published"
+  },
+  {
+    "id": "5",
+    "nome": "Des'Banda em Castelões",
+    "slug": "desbanda-em-casteloes",
+    "data": "05/09/2025",
+    "descricao": "Dois dias de música, festa e animação em Castelões!",
+    "local": "Rua da Igreja",
+    "imagem": "/eventos/DesBanda.webp",
+    "detalhes": "\n      A Des'Banda volta em força com bandas locais, barraquinhas, DJ's convidados\n      e muito mais! Marca já na agenda porque vais querer estar lá!\n    ",
+    "status": "published"
+  },
+  {
+    "id": "6",
+    "nome": "Jantar de Gala de Natal 2025",
+    "slug": "jantar-de-gala-de-natal-2025",
+    "hora": "20:00h",
+    "data": "19/12/2025",
+    "descricao": "Uma noite elegante de celebração natalícia, convívio e boa gastronomia.",
+    "local": "Olival da Cabana",
+    "imagem": "/eventos/galanatal2025.webp",
+    "detalhes": "\n    Celebra o Natal numa noite especial com um Jantar de Gala memorável.\n    O evento inclui menu requintado, ambiente sofisticado, animação ao vivo\n    e momentos pensados para celebrar a época natalícia em boa companhia.\n    Reserva já o teu lugar e vem brindar connosco ao Natal de 2025!\n  ",
+    "status": "published"
+  },
+  {
+    "id": "7",
+    "nome": "Leilão G.D.C S.S.C 2025",
+    "slug": "leilao-gdc-ssc-2025",
+    "hora": "15:00h",
+    "data": "07/06/2026",
+    "descricao": "Um leilão especial repleto de história, paixão e memórias que unem gerações do clube.",
+    "local": "Centro Cívico de Castelões",
+    "imagem": "/eventos/leilao.webp",
+    "detalhes": "\n      Participe num evento único dedicado à tradição e ao futuro do clube.\n      O Leilão G.D.C S.S.C reúne objetos simbólicos, recordações históricas\n      e momentos especiais que fazem parte da nossa identidade.\n  \n      Entre camisolas, troféus e artigos memoráveis, esta será uma oportunidade\n      para celebrar o legado do clube e contribuir para a continuação da sua história.\n  \n      Junta-te a nós no Centro Cívico de Castelões no dia 07 de Junho às 15h00\n      e faz parte deste momento especial!\n    ",
+    "status": "published"
+  },
+  {
+    "id": "8",
+    "nome": "Festa de São João",
+    "slug": "festa-sao-joao-2026",
+    "data": "20/06/2026",
+    "hora": "20:00h",
+    "descricao": "Com sardinhas, caldo verde, bebida, sobremesa e muita animação!",
+    "local": "Complexo Desportivo Castelões",
+    "imagem": "/eventos/saojoao26.webp",
+    "detalhes": "\n      <p>Com o cheiro da sardinha a pairar e o talento a brilhar, celebramos o São João sem vacilar!</p>\n  \n      <p><strong>Preço:</strong> 15€ por pessoa</p>\n      <p><strong>Crianças até aos 6 anos:</strong> Grátis</p>\n      <p><strong>Crianças dos 7 aos 12 anos:</strong> 7,50€</p>\n  \n      <ul>\n        <li>3 sardinhas ou 2 féveras</li>\n        <li>Acompanhamento</li>\n        <li>Bebida</li>\n        <li>Caldo verde</li>\n        <li>Sobremesa</li>\n      </ul>\n  \n      <p><strong>Contactos para reservas:</strong></p>\n      <ul>\n        <li>Luísa: 936 614 628</li>\n        <li>Filipa: 917 881 878</li>\n        <li>Joana: 918 539 653</li>\n        <li>Andreia: 917 928 498</li>\n      </ul>\n    ",
+    "status": "published"
+  }
+]

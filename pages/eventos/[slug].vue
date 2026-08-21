@@ -5,14 +5,15 @@ definePageMeta({
 
 import { useRoute } from "vue-router";
 import { ref, watch } from "vue";
-import { eventos } from "~/data/eventos";
+import { useEvents } from "~/modules/events/useEvents";
+const { eventos } = await useEvents();
 
 const route = useRoute();
 const evento = ref(null);
 
 const carregarEvento = () => {
   const slug = route.params.slug;
-  evento.value = eventos.find((e) => e.slug === slug) || null;
+  evento.value = eventos.value.find((e) => e.slug === slug) || null;
 };
 
 carregarEvento();

@@ -1,71 +1,13 @@
 <script setup>
-definePageMeta({
-  layout: "default",
-});
-
-import { ref, computed } from "vue";
-
-const firstName = ref("");
-const lastName = ref("");
-const senderEmail = ref("");
-const subject = ref("");
-const message = ref("");
-
-const errors = ref({
-  firstName: false,
-  lastName: false,
-  senderEmail: false,
-  subject: false,
-  message: false,
-});
-
-const touched = ref(false);
-
-const mailtoLink = computed(() => {
-  const name = `${firstName.value} ${lastName.value}`.trim();
-  const body = `Prezado(a),
-
-Recebemos uma nova mensagem através do formulário de contato. Seguem abaixo os dados fornecidos:
-
-Nome: ${name}
-Email: ${senderEmail.value}
-
-Mensagem:
-${message.value}
-
-Caso seja necessário entrar em contacto, por favor, utilize os dados acima.
-
-Atenciosamente,
-${name}
-`;
-
-  const mailSubject = encodeURIComponent(subject.value);
-  const mailBody = encodeURIComponent(body);
-
-  return `mailto:gdcsscasteloes1984@gmail.com?subject=${mailSubject}&body=${mailBody}`;
-});
-
-const validateFields = () => {
-  errors.value.firstName = firstName.value.trim() === "";
-  errors.value.lastName = lastName.value.trim() === "";
-  errors.value.senderEmail = senderEmail.value.trim() === "";
-  errors.value.subject = subject.value.trim() === "";
-  errors.value.message = message.value.trim() === "";
-
-  return !Object.values(errors.value).includes(true);
-};
-
-const formError = ref(false);
-
-const handleSubmit = () => {
-  touched.value = true;
-  formError.value = false;
-  if (validateFields()) {
-    window.location.href = mailtoLink.value;
-  } else {
-    formError.value = true;
-  }
-};
+definePageMeta({ layout: "default" });
+import { ref } from "vue";
+import { useSiteSettings } from "~/modules/settings/useSiteSettings";
+const config=useRuntimeConfig();
+const { settings } = await useSiteSettings();
+const firstName=ref("");const lastName=ref("");const senderEmail=ref("");const subject=ref("");const message=ref("");
+const errors=ref({firstName:false,lastName:false,senderEmail:false,subject:false,message:false});const touched=ref(false);const formError=ref(false);const submitting=ref(false);const submitSuccess=ref("");
+const validateFields=()=>{errors.value.firstName=!firstName.value.trim();errors.value.lastName=!lastName.value.trim();errors.value.senderEmail=!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(senderEmail.value.trim());errors.value.subject=!subject.value.trim();errors.value.message=!message.value.trim();return !Object.values(errors.value).includes(true)};
+async function handleSubmit(){touched.value=true;formError.value=false;submitSuccess.value='';if(!validateFields()){formError.value=true;return}submitting.value=true;try{await $fetch(`${config.public.apiBase}/api/public/contact`,{method:'POST',body:{firstName:firstName.value,lastName:lastName.value,email:senderEmail.value,subject:subject.value,message:message.value}});submitSuccess.value='Mensagem enviada com sucesso. Entraremos em contacto assim que possível.';firstName.value='';lastName.value='';senderEmail.value='';subject.value='';message.value='';touched.value=false}catch(e){formError.value=true}finally{submitting.value=false}}
 </script>
 
 <template>
@@ -191,15 +133,15 @@ const handleSubmit = () => {
               ]"
             ></textarea>
           </div>
-          <div v-if="formError" class="mb-2 text-red-600 font-semibold">
-            *Preencher campo(s) obrigatório(s)
-          </div>
+          <div v-if="formError" class="mb-2 text-red-600 font-semibold">Não foi possível enviar. Confirma os campos e tenta novamente.</div>
+          <div v-if="submitSuccess" class="mb-3 rounded-md bg-green-50 p-3 text-green-800 font-medium">{{ submitSuccess }}</div>
           <div class="flex justify-end">
             <button
               type="submit"
+              :disabled="submitting"
               class="bg-red-800 text-white hover:bg-black hover:text-white border border-red-800 hover:border-white w-full sm:w-auto inline-block text-center px-4 py-2 rounded"
             >
-              Enviar Email
+              {{ submitting ? "A enviar…" : "Enviar mensagem" }}
             </button>
           </div>
         </form>
@@ -213,11 +155,11 @@ const handleSubmit = () => {
         <div class="flex items-center gap-2 justify-center">
           <Icon name="uil:envelope" class="text-blue-500 w-5 h-5" />
           <a
-            href="mailto:gdcsscasteloes1984@gmail.com"
+            :href="`mailto:${settings.contactEmail}`"
             class="hover:underline"
             aria-label="Clica aqui para mandar email"
           >
-            gdcsscasteloes1984@gmail.com
+            {{ settings.contactEmail }}
           </a>
         </div>
         <div class="flex items-center gap-2 justify-center">

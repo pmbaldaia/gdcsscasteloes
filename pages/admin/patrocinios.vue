@@ -1,0 +1,3 @@
+<script setup lang="ts">
+definePageMeta({ layout: 'admin' });
+import {sponsorsService} from '~/modules/sponsors/service/sponsors.service';const service=sponsorsService();const fields=[{key:'alt',label:'Nome'},{key:'src',label:'Logo',type:'image'},{key:'url',label:'Site',required:false},{key:'order',label:'Ordem',type:'number',required:false},{key:'status',label:'Estado',type:'select',options:[{value:'published',label:'Publicado'},{value:'draft',label:'Rascunho'}]}];</script><template><CmsResourceManager :service="service" title="Patrocínios" description="Logótipos apresentados na página inicial, mantendo a grelha atual." :fields="fields" :columns="['alt','src','url','status']"/></template>

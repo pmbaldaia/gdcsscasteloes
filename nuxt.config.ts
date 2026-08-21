@@ -67,6 +67,7 @@ export default defineNuxtConfig({
   ],
 
   image: {
+    domains: [process.env.NUXT_API_MEDIA_HOST || "localhost"],
     format: ["webp"],
     quality: 100,
     densities: [1],
@@ -160,6 +161,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl,
+      apiBase: "",
+      cmsUrl: "/admin",
       sitemap: {
         hostname: siteUrl,
         exclude: ["/admin/**", "/auth/**", "/manutencao"],

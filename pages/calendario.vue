@@ -1,36 +1,4 @@
 <script setup>
-definePageMeta({
-  layout: "default",
-});
-
-const season = "2026/2027";
+definePageMeta({layout:'default'});import {useGames} from '~/modules/games/useGames';const season='2026/2027';const {jornadas,teams}=await useGames();const allGames=computed(()=>Object.values(jornadas.value||{}).flat().sort((a,b)=>new Date(`${a.date}T${a.time||'00:00'}`)-new Date(`${b.date}T${b.time||'00:00'}`)));const teamLogo=name=>teams.value?.find(t=>t.name===name)?.logo||'/img/logowbg.webp';const fmt=d=>{const x=new Date(`${d}T00:00:00`);return Number.isNaN(x.getTime())?d:x.toLocaleDateString('pt-PT',{day:'2-digit',month:'2-digit',year:'numeric'})}
 </script>
-
-<template>
-  <LandingContainer>
-    <LandingSectionhead>
-      <template #title>
-        <div class="flex flex-col items-center">
-          <span class="text-gray-900">Calendário {{ season }}</span>
-          <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
-            <div class="w-1/2 bg-red-600"></div>
-            <div class="w-1/2 bg-green-600"></div>
-          </div>
-        </div>
-      </template>
-      <template #desc>
-        <span class="text-slate-600">
-          Consulte aqui o calendário oficial de jogos do clube
-        </span>
-      </template>
-    </LandingSectionhead>
-
-    <div class="max-w-7xl mx-auto px-4 mt-12 mb-16">
-      <LandingSeasonNotice
-        :season="season"
-        title="Calendário em preparação"
-        description="O calendário de jogos da época 2026/2027 será disponibilizado em breve. Volte a visitar esta página para acompanhar a nossa temporada."
-      />
-    </div>
-  </LandingContainer>
-</template>
+<template><LandingContainer><LandingSectionhead><template #title><div class="flex flex-col items-center"><span class="text-gray-900">Calendário {{season}}</span><div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden"><div class="w-1/2 bg-red-600"></div><div class="w-1/2 bg-green-600"></div></div></div></template><template #desc><span class="text-slate-600">Consulta aqui o calendário oficial de jogos do clube.</span></template></LandingSectionhead><div class="max-w-5xl mx-auto px-4 mt-12 mb-16"><LandingSeasonNotice v-if="!allGames.length" :season="season" title="Calendário em preparação" description="O calendário será disponibilizado assim que existirem jogos publicados."/><div v-else class="space-y-4"><article v-for="game in allGames" :key="game.id" class="card-surface p-5 grid gap-4 md:grid-cols-[160px_1fr_110px] md:items-center"><div><strong class="text-slate-900">{{game.jornada}}</strong><p class="text-sm text-slate-500">{{fmt(game.date)}} · {{game.time||'—'}}</p></div><div class="flex items-center justify-center gap-5"><div class="flex flex-1 items-center justify-end gap-3 text-right"><span class="font-semibold">{{game.teams?.[0]}}</span><img :src="teamLogo(game.teams?.[0])" :alt="game.teams?.[0]" class="w-12 h-12 object-contain"></div><strong>vs</strong><div class="flex flex-1 items-center gap-3"><img :src="teamLogo(game.teams?.[1])" :alt="game.teams?.[1]" class="w-12 h-12 object-contain"><span class="font-semibold">{{game.teams?.[1]}}</span></div></div><div class="text-center md:text-right"><span class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">{{game.status==='finished'?'Terminado':'Agendado'}}</span></div></article></div></div></LandingContainer></template>

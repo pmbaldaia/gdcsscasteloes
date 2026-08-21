@@ -1,23 +1,25 @@
-# GDCSS Castelões
+# GDCSS Castelões — aplicação única
 
-Bem-vindo ao site oficial do **Grupo Desportivo e Cultural de São Salvador Castelões**.
+Uma única aplicação Nuxt contém o site público, CMS em `/admin`, API Nitro em `/api` e persistência em `storage/`.
 
-Este projeto tem como objetivo divulgar e organizar as atividades, eventos e conteúdos relacionados com o GDCSS Castelões, promovendo o desporto, a cultura e o convívio social da comunidade.
-O Grupo Desportivo e Cultural São Salvador de Castelões foi fundado na freguesia de Castelões a 11 de Abril 1984.
-Rua do Grupo Desportivo, Penafiel 4560-060
+## Desenvolvimento
+```bash
+npm install
+npm run dev
+```
 
-## 📌 Sobre o Projeto
+- Site: http://localhost:3000
+- Admin: http://localhost:3000/admin
+- Login: http://localhost:3000/admin/login
+- API: http://localhost:3000/api/...
 
-Este repositório contém o website oficial do GDCSS Castelões, desenvolvido com tecnologias modernas e focado na simplicidade, acessibilidade e performance. Aqui serão disponibilizadas:
+Os dados persistentes ficam em `storage/data` e uploads em `storage/uploads`. Configure `AUTH_SECRET` em produção.
 
-- Notícias e eventos do clube
-- Informações sobre equipas e modalidades
-- Galerias de fotos e vídeos
-- Contactos e localização
-- Ligações para redes sociais
+## Ajustes — sidebar e agendamento do plantel
 
-## 🚀 Tecnologias Utilizadas
-
-- [Nuxt.js](https://nuxt.com/) – Framework para aplicações Vue 3
-- [TailwindCSS](https://tailwindcss.com/) – Utilitário CSS para design responsivo
-- [Vite](https://vitejs.dev/) – Ferramenta de build rápida para desenvolvimento moderno
+- A navegação lateral do Admin possui scroll vertical próprio em ecrãs com pouca altura.
+- O campo `Publicar em` do Plantel usa `datetime-local` e é opcional.
+- Sem data e com estado `Publicado`, o jogador fica disponível imediatamente no endpoint público.
+- Com uma data/hora futura, o jogador só é devolvido pelo endpoint público quando esse instante chegar.
+- O campo `Ordem` continua a definir a sequência apresentada no frontend e, em novos jogadores, sugere automaticamente a próxima posição.
+- O backend mantém `Nome` ao editar Plantel e Equipa Técnica.

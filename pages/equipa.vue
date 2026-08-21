@@ -1,12 +1,7 @@
 <script setup>
-import {
-  assembleiaGeral,
-  direcao,
-  conselhoFiscal,
-  equipaTecnica,
-  plantel,
-  isEquipaRevealed,
-} from "@/data/equipa";
+import { useTeamStructure } from "~/modules/team/useTeamStructure";
+const { assembleiaGeral, direcao, conselhoFiscal, equipaTecnica, plantel } = await useTeamStructure();
+const isEquipaRevealed = (item) => item?.status !== 'draft' && (!item?.publishedAt || new Date(item.publishedAt).getTime() <= Date.now());
 
 import "~/assets/css/galeria.css";
 
@@ -17,10 +12,10 @@ const fallbackImage = "/equipa/default.webp";
 const selectedImage = ref(null);
 const dialogRef = ref(null);
 const equipaTecnicaVisivel = computed(() =>
-  equipaTecnica.filter((membro) => isEquipaRevealed(membro.id)),
+  equipaTecnica.value.filter((membro) => isEquipaRevealed(membro)),
 );
 const plantelVisivel = computed(() =>
-  plantel.filter((jogador) => isEquipaRevealed(jogador.id)),
+  plantel.value.filter((jogador) => isEquipaRevealed(jogador)),
 );
 
 async function openImage(src) {

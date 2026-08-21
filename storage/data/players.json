@@ -1,0 +1,178 @@
+[
+  {
+    "id": 1,
+    "img": "/equipa/plantel/1.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 1,
+    "name": "César Reta"
+  },
+  {
+    "id": 2,
+    "img": "/equipa/plantel/2.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 2,
+    "name": "Rui Teixeira"
+  },
+  {
+    "id": 3,
+    "img": "/equipa/plantel/3.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 3,
+    "name": "Gustavo Teixeira"
+  },
+  {
+    "id": 4,
+    "img": "/equipa/plantel/4.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 4,
+    "name": "Zé Tó"
+  },
+  {
+    "id": 5,
+    "img": "/equipa/plantel/5.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 5,
+    "name": "Diogo Ganilho"
+  },
+  {
+    "id": 6,
+    "img": "/equipa/plantel/6.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 6,
+    "name": "Kiko"
+  },
+  {
+    "id": 7,
+    "img": "/equipa/plantel/7.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 7,
+    "name": "Pedro Fraga"
+  },
+  {
+    "id": 8,
+    "img": "/equipa/plantel/8.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 8,
+    "name": "Guilherme Moreira"
+  },
+  {
+    "id": 9,
+    "img": "/equipa/plantel/9.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 9,
+    "name": "Tiago Ribeiro"
+  },
+  {
+    "id": 10,
+    "img": "/equipa/plantel/10.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 10,
+    "name": "Miranda"
+  },
+  {
+    "id": 11,
+    "img": "/equipa/plantel/11.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 11,
+    "name": "João Oliveira"
+  },
+  {
+    "id": 12,
+    "img": "/equipa/plantel/12.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 12,
+    "name": "Zé Miguel"
+  },
+  {
+    "id": 13,
+    "img": "/equipa/plantel/13.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 13,
+    "name": "Pedro Morais"
+  },
+  {
+    "id": 14,
+    "img": "/equipa/plantel/14.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 14,
+    "name": "Diogo Queirós"
+  },
+  {
+    "id": 15,
+    "img": "/equipa/plantel/15.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 15,
+    "name": "Diogo Novais"
+  },
+  {
+    "id": 16,
+    "img": "/equipa/plantel/16.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 16,
+    "name": "Paulo Mateus"
+  },
+  {
+    "id": 17,
+    "img": "/equipa/plantel/17.webp",
+    "status": "published",
+    "publishedAt": null,
+    "order": 17,
+    "name": "Fibras"
+  },
+  {
+    "id": 18,
+    "img": "/equipa/plantel/18.webp",
+    "status": "published",
+    "publishedAt": "2026-08-13T20:00:00.000Z",
+    "order": 18,
+    "name": "Duarte Magalhães"
+  },
+  {
+    "id": 19,
+    "img": "/equipa/plantel/19.webp",
+    "status": "published",
+    "publishedAt": "2026-08-14T20:00:00.000Z",
+    "order": 19,
+    "name": "Américo"
+  },
+  {
+    "id": 20,
+    "img": "/equipa/plantel/20.webp",
+    "status": "published",
+    "publishedAt": "2026-08-15T20:00:00.000Z",
+    "order": 20,
+    "name": "António Barbosa"
+  },
+  {
+    "id": 21,
+    "img": "/equipa/plantel/21.webp",
+    "status": "published",
+    "publishedAt": "2026-08-16T20:00:00.000Z",
+    "order": 21,
+    "name": "Jorginho"
+  },
+  {
+    "id": 22,
+    "img": "/equipa/plantel/22.webp",
+    "status": "published",
+    "publishedAt": "2026-08-17T20:00:00.000Z",
+    "order": 22,
+    "name": "Luís Silva"
+  }
+]

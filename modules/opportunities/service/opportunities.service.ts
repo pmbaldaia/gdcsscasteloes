@@ -1,0 +1,1 @@
+import {createCrudService} from '~/modules/core/repository/crud.service';import {opportunitiesRepository} from '../repository/opportunities.repository';export const opportunitiesService=()=>createCrudService(opportunitiesRepository())

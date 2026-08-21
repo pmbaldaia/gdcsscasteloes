@@ -1,0 +1,4 @@
+import { createCrudService } from '../../core/crud.service.mjs'
+import { messagesRepository } from './messages.repository.mjs'
+export const messagesService=createCrudService(messagesRepository,{normalize:p=>({firstName:p.firstName?.trim()||'',lastName:p.lastName?.trim()||'',email:p.email?.trim()||'',subject:p.subject?.trim()||'',message:p.message?.trim()||'',status:p.status||'new'})})
+export async function createPublicMessage(p){ if(!p.firstName?.trim()||!p.lastName?.trim()||!p.email?.includes('@')||!p.subject?.trim()||!p.message?.trim()){const e=new Error('Preenche todos os campos obrigatórios');e.statusCode=400;throw e} return messagesRepository.create({firstName:p.firstName.trim(),lastName:p.lastName.trim(),email:p.email.trim(),subject:p.subject.trim(),message:p.message.trim(),status:'new',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()}) }

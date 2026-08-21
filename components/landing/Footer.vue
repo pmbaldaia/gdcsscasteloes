@@ -1,5 +1,7 @@
 <script setup>
 import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
+import { useSiteSettings } from "~/modules/settings/useSiteSettings";
+const { settings } = await useSiteSettings();
 </script>
 
 <template>
@@ -121,11 +123,11 @@ import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
           <p class="text-fluid-sm leading-relaxed text-gray-700">
             Email:<br />
             <a
-              href="mailto:gdcsscasteloes1984@gmail.com"
+              :href="`mailto:${settings.contactEmail}`"
               class="underline transition-colors duration-300 text-gray-700 hover:text-red-500 hover:underline"
               aria-label="Clica aqui para mandar email"
             >
-              gdcsscasteloes1984@gmail.com
+              {{ settings.contactEmail }}
             </a>
           </p>
         </div>
