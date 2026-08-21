@@ -21,7 +21,7 @@
     <div class="mt-6 text-center">
       <LandingLink
         size="lg"
-        class="bg-black text-white hover:bg-red-800 border border-black hover:border-white"
+        class="bg-primary-900 text-white hover:bg-secondary-800 border border-primary-900 hover:border-secondary-900"
         href="/galeria"
       >
         Ver mais imagens

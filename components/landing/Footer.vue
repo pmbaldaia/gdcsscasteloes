@@ -1,23 +1,22 @@
 <script setup>
-import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
 import { useSiteSettings } from "~/modules/settings/useSiteSettings";
-const { settings } = await useSiteSettings();
-</script>
+import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
+const { settings } = await useSiteSettings();</script>
 
 <template>
   <footer
-    class="w-full mt-12 mb-2 bg-white border-t border-slate-200 py-10 text-slate-900 px-4 sm:px-6 md:px-8"
+    class="site-footer w-full mt-12 bg-surface border-t border-neutral-200 py-10 sm:py-12 text-neutral-900"
   >
-    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8">
+    <div class="site-shell">
       <hr
-        class="border-t border-slate-200 my-6 w-full mx-auto"
+        class="border-t border-neutral-200 my-6 w-full mx-auto"
       />
 
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-8">
         <div class="flex flex-col h-full justify-start text-left">
           <h3 class="text-fluid-xl font-bold mb-1">Sobre</h3>
-          <div class="w-[10%] border-b-2 border-red-500 mb-3"></div>
-          <p class="text-fluid-sm leading-relaxed text-gray-700">
+          <div class="w-[10%] border-b-2 border-secondary-800 mb-3"></div>
+          <p class="text-fluid-sm leading-relaxed text-neutral-600">
             Nós, enquanto equipa, temos a visão de procurar sempre a vitória e
             sermos os melhores em tudo o que fazemos. Treinamos com dedicação e
             foco para alcançar o topo e demonstrar a nossa paixão pelo futebol
@@ -27,12 +26,12 @@ const { settings } = await useSiteSettings();
 
         <div class="flex flex-col h-full justify-start text-left">
           <h3 class="text-fluid-xl font-bold mb-1">Links Úteis</h3>
-          <div class="w-[10%] border-b-2 border-red-500 mb-3"></div>
+          <div class="w-[10%] border-b-2 border-secondary-800 mb-3"></div>
           <ul class="space-y-3 text-fluid-sm">
             <li>
               <a
                 href="/contacto"
-                class="transition-colors duration-300 text-gray-700 hover:text-red-500 hover:underline"
+                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
                 aria-label="Clica aqui para ver os contactos"
               >
                 Contactos
@@ -41,7 +40,7 @@ const { settings } = await useSiteSettings();
             <li>
               <a
                 href="/politicas/cookies"
-                class="transition-colors duration-300 text-gray-700 hover:text-red-500 hover:underline"
+                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
                 aria-label="Clica aqui para ver a política de cookies"
               >
                 Política de Cookies
@@ -50,7 +49,7 @@ const { settings } = await useSiteSettings();
             <li>
               <a
                 href="/politicas/privacidade"
-                class="transition-colors duration-300 text-gray-700 hover:text-red-500 hover:underline"
+                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
                 aria-label="Clica aqui para ver a política de privacidade"
               >
                 Política de Privacidade
@@ -59,7 +58,7 @@ const { settings } = await useSiteSettings();
             <li>
               <a
                 href="/politicas/servico"
-                class="transition-colors duration-300 text-gray-700 hover:text-red-500 hover:underline"
+                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
                 aria-label="Clica aqui para ver os termos de serviço"
               >
                 Termos de Serviço
@@ -68,7 +67,7 @@ const { settings } = await useSiteSettings();
             <li>
               <a
                 href="/politicas/servico"
-                class="transition-colors duration-300 text-gray-700 hover:text-red-500 hover:underline"
+                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
                 aria-label="Clica aqui para ver os termos de serviço"
               >
                 Termos de Serviço
@@ -79,7 +78,7 @@ const { settings } = await useSiteSettings();
                 href="/pdf/manual-acolhimento-boas-praticas.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="transition-colors duration-300 text-gray-700 hover:text-red-500 hover:underline"
+                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
                 aria-label="Clica aqui para ver o Manual de Acolhimento e Boas Práticas"
               >
                 Manual de Acolhimento e Boas Práticas
@@ -90,13 +89,13 @@ const { settings } = await useSiteSettings();
 
         <div class="flex flex-col h-full justify-start text-left">
           <h3 class="text-fluid-xl font-bold mb-1">Redes Sociais</h3>
-          <div class="w-[10%] border-b-2 border-red-500 mb-3"></div>
+          <div class="w-[10%] border-b-2 border-secondary-800 mb-3"></div>
           <ul class="space-y-3 text-fluid-sm">
             <li>
               <a
                 href="https://www.facebook.com/gdcscasteloes/"
                 target="_blank"
-                class="flex items-center space-x-2 text-gray-700 hover:text-red-500 hover:underline transition-colors duration-300"
+                class="flex items-center space-x-2 text-neutral-600 hover:text-secondary-800 hover:underline transition-colors duration-300"
                 aria-label="Clica aqui para aceder ao Facebook"
               >
                 <PhFacebookLogo class="w-6 h-6 fill-current" />
@@ -107,7 +106,7 @@ const { settings } = await useSiteSettings();
               <a
                 href="https://www.instagram.com/gdcsscasteloes/"
                 target="_blank"
-                class="flex items-center space-x-2 text-gray-700 hover:text-red-500 hover:underline transition-colors duration-300"
+                class="flex items-center space-x-2 text-neutral-600 hover:text-secondary-800 hover:underline transition-colors duration-300"
                 aria-label="Clica aqui para aceder ao Instagram"
               >
                 <PhInstagramLogo class="w-6 h-6 fill-current" />
@@ -119,12 +118,12 @@ const { settings } = await useSiteSettings();
 
         <div class="flex flex-col h-full justify-start text-left">
           <h3 class="text-fluid-xl font-bold mb-1">Contacto</h3>
-          <div class="w-[10%] border-b-2 border-red-500 mb-3"></div>
-          <p v-if="settings.contactEmail" class="text-fluid-sm leading-relaxed text-gray-700">
+          <div class="w-[10%] border-b-2 border-secondary-800 mb-3"></div>
+          <p v-if="settings.contactEmail" class="text-fluid-sm leading-relaxed text-neutral-600">
             Email:<br />
             <a
               :href="`mailto:${settings.contactEmail}`"
-              class="underline transition-colors duration-300 text-gray-700 hover:text-red-500 hover:underline"
+              class="underline transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
               aria-label="Clica aqui para mandar email"
             >
               {{ settings.contactEmail }}
@@ -134,21 +133,21 @@ const { settings } = await useSiteSettings();
       </div>
 
       <hr
-        class="border-t border-slate-200 my-6 w-full mx-auto"
+        class="border-t border-neutral-200 my-6 w-full mx-auto"
       />
 
-      <p class="text-center text-fluid-xs text-gray-700 mt-8">
+      <p class="text-center text-fluid-xs text-neutral-600 mt-8">
         Copyright © {{ new Date().getFullYear() }} GDCSSCastelões. Todos os
         direitos reservados.
       </p>
 
-      <p class="text-center text-fluid-xs text-gray-700 mt-1">
+      <p class="text-center text-fluid-xs text-neutral-600 mt-1">
         Feito por
         <a
           href="https://webcreaterpt.pt"
           target="_blank"
           rel="noopener"
-          class="hover:text-red-500 hover:underline transition-colors duration-300 text-gray-700"
+          class="hover:text-secondary-800 hover:underline transition-colors duration-300 text-neutral-600"
           aria-label="Desenvolvedor do site"
         >
           Webcreaterpt

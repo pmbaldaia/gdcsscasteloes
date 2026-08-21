@@ -31,13 +31,13 @@ const isActive = (to) => route.path === to;
 <template>
   <aside
     :class="[
-      'flex flex-col bg-white border-r border-slate-200 shadow-sm min-h-screen transition-[width] duration-300',
+      'flex flex-col bg-surface border-r border-neutral-200 shadow-sm min-h-screen transition-[width] duration-300',
       collapsed ? 'w-16 items-center' : 'w-64 items-start',
     ]"
   >
     <div
       :class="[
-        'flex items-center h-16 border-b border-slate-200 px-4 font-bold text-slate-800 w-full mt-2 justify-center',
+        'flex items-center h-16 border-b border-neutral-200 px-4 font-bold text-neutral-900 w-full mt-2 justify-center',
       ]"
     >
       <NuxtImg
@@ -64,8 +64,8 @@ const isActive = (to) => route.path === to;
         :class="[
           'group flex items-center gap-3 rounded-lg font-medium transition-colors w-full',
           isActive(link.to)
-            ? 'bg-red-800 text-white font-semibold shadow-sm'
-            : 'text-slate-700 hover:bg-green-800 hover:text-white',
+            ? 'bg-secondary-800 text-white font-semibold shadow-sm'
+            : 'text-neutral-600 hover:bg-primary-800 hover:text-white',
           collapsed ? 'justify-center px-0 py-3' : 'justify-start px-3 py-2.5',
         ]"
       >
@@ -76,7 +76,7 @@ const isActive = (to) => route.path === to;
           :class="[
             isActive(link.to)
               ? 'text-white'
-              : 'text-slate-600 group-hover:text-white',
+              : 'text-neutral-600 group-hover:text-white',
           ]"
         />
 

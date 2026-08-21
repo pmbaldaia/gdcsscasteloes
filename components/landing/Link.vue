@@ -20,11 +20,11 @@ const sizes = {
 
 const styles = {
   outline:
-    "bg-white border border-slate-300 hover:border-green-800 hover:text-green-900 text-slate-800 shadow-sm",
+    "bg-surface border border-neutral-200 hover:border-primary-800 hover:text-primary-900 text-neutral-900 shadow-sm",
   primary:
-    "bg-green-800 text-white hover:bg-green-900 border border-green-800 shadow-sm",
-  inverted: "bg-white text-slate-900 border border-slate-200 shadow-sm hover:bg-slate-50",
-  muted: "bg-slate-100 hover:bg-slate-200 border border-transparent text-slate-800",
+    "bg-primary-800 text-white hover:bg-primary-950 border border-primary-800 shadow-sm",
+  inverted: "bg-surface text-neutral-900 border border-neutral-200 shadow-sm hover:bg-neutral-50",
+  muted: "bg-neutral-50 hover:bg-neutral-200 border border-transparent text-neutral-900",
 };
 </script>
 
@@ -32,7 +32,7 @@ const styles = {
   <NuxtLink
     :href="href"
     :class="[
-      'rounded-lg text-center font-medium transition focus-visible:ring-2 ring-offset-2 ring-green-700/40',
+      'rounded-lg text-center font-medium transition focus-visible:ring-2 ring-offset-2 ring-primary-700 ring-opacity-40',
       block && 'w-full',
       sizes[size],
       styles[styleName],

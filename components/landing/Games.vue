@@ -3,6 +3,18 @@ import { computed } from "vue";
 import { useGames } from "~/modules/games/useGames";
 const { jornadas, teams } = await useGames();
 
+
+function teamLogo(name) {
+  return teams.value?.find((team) => team.name === name)?.logo || "/img/logowbg.webp";
+}
+
+function onTeamLogoError(event) {
+  const image = event.target;
+  if (image.dataset.fallbackApplied === "1") return;
+  image.dataset.fallbackApplied = "1";
+  image.src = "/img/logowbg.webp";
+}
+
 function parseGameDate(game) {
   return new Date(`${game.date}T${game.time}:00`);
 }
@@ -41,11 +53,11 @@ const showVoltaBadge = computed(
 <template>
   <div class="max-w-3xl mx-auto mt-10">
     <div v-if="nextGame" class="card-surface p-6 sm:p-8 text-center relative">
-      <h3 class="text-fluid-2xl font-bold text-gray-900 mb-3">
+      <h3 class="text-fluid-2xl font-bold text-neutral-900 mb-3">
         🎯 Próximo Jogo
       </h3>
 
-      <p class="text-fluid-lg text-gray-600 mb-6 leading-relaxed">
+      <p class="text-fluid-lg text-neutral-600 mb-6 leading-relaxed">
         <span class="font-semibold">
           {{ nextGame.jornada }}
         </span>
@@ -57,37 +69,39 @@ const showVoltaBadge = computed(
         <!-- Time 1 -->
         <div class="flex flex-col items-center w-32">
           <SiteImage
-            :src="teams.find((t) => t.name === nextGame.teams[0])?.logo"
+            :src="teamLogo(nextGame.teams[0])"
             :alt="`Logo ${nextGame.teams[0]}`"
             preset="badge"
             width="80"
             height="80"
             sizes="80px"
             loading="lazy"
-            class="w-20 h-20 object-contain mb-3"
+            class="brand-logo-original w-20 h-20 object-contain mb-3"
+            @error="onTeamLogoError"
           />
-          <p class="text-fluid-lg font-semibold text-gray-800">
+          <p class="text-fluid-lg font-semibold text-neutral-900">
             {{ nextGame.teams[0] }}
           </p>
         </div>
 
-        <span class="text-fluid-2xl font-extrabold text-gray-900"
+        <span class="text-fluid-2xl font-extrabold text-neutral-900"
           >vs</span
         >
 
         <!-- Time 2 -->
         <div class="flex flex-col items-center w-32">
           <SiteImage
-            :src="teams.find((t) => t.name === nextGame.teams[1])?.logo"
+            :src="teamLogo(nextGame.teams[1])"
             :alt="`Logo ${nextGame.teams[1]}`"
             preset="badge"
             width="80"
             height="80"
             sizes="80px"
             loading="lazy"
-            class="w-20 h-20 object-contain mb-3"
+            class="brand-logo-original w-20 h-20 object-contain mb-3"
+            @error="onTeamLogoError"
           />
-          <p class="text-fluid-lg font-semibold text-gray-800">
+          <p class="text-fluid-lg font-semibold text-neutral-900">
             {{ nextGame.teams[1] }}
           </p>
         </div>
@@ -96,7 +110,7 @@ const showVoltaBadge = computed(
 
     <div
       v-else
-      class="text-center text-gray-700 py-10 text-fluid-xl"
+      class="text-center text-neutral-600 py-10 text-fluid-xl"
     >
       🚫 Não há próximos jogos agendados.
     </div>

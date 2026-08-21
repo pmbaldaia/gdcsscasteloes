@@ -5,7 +5,7 @@ type SelectOption = string | number | boolean | { value: string | number | boole
 interface Field {
   key: string
   label: string
-  type?: 'text'|'date'|'time'|'datetime-local'|'textarea'|'number'|'select'|'array'|'image'|'email'|'password'
+  type?: 'text'|'date'|'time'|'datetime-local'|'textarea'|'number'|'select'|'array'|'image'|'image-multi'|'email'|'password'
   options?: SelectOption[]
   placeholder?: string
   required?: boolean
@@ -34,7 +34,8 @@ const props=withDefaults(defineProps<{
   allowDelete?: boolean
   panelNote?: string
   emptyText?: string
-}>(), { publishKey: 'status', showSearch: true, allowCreate: true, allowEdit: true, allowDelete: true, panelNote: 'As alterações guardadas aqui são refletidas no site público.', emptyText: 'Adiciona o primeiro registo para começar.' })
+  defaultFilters?: Record<string, any>
+}>(), { publishKey: 'status', showSearch: true, allowCreate: true, allowEdit: true, allowDelete: true, panelNote: 'As alterações guardadas aqui são refletidas no site público.', emptyText: 'Adiciona o primeiro registo para começar.', defaultFilters: () => ({}) })
 
 const route=useRoute()
 const router=useRouter()
@@ -43,8 +44,22 @@ const pending=ref(false)
 const error=ref('')
 const toast=useToast()
 const confirmDialog=useConfirm()
+const { user }=useAuth()
+const isAdmin=computed(()=>user.value?.role==='admin')
+const isEditor=computed(()=>user.value?.role==='editor')
+const canCreate=computed(()=>props.allowCreate && isAdmin.value)
+const canEdit=computed(()=>props.allowEdit && (isAdmin.value || isEditor.value))
+const canDelete=computed(()=>props.allowDelete && isAdmin.value)
 const query=ref('')
-const filters=ref<Record<string, any>>(Object.fromEntries(props.fields.filter(f=>f.filterable).map(f=>[f.key,''])))
+const page=ref(1)
+const pageSize=10
+const filters=ref<Record<string, any>>(
+  Object.fromEntries(
+    props.fields
+      .filter(f=>f.filterable)
+      .map(f=>[f.key, props.defaultFilters?.[f.key] ?? ''])
+  )
+)
 const editing=ref<any|null>(null)
 const editingId=ref<string|number|null>(null)
 const modalOpen=ref(false)
@@ -80,6 +95,7 @@ const formatDateTime=(value:any)=>{
 const display=(item:any,key:string)=>{
   const v=item[key]
   const field=props.fields.find(f=>f.key===key)
+  if(field?.type==='image-multi' && Array.isArray(v)) return `${v.length} ${v.length===1?'imagem':'imagens'}`
   if(Array.isArray(v)) return v.join(' · ')
   if(field?.type==='select') return optionLabel(field,v)
   if(field?.type==='datetime-local') return formatDateTime(v)
@@ -108,6 +124,16 @@ const filteredItems=computed(()=>{
   })
 })
 
+const totalPages=computed(()=>Math.max(1,Math.ceil(filteredItems.value.length/pageSize)))
+const paginatedItems=computed(()=>{
+  const safePage=Math.min(Math.max(1,page.value),totalPages.value)
+  const start=(safePage-1)*pageSize
+  return filteredItems.value.slice(start,start+pageSize)
+})
+
+watch([query,filters],()=>{ page.value=1 },{deep:true})
+watch(totalPages,(total)=>{ if(page.value>total) page.value=total })
+
 async function load(){
   pending.value=true; error.value=''
   try{ items.value=await props.service.list() }
@@ -121,10 +147,11 @@ function empty(){
       return [f.key,max+1]
     }
     if(f.defaultValue!==undefined) return [f.key,typeof f.defaultValue==='function'?f.defaultValue():f.defaultValue]
-    return [f.key,f.type==='array'?[]:'']
+    return [f.key,['array','image-multi'].includes(f.type||'')?[]:'']
   }))
 }
 function create(){
+  if(!canCreate.value) return
   revokeLocalPreviews()
   editingId.value=null
   editing.value=empty()
@@ -132,6 +159,7 @@ function create(){
   error.value=''
 }
 function edit(item:any){
+  if(!canEdit.value) return
   revokeLocalPreviews()
   editingId.value=item.id
   editing.value=JSON.parse(JSON.stringify(item))
@@ -153,7 +181,7 @@ function validate(payload:any){
   for(const f of props.fields){
     if(f.required===false) continue
     if(['text','email','password','date','time','datetime-local','select'].includes(f.type||'text') && !String(payload[f.key]??'').trim()) return `${f.label} é obrigatório.`
-    if(f.type==='array' && (!Array.isArray(payload[f.key]) || !payload[f.key].filter(Boolean).length)) return `${f.label} é obrigatório.`
+    if(['array','image-multi'].includes(f.type||'') && (!Array.isArray(payload[f.key]) || !payload[f.key].filter(Boolean).length)) return `${f.label} é obrigatório.`
   }
   return ''
 }
@@ -188,6 +216,7 @@ async function submit(){
   }finally{ saving.value=false }
 }
 async function del(item:any){
+  if(!canDelete.value) return
   const label = display(item, visibleColumns.value[0])
   const accepted = await confirmDialog.ask({
     title: 'Eliminar registo?',
@@ -212,6 +241,7 @@ async function del(item:any){
   }
 }
 async function togglePublish(item:any){
+  if(!canEdit.value) return
   const key=props.publishKey
   const current=item[key]
   const next=current==='draft'?'published':'draft'
@@ -261,8 +291,12 @@ function clearImage(field:Field){
   delete localImagePreviews.value[field.key]
   if(editing.value) editing.value[field.key]=''
 }
-function clearFilters(){ query.value=''; filters.value=Object.fromEntries(filterFields.value.map(f=>[f.key,''])) }
-onMounted(async()=>{ await load(); if(route.query.new==='1') create() })
+function clearFilters(){
+  query.value=''
+  filters.value=Object.fromEntries(filterFields.value.map(f=>[f.key,'']))
+  page.value=1
+}
+onMounted(async()=>{ await load(); if(route.query.new==='1' && canCreate.value) create() })
 onBeforeUnmount(revokeLocalPreviews)
 </script>
 
@@ -270,7 +304,7 @@ onBeforeUnmount(revokeLocalPreviews)
   <div class="page-stack">
     <header class="page-heading">
       <div><p class="eyebrow">GDCSS Castelões · Gestão</p><h1>{{title}}</h1><p class="page-heading__description">{{description}}</p></div>
-      <div v-if="allowCreate" class="page-heading__actions"><button class="btn btn--primary" @click="create"><Icon name="lucide:plus"/> Adicionar</button></div>
+      <div v-if="canCreate" class="page-heading__actions"><button class="btn btn--primary" @click="create"><Icon name="lucide:plus"/> Adicionar</button></div>
     </header>
 
     <p v-if="error" class="cms-alert cms-alert--danger">{{error}}</p>
@@ -293,34 +327,52 @@ onBeforeUnmount(revokeLocalPreviews)
       </div>
 
       <div v-if="pending" class="cms-loading">A carregar…</div>
-      <div v-else-if="!filteredItems.length" class="empty-state"><Icon name="lucide:inbox" size="30"/><h3>{{query||Object.values(filters).some(Boolean)?'Sem resultados':'Ainda não existem registos'}}</h3><p>{{query||Object.values(filters).some(Boolean)?'Altera a pesquisa ou os filtros.':emptyText}}</p><button v-if="allowCreate&&!query&&!Object.values(filters).some(Boolean)" class="btn btn--primary" @click="create">Adicionar registo</button></div>
+      <div v-else-if="!filteredItems.length" class="empty-state"><Icon name="lucide:inbox" size="30"/><h3>{{query||Object.values(filters).some(Boolean)?'Sem resultados':'Ainda não existem registos'}}</h3><p>{{query||Object.values(filters).some(Boolean)?'Altera a pesquisa ou os filtros.':emptyText}}</p><button v-if="canCreate&&!query&&!Object.values(filters).some(Boolean)" class="btn btn--primary" @click="create">Adicionar registo</button></div>
       <div v-else class="table-scroll">
-        <table class="data-table"><thead><tr><th v-for="c in visibleColumns" :key="c">{{fieldLabel(c)}}</th><th>Ações</th></tr></thead>
-          <tbody><tr v-for="item in filteredItems" :key="item.id">
-            <td v-for="c in visibleColumns" :key="c">
+        <table class="data-table resource-data-table"><thead><tr><th v-for="c in visibleColumns" :key="c">{{fieldLabel(c)}}</th><th>Ações</th></tr></thead>
+          <tbody><tr v-for="item in paginatedItems" :key="item.id">
+            <td v-for="c in visibleColumns" :key="c" :data-label="fieldLabel(c)">
               <img v-if="isImageColumn(c) && item[c]" :src="item[c]" :alt="`Imagem de ${display(item,visibleColumns[0])}`" class="table-image-preview" loading="lazy">
               <strong v-else-if="c===visibleColumns[0]">{{display(item,c)}}</strong>
               <template v-else>{{display(item,c)}}</template>
             </td>
-            <td><div class="row-actions">
-              <button v-if="isPublishable" class="icon-button icon-button--small" @click="togglePublish(item)" :title="item[publishKey]==='draft'?'Publicar':'Despublicar'"><Icon :name="item[publishKey]==='draft'?'lucide:eye':'lucide:eye-off'"/></button>
-              <button v-if="allowEdit" class="icon-button icon-button--small" @click="edit(item)" title="Ver / atualizar"><Icon name="lucide:eye"/></button>
-              <button v-if="allowDelete" class="icon-button icon-button--small danger" @click="del(item)" title="Eliminar"><Icon name="lucide:trash-2"/></button>
+            <td data-label="Ações"><div class="row-actions">
+              <button v-if="isPublishable && canEdit" class="icon-button icon-button--small" @click="togglePublish(item)" :title="item[publishKey]==='draft'?'Publicar':'Despublicar'"><Icon :name="item[publishKey]==='draft'?'lucide:eye':'lucide:eye-off'"/></button>
+              <button v-if="canEdit" class="icon-button icon-button--small" @click="edit(item)" title="Editar"><Icon name="lucide:pencil"/></button>
+              <button v-if="canDelete" class="icon-button icon-button--small danger" @click="del(item)" title="Eliminar"><Icon name="lucide:trash-2"/></button>
             </div></td>
           </tr></tbody>
         </table>
       </div>
+
+      <CmsPagination
+        v-model:page="page"
+        :total-items="filteredItems.length"
+        :page-size="pageSize"
+      />
     </section>
 
     <div v-if="modalOpen" class="modal-backdrop" @click.self="close">
       <form v-if="editing" class="cms-modal" @submit.prevent="submit">
         <header><div><p class="eyebrow">{{editingId!==null?'Editar registo':'Novo registo'}}</p><h2>{{title}}</h2></div><button type="button" class="icon-button" @click="close"><Icon name="lucide:x"/></button></header>
         <div class="form-grid">
-          <label v-for="field in fields" :key="field.key" class="form-field" :class="{'form-field--wide':['textarea','array','image'].includes(field.type||'')}">
+          <label v-for="field in fields" :key="field.key" class="form-field" :class="{'form-field--wide':['textarea','array','image','image-multi'].includes(field.type||'')}">
             <span>{{field.label}}</span>
             <textarea v-if="field.type==='textarea'" v-model="editing[field.key]" rows="5" :placeholder="field.placeholder" :readonly="field.readonly"/>
             <textarea v-else-if="field.type==='array'" :value="Array.isArray(editing[field.key])?editing[field.key].join('\n'):editing[field.key]" rows="5" placeholder="Um item por linha" @input="arrayInput(field.key,$event)"/>
             <select v-else-if="field.type==='select'" v-model="editing[field.key]" :disabled="field.readonly"><option value="">Selecionar…</option><option v-for="option in field.options" :key="String(normalizedOption(option).value)" :value="normalizedOption(option).value">{{normalizedOption(option).label}}</option></select>
+            <CmsDateTimePicker
+              v-else-if="['date','time','datetime-local'].includes(field.type||'')"
+              v-model="editing[field.key]"
+              :type="field.type as 'date'|'time'|'datetime-local'"
+              :required="field.required!==false"
+              :readonly="field.readonly"
+              :placeholder="field.placeholder"
+            />
+            <CmsGalleryImagePicker
+              v-else-if="field.type==='image-multi'"
+              v-model="editing[field.key]"
+            />
             <template v-else-if="field.type==='image'">
               <div class="image-field">
                 <div v-if="imagePreviewFor(field)" class="image-preview-card">

@@ -59,17 +59,17 @@ function getConselhoFiscalPosition(index) {
     <LandingSectionhead>
       <template #title>
         <div class="flex flex-col items-center">
-          <span class="text-slate-800">Equipa {{ season }}</span>
+          <span class="text-neutral-900">Equipa {{ season }}</span>
 
           <div class="mt-5 flex h-px w-32 overflow-hidden rounded-sm">
-            <div class="w-1/2 bg-green-600"></div>
-            <div class="w-1/2 bg-red-600"></div>
+            <div class="w-1/2 bg-primary-700"></div>
+            <div class="w-1/2 bg-secondary-500"></div>
           </div>
         </div>
       </template>
 
       <template #desc>
-        <span class="text-slate-600">
+        <span class="text-neutral-600">
           Órgãos sociais, equipa técnica e plantel do G.D.C.S.S. Castelões
         </span>
       </template>
@@ -78,14 +78,14 @@ function getConselhoFiscalPosition(index) {
     <section class="mt-12 w-full">
       <div class="mb-12 text-center">
         <span
-          class="text-sm font-semibold uppercase tracking-[0.25em] text-green-700"
+          class="text-sm font-semibold uppercase tracking-[0.25em] text-primary-700"
         >
           Órgãos Sociais
         </span>
       </div>
 
       <section class="w-full">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-800">
+        <h2 class="mb-6 text-center text-2xl font-bold text-neutral-900">
           Assembleia Geral
         </h2>
 
@@ -104,10 +104,10 @@ function getConselhoFiscalPosition(index) {
             />
 
             <div class="mt-4 flex flex-1 flex-col justify-end px-4 pb-4">
-              <p class="text-xl font-semibold text-slate-900">
+              <p class="text-xl font-semibold text-neutral-900">
                 {{ formatarNome(membro.nome) }}
               </p>
-              <p class="text-slate-600">
+              <p class="text-neutral-600">
                 {{ membro.funcao }}
               </p>
             </div>
@@ -116,7 +116,7 @@ function getConselhoFiscalPosition(index) {
       </section>
 
       <section class="mt-16 w-full">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-800">
+        <h2 class="mb-6 text-center text-2xl font-bold text-neutral-900">
           Direção
         </h2>
 
@@ -135,10 +135,10 @@ function getConselhoFiscalPosition(index) {
             />
 
             <div class="mt-4 flex flex-1 flex-col justify-end px-4 pb-4">
-              <p class="text-xl font-semibold text-slate-900">
+              <p class="text-xl font-semibold text-neutral-900">
                 {{ formatarNome(membro.nome) }}
               </p>
-              <p class="text-slate-600">
+              <p class="text-neutral-600">
                 {{ membro.funcao }}
               </p>
             </div>
@@ -147,7 +147,7 @@ function getConselhoFiscalPosition(index) {
       </section>
 
       <section class="mt-16 w-full">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-800">
+        <h2 class="mb-6 text-center text-2xl font-bold text-neutral-900">
           Conselho Fiscal
         </h2>
 
@@ -167,10 +167,10 @@ function getConselhoFiscalPosition(index) {
             />
 
             <div class="mt-4 flex flex-1 flex-col justify-end px-4 pb-4">
-              <p class="text-xl font-semibold text-slate-900">
+              <p class="text-xl font-semibold text-neutral-900">
                 {{ formatarNome(membro.nome) }}
               </p>
-              <p class="text-slate-600">
+              <p class="text-neutral-600">
                 {{ membro.funcao }}
               </p>
             </div>
@@ -182,14 +182,14 @@ function getConselhoFiscalPosition(index) {
     <section class="mt-20 mb-16 w-full">
       <div class="mb-12 text-center">
         <span
-          class="text-sm font-semibold uppercase tracking-[0.25em] text-green-700"
+          class="text-sm font-semibold uppercase tracking-[0.25em] text-primary-700"
         >
           Estrutura Desportiva
         </span>
       </div>
 
       <section id="equipa-tecnica" class="w-full scroll-mt-28">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-800">
+        <h2 class="mb-6 text-center text-2xl font-bold text-neutral-900">
           Equipa Técnica
         </h2>
 
@@ -197,7 +197,7 @@ function getConselhoFiscalPosition(index) {
           <div
             v-for="membro in equipaTecnicaVisivel"
             :key="membro.id"
-            class="card-surface flex cursor-pointer items-center justify-center overflow-hidden bg-slate-50 p-2 transition-shadow hover:shadow-lg"
+            class="card-surface flex cursor-pointer items-center justify-center overflow-hidden bg-neutral-50 p-2 transition-shadow hover:shadow-lg"
             role="button"
             tabindex="0"
             @click="openImage(getImagem(membro.img))"
@@ -215,7 +215,7 @@ function getConselhoFiscalPosition(index) {
       </section>
 
       <section id="plantel" class="mt-16 w-full scroll-mt-28">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-800">
+        <h2 class="mb-6 text-center text-2xl font-bold text-neutral-900">
           Plantel
         </h2>
 
@@ -223,7 +223,7 @@ function getConselhoFiscalPosition(index) {
           <div
             v-for="jogador in plantelVisivel"
             :key="jogador.id"
-            class="card-surface flex cursor-pointer items-center justify-center overflow-hidden bg-slate-50 p-2 transition-shadow hover:shadow-lg"
+            class="card-surface flex cursor-pointer items-center justify-center overflow-hidden bg-neutral-50 p-2 transition-shadow hover:shadow-lg"
             role="button"
             tabindex="0"
             @click="openImage(getImagem(jogador.img))"
@@ -245,9 +245,10 @@ function getConselhoFiscalPosition(index) {
       v-if="selectedImage"
       ref="dialogRef"
       class="dialog-zoom"
+      @cancel.prevent="closeDialog"
       @click.self="closeDialog"
     >
-      <div class="dialog-content">
+      <div class="dialog-content" @click.self="closeDialog">
         <button
           type="button"
           aria-label="Fechar imagem"
@@ -260,6 +261,7 @@ function getConselhoFiscalPosition(index) {
           :src="selectedImage"
           alt="Imagem ampliada"
           class="zoomed-image"
+          @click.stop
         />
       </div>
     </dialog>

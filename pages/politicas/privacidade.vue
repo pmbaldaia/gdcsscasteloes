@@ -9,18 +9,18 @@ definePageMeta({
     <LandingSectionhead>
       <template #title>
         <div class="flex flex-col items-center">
-          <span class="text-gray-900"
+          <span class="text-neutral-900"
             >Política de Privacidade</span
           >
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
-            <div class="w-1/2 bg-red-600"></div>
-            <div class="w-1/2 bg-green-600"></div>
+            <div class="w-1/2 bg-secondary-500"></div>
+            <div class="w-1/2 bg-primary-700"></div>
           </div>
         </div>
       </template>
 
       <template #desc>
-        <span class="text-slate-600">
+        <span class="text-neutral-600">
           O G.D.C.S.S. Castelões preza pela transparência e segurança dos seus
           dados pessoais. A nossa Política de Privacidade visa esclarecer de que
           forma recolhemos, utilizamos, protegemos e partilhamos as suas
@@ -29,7 +29,7 @@ definePageMeta({
       </template>
     </LandingSectionhead>
 
-    <div class="mt-8 text-fluid-lg text-slate-600">
+    <div class="mt-8 text-fluid-lg text-neutral-600">
       <p class="mb-6">
         O G.D.C.S.S. Castelões está comprometido com a proteção da sua
         privacidade. Esta Política de Privacidade foi desenvolvida para informar
@@ -38,7 +38,7 @@ definePageMeta({
         suas informações.
       </p>
 
-      <h3 class="text-fluid-xl font-semibold text-gray-900">
+      <h3 class="text-fluid-xl font-semibold text-neutral-900">
         1. Dados Pessoais Recolhidos
       </h3>
       <p class="mb-4">
@@ -49,7 +49,7 @@ definePageMeta({
         comportamento de navegação.
       </p>
 
-      <h3 class="text-fluid-xl font-semibold text-gray-900">
+      <h3 class="text-fluid-xl font-semibold text-neutral-900">
         2. Finalidade da Recolha dos Dados
       </h3>
       <div class="mb-4">
@@ -72,7 +72,7 @@ definePageMeta({
         </ul>
       </div>
 
-      <h3 class="text-fluid-xl font-semibold text-gray-900">
+      <h3 class="text-fluid-xl font-semibold text-neutral-900">
         3. Proteção dos Dados Pessoais
       </h3>
       <p class="mb-4">
@@ -83,7 +83,7 @@ definePageMeta({
         perda ou alteração indevida.
       </p>
 
-      <h3 class="text-fluid-xl font-semibold text-gray-900">
+      <h3 class="text-fluid-xl font-semibold text-neutral-900">
         4. Direitos dos Utilizadores
       </h3>
       <p class="mb-4">
@@ -94,7 +94,7 @@ definePageMeta({
         do nosso canal de suporte.
       </p>
 
-      <h3 class="text-fluid-xl font-semibold text-gray-900">
+      <h3 class="text-fluid-xl font-semibold text-neutral-900">
         5. Cookies
       </h3>
       <p class="mb-4">
@@ -102,7 +102,7 @@ definePageMeta({
         mais informações sobre como utilizamos cookies, consulte a nossa
         <a
           href="/politicas/cookies"
-          class="text-red-800"
+          class="text-secondary-800"
           aria-label="Aceda aqui à Política de Cookies"
           >Política de Cookies</a
         >.

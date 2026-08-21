@@ -9,19 +9,19 @@ definePageMeta({
     class="flex flex-col items-center justify-center min-h-screen text-center px-4 sm:px-6"
   >
     <div
-      class="w-full max-w-md sm:max-w-xl bg-white/95 backdrop-blur-sm p-6 sm:p-10 rounded-2xl shadow-xl border border-white/60"
+      class="w-full max-w-md sm:max-w-xl bg-surface/95 backdrop-blur-sm p-6 sm:p-10 rounded-2xl shadow-xl border border-white/60"
     >
       <h1
-        class="text-fluid-4xl font-extrabold mb-4 sm:mb-6 text-green-800 tracking-tight"
+        class="text-fluid-4xl font-extrabold mb-4 sm:mb-6 text-primary-800 tracking-tight"
       >
         O jogo está interrompido!
       </h1>
 
-      <p class="text-fluid-lg text-slate-700 mb-6 sm:mb-8 leading-relaxed">
+      <p class="text-fluid-lg text-neutral-600 mb-6 sm:mb-8 leading-relaxed">
         O nosso site está em manutenção. Voltaremos em breve com melhorias.
       </p>
 
-      <p class="text-fluid-sm text-slate-600 mb-8 sm:mb-12 italic">
+      <p class="text-fluid-sm text-neutral-600 mb-8 sm:mb-12 italic">
         “Até os melhores jogadores precisam de uma pausa para dar o seu melhor.”
       </p>
 
@@ -35,7 +35,7 @@ definePageMeta({
         />
       </div>
 
-      <p class="text-fluid-sm text-slate-800 font-semibold">
+      <p class="text-fluid-sm text-neutral-900 font-semibold">
         Entretanto, aproveita para descansar e regressar com energia!
       </p>
     </div>

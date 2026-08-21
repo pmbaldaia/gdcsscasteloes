@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { isDark } = useThemeMode()
 defineProps<{ open?: boolean }>();
 defineEmits<{ close: [] }>();
 const route = useRoute();
@@ -15,9 +16,9 @@ const { groups } = useCmsNavigation();
   <aside class="cms-sidebar" :class="{ 'cms-sidebar--open': open }">
     <NuxtLink to="/admin" class="brand" @click="$emit('close')"
       ><img
-        src="/img/logowbg.webp"
+        :src="isDark ? '/img/logotipo.webp' : '/img/logowbg.webp'"
         alt="GDCSS Castelões"
-        class="brand__logo"
+        class="brand-logo-original brand__logo"
       /><span class="brand__name">GDCSSCastelões</span></NuxtLink
     >
     <nav class="sidebar-nav" aria-label="Navegação principal">

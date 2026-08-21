@@ -13,7 +13,13 @@
     "mongo:check": "node --env-file=.env scripts/check-mongodb.mjs",
     "mongo:migrate": "node --env-file=.env scripts/migrate-to-mongodb.mjs",
     "mongo:check-settings": "node --env-file=.env scripts/check-settings.mjs",
-    "assets:check": "node scripts/check-static-assets.mjs"
+    "assets:check": "node scripts/check-static-assets.mjs",
+    "mongo:gallery-backfill": "node --env-file=.env scripts/backfill-gallery-order.mjs",
+    "sharp:check": "node scripts/check-sharp-versions.mjs",
+    "mongo:import-2627": "node --env-file=.env scripts/import-season-2627.mjs",
+    "deps:reset": "node scripts/reset-dependencies.mjs",
+    "brand:check": "node scripts/check-admin-brand.mjs",
+    "a11y:tokens": "node scripts/check-accessibility-tokens.mjs"
   },
   "devDependencies": {
     "@nuxt/image": "^1.11.0",
@@ -33,6 +39,10 @@
     "@pinia/nuxt": "^0.11.0",
     "lucide-vue-next": "^0.510.0",
     "pinia": "^3.0.2",
-    "mongodb": "^6.19.0"
+    "mongodb": "^6.19.0",
+    "sharp": "0.32.6"
+  },
+  "overrides": {
+    "sharp": "0.32.6"
   }
 }

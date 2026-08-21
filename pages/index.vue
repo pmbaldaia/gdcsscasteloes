@@ -7,7 +7,9 @@ definePageMeta({
 <template>
   <LandingContainer>
     <LandingHero />
-    <LandingFeatures />
+    <div id="conteudo-principal">
+      <LandingFeatures />
+    </div>
     <LandingGames />
     <LandingLogos />
     <LandingCta />

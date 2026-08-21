@@ -4,6 +4,8 @@ const emptySettings = Object.freeze({
   id: '',
   clubName: '',
   contactEmail: '',
+  heroDesktopImage: '',
+  heroMobileImage: '',
   public: true,
 })
 

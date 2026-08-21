@@ -9,16 +9,16 @@ definePageMeta({
     <LandingSectionhead>
       <template #title>
         <div class="flex flex-col items-center">
-          <span class="text-gray-900">Termos de Serviço</span>
+          <span class="text-neutral-900">Termos de Serviço</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
-            <div class="w-1/2 bg-red-600"></div>
-            <div class="w-1/2 bg-green-600"></div>
+            <div class="w-1/2 bg-secondary-500"></div>
+            <div class="w-1/2 bg-primary-700"></div>
           </div>
         </div>
       </template>
 
       <template #desc>
-        <span class="text-slate-600">
+        <span class="text-neutral-600">
           Os Termos de Serviço estabelecem as condições para o uso do site do
           G.D.C.S.S. Castelões. Ao aceder ou utilizar o nosso site, você
           concorda em cumprir os termos e condições descritos abaixo.
@@ -26,7 +26,7 @@ definePageMeta({
       </template>
     </LandingSectionhead>
 
-    <div class="mt-8 text-fluid-lg text-slate-600">
+    <div class="mt-8 text-fluid-lg text-neutral-600">
       <p class="mb-6">
         Estes Termos de Serviço regulam o acesso e a utilização do site do
         G.D.C.S.S. Castelões. Ao utilizar o nosso site, você concorda em cumprir
@@ -34,7 +34,7 @@ definePageMeta({
         periodicamente.
       </p>
 
-      <h3 class="text-fluid-xl font-semibold text-gray-900">
+      <h3 class="text-fluid-xl font-semibold text-neutral-900">
         1. Aceitação dos Termos
       </h3>
       <p class="mb-4">
@@ -44,7 +44,7 @@ definePageMeta({
         utilizar o nosso site.
       </p>
 
-      <h3 class="text-fluid-xl font-semibold text-gray-900">
+      <h3 class="text-fluid-xl font-semibold text-neutral-900">
         2. Direitos de Propriedade Intelectual
       </h3>
       <p class="mb-4">
@@ -54,7 +54,7 @@ definePageMeta({
         estritamente proibido, salvo em caso de permissão explícita.
       </p>
 
-      <h3 class="text-fluid-xl font-semibold text-gray-900">
+      <h3 class="text-fluid-xl font-semibold text-neutral-900">
         3. Responsabilidades do Utilizador
       </h3>
       <p class="mb-4">
@@ -65,7 +65,7 @@ definePageMeta({
         ações legais.
       </p>
 
-      <h3 class="text-fluid-xl font-semibold text-gray-900">
+      <h3 class="text-fluid-xl font-semibold text-neutral-900">
         4. Limitação de Responsabilidade
       </h3>
       <p class="mb-4">
@@ -75,7 +75,7 @@ definePageMeta({
         incorretos.
       </p>
 
-      <h3 class="text-fluid-xl font-semibold text-gray-900">
+      <h3 class="text-fluid-xl font-semibold text-neutral-900">
         5. Modificação dos Termos
       </h3>
       <p class="mb-4">

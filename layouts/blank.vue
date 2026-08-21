@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen text-gray-900 flex flex-col overflow-hidden">
+  <div class="relative min-h-screen text-neutral-900 flex flex-col overflow-hidden">
     <NuxtImg
       src="/campo/campo.webp"
       alt=""
@@ -14,6 +14,6 @@
     />
     <div class="absolute inset-0 bg-black/50 pointer-events-none -z-10" />
 
-    <NuxtPage class="relative z-10 flex-1" />
+    <div class="relative z-10 flex-1"><slot /></div>
   </div>
 </template>

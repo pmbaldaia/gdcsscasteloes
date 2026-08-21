@@ -1,4 +1,187 @@
 <script setup>
-definePageMeta({layout:'default'});import {useGames} from '~/modules/games/useGames';const season='2026/2027';const {jornadas,teams}=await useGames();const allGames=computed(()=>Object.values(jornadas.value||{}).flat().sort((a,b)=>new Date(`${a.date}T${a.time||'00:00'}`)-new Date(`${b.date}T${b.time||'00:00'}`)));const teamLogo=name=>teams.value?.find(t=>t.name===name)?.logo||'/img/logowbg.webp';const fmt=d=>{const x=new Date(`${d}T00:00:00`);return Number.isNaN(x.getTime())?d:x.toLocaleDateString('pt-PT',{day:'2-digit',month:'2-digit',year:'numeric'})}
+definePageMeta({ layout: 'default' })
+
+import { useGames } from '~/modules/games/useGames'
+
+const { jornadas, teams } = await useGames()
+
+const games = computed(() =>
+  Object.values(jornadas.value || {})
+    .flat()
+    .sort(
+      (a, b) =>
+        new Date(`${a.date}T${a.time || '00:00'}`) -
+        new Date(`${b.date}T${b.time || '00:00'}`),
+    ),
+)
+
+const seasons = computed(() =>
+  [...new Set(games.value.map(game => game.season).filter(Boolean))]
+    .sort((a, b) => {
+      const yearA = Number(String(a).split('/')[0]) || 0
+      const yearB = Number(String(b).split('/')[0]) || 0
+      return yearB - yearA
+    }),
+)
+
+const selectedSeason = ref(seasons.value[0] || '2025/2026')
+
+watch(
+  seasons,
+  (available) => {
+    if (available.length && !available.includes(selectedSeason.value)) {
+      selectedSeason.value = available[0]
+    }
+  },
+  { immediate: true },
+)
+
+const filteredGames = computed(() =>
+  games.value.filter(game => game.season === selectedSeason.value),
+)
+
+const teamLogo = (name) =>
+  teams.value?.find(team => team.name === name)?.logo || '/img/logowbg.webp'
+
+const formatDate = (value) => {
+  const date = new Date(`${value}T00:00:00`)
+  return Number.isNaN(date.getTime())
+    ? value
+    : date.toLocaleDateString('pt-PT', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      })
+}
+
+const gameStatus = (status) =>
+  ({
+    finished: 'Terminado',
+    scheduled: 'Agendado',
+    cancelled: 'Cancelado',
+    postponed: 'Adiado',
+    draft: 'Rascunho',
+  })[status] || 'Agendado'
+
+function onLogoError(event) {
+  const image = event.target
+  if (image.dataset.fallbackApplied === '1') return
+  image.dataset.fallbackApplied = '1'
+  image.src = '/img/logowbg.webp'
+}
 </script>
-<template><LandingContainer><LandingSectionhead><template #title><div class="flex flex-col items-center"><span class="text-gray-900">Calendário {{season}}</span><div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden"><div class="w-1/2 bg-red-600"></div><div class="w-1/2 bg-green-600"></div></div></div></template><template #desc><span class="text-slate-600">Consulta aqui o calendário oficial de jogos do clube.</span></template></LandingSectionhead><div class="max-w-5xl mx-auto px-4 mt-12 mb-16"><LandingSeasonNotice v-if="!allGames.length" :season="season" title="Calendário em preparação" description="O calendário será disponibilizado assim que existirem jogos publicados."/><div v-else class="space-y-4"><article v-for="game in allGames" :key="game.id" class="card-surface p-5 grid gap-4 md:grid-cols-[160px_1fr_110px] md:items-center"><div><strong class="text-slate-900">{{game.jornada}}</strong><p class="text-sm text-slate-500">{{fmt(game.date)}} · {{game.time||'—'}}</p></div><div class="flex items-center justify-center gap-5"><div class="flex flex-1 items-center justify-end gap-3 text-right"><span class="font-semibold">{{game.teams?.[0]}}</span><img :src="teamLogo(game.teams?.[0])" :alt="game.teams?.[0]" class="w-12 h-12 object-contain"></div><strong>vs</strong><div class="flex flex-1 items-center gap-3"><img :src="teamLogo(game.teams?.[1])" :alt="game.teams?.[1]" class="w-12 h-12 object-contain"><span class="font-semibold">{{game.teams?.[1]}}</span></div></div><div class="text-center md:text-right"><span class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">{{game.status==='finished'?'Terminado':'Agendado'}}</span></div></article></div></div></LandingContainer></template>
+
+<template>
+  <LandingContainer>
+    <LandingSectionhead>
+      <template #title>
+        <div class="flex flex-col items-center">
+          <span class="text-neutral-900">Calendário</span>
+          <div class="mt-5 flex h-px w-32 overflow-hidden rounded-sm">
+            <div class="w-1/2 bg-secondary-500" />
+            <div class="w-1/2 bg-primary-700" />
+          </div>
+        </div>
+      </template>
+
+      <template #desc>
+        <span class="text-neutral-600">
+          Consulta o calendário oficial de jogos do clube por época.
+        </span>
+      </template>
+    </LandingSectionhead>
+
+    <div class="mx-auto mt-10 mb-16 w-full max-w-5xl">
+      <div class="mb-7 flex flex-col gap-4 rounded-xl border border-neutral-200 bg-surface p-4 shadow-sm md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-600">
+            Calendário
+          </p>
+          <h2 class="mt-1 text-xl font-bold text-neutral-900">
+            Época {{ selectedSeason }}
+          </h2>
+        </div>
+
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center md:justify-end">
+          <span class="inline-flex w-fit items-center rounded-full bg-neutral-50 px-3 py-1.5 text-xs font-semibold text-neutral-600">
+            {{ filteredGames.length }}
+            {{ filteredGames.length === 1 ? 'jogo' : 'jogos' }}
+          </span>
+
+          <label class="relative block min-w-[190px]">
+            <span class="sr-only">Selecionar época</span>
+            <select
+              v-model="selectedSeason"
+              class="w-full appearance-none rounded-lg border border-neutral-200 bg-surface px-4 py-2.5 pr-10 text-sm font-semibold text-neutral-900 outline-none transition focus:border-primary-700 focus:ring-2 focus:ring-primary-700 focus:ring-opacity-10"
+            >
+              <option v-for="season in seasons" :key="season" :value="season">
+                {{ season }}
+              </option>
+            </select>
+            <Icon
+              name="lucide:chevron-down"
+              class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-neutral-600"
+              size="17"
+            />
+          </label>
+        </div>
+      </div>
+
+      <LandingSeasonNotice
+        v-if="!filteredGames.length"
+        :season="selectedSeason"
+        title="Calendário em preparação"
+        description="O calendário será disponibilizado assim que existirem jogos publicados para esta época."
+      />
+
+      <div v-else class="space-y-4">
+        <article
+          v-for="game in filteredGames"
+          :key="game.id"
+          class="card-surface grid gap-4 p-5 md:grid-cols-[160px_1fr_110px] md:items-center"
+        >
+          <div>
+            <strong class="text-neutral-900">{{ game.jornada }}</strong>
+            <p class="text-sm text-neutral-600">
+              {{ formatDate(game.date) }} · {{ game.time || '—' }}
+            </p>
+          </div>
+
+          <div class="flex items-center justify-center gap-5">
+            <div class="flex flex-1 items-center justify-end gap-3 text-right">
+              <span class="font-semibold">{{ game.teams?.[0] }}</span>
+              <SiteImage
+                :src="teamLogo(game.teams?.[0])"
+                :alt="`Logo ${game.teams?.[0] || ''}`"
+                preset="badge"
+                class="brand-logo-original h-12 w-12 object-contain"
+                loading="lazy"
+                @error="onLogoError"
+              />
+            </div>
+
+            <strong>vs</strong>
+
+            <div class="flex flex-1 items-center gap-3">
+              <SiteImage
+                :src="teamLogo(game.teams?.[1])"
+                :alt="`Logo ${game.teams?.[1] || ''}`"
+                preset="badge"
+                class="brand-logo-original h-12 w-12 object-contain"
+                loading="lazy"
+                @error="onLogoError"
+              />
+              <span class="font-semibold">{{ game.teams?.[1] }}</span>
+            </div>
+          </div>
+
+          <div class="text-center md:text-right">
+            <span class="inline-flex rounded-full bg-neutral-50 px-3 py-1 text-xs font-semibold text-neutral-600">
+              {{ gameStatus(game.status) }}
+            </span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </LandingContainer>
+</template>

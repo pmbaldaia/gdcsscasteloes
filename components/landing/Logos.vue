@@ -13,7 +13,7 @@ onUnmounted(()=>{window.removeEventListener('keydown',onKeydown);if(import.meta.
 <template>
   <section class="mt-24">
     <h2
-      class="text-slate-900 text-fluid-3xl font-bold text-center tracking-tight"
+      class="text-neutral-900 text-fluid-3xl font-bold text-center tracking-tight"
     >
       Patrocínios
     </h2>
@@ -23,7 +23,7 @@ onUnmounted(()=>{window.removeEventListener('keydown',onKeydown);if(import.meta.
         :key="i"
         type="button"
         :aria-label="`Ampliar logo ${sponsor.alt}`"
-        class="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 rounded-lg"
+        class="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-800 rounded-lg"
         @click="openSponsor(sponsor)"
       >
         <SiteImage
@@ -52,7 +52,7 @@ onUnmounted(()=>{window.removeEventListener('keydown',onKeydown);if(import.meta.
         <button
           type="button"
           aria-label="Fechar imagem"
-          class="absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-red-600 text-lg font-bold text-white shadow-md transition-colors hover:bg-red-700"
+          class="absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-secondary-800 text-lg font-bold text-white shadow-md transition-colors hover:bg-secondary-900"
           @click="closeZoom"
         >
           ✕

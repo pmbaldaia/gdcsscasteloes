@@ -7,7 +7,6 @@ import { teamsService } from '~/modules/teams/service/teams.service'
 const baseGamesService = gamesService()
 const teamService = teamsService()
 const teams = ref<any[]>([])
-
 const teamOptions = computed(() =>
   [...teams.value]
     .sort((a, b) => String(a.name || '').localeCompare(String(b.name || ''), 'pt-PT'))
@@ -25,13 +24,13 @@ const fields = computed(() => [
   { key: 'team1', label: 'Equipa 1', type: 'select', options: teamOptions.value },
   { key: 'team2', label: 'Equipa 2', type: 'select', options: teamOptions.value },
   { key: 'volta', label: 'Volta', type: 'number' },
-  { key: 'status', label: 'Estado do jogo', type: 'select', filterable: true, options: [
+  { key: 'status', label: 'Estado do jogo', type: 'select', options: [
     { value: 'scheduled', label: 'Agendado' },
     { value: 'finished', label: 'Terminado' },
     { value: 'cancelled', label: 'Cancelado' },
     { value: 'draft', label: 'Rascunho' }
   ] },
-  { key: 'publicationStatus', label: 'Publicação', type: 'select', filterable: true, options: [
+  { key: 'publicationStatus', label: 'Publicação', type: 'select', options: [
     { value: 'published', label: 'Publicado' },
     { value: 'draft', label: 'Não publicado' }
   ] }
@@ -90,5 +89,6 @@ onMounted(async () => {
     :columns="['season','jornada','date','time','team1','team2','status','publicationStatus']"
     publish-key="publicationStatus"
     :show-search="false"
+    :default-filters="{ season: '2026/2027' }"
   />
 </template>

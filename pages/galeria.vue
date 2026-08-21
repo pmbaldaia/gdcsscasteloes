@@ -30,28 +30,28 @@ const closeDialog = () => {
     <LandingSectionhead>
       <template #title>
         <div class="flex flex-col items-center">
-          <span class="text-gray-900">Galeria</span>
+          <span class="text-neutral-900">Galeria</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
-            <div class="w-1/2 bg-red-600"></div>
-            <div class="w-1/2 bg-green-600"></div>
+            <div class="w-1/2 bg-secondary-500"></div>
+            <div class="w-1/2 bg-primary-700"></div>
           </div>
         </div>
       </template>
       <template #desc>
-        <p class="text-slate-600">
+        <p class="text-neutral-600">
           Espreita alguns dos momentos que captámos em imagens!
         </p>
       </template>
     </LandingSectionhead>
 
-    <div class="space-y-24 mt-12 sm:px-4">
+    <div class="space-y-16 sm:space-y-20 mt-12">
       <section v-for="(category, index) in categories" :key="index">
         <h2
           :class="[
             'text-fluid-2xl font-bold tracking-tight mb-10',
             index === 0 || index >= categories.length - 3
-              ? 'text-left mt-6 text-gray-800'
-              : 'text-center text-gray-800',
+              ? 'text-left mt-6 text-neutral-900'
+              : 'text-center text-neutral-900',
           ]"
         >
           {{ category.title }}
@@ -87,9 +87,10 @@ const closeDialog = () => {
       v-if="selectedImage"
       ref="dialogRef"
       class="dialog-zoom"
+      @cancel.prevent="closeDialog"
       @click.self="closeDialog"
     >
-      <div class="dialog-content">
+      <div class="dialog-content" @click.self="closeDialog">
         <button
           @click="closeDialog"
           aria-label="Fechar imagem"
@@ -97,15 +98,13 @@ const closeDialog = () => {
         >
           ✕
         </button>
-        <SiteImage
+        <img
           :src="selectedImage"
           alt="Imagem ampliada"
-          preset="cardLg"
-          width="800"
-          height="800"
-          sizes="(max-width: 1024px) 90vw, 800px"
-          loading="eager"
           class="zoomed-image"
+          loading="eager"
+          decoding="async"
+          @click.stop
         />
       </div>
     </dialog>

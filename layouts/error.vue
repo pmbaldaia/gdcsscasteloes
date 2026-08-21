@@ -5,13 +5,13 @@ const error = useError();
 
 <template>
   <div
-    class="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-cover bg-center bg-no-repeat relative text-gray-900"
+    class="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-cover bg-center bg-no-repeat relative text-neutral-900"
     :style="{ backgroundImage: 'url(/campo/campo.webp)' }"
   >
     <div class="absolute inset-0 bg-black/50"></div>
 
     <div
-      class="relative z-10 max-w-md w-full bg-white/90 backdrop-blur-md rounded-2xl p-8 shadow-lg flex flex-col items-center"
+      class="relative z-10 max-w-md w-full bg-surface/90 backdrop-blur-md rounded-2xl p-8 shadow-lg flex flex-col items-center"
     >
       <div class="w-28 h-28 md:w-36 md:h-36 animate-bounce mb-6">
         <img
@@ -22,11 +22,11 @@ const error = useError();
       </div>
 
       <h1 class="text-fluid-hero font-extrabold mb-2">
-        <span class="text-green-700" v-html="error?.statusCode || '404'"></span>
+        <span class="text-primary-700" v-html="error?.statusCode || '404'"></span>
       </h1>
 
       <p class="text-fluid-2xl font-semibold mb-1">Página fora de jogo!</p>
-      <p class="text-gray-700 text-fluid-base mb-8 max-w-xs px-4">
+      <p class="text-neutral-600 text-fluid-base mb-8 max-w-xs px-4">
         {{
           error?.statusMessage || "Algo correu mal. Tenta novamente mais tarde."
         }}
@@ -35,7 +35,7 @@ const error = useError();
       <div class="flex gap-6 w-full max-w-xs mb-6">
         <NuxtLink
           to="/"
-          class="flex-1 bg-red-800 text-white hover:bg-red-900 border border-red-900 rounded-full py-3 font-semibold transition"
+          class="flex-1 bg-secondary-800 text-white hover:bg-secondary-900 border border-secondary-900 rounded-full py-3 font-semibold transition"
         >
           Voltar à página inicial
         </NuxtLink>

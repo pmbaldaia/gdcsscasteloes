@@ -2,6 +2,7 @@ import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: [
     "./components/**/*.{js,vue,ts}",
     "./layouts/**/*.vue",
@@ -16,15 +17,42 @@ export default {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       colors: {
+        primary: {
+          50: "var(--color-primary-50)",
+          700: "var(--color-primary-700)",
+          800: "var(--color-primary-800)",
+          900: "var(--color-primary-900)",
+          950: "var(--color-primary-950)",
+        },
+        secondary: {
+          50: "var(--color-secondary-50)",
+          500: "var(--color-secondary-500)",
+          800: "var(--color-secondary-800)",
+          900: "var(--color-secondary-900)",
+          950: "var(--color-secondary-950)",
+        },
+        neutral: {
+          50: "var(--color-neutral-50)",
+          200: "var(--color-neutral-200)",
+          600: "var(--color-neutral-600)",
+          900: "var(--color-neutral-900)",
+        },
+        surface: "var(--color-surface)",
         club: {
-          green: "#166534",
-          red: "#991b1b",
+          green: "var(--color-primary-900)",
+          red: "var(--color-secondary-800)",
         },
       },
+      borderRadius: {
+        card: "var(--radius-card)",
+        button: "var(--radius-button)",
+        lg: "var(--radius-button)",
+        xl: "var(--radius-card)",
+        "2xl": "16px",
+      },
       boxShadow: {
-        card: "0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06)",
-        "card-hover":
-          "0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.06)",
+        card: "var(--shadow-card)",
+        "card-hover": "var(--shadow-card-hover)",
       },
       /* Escala fluida contida: boa em mobile, não exagera em MacBook/desktop */
       fontSize: {

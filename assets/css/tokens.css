@@ -1,0 +1,117 @@
+:root {
+  /* =========================================================
+     GDCSS CASTELÕES — DESIGN TOKENS
+     Fonte da verdade: brasão oficial / Design System Agosto 2026
+     ========================================================= */
+
+  /* Primária — Verde do brasão */
+  --color-primary-50: #ebffeb;
+  --color-primary-700: #007000;
+  --color-primary-800: #005c00;
+  --color-primary-900: #004c00;
+  --color-primary-950: #003300;
+
+  /* Secundária — Vermelho do brasão */
+  --color-secondary-50: #ffebeb;
+  --color-secondary-500: #ff0000;
+  --color-secondary-800: #b80000;
+  --color-secondary-900: #990000;
+  --color-secondary-950: #700000;
+
+  /* Neutros */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-600: #475569;
+  --color-neutral-900: #0f172a;
+  --color-surface: #ffffff;
+
+  /* Tipografia */
+  --font-brand: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Geometria */
+  --radius-card: 14px;
+  --radius-button: 8px;
+
+  /* Elevação */
+  --shadow-card: 0 1px 3px rgb(15 23 42 / .07), 0 1px 2px -1px rgb(15 23 42 / .06);
+  --shadow-card-hover: 0 12px 22px -8px rgb(15 23 42 / .16), 0 4px 8px -4px rgb(15 23 42 / .08);
+
+  /* Foco WCAG — primary-700 */
+  --focus-ring: #007000;
+  --focus-ring-soft: rgb(0 112 0 / .18);
+
+/* Tokens semânticos — modo claro */
+--ui-page: #f8fafc;
+--ui-surface: #ffffff;
+--ui-surface-raised: #ffffff;
+  --ui-surface-soft: #f1f5f9;
+  --ui-overlay: rgb(15 23 42 / .58);
+--ui-text: #0f172a;
+--ui-text-muted: #475569;
+--ui-divider: #e2e8f0;
+--ui-control-border: #64748b;
+--ui-disabled-bg: #f1f5f9;
+--ui-disabled-text: #475569;
+
+--ui-primary-bg: #005c00;
+--ui-primary-bg-hover: #003300;
+--ui-primary-bg-active: #004c00;
+--ui-primary-text: #004c00;
+--ui-primary-soft: #ebffeb;
+
+--ui-danger-bg: #b80000;
+--ui-danger-bg-hover: #990000;
+--ui-danger-text: #990000;
+--ui-danger-soft: #ffebeb;
+
+--ui-focus: #007000;
+--ui-focus-soft: rgb(0 112 0 / .20);
+
+}
+
+
+
+
+html.dark {
+  /* O matiz principal da marca mantém-se; superfícies e texto adaptam-se. */
+  --color-primary-50: #0d2410;
+  --color-primary-700: #4fb64f;
+  --color-secondary-50: #2a0d0d;
+  --color-neutral-50: #0b1118;
+  --color-neutral-200: #344358;
+  --color-neutral-600: #a9b5c5;
+  --color-neutral-900: #f1f5f9;
+  --color-surface: #111923;
+
+  --ui-page: #090e14;
+  --ui-surface: #121b25;
+  --ui-surface-raised: #1a2633;
+  --ui-surface-soft: #0e1620;
+  --ui-overlay: rgb(0 0 0 / .72);
+  --ui-text: #f8fafc;
+  --ui-text-muted: #b8c4d1;
+  --ui-divider: #43546a;
+  --ui-control-border: #71839a;
+  --ui-disabled-bg: #202b37;
+  --ui-disabled-text: #b8c4d1;
+
+  --ui-primary-bg: #005c00;
+  --ui-primary-bg-hover: #004c00;
+  --ui-primary-bg-active: #003300;
+  --ui-primary-text: #9be39b;
+  --ui-primary-soft: #102b14;
+
+  --ui-danger-bg: #b80000;
+  --ui-danger-bg-hover: #990000;
+  --ui-danger-text: #ffaaaa;
+  --ui-danger-soft: #321111;
+
+  --ui-focus: #4fb64f;
+  --ui-focus-soft: rgb(79 182 79 / .24);
+
+  --shadow-card: 0 1px 3px rgb(0 0 0 / .30), 0 1px 2px -1px rgb(0 0 0 / .26);
+  --shadow-card-hover: 0 16px 28px -10px rgb(0 0 0 / .52), 0 5px 10px -5px rgb(0 0 0 / .36);
+
+  --focus-ring: var(--ui-focus);
+  --focus-ring-soft: var(--ui-focus-soft);
+}

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { isDark } = useThemeMode()
 definePageMeta({ layout: "admin-auth" });
 const email = ref("");
 const password = ref("");
@@ -44,7 +45,7 @@ async function submit() {
 </script>
 <template>
   <section class="auth-card">
-    <img src="/img/logowbg.webp" alt="GDCSS Castelões" class="auth-logo" />
+    <img :src="isDark ? '/img/logotipo.webp' : '/img/logowbg.webp'" alt="GDCSS Castelões" class="brand-logo-original auth-logo" />
     <p class="eyebrow">Área reservada</p>
     <h1>GDCSS Castelões</h1>
     <p>Inicia sessão para gerir os conteúdos do site.</p>

@@ -21,10 +21,10 @@ watch(() => route.params.slug, carregarEvento);
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto mt-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-5xl mx-auto mt-12">
     <NuxtLink
       to="/eventos"
-      class="inline-block mb-8 text-blue-500 hover:underline font-medium transition-colors"
+      class="inline-block mb-8 text-primary-700 hover:underline font-medium transition-colors"
     >
       ← Voltar aos eventos
     </NuxtLink>
@@ -51,17 +51,17 @@ watch(() => route.params.slug, carregarEvento);
 
       <div class="p-6 sm:p-10">
         <h1
-          class="text-fluid-3xl font-extrabold text-gray-900 mb-6 transition-colors"
+          class="text-fluid-3xl font-extrabold text-neutral-900 mb-6 transition-colors"
         >
           {{ evento.nome }}
         </h1>
 
         <div
-          class="flex flex-col sm:flex-row sm:space-x-10 text-gray-700 mb-8"
+          class="flex flex-col sm:flex-row sm:space-x-10 text-neutral-600 mb-8"
         >
           <p class="flex items-center mb-3 sm:mb-0 gap-2">
             <svg
-              class="w-5 h-5 text-red-500 flex-shrink-0"
+              class="w-5 h-5 text-secondary-800 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -87,7 +87,7 @@ watch(() => route.params.slug, carregarEvento);
 
           <p class="flex items-center mb-3 sm:mb-0 gap-2">
             <svg
-              class="w-5 h-5 text-blue-500 flex-shrink-0"
+              class="w-5 h-5 text-primary-700 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -104,7 +104,7 @@ watch(() => route.params.slug, carregarEvento);
 
           <p class="flex items-center gap-2">
             <svg
-              class="w-5 h-5 text-green-500 flex-shrink-0"
+              class="w-5 h-5 text-primary-700 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -126,20 +126,20 @@ watch(() => route.params.slug, carregarEvento);
         </div>
 
         <p
-          class="text-gray-800 leading-relaxed mb-6 transition-colors"
+          class="text-neutral-900 leading-relaxed mb-6 transition-colors"
         >
           {{ evento.descricao }}
         </p>
 
         <div
           v-if="evento.detalhes"
-          class="prose-fluid text-slate-700 leading-relaxed"
+          class="prose-fluid text-neutral-600 leading-relaxed"
           v-html="evento.detalhes"
         ></div>
       </div>
     </div>
 
-    <p v-else class="text-red-500 mt-6 text-center font-semibold text-fluid-lg">
+    <p v-else class="text-secondary-800 mt-6 text-center font-semibold text-fluid-lg">
       Evento não encontrado.
     </p>
   </div>

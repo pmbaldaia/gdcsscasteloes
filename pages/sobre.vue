@@ -19,16 +19,16 @@ const campo = {
     <LandingSectionhead>
       <template #title>
         <div class="flex flex-col items-center">
-          <span class="text-slate-800">Sobre nós</span>
+          <span class="text-neutral-900">Sobre nós</span>
           <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
-            <div class="w-1/2 bg-red-600"></div>
-            <div class="w-1/2 bg-green-600"></div>
+            <div class="w-1/2 bg-secondary-500"></div>
+            <div class="w-1/2 bg-primary-700"></div>
           </div>
         </div>
       </template>
 
       <template #desc>
-        <span class="text-slate-600">
+        <span class="text-neutral-600">
           Localização e imagem do campo do Castelões
         </span>
       </template>
@@ -51,10 +51,10 @@ const campo = {
 
       <div class="w-full md:w-1/2 p-4 flex justify-center items-center">
         <div
-          class="text-fluid-2xl leading-relaxed text-center md:text-left text-slate-800"
+          class="text-fluid-2xl leading-relaxed text-center md:text-left text-neutral-900"
         >
           <strong>{{ campo.nome }}</strong>
-          <p class="text-slate-600 mt-2">{{ campo.rua }}</p>
+          <p class="text-neutral-600 mt-2">{{ campo.rua }}</p>
         </div>
       </div>
     </div>

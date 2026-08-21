@@ -6,5 +6,13 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return
   }
   if (!token.value) return navigateTo('/admin/login')
-  try { await me() } catch { token.value = null; return navigateTo('/admin/login') }
+  try {
+    const user = await me()
+    if (to.path.startsWith('/admin/utilizadores') && user.role !== 'admin') {
+      return navigateTo('/admin')
+    }
+  } catch {
+    token.value = null
+    return navigateTo('/admin/login')
+  }
 })

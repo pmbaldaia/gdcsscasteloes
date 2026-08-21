@@ -117,3 +117,49 @@ O componente `components/SiteImage.vue` distingue automaticamente:
 - assets estáticos (`/eventos/...`, `/equipa/...`, etc.) → `NuxtImg`, mantendo otimização.
 
 Isto evita URLs `/_ipx/.../uploads/...` que não conseguem processar corretamente streams GridFS em produção.
+
+
+## Época 2026/2027 — Divisão de Honra
+
+O projeto inclui o calendário validado de 30 jornadas do GDCSS Castelões para 2026/2027.
+
+No CMS, em `/admin/jogos`, existe a ação **Adicionar época 2026/2027**. Esta importação é idempotente e não destrutiva:
+
+- não altera jogos de 2025/2026;
+- cria apenas jornadas 2026/2027 em falta;
+- cria apenas equipas que ainda não existam;
+- preserva logos e dados das equipas existentes;
+- novas equipas são criadas com `logo: ""`, para o logo ser posteriormente carregado em `/admin/equipas`;
+- repetir a importação não duplica jornadas nem equipas.
+
+Também pode ser executada pela linha de comandos:
+
+```bash
+npm run mongo:import-2627
+```
+
+
+## macOS — Sharp/libvips duplicado
+
+O projeto fixa `sharp` em `0.32.6`, a mesma versão usada pelo IPX desta árvore de dependências.
+
+Se uma instalação antiga tiver deixado Sharp 0.34 em `node_modules/@img`, executa:
+
+```bash
+npm run deps:reset
+npm ci
+npm run sharp:check
+npm run dev
+```
+
+`deps:reset` remove apenas dependências/cache locais (`node_modules`, `.nuxt`, `.output`, `.netlify`); não altera código, `.env` nem MongoDB.
+
+## NuxtPage e layouts
+
+`<NuxtPage />` é renderizado apenas em `app.vue`. Os layouts usam `<slot />`, conforme a arquitetura de layouts do Nuxt.
+
+
+## Design System GDCSS Castelões
+
+O site público e o CMS partilham a mesma fonte de verdade visual em `assets/css/tokens.css`.
+Consultar `docs/design-system.md` antes de adicionar novas cores ou componentes.
