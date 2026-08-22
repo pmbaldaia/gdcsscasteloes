@@ -44,14 +44,6 @@ async function handleLogout() {
   await logout()
 }
 
-function help() {
-  window.open(
-    'https://gdcsscasteloes.pt/contacto',
-    '_blank',
-    'noopener,noreferrer',
-  )
-}
-
 function openSite() {
   window.open('/', '_blank', 'noopener,noreferrer')
 }
@@ -92,16 +84,6 @@ function openSite() {
       </button>
 
       <ThemeToggle />
-
-      <button
-        class="icon-button"
-        type="button"
-        aria-label="Ajuda"
-        title="Ajuda"
-        @click="help"
-      >
-        <Icon name="lucide:circle-help" size="19" />
-      </button>
 
       <NuxtLink
         to="/admin/mensagens"

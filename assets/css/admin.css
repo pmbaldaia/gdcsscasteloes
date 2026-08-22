@@ -916,7 +916,7 @@ button { color: inherit; }
 
 @media (max-width: 760px) {
   .cms-content {
-    padding: 12px;
+    padding: 28px 12px 12px;
   }
 
   .page-stack {
@@ -959,7 +959,7 @@ button { color: inherit; }
   }
 
   .cms-content {
-    padding: 10px;
+    padding: 28px 10px 10px;
   }
 
   .cms-modal {
@@ -2439,7 +2439,8 @@ html.dark .topbar-site-button:hover {
   }
 
   .topbar-site-button {
-    width: 36px;
+    width: 40px;
+    min-height: 40px;
     padding: 0;
   }
 }
@@ -2583,6 +2584,21 @@ html.dark .topbar-site-button:hover {
 .cms-shell .theme-toggle {
   min-width: 40px;
   min-height: 40px;
+}
+
+.cms-topbar .icon-button,
+.cms-topbar .theme-toggle {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border: 1px solid var(--ui-control-border);
+  background: var(--ui-surface);
+}
+
+.cms-topbar .topbar-site-button {
+  min-height: 40px;
+  border-color: var(--ui-control-border);
 }
 
 /* Não comunicar seleção apenas por cor. */
