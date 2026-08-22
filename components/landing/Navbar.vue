@@ -31,17 +31,29 @@ const isActive = (item) =>
     ? route.path === "/eventos/" || route.path.startsWith("/eventos/")
     : route.path === item.path;
 
+function getScrollTop() {
+  return (
+    window.scrollY ||
+    document.documentElement.scrollTop ||
+    document.body.scrollTop ||
+    0
+  );
+}
+
 function updateScrollState() {
-  scrolled.value = window.scrollY > 0;
+  scrolled.value = getScrollTop() > 0;
 }
 
 onMounted(() => {
   updateScrollState();
-  window.addEventListener("scroll", updateScrollState, { passive: true });
+  document.addEventListener("scroll", updateScrollState, {
+    passive: true,
+    capture: true,
+  });
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("scroll", updateScrollState);
+  document.removeEventListener("scroll", updateScrollState, { capture: true });
 });
 
 watch(() => route.path, () => {

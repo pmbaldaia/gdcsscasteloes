@@ -47,12 +47,7 @@ const closeDialog = () => {
     <div class="space-y-16 sm:space-y-20 mt-12">
       <section v-for="(category, index) in categories" :key="index">
         <h2
-          :class="[
-            'text-fluid-2xl font-bold tracking-tight mb-10',
-            index === 0 || index >= categories.length - 3
-              ? 'text-left mt-6 text-neutral-900'
-              : 'text-center text-neutral-900',
-          ]"
+          class="text-fluid-2xl font-bold tracking-tight mb-10 text-center text-neutral-900"
         >
           {{ category.title }}
         </h2>

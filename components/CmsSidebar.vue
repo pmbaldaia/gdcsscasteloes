@@ -19,7 +19,7 @@ const { groups } = useCmsNavigation();
         :src="isDark ? '/img/logotipo.webp' : '/img/logowbg.webp'"
         alt="GDCSS Castelões"
         class="brand-logo-original brand__logo"
-      /><span class="brand__name">GDCSSCastelões</span></NuxtLink
+      /><span class="brand__name">G.D.C.S.S.C.</span></NuxtLink
     >
     <nav class="sidebar-nav" aria-label="Navegação principal">
       <section v-for="group in groups" :key="group.label" class="nav-group">
