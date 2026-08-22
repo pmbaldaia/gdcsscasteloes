@@ -2596,6 +2596,20 @@ html.dark .topbar-site-button:hover {
   background: var(--ui-surface);
 }
 
+.mobile-menu-link {
+  display: none !important;
+}
+
+@media (max-width: 620px) {
+  .cms-topbar .notification-button {
+    display: none;
+  }
+
+  .user-dropdown .mobile-menu-link {
+    display: flex !important;
+  }
+}
+
 .cms-topbar .topbar-site-button {
   min-height: 40px;
   border-color: var(--ui-control-border);

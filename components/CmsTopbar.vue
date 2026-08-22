@@ -106,6 +106,10 @@ function openSite() {
       </button>
 
       <div v-if="menuOpen" class="user-dropdown">
+        <NuxtLink to="/admin/mensagens" class="mobile-menu-link" @click="menuOpen = false">
+          <Icon name="lucide:mail" />
+          Mensagens
+        </NuxtLink>
         <NuxtLink to="/admin/definicoes" @click="menuOpen = false">
           <Icon name="lucide:settings" />
           Definições
