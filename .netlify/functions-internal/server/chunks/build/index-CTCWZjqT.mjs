@@ -3,7 +3,7 @@ import __nuxt_component_0$1 from './Icon-DhbMUx6q.mjs';
 import { withCtx, createVNode, withAsyncContext, computed, mergeProps, unref, ref, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrRenderAttrs, ssrRenderAttr, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderTeleport } from 'vue/server-renderer';
 import { u as useSiteSettings } from './useSiteSettings-Dkw2OmCn.mjs';
-import { _ as _sfc_main$6 } from './SiteImage-0fq-XTGy.mjs';
+import { _ as _sfc_main$6 } from './SiteImage-pGk6Uodw.mjs';
 import { u as useGames } from './useGames-ClDAqFc-.mjs';
 import { c as createPublicRepository } from './public.repository-zOMnXrxb.mjs';
 import { u as useAsyncData } from './asyncData-D54zHTjC.mjs';
@@ -33,7 +33,7 @@ import 'devalue';
 import 'unhead/utils';
 import 'unhead/plugins';
 import './NuxtImg-BJb9P2Je.mjs';
-import './imageFallback-Dlnrmqzg.mjs';
+import './imageFallback-CODQxCbd.mjs';
 import 'perfect-debounce';
 
 const fallbackImage = "/img/gdcss-casteloes-tarja.webp";
@@ -330,4 +330,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-Uu-aklDK.mjs.map
+//# sourceMappingURL=index-CTCWZjqT.mjs.map

@@ -4,10 +4,12 @@ function applyImageFallback(event, fallback, element) {
   if (!(image == null ? void 0 : image.dataset)) return false;
   const nextSrc = fallback || image.dataset.fallback;
   if (!nextSrc || image.dataset.fallbackApplied === "1") return false;
+  const current = image.currentSrc || image.src || "";
+  if (current.includes(nextSrc)) return false;
   image.dataset.fallbackApplied = "1";
   image.src = nextSrc;
   return true;
 }
 
 export { applyImageFallback as a };
-//# sourceMappingURL=imageFallback-Dlnrmqzg.mjs.map
+//# sourceMappingURL=imageFallback-CODQxCbd.mjs.map

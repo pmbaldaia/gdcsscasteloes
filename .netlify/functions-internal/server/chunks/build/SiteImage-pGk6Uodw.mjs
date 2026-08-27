@@ -1,7 +1,7 @@
 import { _ as _sfc_main$1 } from './NuxtImg-BJb9P2Je.mjs';
 import { defineComponent, ref, computed, unref, mergeProps, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent } from 'vue/server-renderer';
-import { a as applyImageFallback } from './imageFallback-Dlnrmqzg.mjs';
+import { a as applyImageFallback } from './imageFallback-CODQxCbd.mjs';
 
 const _sfc_main = /* @__PURE__ */ defineComponent({
   ...{ inheritAttrs: false },
@@ -17,16 +17,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const props = __props;
     const nativeImgRef = ref(null);
     const nuxtImgRef = ref(null);
-    const managedUpload = computed(() => {
+    const useDirectImage = computed(() => {
       const value = String(props.src || "");
-      return value.startsWith("/uploads/") || value.includes("/uploads/");
+      return value.startsWith("/uploads/") || value.includes("/uploads/") || value.startsWith("/logos/");
     });
     function resolveImageElement(event) {
       var _a;
       if (event.target instanceof HTMLImageElement) {
         return event.target;
       }
-      const element = managedUpload.value ? nativeImgRef.value : (_a = nuxtImgRef.value) == null ? void 0 : _a.$el;
+      const element = useDirectImage.value ? nativeImgRef.value : (_a = nuxtImgRef.value) == null ? void 0 : _a.$el;
       return element instanceof HTMLImageElement ? element : null;
     }
     function onImageError(event) {
@@ -34,7 +34,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     }
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtImg = _sfc_main$1;
-      if (unref(managedUpload)) {
+      if (unref(useDirectImage)) {
         _push(`<img${ssrRenderAttrs(mergeProps({
           ref_key: "nativeImgRef",
           ref: nativeImgRef,
@@ -61,4 +61,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as _ };
-//# sourceMappingURL=SiteImage-0fq-XTGy.mjs.map
+//# sourceMappingURL=SiteImage-pGk6Uodw.mjs.map

@@ -4,27 +4,22 @@ definePageMeta({
 });
 
 import { computed } from "vue";
-import { useEvents } from "~/modules/events/useEvents";
+import { parseEventDate, useEvents } from "~/modules/events/useEvents";
 const { eventos: eventosOriginais } = await useEvents();
-
-function parseDateBr(dataStr) {
-  const [day, month, year] = dataStr.split("/").map(Number);
-  return new Date(year, month - 1, day);
-}
 
 const hoje = new Date();
 hoje.setHours(0, 0, 0, 0);
 
 const eventosFuturos = computed(() =>
   eventosOriginais.value
-    .filter((e) => parseDateBr(e.data) >= hoje)
-    .sort((a, b) => parseDateBr(a.data) - parseDateBr(b.data))
+    .filter((e) => parseEventDate(e.data) >= hoje)
+    .sort((a, b) => parseEventDate(a.data) - parseEventDate(b.data))
 );
 
 const eventosPassados = computed(() =>
   eventosOriginais.value
-    .filter((e) => parseDateBr(e.data) < hoje)
-    .sort((a, b) => parseDateBr(b.data) - parseDateBr(a.data))
+    .filter((e) => parseEventDate(e.data) < hoje)
+    .sort((a, b) => parseEventDate(b.data) - parseEventDate(a.data))
     .map((e) => ({ ...e, passado: true }))
 );
 </script>

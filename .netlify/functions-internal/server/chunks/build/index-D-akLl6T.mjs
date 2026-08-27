@@ -1,10 +1,10 @@
 import { _ as __nuxt_component_0 } from './Container-BfHLpACB.mjs';
 import { _ as _sfc_main$1 } from './Sectionhead-DAjZ4P2v.mjs';
-import { _ as _sfc_main$2 } from './SiteImage-0fq-XTGy.mjs';
+import { _ as _sfc_main$2 } from './SiteImage-pGk6Uodw.mjs';
 import { _ as __nuxt_component_0$1 } from './nuxt-link-CVE1ktMt.mjs';
 import { withAsyncContext, computed, withCtx, createVNode, createTextVNode, openBlock, createBlock, Fragment, renderList, toDisplayString, createCommentVNode, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrRenderList, ssrInterpolate } from 'vue/server-renderer';
-import { u as useEvents } from './useEvents-Bs4Fo9Gj.mjs';
+import { u as useEvents, p as parseEventDate } from './useEvents-D-W8JIGs.mjs';
 import './_plugin-vue_export-helper-1tPrXgE0.mjs';
 import './NuxtImg-BJb9P2Je.mjs';
 import '../nitro/nitro.mjs';
@@ -28,7 +28,7 @@ import 'unhead/server';
 import 'devalue';
 import 'unhead/utils';
 import 'unhead/plugins';
-import './imageFallback-Dlnrmqzg.mjs';
+import './imageFallback-CODQxCbd.mjs';
 import './public.repository-zOMnXrxb.mjs';
 import './asyncData-D54zHTjC.mjs';
 import 'perfect-debounce';
@@ -39,17 +39,13 @@ const _sfc_main = {
   async setup(__props) {
     let __temp, __restore;
     const { eventos: eventosOriginais } = ([__temp, __restore] = withAsyncContext(() => useEvents()), __temp = await __temp, __restore(), __temp);
-    function parseDateBr(dataStr) {
-      const [day, month, year] = dataStr.split("/").map(Number);
-      return new Date(year, month - 1, day);
-    }
     const hoje = /* @__PURE__ */ new Date();
     hoje.setHours(0, 0, 0, 0);
     const eventosFuturos = computed(
-      () => eventosOriginais.value.filter((e) => parseDateBr(e.data) >= hoje).sort((a, b) => parseDateBr(a.data) - parseDateBr(b.data))
+      () => eventosOriginais.value.filter((e) => parseEventDate(e.data) >= hoje).sort((a, b) => parseEventDate(a.data) - parseEventDate(b.data))
     );
     const eventosPassados = computed(
-      () => eventosOriginais.value.filter((e) => parseDateBr(e.data) < hoje).sort((a, b) => parseDateBr(b.data) - parseDateBr(a.data)).map((e) => ({ ...e, passado: true }))
+      () => eventosOriginais.value.filter((e) => parseEventDate(e.data) < hoje).sort((a, b) => parseEventDate(b.data) - parseEventDate(a.data)).map((e) => ({ ...e, passado: true }))
     );
     return (_ctx, _push, _parent, _attrs) => {
       const _component_LandingContainer = __nuxt_component_0;
@@ -281,4 +277,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-CzeIoVQQ.mjs.map
+//# sourceMappingURL=index-D-akLl6T.mjs.map
