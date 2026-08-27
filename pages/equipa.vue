@@ -1,4 +1,5 @@
 <script setup>
+import { applyImageFallback } from "~/utils/imageFallback";
 import { useTeamStructure } from "~/modules/team/useTeamStructure";
 const { assembleiaGeral, direcao, conselhoFiscal, equipaTecnica, plantel } = await useTeamStructure();
 const isEquipaRevealed = (item) => item?.status !== 'draft' && (!item?.publishedAt || new Date(item.publishedAt).getTime() <= Date.now());
@@ -36,11 +37,7 @@ function formatarNome(nome) {
 }
 
 function onImgError(event) {
-  const image = event.target;
-  const fallback = image.dataset.fallback;
-  if (!fallback || image.dataset.fallbackApplied === "1") return;
-  image.dataset.fallbackApplied = "1";
-  image.src = fallback;
+  applyImageFallback(event);
 }
 
 function getImagem(src) {

@@ -783,7 +783,7 @@ const _routes = [
     name: "index",
     path: "/",
     meta: __nuxt_page_meta$x || {},
-    component: () => import('./index-DVZESHwv.mjs')
+    component: () => import('./index-BNoRVuNr.mjs')
   },
   {
     name: "sobre",
@@ -813,7 +813,7 @@ const _routes = [
     name: "contacto",
     path: "/contacto",
     meta: __nuxt_page_meta$s || {},
-    component: () => import('./contacto-hHLNIOoH.mjs')
+    component: () => import('./contacto-ChNGsfb8.mjs')
   },
   {
     name: "auth-login",
@@ -825,7 +825,7 @@ const _routes = [
     name: "calendario",
     path: "/calendario",
     meta: __nuxt_page_meta$q || {},
-    component: () => import('./calendario-BsrHc5Kd.mjs')
+    component: () => import('./calendario-DmCOVdxX.mjs')
   },
   {
     name: "manutencao",
@@ -837,13 +837,13 @@ const _routes = [
     name: "admin",
     path: "/admin",
     meta: __nuxt_page_meta$o || {},
-    component: () => import('./index-B-uB9OdW.mjs')
+    component: () => import('./index-DqMF54T3.mjs')
   },
   {
     name: "admin-jogos",
     path: "/admin/jogos",
     meta: __nuxt_page_meta$n || {},
-    component: () => import('./jogos-BDUYcBQl.mjs')
+    component: () => import('./jogos-vZLRe6mu.mjs')
   },
   {
     name: "admin-login",
@@ -855,43 +855,43 @@ const _routes = [
     name: "admin-media",
     path: "/admin/media",
     meta: __nuxt_page_meta$l || {},
-    component: () => import('./media-DoY8SAsL.mjs')
+    component: () => import('./media-DrROGqyo.mjs')
   },
   {
     name: "admin-socios",
     path: "/admin/socios",
     meta: __nuxt_page_meta$k || {},
-    component: () => import('./socios-Chn5IwIo.mjs')
+    component: () => import('./socios-CKMdpuZK.mjs')
   },
   {
     name: "admin-direcao",
     path: "/admin/direcao",
     meta: __nuxt_page_meta$j || {},
-    component: () => import('./direcao-BmUctKYs.mjs')
+    component: () => import('./direcao-SguPx2Nv.mjs')
   },
   {
     name: "admin-equipas",
     path: "/admin/equipas",
     meta: __nuxt_page_meta$i || {},
-    component: () => import('./equipas-uFXQJrMP.mjs')
+    component: () => import('./equipas-sBT3JxN6.mjs')
   },
   {
     name: "admin-eventos",
     path: "/admin/eventos",
     meta: __nuxt_page_meta$h || {},
-    component: () => import('./eventos-B0VW8NLe.mjs')
+    component: () => import('./eventos-BIlNt2Uy.mjs')
   },
   {
     name: "admin-galeria",
     path: "/admin/galeria",
     meta: __nuxt_page_meta$g || {},
-    component: () => import('./galeria-DyX8D_HW.mjs')
+    component: () => import('./galeria-BtEQNqyo.mjs')
   },
   {
     name: "admin-plantel",
     path: "/admin/plantel",
     meta: __nuxt_page_meta$f || {},
-    component: () => import('./plantel-VakAivKt.mjs')
+    component: () => import('./plantel-BHrdO4NC.mjs')
   },
   {
     name: "auth-register",
@@ -915,7 +915,7 @@ const _routes = [
     name: "admin-pesquisa",
     path: "/admin/pesquisa",
     meta: __nuxt_page_meta$b || {},
-    component: () => import('./pesquisa-CWY0vGUW.mjs')
+    component: () => import('./pesquisa-DTZOEBIX.mjs')
   },
   {
     name: "eventos-slug",
@@ -927,25 +927,25 @@ const _routes = [
     name: "admin-conteudos",
     path: "/admin/conteudos",
     meta: __nuxt_page_meta$9 || {},
-    component: () => import('./conteudos-nxlton8q.mjs')
+    component: () => import('./conteudos-qkvg68yo.mjs')
   },
   {
     name: "admin-mensagens",
     path: "/admin/mensagens",
     meta: __nuxt_page_meta$8 || {},
-    component: () => import('./mensagens-DJCPsSbP.mjs')
+    component: () => import('./mensagens-CMMKjETc.mjs')
   },
   {
     name: "admin-definicoes",
     path: "/admin/definicoes",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./definicoes-CmjwmHtj.mjs')
+    component: () => import('./definicoes-Cr2BMiaY.mjs')
   },
   {
     name: "admin-patrocinios",
     path: "/admin/patrocinios",
     meta: __nuxt_page_meta$6 || {},
-    component: () => import('./patrocinios-DGBUgKWf.mjs')
+    component: () => import('./patrocinios-nX6X0DcN.mjs')
   },
   {
     name: "politicas-cookies",
@@ -963,19 +963,19 @@ const _routes = [
     name: "admin-utilizadores",
     path: "/admin/utilizadores",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./utilizadores-BoVMsVhR.mjs')
+    component: () => import('./utilizadores-BeH-MsCG.mjs')
   },
   {
     name: "admin-oportunidades",
     path: "/admin/oportunidades",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./oportunidades-B7FE-qmY.mjs')
+    component: () => import('./oportunidades-Cus3d9zD.mjs')
   },
   {
     name: "admin-equipa-tecnica",
     path: "/admin/equipa-tecnica",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./equipa-tecnica-CQk2WVJi.mjs')
+    component: () => import('./equipa-tecnica-CKPbckGw.mjs')
   },
   {
     name: "politicas-privacidade",
@@ -1521,8 +1521,8 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     }
   }
 });
-const LazyIcon = defineAsyncComponent(() => import('./Icon-DZ18AjZn.mjs').then((r) => r["default"] || r.default || r));
-const LazyIconCSS = defineAsyncComponent(() => import('./IconCSS-uZUKw_A_.mjs').then((r) => r["default"] || r.default || r));
+const LazyIcon = defineAsyncComponent(() => import('./Icon-DhbMUx6q.mjs').then((r) => r["default"] || r.default || r));
+const LazyIconCSS = defineAsyncComponent(() => import('./IconCSS-B8o6Sc93.mjs').then((r) => r["default"] || r.default || r));
 const lazyGlobalComponents = [
   ["Icon", LazyIcon],
   ["IconCSS", LazyIconCSS]
@@ -1566,10 +1566,10 @@ const plugins = [
   robot_meta_server_bRHpso_4KN_Ec3RJzqCvbuvfZsNOeE_4TgpL8dCNuwk
 ];
 const layouts = {
-  "admin-auth": defineAsyncComponent(() => import('./admin-auth-BZ4_UP7M.mjs').then((m) => m.default || m)),
-  admin: defineAsyncComponent(() => import('./admin-DEQBfhYu.mjs').then((m) => m.default || m)),
+  "admin-auth": defineAsyncComponent(() => import('./admin-auth-CnaBuH3-.mjs').then((m) => m.default || m)),
+  admin: defineAsyncComponent(() => import('./admin-BOQp6-Uw.mjs').then((m) => m.default || m)),
   blank: defineAsyncComponent(() => import('./blank-B4Lni5Rk.mjs').then((m) => m.default || m)),
-  default: defineAsyncComponent(() => import('./default-I0m-WdWJ.mjs').then((m) => m.default || m)),
+  default: defineAsyncComponent(() => import('./default-C46MpWrx.mjs').then((m) => m.default || m)),
   error: defineAsyncComponent(() => import('./error-B-aG63QF.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;

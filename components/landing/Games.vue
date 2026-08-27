@@ -8,13 +8,6 @@ function teamLogo(name) {
   return teams.value?.find((team) => team.name === name)?.logo || "/img/logowbg.webp";
 }
 
-function onTeamLogoError(event) {
-  const image = event.target;
-  if (image.dataset.fallbackApplied === "1") return;
-  image.dataset.fallbackApplied = "1";
-  image.src = "/img/logowbg.webp";
-}
-
 function parseGameDate(game) {
   return new Date(`${game.date}T${game.time}:00`);
 }
@@ -72,12 +65,12 @@ const showVoltaBadge = computed(
             :src="teamLogo(nextGame.teams[0])"
             :alt="`Logo ${nextGame.teams[0]}`"
             preset="badge"
+            fallback="/img/logowbg.webp"
             width="80"
             height="80"
             sizes="80px"
             loading="lazy"
             class="brand-logo-original w-20 h-20 object-contain mb-3"
-            @error="onTeamLogoError"
           />
           <p class="text-fluid-lg font-semibold text-neutral-900">
             {{ nextGame.teams[0] }}
@@ -94,12 +87,12 @@ const showVoltaBadge = computed(
             :src="teamLogo(nextGame.teams[1])"
             :alt="`Logo ${nextGame.teams[1]}`"
             preset="badge"
+            fallback="/img/logowbg.webp"
             width="80"
             height="80"
             sizes="80px"
             loading="lazy"
             class="brand-logo-original w-20 h-20 object-contain mb-3"
-            @error="onTeamLogoError"
           />
           <p class="text-fluid-lg font-semibold text-neutral-900">
             {{ nextGame.teams[1] }}

@@ -63,12 +63,6 @@ const gameStatus = (status) =>
     draft: 'Rascunho',
   })[status] || 'Agendado'
 
-function onLogoError(event) {
-  const image = event.target
-  if (image.dataset.fallbackApplied === '1') return
-  image.dataset.fallbackApplied = '1'
-  image.src = '/img/logowbg.webp'
-}
 </script>
 
 <template>
@@ -154,9 +148,9 @@ function onLogoError(event) {
                 :src="teamLogo(game.teams?.[0])"
                 :alt="`Logo ${game.teams?.[0] || ''}`"
                 preset="badge"
+                fallback="/img/logowbg.webp"
                 class="brand-logo-original h-12 w-12 object-contain"
                 loading="lazy"
-                @error="onLogoError"
               />
             </div>
 
@@ -167,9 +161,9 @@ function onLogoError(event) {
                 :src="teamLogo(game.teams?.[1])"
                 :alt="`Logo ${game.teams?.[1] || ''}`"
                 preset="badge"
+                fallback="/img/logowbg.webp"
                 class="brand-logo-original h-12 w-12 object-contain"
                 loading="lazy"
-                @error="onLogoError"
               />
               <span class="font-semibold">{{ game.teams?.[1] }}</span>
             </div>
