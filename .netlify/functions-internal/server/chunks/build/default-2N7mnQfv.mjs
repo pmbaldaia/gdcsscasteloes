@@ -7,7 +7,7 @@ import { ssrRenderAttrs, ssrRenderComponent, ssrRenderClass, ssrRenderSlot, ssrR
 import { F as F$2, G as G$1 } from './PhInstagramLogo.vue-CfLhyFSS.mjs';
 import { useRoute as useRoute$1 } from 'vue-router';
 import { p as useRoute, f as useThemeMode } from './server.mjs';
-import { u as useSiteSettings } from './useSiteSettings-Dkw2OmCn.mjs';
+import { u as useSiteSettings } from './useSiteSettings-CNvi8uhM.mjs';
 import './_plugin-vue_export-helper-1tPrXgE0.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
@@ -510,4 +510,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=default-C46MpWrx.mjs.map
+//# sourceMappingURL=default-2N7mnQfv.mjs.map

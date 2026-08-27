@@ -57,6 +57,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       { key: "time", label: "Hora", type: "time" },
       { key: "team1", label: "Equipa 1", type: "select", options: teamOptions.value },
       { key: "team2", label: "Equipa 2", type: "select", options: teamOptions.value },
+      { key: "venue", label: "Est\xE1dio / Campo" },
+      { key: "address", label: "Rua / Morada" },
       { key: "volta", label: "Volta", type: "number" },
       { key: "status", label: "Estado do jogo", type: "select", options: [
         { value: "scheduled", label: "Agendado" },
@@ -111,7 +113,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         title: "Jogos e jornadas",
         description: "Gere o calend\xE1rio por \xE9poca. Ao adicionar ou editar um jogo, escolhe as duas equipas a partir das equipas registadas no CMS.",
         fields: unref(fields),
-        columns: ["season", "jornada", "date", "time", "team1", "team2", "status", "publicationStatus"],
+        columns: ["season", "jornada", "date", "time", "team1", "team2", "venue", "address", "status", "publicationStatus"],
         "publish-key": "publicationStatus",
         "show-search": false,
         "default-filters": { season: "2026/2027" }
@@ -127,4 +129,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=jogos-vZLRe6mu.mjs.map
+//# sourceMappingURL=jogos-CMXqQ5CZ.mjs.map

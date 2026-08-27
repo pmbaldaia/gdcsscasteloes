@@ -141,32 +141,46 @@ const gameStatus = (status) =>
             </p>
           </div>
 
-          <div class="flex items-center justify-center gap-5">
-            <div class="flex flex-1 items-center justify-end gap-3 text-right">
-              <span class="font-semibold">{{ game.teams?.[0] }}</span>
-              <SiteImage
-                :src="teamLogo(game.teams?.[0])"
-                :alt="`Logo ${game.teams?.[0] || ''}`"
-                preset="badge"
-                fallback="/img/logowbg.webp"
-                class="brand-logo-original h-12 w-12 object-contain"
-                loading="lazy"
-              />
+          <div class="flex min-w-0 flex-col items-center gap-2">
+            <div class="flex w-full items-center justify-center gap-5">
+              <div class="flex min-w-0 flex-1 items-center justify-end gap-3 text-right">
+                <span class="font-semibold">{{ game.teams?.[0] }}</span>
+                <SiteImage
+                  :src="teamLogo(game.teams?.[0])"
+                  :alt="`Logo ${game.teams?.[0] || ''}`"
+                  preset="badge"
+                  fallback="/img/logowbg.webp"
+                  class="brand-logo-original h-12 w-12 shrink-0 object-contain"
+                  loading="lazy"
+                />
+              </div>
+
+              <strong class="shrink-0">vs</strong>
+
+              <div class="flex min-w-0 flex-1 items-center gap-3">
+                <SiteImage
+                  :src="teamLogo(game.teams?.[1])"
+                  :alt="`Logo ${game.teams?.[1] || ''}`"
+                  preset="badge"
+                  fallback="/img/logowbg.webp"
+                  class="brand-logo-original h-12 w-12 shrink-0 object-contain"
+                  loading="lazy"
+                />
+                <span class="font-semibold">{{ game.teams?.[1] }}</span>
+              </div>
             </div>
 
-            <strong>vs</strong>
-
-            <div class="flex flex-1 items-center gap-3">
-              <SiteImage
-                :src="teamLogo(game.teams?.[1])"
-                :alt="`Logo ${game.teams?.[1] || ''}`"
-                preset="badge"
-                fallback="/img/logowbg.webp"
-                class="brand-logo-original h-12 w-12 object-contain"
-                loading="lazy"
-              />
-              <span class="font-semibold">{{ game.teams?.[1] }}</span>
-            </div>
+            <p
+              v-if="game.venue || game.address"
+              class="flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-center text-sm text-neutral-600 md:flex-nowrap md:whitespace-nowrap"
+            >
+              <span v-if="game.venue" class="inline-flex items-center gap-1.5">
+                <Icon name="lucide:map-pin" size="15" class="shrink-0" />
+                <span>{{ game.venue }}</span>
+              </span>
+              <span v-if="game.venue && game.address" aria-hidden="true">·</span>
+              <span v-if="game.address">{{ game.address }}</span>
+            </p>
           </div>
 
           <div class="text-center md:text-right">

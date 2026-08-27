@@ -96,6 +96,8 @@ const gamesService = createCrudService(gamesRepository, {
     date: p.date ?? '',
     time: p.time ?? '',
     teams: Array.isArray(p.teams) ? p.teams.slice(0,2) : [],
+    venue: p.venue ?? '',
+    address: p.address ?? '',
     volta: Number(p.volta ?? 1),
     status: p.status ?? 'scheduled',
     publicationStatus: p.publicationStatus ?? 'published'

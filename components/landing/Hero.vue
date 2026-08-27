@@ -15,6 +15,10 @@ const mobileImage = computed(() =>
   settings.value?.heroDesktopImage ||
   fallbackImage
 )
+
+const heroEyebrow = computed(() => settings.value?.heroEyebrow || 'G.D.C.S.S. Castelões')
+const heroTitle = computed(() => settings.value?.heroTitle || 'Bem-vindo ao site oficial do G.D.C.S.S. Castelões')
+const heroDescription = computed(() => settings.value?.heroDescription || 'Celebrando com orgulho 41 anos de história, dedicação e conquistas, o G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada freguesia de Castelões. Venha fazer parte dessa jornada, repleta de momentos inesquecíveis e vitórias que marcaram a nossa comunidade!')
 </script>
 
 <template>
@@ -33,17 +37,14 @@ const mobileImage = computed(() =>
 
     <div class="home-hero__content site-shell">
       <div class="home-hero__copy">
-        <p class="home-hero__eyebrow">G.D.C.S.S. Castelões</p>
+        <p class="home-hero__eyebrow">{{ heroEyebrow }}</p>
 
         <h1 id="home-hero-title">
-          Bem-vindo ao site oficial do G.D.C.S.S. Castelões
+          {{ heroTitle }}
         </h1>
 
         <p class="home-hero__description">
-          Celebrando com orgulho 41 anos de história, dedicação e conquistas, o
-          G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada
-          freguesia de Castelões. Venha fazer parte dessa jornada, repleta de
-          momentos inesquecíveis e vitórias que marcaram a nossa comunidade!
+          {{ heroDescription }}
         </p>
 
         <div class="home-hero__actions">

@@ -1,7 +1,7 @@
 import { _ as __nuxt_component_0 } from './Container-BfHLpACB.mjs';
 import { _ as _sfc_main$2 } from './Sectionhead-DAjZ4P2v.mjs';
 import __nuxt_component_0$1 from './Icon-DhbMUx6q.mjs';
-import { withAsyncContext, computed, ref, watch, withCtx, createVNode, unref, toDisplayString, withDirectives, isRef, openBlock, createBlock, Fragment, renderList, vModelSelect, mergeProps, useSSRContext } from 'vue';
+import { withAsyncContext, computed, ref, watch, withCtx, createVNode, unref, toDisplayString, withDirectives, isRef, openBlock, createBlock, Fragment, renderList, vModelSelect, createCommentVNode, mergeProps, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual, ssrRenderAttrs } from 'vue/server-renderer';
 import { _ as _sfc_main$3 } from './SiteImage-pGk6Uodw.mjs';
 import { u as useGames } from './useGames-ClDAqFc-.mjs';
@@ -175,25 +175,53 @@ const _sfc_main = {
               _push2(`<div class="space-y-4"${_scopeId}><!--[-->`);
               ssrRenderList(unref(filteredGames), (game) => {
                 var _a, _b, _c, _d, _e, _f;
-                _push2(`<article class="card-surface grid gap-4 p-5 md:grid-cols-[160px_1fr_110px] md:items-center"${_scopeId}><div${_scopeId}><strong class="text-neutral-900"${_scopeId}>${ssrInterpolate(game.jornada)}</strong><p class="text-sm text-neutral-600"${_scopeId}>${ssrInterpolate(formatDate(game.date))} \xB7 ${ssrInterpolate(game.time || "\u2014")}</p></div><div class="flex items-center justify-center gap-5"${_scopeId}><div class="flex flex-1 items-center justify-end gap-3 text-right"${_scopeId}><span class="font-semibold"${_scopeId}>${ssrInterpolate((_a = game.teams) == null ? void 0 : _a[0])}</span>`);
+                _push2(`<article class="card-surface grid gap-4 p-5 md:grid-cols-[160px_1fr_110px] md:items-center"${_scopeId}><div${_scopeId}><strong class="text-neutral-900"${_scopeId}>${ssrInterpolate(game.jornada)}</strong><p class="text-sm text-neutral-600"${_scopeId}>${ssrInterpolate(formatDate(game.date))} \xB7 ${ssrInterpolate(game.time || "\u2014")}</p></div><div class="flex min-w-0 flex-col items-center gap-2"${_scopeId}><div class="flex w-full items-center justify-center gap-5"${_scopeId}><div class="flex min-w-0 flex-1 items-center justify-end gap-3 text-right"${_scopeId}><span class="font-semibold"${_scopeId}>${ssrInterpolate((_a = game.teams) == null ? void 0 : _a[0])}</span>`);
                 _push2(ssrRenderComponent(_component_SiteImage, {
                   src: teamLogo((_b = game.teams) == null ? void 0 : _b[0]),
                   alt: `Logo ${((_c = game.teams) == null ? void 0 : _c[0]) || ""}`,
                   preset: "badge",
                   fallback: "/img/logowbg.webp",
-                  class: "brand-logo-original h-12 w-12 object-contain",
+                  class: "brand-logo-original h-12 w-12 shrink-0 object-contain",
                   loading: "lazy"
                 }, null, _parent2, _scopeId));
-                _push2(`</div><strong${_scopeId}>vs</strong><div class="flex flex-1 items-center gap-3"${_scopeId}>`);
+                _push2(`</div><strong class="shrink-0"${_scopeId}>vs</strong><div class="flex min-w-0 flex-1 items-center gap-3"${_scopeId}>`);
                 _push2(ssrRenderComponent(_component_SiteImage, {
                   src: teamLogo((_d = game.teams) == null ? void 0 : _d[1]),
                   alt: `Logo ${((_e = game.teams) == null ? void 0 : _e[1]) || ""}`,
                   preset: "badge",
                   fallback: "/img/logowbg.webp",
-                  class: "brand-logo-original h-12 w-12 object-contain",
+                  class: "brand-logo-original h-12 w-12 shrink-0 object-contain",
                   loading: "lazy"
                 }, null, _parent2, _scopeId));
-                _push2(`<span class="font-semibold"${_scopeId}>${ssrInterpolate((_f = game.teams) == null ? void 0 : _f[1])}</span></div></div><div class="text-center md:text-right"${_scopeId}><span class="inline-flex rounded-full bg-neutral-50 px-3 py-1 text-xs font-semibold text-neutral-600"${_scopeId}>${ssrInterpolate(gameStatus(game.status))}</span></div></article>`);
+                _push2(`<span class="font-semibold"${_scopeId}>${ssrInterpolate((_f = game.teams) == null ? void 0 : _f[1])}</span></div></div>`);
+                if (game.venue || game.address) {
+                  _push2(`<p class="flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-center text-sm text-neutral-600 md:flex-nowrap md:whitespace-nowrap"${_scopeId}>`);
+                  if (game.venue) {
+                    _push2(`<span class="inline-flex items-center gap-1.5"${_scopeId}>`);
+                    _push2(ssrRenderComponent(_component_Icon, {
+                      name: "lucide:map-pin",
+                      size: "15",
+                      class: "shrink-0"
+                    }, null, _parent2, _scopeId));
+                    _push2(`<span${_scopeId}>${ssrInterpolate(game.venue)}</span></span>`);
+                  } else {
+                    _push2(`<!---->`);
+                  }
+                  if (game.venue && game.address) {
+                    _push2(`<span aria-hidden="true"${_scopeId}>\xB7</span>`);
+                  } else {
+                    _push2(`<!---->`);
+                  }
+                  if (game.address) {
+                    _push2(`<span${_scopeId}>${ssrInterpolate(game.address)}</span>`);
+                  } else {
+                    _push2(`<!---->`);
+                  }
+                  _push2(`</p>`);
+                } else {
+                  _push2(`<!---->`);
+                }
+                _push2(`</div><div class="text-center md:text-right"${_scopeId}><span class="inline-flex rounded-full bg-neutral-50 px-3 py-1 text-xs font-semibold text-neutral-600"${_scopeId}>${ssrInterpolate(gameStatus(game.status))}</span></div></article>`);
               });
               _push2(`<!--]--></div>`);
             }
@@ -265,30 +293,53 @@ const _sfc_main = {
                         createVNode("strong", { class: "text-neutral-900" }, toDisplayString(game.jornada), 1),
                         createVNode("p", { class: "text-sm text-neutral-600" }, toDisplayString(formatDate(game.date)) + " \xB7 " + toDisplayString(game.time || "\u2014"), 1)
                       ]),
-                      createVNode("div", { class: "flex items-center justify-center gap-5" }, [
-                        createVNode("div", { class: "flex flex-1 items-center justify-end gap-3 text-right" }, [
-                          createVNode("span", { class: "font-semibold" }, toDisplayString((_a = game.teams) == null ? void 0 : _a[0]), 1),
-                          createVNode(_component_SiteImage, {
-                            src: teamLogo((_b = game.teams) == null ? void 0 : _b[0]),
-                            alt: `Logo ${((_c = game.teams) == null ? void 0 : _c[0]) || ""}`,
-                            preset: "badge",
-                            fallback: "/img/logowbg.webp",
-                            class: "brand-logo-original h-12 w-12 object-contain",
-                            loading: "lazy"
-                          }, null, 8, ["src", "alt"])
+                      createVNode("div", { class: "flex min-w-0 flex-col items-center gap-2" }, [
+                        createVNode("div", { class: "flex w-full items-center justify-center gap-5" }, [
+                          createVNode("div", { class: "flex min-w-0 flex-1 items-center justify-end gap-3 text-right" }, [
+                            createVNode("span", { class: "font-semibold" }, toDisplayString((_a = game.teams) == null ? void 0 : _a[0]), 1),
+                            createVNode(_component_SiteImage, {
+                              src: teamLogo((_b = game.teams) == null ? void 0 : _b[0]),
+                              alt: `Logo ${((_c = game.teams) == null ? void 0 : _c[0]) || ""}`,
+                              preset: "badge",
+                              fallback: "/img/logowbg.webp",
+                              class: "brand-logo-original h-12 w-12 shrink-0 object-contain",
+                              loading: "lazy"
+                            }, null, 8, ["src", "alt"])
+                          ]),
+                          createVNode("strong", { class: "shrink-0" }, "vs"),
+                          createVNode("div", { class: "flex min-w-0 flex-1 items-center gap-3" }, [
+                            createVNode(_component_SiteImage, {
+                              src: teamLogo((_d = game.teams) == null ? void 0 : _d[1]),
+                              alt: `Logo ${((_e = game.teams) == null ? void 0 : _e[1]) || ""}`,
+                              preset: "badge",
+                              fallback: "/img/logowbg.webp",
+                              class: "brand-logo-original h-12 w-12 shrink-0 object-contain",
+                              loading: "lazy"
+                            }, null, 8, ["src", "alt"]),
+                            createVNode("span", { class: "font-semibold" }, toDisplayString((_f = game.teams) == null ? void 0 : _f[1]), 1)
+                          ])
                         ]),
-                        createVNode("strong", null, "vs"),
-                        createVNode("div", { class: "flex flex-1 items-center gap-3" }, [
-                          createVNode(_component_SiteImage, {
-                            src: teamLogo((_d = game.teams) == null ? void 0 : _d[1]),
-                            alt: `Logo ${((_e = game.teams) == null ? void 0 : _e[1]) || ""}`,
-                            preset: "badge",
-                            fallback: "/img/logowbg.webp",
-                            class: "brand-logo-original h-12 w-12 object-contain",
-                            loading: "lazy"
-                          }, null, 8, ["src", "alt"]),
-                          createVNode("span", { class: "font-semibold" }, toDisplayString((_f = game.teams) == null ? void 0 : _f[1]), 1)
-                        ])
+                        game.venue || game.address ? (openBlock(), createBlock("p", {
+                          key: 0,
+                          class: "flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-center text-sm text-neutral-600 md:flex-nowrap md:whitespace-nowrap"
+                        }, [
+                          game.venue ? (openBlock(), createBlock("span", {
+                            key: 0,
+                            class: "inline-flex items-center gap-1.5"
+                          }, [
+                            createVNode(_component_Icon, {
+                              name: "lucide:map-pin",
+                              size: "15",
+                              class: "shrink-0"
+                            }),
+                            createVNode("span", null, toDisplayString(game.venue), 1)
+                          ])) : createCommentVNode("", true),
+                          game.venue && game.address ? (openBlock(), createBlock("span", {
+                            key: 1,
+                            "aria-hidden": "true"
+                          }, "\xB7")) : createCommentVNode("", true),
+                          game.address ? (openBlock(), createBlock("span", { key: 2 }, toDisplayString(game.address), 1)) : createCommentVNode("", true)
+                        ])) : createCommentVNode("", true)
                       ]),
                       createVNode("div", { class: "text-center md:text-right" }, [
                         createVNode("span", { class: "inline-flex rounded-full bg-neutral-50 px-3 py-1 text-xs font-semibold text-neutral-600" }, toDisplayString(gameStatus(game.status)), 1)
@@ -313,4 +364,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=calendario-gz-rPNoV.mjs.map
+//# sourceMappingURL=calendario-By-x0Owi.mjs.map

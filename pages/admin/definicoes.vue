@@ -20,10 +20,16 @@ async function load() {
     contactEmail: '',
     heroDesktopImage: '',
     heroMobileImage: '',
+    heroEyebrow: 'G.D.C.S.S. Castelões',
+    heroTitle: 'Bem-vindo ao site oficial do G.D.C.S.S. Castelões',
+    heroDescription: 'Celebrando com orgulho 41 anos de história, dedicação e conquistas, o G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada freguesia de Castelões. Venha fazer parte dessa jornada, repleta de momentos inesquecíveis e vitórias que marcaram a nossa comunidade!',
   }
 
   data.value.heroDesktopImage ||= ''
   data.value.heroMobileImage ||= ''
+  data.value.heroEyebrow ||= 'G.D.C.S.S. Castelões'
+  data.value.heroTitle ||= 'Bem-vindo ao site oficial do G.D.C.S.S. Castelões'
+  data.value.heroDescription ||= 'Celebrando com orgulho 41 anos de história, dedicação e conquistas, o G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada freguesia de Castelões. Venha fazer parte dessa jornada, repleta de momentos inesquecíveis e vitórias que marcaram a nossa comunidade!'
 }
 
 async function save() {
@@ -98,8 +104,7 @@ onMounted(load)
             <p class="eyebrow">Página principal</p>
             <h2>Hero banner</h2>
             <p>
-              Define imagens diferentes para desktop e telemóvel. O site escolhe
-              automaticamente a versão adequada ao tamanho do ecrã.
+              Define as imagens e o texto apresentados no banner principal.
             </p>
           </div>
         </header>
@@ -116,6 +121,23 @@ onMounted(load)
             label="Imagem mobile"
             recommended="Recomendado: 1080 × 1350 px ou 1080 × 1920 px · formato vertical"
           />
+        </div>
+
+        <div class="settings-form hero-settings-copy">
+          <label class="form-field">
+            <span>Texto pequeno</span>
+            <input v-model="data.heroEyebrow" required>
+          </label>
+
+          <label class="form-field">
+            <span>Título</span>
+            <textarea v-model="data.heroTitle" rows="3" required />
+          </label>
+
+          <label class="form-field">
+            <span>Descrição</span>
+            <textarea v-model="data.heroDescription" rows="5" required />
+          </label>
         </div>
 
         <div class="cms-alert cms-alert--info hero-settings-note">

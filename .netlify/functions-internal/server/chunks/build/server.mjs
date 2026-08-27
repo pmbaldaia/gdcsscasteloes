@@ -783,7 +783,7 @@ const _routes = [
     name: "index",
     path: "/",
     meta: __nuxt_page_meta$x || {},
-    component: () => import('./index-CTCWZjqT.mjs')
+    component: () => import('./index-DN7nQUVS.mjs')
   },
   {
     name: "sobre",
@@ -813,7 +813,7 @@ const _routes = [
     name: "contacto",
     path: "/contacto",
     meta: __nuxt_page_meta$s || {},
-    component: () => import('./contacto-ChNGsfb8.mjs')
+    component: () => import('./contacto-B4uDeL8O.mjs')
   },
   {
     name: "auth-login",
@@ -825,7 +825,7 @@ const _routes = [
     name: "calendario",
     path: "/calendario",
     meta: __nuxt_page_meta$q || {},
-    component: () => import('./calendario-gz-rPNoV.mjs')
+    component: () => import('./calendario-By-x0Owi.mjs')
   },
   {
     name: "manutencao",
@@ -843,7 +843,7 @@ const _routes = [
     name: "admin-jogos",
     path: "/admin/jogos",
     meta: __nuxt_page_meta$n || {},
-    component: () => import('./jogos-vZLRe6mu.mjs')
+    component: () => import('./jogos-CMXqQ5CZ.mjs')
   },
   {
     name: "admin-login",
@@ -939,7 +939,7 @@ const _routes = [
     name: "admin-definicoes",
     path: "/admin/definicoes",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./definicoes-Cr2BMiaY.mjs')
+    component: () => import('./definicoes-D5ZPnJ_k.mjs')
   },
   {
     name: "admin-patrocinios",
@@ -1566,10 +1566,10 @@ const plugins = [
   robot_meta_server_bRHpso_4KN_Ec3RJzqCvbuvfZsNOeE_4TgpL8dCNuwk
 ];
 const layouts = {
-  "admin-auth": defineAsyncComponent(() => import('./admin-auth-CnaBuH3-.mjs').then((m) => m.default || m)),
-  admin: defineAsyncComponent(() => import('./admin-BOQp6-Uw.mjs').then((m) => m.default || m)),
+  "admin-auth": defineAsyncComponent(() => import('./admin-auth-BzjKBeTM.mjs').then((m) => m.default || m)),
+  admin: defineAsyncComponent(() => import('./admin-DXh2THVq.mjs').then((m) => m.default || m)),
   blank: defineAsyncComponent(() => import('./blank-B4Lni5Rk.mjs').then((m) => m.default || m)),
-  default: defineAsyncComponent(() => import('./default-C46MpWrx.mjs').then((m) => m.default || m)),
+  default: defineAsyncComponent(() => import('./default-2N7mnQfv.mjs').then((m) => m.default || m)),
   error: defineAsyncComponent(() => import('./error-B-aG63QF.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;

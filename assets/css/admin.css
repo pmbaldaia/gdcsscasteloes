@@ -164,7 +164,11 @@ button { color: inherit; }
 .data-table tbody tr:hover td { background:var(--color-surface-alt); }
 .data-table td:first-child { color:var(--color-ink); }
 .data-table td strong { font-weight:600; }
-.data-table th:last-child, .data-table td:last-child { width:52px; padding-left:6px; }
+.data-table th:last-child, .data-table td:last-child { width:124px; min-width:124px; padding-left:8px; padding-right:8px; }
+.resource-data-table th:last-child,
+.resource-data-table td:last-child { position:sticky; right:0; z-index:2; background:var(--color-surface); box-shadow:-8px 0 12px -12px rgb(15 23 42 / .5); }
+.resource-data-table th:last-child { background:var(--color-surface-alt); }
+.resource-data-table td:last-child .row-actions { justify-content:center; }
 .status-badge { width:max-content; display:inline-flex; align-items:center; gap:6px; padding:4px 9px; border-radius:999px; font-size:var(--text-xs); font-weight:600; }
 .status-badge__dot { width:6px; height:6px; border-radius:50%; }
 .status-badge--success { background:var(--color-accent-tint); color:var(--color-primary-800); }.status-badge--success .status-badge__dot { background:var(--color-accent); }
@@ -730,6 +734,7 @@ button { color: inherit; }
     grid-template-columns: 1fr;
     border-bottom: 0 !important;
     background: var(--color-surface-alt) !important;
+    box-shadow: none;
   }
   .resource-data-table td:last-child::before { display: none; }
   .resource-data-table .row-actions { justify-content: flex-end; gap: 8px; }
@@ -1802,6 +1807,24 @@ button { color: inherit; }
 .cms-shell .data-table th {
   background: transparent !important;
   color: #fff !important;
+}
+
+@media (min-width: 761px) {
+  .cms-shell .resource-data-table th:last-child,
+  .cms-shell .resource-data-table td:last-child {
+    position: sticky;
+    right: 0;
+    width: 136px;
+    min-width: 136px;
+    background: var(--color-surface) !important;
+    box-shadow: -10px 0 14px -12px rgb(15 23 42 / .7);
+    z-index: 4;
+  }
+
+  .cms-shell .resource-data-table th:last-child {
+    background: var(--color-primary-950) !important;
+    color: #fff !important;
+  }
 }
 
 .cms-shell .data-table tbody tr:hover {

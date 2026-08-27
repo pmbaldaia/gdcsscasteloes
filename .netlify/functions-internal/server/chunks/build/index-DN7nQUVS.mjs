@@ -1,8 +1,8 @@
 import { _ as __nuxt_component_0 } from './Container-BfHLpACB.mjs';
 import __nuxt_component_0$1 from './Icon-DhbMUx6q.mjs';
 import { withCtx, createVNode, withAsyncContext, computed, mergeProps, unref, ref, useSSRContext } from 'vue';
-import { ssrRenderComponent, ssrRenderAttrs, ssrRenderAttr, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderTeleport } from 'vue/server-renderer';
-import { u as useSiteSettings } from './useSiteSettings-Dkw2OmCn.mjs';
+import { ssrRenderComponent, ssrRenderAttrs, ssrRenderAttr, ssrInterpolate, ssrRenderList, ssrRenderClass, ssrRenderTeleport } from 'vue/server-renderer';
+import { u as useSiteSettings } from './useSiteSettings-CNvi8uhM.mjs';
 import { _ as _sfc_main$6 } from './SiteImage-pGk6Uodw.mjs';
 import { u as useGames } from './useGames-ClDAqFc-.mjs';
 import { c as createPublicRepository } from './public.repository-zOMnXrxb.mjs';
@@ -55,12 +55,24 @@ const _sfc_main$5 = {
         return ((_a = settings.value) == null ? void 0 : _a.heroMobileImage) || ((_b = settings.value) == null ? void 0 : _b.heroDesktopImage) || fallbackImage;
       }
     );
+    const heroEyebrow = computed(() => {
+      var _a;
+      return ((_a = settings.value) == null ? void 0 : _a.heroEyebrow) || "G.D.C.S.S. Castel\xF5es";
+    });
+    const heroTitle = computed(() => {
+      var _a;
+      return ((_a = settings.value) == null ? void 0 : _a.heroTitle) || "Bem-vindo ao site oficial do G.D.C.S.S. Castel\xF5es";
+    });
+    const heroDescription = computed(() => {
+      var _a;
+      return ((_a = settings.value) == null ? void 0 : _a.heroDescription) || "Celebrando com orgulho 41 anos de hist\xF3ria, dedica\xE7\xE3o e conquistas, o G.D.C.S.S. Castel\xF5es foi fundado a 11 de abril de 1984, na nossa amada freguesia de Castel\xF5es. Venha fazer parte dessa jornada, repleta de momentos inesquec\xEDveis e vit\xF3rias que marcaram a nossa comunidade!";
+    });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Icon = __nuxt_component_0$1;
       _push(`<section${ssrRenderAttrs(mergeProps({
         class: "home-hero",
         "aria-labelledby": "home-hero-title"
-      }, _attrs))}><picture class="home-hero__media" aria-hidden="true"><source media="(min-width: 768px)"${ssrRenderAttr("srcset", unref(desktopImage))}><img${ssrRenderAttr("src", unref(mobileImage))} alt="" fetchpriority="high" decoding="async"></picture><div class="home-hero__overlay" aria-hidden="true"></div><div class="home-hero__content site-shell"><div class="home-hero__copy"><p class="home-hero__eyebrow">G.D.C.S.S. Castel\xF5es</p><h1 id="home-hero-title"> Bem-vindo ao site oficial do G.D.C.S.S. Castel\xF5es </h1><p class="home-hero__description"> Celebrando com orgulho 41 anos de hist\xF3ria, dedica\xE7\xE3o e conquistas, o G.D.C.S.S. Castel\xF5es foi fundado a 11 de abril de 1984, na nossa amada freguesia de Castel\xF5es. Venha fazer parte dessa jornada, repleta de momentos inesquec\xEDveis e vit\xF3rias que marcaram a nossa comunidade! </p><div class="home-hero__actions"><a class="home-hero__button home-hero__button--secondary" href="/equipa#plantel"> Plantel `);
+      }, _attrs))}><picture class="home-hero__media" aria-hidden="true"><source media="(min-width: 768px)"${ssrRenderAttr("srcset", unref(desktopImage))}><img${ssrRenderAttr("src", unref(mobileImage))} alt="" fetchpriority="high" decoding="async"></picture><div class="home-hero__overlay" aria-hidden="true"></div><div class="home-hero__content site-shell"><div class="home-hero__copy"><p class="home-hero__eyebrow">${ssrInterpolate(unref(heroEyebrow))}</p><h1 id="home-hero-title">${ssrInterpolate(unref(heroTitle))}</h1><p class="home-hero__description">${ssrInterpolate(unref(heroDescription))}</p><div class="home-hero__actions"><a class="home-hero__button home-hero__button--secondary" href="/equipa#plantel"> Plantel `);
       _push(ssrRenderComponent(_component_Icon, {
         name: "lucide:arrow-right",
         size: "17"
@@ -330,4 +342,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-CTCWZjqT.mjs.map
+//# sourceMappingURL=index-DN7nQUVS.mjs.map

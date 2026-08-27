@@ -168,7 +168,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
       if (unref(data)) {
-        _push(`<form class="settings-page"><section class="panel settings-section"><header class="settings-section__header"><div><p class="eyebrow">Clube</p><h2>Dados gerais</h2><p>Informa\xE7\xE3o base utilizada no site e no CMS.</p></div></header><div class="settings-form"><label class="form-field"><span>Nome do clube</span><input${ssrRenderAttr("value", unref(data).clubName)} required></label><label class="form-field"><span>Email de contacto</span><input${ssrRenderAttr("value", unref(data).contactEmail)} type="email" required></label></div></section><section class="panel settings-section"><header class="settings-section__header"><div><p class="eyebrow">P\xE1gina principal</p><h2>Hero banner</h2><p> Define imagens diferentes para desktop e telem\xF3vel. O site escolhe automaticamente a vers\xE3o adequada ao tamanho do ecr\xE3. </p></div></header><div class="hero-settings-grid">`);
+        _push(`<form class="settings-page"><section class="panel settings-section"><header class="settings-section__header"><div><p class="eyebrow">Clube</p><h2>Dados gerais</h2><p>Informa\xE7\xE3o base utilizada no site e no CMS.</p></div></header><div class="settings-form"><label class="form-field"><span>Nome do clube</span><input${ssrRenderAttr("value", unref(data).clubName)} required></label><label class="form-field"><span>Email de contacto</span><input${ssrRenderAttr("value", unref(data).contactEmail)} type="email" required></label></div></section><section class="panel settings-section"><header class="settings-section__header"><div><p class="eyebrow">P\xE1gina principal</p><h2>Hero banner</h2><p> Define as imagens e o texto apresentados no banner principal. </p></div></header><div class="hero-settings-grid">`);
         _push(ssrRenderComponent(_component_CmsSingleImagePicker, {
           modelValue: unref(data).heroDesktopImage,
           "onUpdate:modelValue": ($event) => unref(data).heroDesktopImage = $event,
@@ -181,7 +181,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           label: "Imagem mobile",
           recommended: "Recomendado: 1080 \xD7 1350 px ou 1080 \xD7 1920 px \xB7 formato vertical"
         }, null, _parent));
-        _push(`</div><div class="cms-alert cms-alert--info hero-settings-note">`);
+        _push(`</div><div class="settings-form hero-settings-copy"><label class="form-field"><span>Texto pequeno</span><input${ssrRenderAttr("value", unref(data).heroEyebrow)} required></label><label class="form-field"><span>T\xEDtulo</span><textarea rows="3" required>${ssrInterpolate(unref(data).heroTitle)}</textarea></label><label class="form-field"><span>Descri\xE7\xE3o</span><textarea rows="5" required>${ssrInterpolate(unref(data).heroDescription)}</textarea></label></div><div class="cms-alert cms-alert--info hero-settings-note">`);
         _push(ssrRenderComponent(_component_Icon, {
           name: "lucide:info",
           size: "18"
@@ -206,4 +206,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=definicoes-Cr2BMiaY.mjs.map
+//# sourceMappingURL=definicoes-D5ZPnJ_k.mjs.map

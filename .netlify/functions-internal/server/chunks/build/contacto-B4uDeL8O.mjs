@@ -3,7 +3,7 @@ import { _ as _sfc_main$1 } from './Sectionhead-DAjZ4P2v.mjs';
 import __nuxt_component_0$1 from './Icon-DhbMUx6q.mjs';
 import { withAsyncContext, ref, withCtx, createVNode, unref, withModifiers, createTextVNode, withDirectives, vModelText, openBlock, createBlock, createCommentVNode, toDisplayString, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrRenderAttr, ssrRenderClass, ssrInterpolate, ssrIncludeBooleanAttr } from 'vue/server-renderer';
-import { u as useSiteSettings } from './useSiteSettings-Dkw2OmCn.mjs';
+import { u as useSiteSettings } from './useSiteSettings-CNvi8uhM.mjs';
 import { b as useRuntimeConfig } from './server.mjs';
 import './_plugin-vue_export-helper-1tPrXgE0.mjs';
 import '@iconify/vue/dist/offline';
@@ -329,4 +329,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=contacto-ChNGsfb8.mjs.map
+//# sourceMappingURL=contacto-B4uDeL8O.mjs.map
