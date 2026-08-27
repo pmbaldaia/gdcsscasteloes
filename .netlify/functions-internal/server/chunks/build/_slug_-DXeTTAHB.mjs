@@ -1,5 +1,5 @@
 import { _ as __nuxt_component_0 } from './nuxt-link-CVE1ktMt.mjs';
-import { _ as _sfc_main$1 } from './SiteImage-DHN0p5DB.mjs';
+import { _ as _sfc_main$1 } from './SiteImage-0fq-XTGy.mjs';
 import { withAsyncContext, ref, watch, mergeProps, withCtx, createTextVNode, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate } from 'vue/server-renderer';
 import { useRoute } from 'vue-router';
@@ -25,6 +25,7 @@ import 'devalue';
 import 'unhead/utils';
 import 'unhead/plugins';
 import './NuxtImg-BJb9P2Je.mjs';
+import './imageFallback-Dlnrmqzg.mjs';
 import './public.repository-zOMnXrxb.mjs';
 import './asyncData-D54zHTjC.mjs';
 import 'perfect-debounce';
@@ -98,4 +99,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=_slug_-DtlaF07S.mjs.map
+//# sourceMappingURL=_slug_-DXeTTAHB.mjs.map

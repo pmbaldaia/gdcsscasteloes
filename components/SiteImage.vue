@@ -17,9 +17,15 @@ const props = withDefaults(defineProps<{
 const nativeImgRef = ref<HTMLImageElement | null>(null)
 const nuxtImgRef = ref<ComponentPublicInstance | null>(null)
 
-const managedUpload = computed(() => {
+// Logos de equipas e uploads do CMS são servidos diretamente, como no Admin.
+// Evita `/_ipx`/`/.netlify/images` que falham com ficheiros estáticos e GridFS.
+const useDirectImage = computed(() => {
   const value = String(props.src || '')
-  return value.startsWith('/uploads/') || value.includes('/uploads/')
+  return (
+    value.startsWith('/uploads/') ||
+    value.includes('/uploads/') ||
+    value.startsWith('/logos/')
+  )
 })
 
 function resolveImageElement(event: Event) {
@@ -27,7 +33,7 @@ function resolveImageElement(event: Event) {
     return event.target
   }
 
-  const element = managedUpload.value
+  const element = useDirectImage.value
     ? nativeImgRef.value
     : nuxtImgRef.value?.$el
 
@@ -41,7 +47,7 @@ function onImageError(event: Event) {
 
 <template>
   <img
-    v-if="managedUpload"
+    v-if="useDirectImage"
     ref="nativeImgRef"
     :src="src || ''"
     :alt="alt"

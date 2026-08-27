@@ -3,7 +3,7 @@ import { _ as _sfc_main$2 } from './Sectionhead-DAjZ4P2v.mjs';
 import __nuxt_component_0$1 from './Icon-DhbMUx6q.mjs';
 import { withAsyncContext, computed, ref, watch, withCtx, createVNode, unref, toDisplayString, withDirectives, isRef, openBlock, createBlock, Fragment, renderList, vModelSelect, mergeProps, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual, ssrRenderAttrs } from 'vue/server-renderer';
-import { _ as _sfc_main$3 } from './SiteImage-DHN0p5DB.mjs';
+import { _ as _sfc_main$3 } from './SiteImage-0fq-XTGy.mjs';
 import { u as useGames } from './useGames-ClDAqFc-.mjs';
 import './_plugin-vue_export-helper-1tPrXgE0.mjs';
 import '@iconify/vue/dist/offline';
@@ -31,6 +31,7 @@ import 'devalue';
 import 'unhead/utils';
 import 'unhead/plugins';
 import './NuxtImg-BJb9P2Je.mjs';
+import './imageFallback-Dlnrmqzg.mjs';
 import './public.repository-zOMnXrxb.mjs';
 import './asyncData-D54zHTjC.mjs';
 import 'perfect-debounce';
@@ -117,12 +118,6 @@ const _sfc_main = {
       postponed: "Adiado",
       draft: "Rascunho"
     })[status] || "Agendado";
-    function onLogoError(event) {
-      const image = event.target;
-      if (image.dataset.fallbackApplied === "1") return;
-      image.dataset.fallbackApplied = "1";
-      image.src = "/img/logowbg.webp";
-    }
     return (_ctx, _push, _parent, _attrs) => {
       const _component_LandingContainer = __nuxt_component_0;
       const _component_LandingSectionhead = _sfc_main$2;
@@ -185,18 +180,18 @@ const _sfc_main = {
                   src: teamLogo((_b = game.teams) == null ? void 0 : _b[0]),
                   alt: `Logo ${((_c = game.teams) == null ? void 0 : _c[0]) || ""}`,
                   preset: "badge",
+                  fallback: "/img/logowbg.webp",
                   class: "brand-logo-original h-12 w-12 object-contain",
-                  loading: "lazy",
-                  onError: onLogoError
+                  loading: "lazy"
                 }, null, _parent2, _scopeId));
                 _push2(`</div><strong${_scopeId}>vs</strong><div class="flex flex-1 items-center gap-3"${_scopeId}>`);
                 _push2(ssrRenderComponent(_component_SiteImage, {
                   src: teamLogo((_d = game.teams) == null ? void 0 : _d[1]),
                   alt: `Logo ${((_e = game.teams) == null ? void 0 : _e[1]) || ""}`,
                   preset: "badge",
+                  fallback: "/img/logowbg.webp",
                   class: "brand-logo-original h-12 w-12 object-contain",
-                  loading: "lazy",
-                  onError: onLogoError
+                  loading: "lazy"
                 }, null, _parent2, _scopeId));
                 _push2(`<span class="font-semibold"${_scopeId}>${ssrInterpolate((_f = game.teams) == null ? void 0 : _f[1])}</span></div></div><div class="text-center md:text-right"${_scopeId}><span class="inline-flex rounded-full bg-neutral-50 px-3 py-1 text-xs font-semibold text-neutral-600"${_scopeId}>${ssrInterpolate(gameStatus(game.status))}</span></div></article>`);
               });
@@ -277,9 +272,9 @@ const _sfc_main = {
                             src: teamLogo((_b = game.teams) == null ? void 0 : _b[0]),
                             alt: `Logo ${((_c = game.teams) == null ? void 0 : _c[0]) || ""}`,
                             preset: "badge",
+                            fallback: "/img/logowbg.webp",
                             class: "brand-logo-original h-12 w-12 object-contain",
-                            loading: "lazy",
-                            onError: onLogoError
+                            loading: "lazy"
                           }, null, 8, ["src", "alt"])
                         ]),
                         createVNode("strong", null, "vs"),
@@ -288,9 +283,9 @@ const _sfc_main = {
                             src: teamLogo((_d = game.teams) == null ? void 0 : _d[1]),
                             alt: `Logo ${((_e = game.teams) == null ? void 0 : _e[1]) || ""}`,
                             preset: "badge",
+                            fallback: "/img/logowbg.webp",
                             class: "brand-logo-original h-12 w-12 object-contain",
-                            loading: "lazy",
-                            onError: onLogoError
+                            loading: "lazy"
                           }, null, 8, ["src", "alt"]),
                           createVNode("span", { class: "font-semibold" }, toDisplayString((_f = game.teams) == null ? void 0 : _f[1]), 1)
                         ])
@@ -318,4 +313,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=calendario-DmCOVdxX.mjs.map
+//# sourceMappingURL=calendario-BzxFAIXD.mjs.map

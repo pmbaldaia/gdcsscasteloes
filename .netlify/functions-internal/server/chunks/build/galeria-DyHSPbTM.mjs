@@ -1,6 +1,6 @@
 import { _ as __nuxt_component_0 } from './Container-BfHLpACB.mjs';
 import { _ as _sfc_main$1 } from './Sectionhead-DAjZ4P2v.mjs';
-import { _ as _sfc_main$2 } from './SiteImage-DHN0p5DB.mjs';
+import { _ as _sfc_main$2 } from './SiteImage-0fq-XTGy.mjs';
 import { withAsyncContext, ref, withCtx, createVNode, unref, openBlock, createBlock, Fragment, renderList, toDisplayString, withModifiers, createCommentVNode, nextTick, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrRenderList, ssrInterpolate, ssrRenderAttr } from 'vue/server-renderer';
 import { c as createPublicRepository } from './public.repository-zOMnXrxb.mjs';
@@ -28,6 +28,7 @@ import 'unhead/server';
 import 'devalue';
 import 'unhead/utils';
 import 'unhead/plugins';
+import './imageFallback-Dlnrmqzg.mjs';
 import 'perfect-debounce';
 
 const numericId = (value) => {
@@ -227,4 +228,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=galeria-C8qSrEB0.mjs.map
+//# sourceMappingURL=galeria-DyHSPbTM.mjs.map

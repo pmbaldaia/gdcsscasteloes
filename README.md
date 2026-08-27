@@ -113,10 +113,10 @@ Antes de passar a produção, usar outra base (`gdcsscasteloes`) e alterar `AUTH
 Os ficheiros enviados pelo Admin são guardados em MongoDB GridFS e expostos em `/uploads/:id`.
 
 O componente `components/SiteImage.vue` distingue automaticamente:
-- `/uploads/...` → `<img>` direto, sem passar pelo IPX do Nuxt Image;
-- assets estáticos (`/eventos/...`, `/equipa/...`, etc.) → `NuxtImg`, mantendo otimização.
+- `/uploads/...` e `/logos/...` → `<img>` direto, sem passar pelo IPX/Nuxt Image (igual ao Admin);
+- outros assets estáticos (`/eventos/...`, `/equipa/...`, etc.) → `NuxtImg`, mantendo otimização.
 
-Isto evita URLs `/_ipx/.../uploads/...` que não conseguem processar corretamente streams GridFS em produção.
+Isto evita URLs `/_ipx/.../uploads/...` e falhas de otimização de logótipos de equipas em produção Netlify.
 
 
 ## Época 2026/2027 — Divisão de Honra

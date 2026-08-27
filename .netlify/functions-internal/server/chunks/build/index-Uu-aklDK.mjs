@@ -3,7 +3,7 @@ import __nuxt_component_0$1 from './Icon-DhbMUx6q.mjs';
 import { withCtx, createVNode, withAsyncContext, computed, mergeProps, unref, ref, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrRenderAttrs, ssrRenderAttr, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderTeleport } from 'vue/server-renderer';
 import { u as useSiteSettings } from './useSiteSettings-Dkw2OmCn.mjs';
-import { _ as _sfc_main$6 } from './SiteImage-DHN0p5DB.mjs';
+import { _ as _sfc_main$6 } from './SiteImage-0fq-XTGy.mjs';
 import { u as useGames } from './useGames-ClDAqFc-.mjs';
 import { c as createPublicRepository } from './public.repository-zOMnXrxb.mjs';
 import { u as useAsyncData } from './asyncData-D54zHTjC.mjs';
@@ -33,6 +33,7 @@ import 'devalue';
 import 'unhead/utils';
 import 'unhead/plugins';
 import './NuxtImg-BJb9P2Je.mjs';
+import './imageFallback-Dlnrmqzg.mjs';
 import 'perfect-debounce';
 
 const fallbackImage = "/img/gdcss-casteloes-tarja.webp";
@@ -154,12 +155,6 @@ const _sfc_main$3 = {
       var _a, _b;
       return ((_b = (_a = teams.value) == null ? void 0 : _a.find((team) => team.name === name)) == null ? void 0 : _b.logo) || "/img/logowbg.webp";
     }
-    function onTeamLogoError(event) {
-      const image = event.target;
-      if (image.dataset.fallbackApplied === "1") return;
-      image.dataset.fallbackApplied = "1";
-      image.src = "/img/logowbg.webp";
-    }
     function parseGameDate(game) {
       return /* @__PURE__ */ new Date(`${game.date}T${game.time}:00`);
     }
@@ -193,24 +188,24 @@ const _sfc_main$3 = {
           src: teamLogo(nextGame.value.teams[0]),
           alt: `Logo ${nextGame.value.teams[0]}`,
           preset: "badge",
+          fallback: "/img/logowbg.webp",
           width: "80",
           height: "80",
           sizes: "80px",
           loading: "lazy",
-          class: "brand-logo-original w-20 h-20 object-contain mb-3",
-          onError: onTeamLogoError
+          class: "brand-logo-original w-20 h-20 object-contain mb-3"
         }, null, _parent));
         _push(`<p class="text-fluid-lg font-semibold text-neutral-900">${ssrInterpolate(nextGame.value.teams[0])}</p></div><span class="text-fluid-2xl font-extrabold text-neutral-900">vs</span><div class="flex flex-col items-center w-32">`);
         _push(ssrRenderComponent(_component_SiteImage, {
           src: teamLogo(nextGame.value.teams[1]),
           alt: `Logo ${nextGame.value.teams[1]}`,
           preset: "badge",
+          fallback: "/img/logowbg.webp",
           width: "80",
           height: "80",
           sizes: "80px",
           loading: "lazy",
-          class: "brand-logo-original w-20 h-20 object-contain mb-3",
-          onError: onTeamLogoError
+          class: "brand-logo-original w-20 h-20 object-contain mb-3"
         }, null, _parent));
         _push(`<p class="text-fluid-lg font-semibold text-neutral-900">${ssrInterpolate(nextGame.value.teams[1])}</p></div></div></div>`);
       } else {
@@ -335,4 +330,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-BNoRVuNr.mjs.map
+//# sourceMappingURL=index-Uu-aklDK.mjs.map

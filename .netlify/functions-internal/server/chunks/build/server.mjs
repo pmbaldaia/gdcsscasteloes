@@ -783,7 +783,7 @@ const _routes = [
     name: "index",
     path: "/",
     meta: __nuxt_page_meta$x || {},
-    component: () => import('./index-BNoRVuNr.mjs')
+    component: () => import('./index-Uu-aklDK.mjs')
   },
   {
     name: "sobre",
@@ -795,13 +795,13 @@ const _routes = [
     name: "equipa",
     path: "/equipa",
     meta: __nuxt_page_meta$v || {},
-    component: () => import('./equipa-DYi90kXT.mjs')
+    component: () => import('./equipa-CWEpYojN.mjs')
   },
   {
     name: "galeria",
     path: "/galeria",
     meta: __nuxt_page_meta$u || {},
-    component: () => import('./galeria-C8qSrEB0.mjs')
+    component: () => import('./galeria-DyHSPbTM.mjs')
   },
   {
     name: "all",
@@ -825,7 +825,7 @@ const _routes = [
     name: "calendario",
     path: "/calendario",
     meta: __nuxt_page_meta$q || {},
-    component: () => import('./calendario-DmCOVdxX.mjs')
+    component: () => import('./calendario-BzxFAIXD.mjs')
   },
   {
     name: "manutencao",
@@ -903,7 +903,7 @@ const _routes = [
     name: "eventos",
     path: "/eventos",
     meta: __nuxt_page_meta$d || {},
-    component: () => import('./index-_dqrfVmB.mjs')
+    component: () => import('./index-CzeIoVQQ.mjs')
   },
   {
     name: "oportunidades",
@@ -921,7 +921,7 @@ const _routes = [
     name: "eventos-slug",
     path: "/eventos/:slug()",
     meta: __nuxt_page_meta$a || {},
-    component: () => import('./_slug_-DtlaF07S.mjs')
+    component: () => import('./_slug_-DXeTTAHB.mjs')
   },
   {
     name: "admin-conteudos",
