@@ -7,139 +7,139 @@ const sources = [
         "urls": [
             {
                 "loc": "https://gdcsscasteloes.pt/[...all]",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/conteudos",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/definicoes",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/direcao",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/equipa-tecnica",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/equipas",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/eventos",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/galeria",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/jogos",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/login",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/media",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/mensagens",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/oportunidades",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/patrocinios",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/pesquisa",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/plantel",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/socios",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/utilizadores",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/auth/login",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/auth/register",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/calendario",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/contacto",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/equipa",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/eventos/[slug]",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/eventos",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/galeria",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/manutencao",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/oportunidades",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/politicas/cookies",
-                "lastmod": "2026-08-27T11:12:10.900Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/politicas/privacidade",
-                "lastmod": "2026-08-27T11:12:10.901Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/politicas/servico",
-                "lastmod": "2026-08-27T11:12:10.901Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/sobre",
-                "lastmod": "2026-08-27T11:12:10.901Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt",
@@ -529,6 +529,9 @@ const sources = [
                         "loc": "undefined/logos/grdRans.webp"
                     },
                     {
+                        "loc": "undefined/patrocinios/3garage.webp"
+                    },
+                    {
                         "loc": "undefined/patrocinios/allianz.webp"
                     },
                     {
@@ -688,7 +691,7 @@ const sources = [
                         "loc": "undefined/patrocinios/vistara.webp"
                     }
                 ],
-                "lastmod": "2026-08-27T11:12:10.901Z"
+                "lastmod": "2026-08-31T15:11:55.189Z"
             }
         ],
         "sourceType": "user"

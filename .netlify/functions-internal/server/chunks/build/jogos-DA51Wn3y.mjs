@@ -57,8 +57,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       { key: "time", label: "Hora", type: "time" },
       { key: "team1", label: "Equipa 1", type: "select", options: teamOptions.value },
       { key: "team2", label: "Equipa 2", type: "select", options: teamOptions.value },
-      { key: "venue", label: "Est\xE1dio / Campo" },
-      { key: "address", label: "Rua / Morada" },
+      { key: "venue", label: "Est\xE1dio / Campo", required: false },
+      { key: "address", label: "Rua / Morada", required: false },
       { key: "volta", label: "Volta", type: "number" },
       { key: "status", label: "Estado do jogo", type: "select", options: [
         { value: "scheduled", label: "Agendado" },
@@ -129,4 +129,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=jogos-CMXqQ5CZ.mjs.map
+//# sourceMappingURL=jogos-DA51Wn3y.mjs.map
