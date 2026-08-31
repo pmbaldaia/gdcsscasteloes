@@ -57,6 +57,7 @@ const sponsors = [
   { src: "/patrocinios/marcoarco.webp", alt: "Marco Arco" },
   { src: "/patrocinios/bravosincriveis.webp", alt: "Bravos e Incríveis" },
   { src: "/patrocinios/fernandosousa.webp", alt: "Fernando Sousa" },
+  { src: "/patrocinios/3garage.webp", alt: "3 Garage" },
 ];
 
 const selectedSponsor = ref(null);
