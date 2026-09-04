@@ -1,17 +1,2 @@
-<script setup>
-definePageMeta({
-  layout: "default",
-});
-</script>
-
-<template>
-  <LandingContainer>
-    <LandingHero />
-    <div id="conteudo-principal">
-      <LandingFeatures />
-    </div>
-    <LandingGames />
-    <LandingLogos />
-    <LandingCta />
-  </LandingContainer>
-</template>
+<script setup>definePageMeta({layout:'default'})</script>
+<template><CmsPublicPageRenderer page-slug="inicio" /></template>

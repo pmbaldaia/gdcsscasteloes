@@ -18,28 +18,17 @@ async function load() {
     id: 'club',
     clubName: 'GDCSS Castelões',
     contactEmail: '',
-    heroDesktopImage: '',
-    heroMobileImage: '',
-    heroEyebrow: 'G.D.C.S.S. Castelões',
-    heroTitle: 'Bem-vindo ao site oficial do G.D.C.S.S. Castelões',
-    heroDescription: 'Celebrando com orgulho 41 anos de história, dedicação e conquistas, o G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada freguesia de Castelões. Venha fazer parte dessa jornada, repleta de momentos inesquecíveis e vitórias que marcaram a nossa comunidade!',
   }
 
-  data.value.heroDesktopImage ||= ''
-  data.value.heroMobileImage ||= ''
-  data.value.heroEyebrow ||= 'G.D.C.S.S. Castelões'
-  data.value.heroTitle ||= 'Bem-vindo ao site oficial do G.D.C.S.S. Castelões'
-  data.value.heroDescription ||= 'Celebrando com orgulho 41 anos de história, dedicação e conquistas, o G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada freguesia de Castelões. Venha fazer parte dessa jornada, repleta de momentos inesquecíveis e vitórias que marcaram a nossa comunidade!'
-  data.value.navigation ||= [
-    { title: 'Sobre nós', path: '/sobre/', visible: true }, { title: 'Equipa', path: '/equipa/', visible: true },
-    { title: 'Calendário', path: '/calendario/', visible: true }, { title: 'Eventos', path: '/eventos/', visible: true },
-    { title: 'Galeria', path: '/galeria/', visible: true }, { title: 'Oportunidades', path: '/oportunidades/', visible: true },
-  ]
   data.value.socialLinks ||= [
     { platform: 'facebook', label: 'Facebook', url: 'https://www.facebook.com/gdcscasteloes/', visible: true },
     { platform: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/gdcsscasteloes/', visible: true },
     { platform: 'tiktok', label: 'TikTok', url: 'https://www.tiktok.com/@gdcss.casteloes', visible: true },
   ]
+  data.value.footerAboutTitle ||= 'Sobre'
+  data.value.footerLinksTitle ||= 'Links Úteis'
+  data.value.footerSocialTitle ||= 'Redes Sociais'
+  data.value.footerContactTitle ||= 'Contacto'
   data.value.footerAbout ||= 'Nós, enquanto equipa, temos a visão de procurar sempre a vitória e sermos os melhores em tudo o que fazemos. Treinamos com dedicação e foco para alcançar o topo e demonstrar a nossa paixão pelo futebol em cada jogo.' 
 }
 
@@ -59,7 +48,7 @@ async function save() {
     await refreshNuxtData('gdcss-public-settings')
     toast.success(
       'Definições guardadas',
-      'Os dados gerais e as imagens da página principal foram atualizados.'
+      'Os dados gerais foram atualizados com sucesso.'
     )
   } catch (e: any) {
     error.value = e?.data?.message || e.message
@@ -79,7 +68,7 @@ onMounted(load)
         <p class="eyebrow">Sistema</p>
         <h1>Definições</h1>
         <p class="page-heading__description">
-          Dados gerais e apresentação da página principal do site.
+          Dados gerais utilizados no site e no CMS.
         </p>
       </div>
     </header>
@@ -109,72 +98,14 @@ onMounted(load)
         </div>
       </section>
 
-      <section class="panel settings-section">
-        <header class="settings-section__header">
-          <div>
-            <p class="eyebrow">Página principal</p>
-            <h2>Hero banner</h2>
-            <p>
-              Define as imagens e o texto apresentados no banner principal.
-            </p>
-          </div>
-        </header>
-
-        <div class="hero-settings-grid">
-          <CmsSingleImagePicker
-            v-model="data.heroDesktopImage"
-            label="Imagem desktop"
-            recommended="Recomendado: 1920 × 1080 px ou superior · formato horizontal"
-          />
-
-          <CmsSingleImagePicker
-            v-model="data.heroMobileImage"
-            label="Imagem mobile"
-            recommended="Recomendado: 1080 × 1350 px ou 1080 × 1920 px · formato vertical"
-          />
-        </div>
-
-        <div class="settings-form hero-settings-copy">
-          <label class="form-field">
-            <span>Texto pequeno</span>
-            <input v-model="data.heroEyebrow" required>
-          </label>
-
-          <label class="form-field">
-            <span>Título</span>
-            <textarea v-model="data.heroTitle" rows="3" required />
-          </label>
-
-          <label class="form-field">
-            <span>Descrição</span>
-            <textarea v-model="data.heroDescription" rows="5" required />
-          </label>
-        </div>
-
-        <div class="cms-alert cms-alert--info hero-settings-note">
-          <Icon name="lucide:info" size="18" />
-          <span>
-            Se uma das imagens não estiver definida, o site utiliza automaticamente
-            a imagem disponível ou o banner atual como fallback.
-          </span>
-        </div>
-      </section>
-
-
-      <section class="panel settings-section">
-        <header class="settings-section__header"><div><p class="eyebrow">Navegação</p><h2>Menu principal</h2><p>Altere os nomes, destinos e visibilidade dos itens existentes.</p></div></header>
-        <div class="settings-form">
-          <div v-for="(item, index) in data.navigation" :key="index" class="settings-form" style="grid-column:1/-1">
-            <label class="form-field"><span>Nome</span><input v-model="item.title" required></label>
-            <label class="form-field"><span>Endereço</span><input v-model="item.path" required></label>
-            <label class="form-field"><span><input v-model="item.visible" type="checkbox"> Visível no site</span></label>
-          </div>
-        </div>
-      </section>
 
       <section class="panel settings-section">
         <header class="settings-section__header"><div><p class="eyebrow">Rodapé</p><h2>Conteúdo e redes sociais</h2><p>Informação apresentada no rodapé e nos atalhos sociais do menu.</p></div></header>
         <div class="settings-form">
+          <label class="form-field"><span>Título “Sobre”</span><input v-model="data.footerAboutTitle"></label>
+          <label class="form-field"><span>Título “Links úteis”</span><input v-model="data.footerLinksTitle"></label>
+          <label class="form-field"><span>Título “Redes sociais”</span><input v-model="data.footerSocialTitle"></label>
+          <label class="form-field"><span>Título “Contacto”</span><input v-model="data.footerContactTitle"></label>
           <label class="form-field" style="grid-column:1/-1"><span>Texto “Sobre”</span><textarea v-model="data.footerAbout" rows="5" /></label>
           <div v-for="(social, index) in data.socialLinks" :key="social.platform || index" class="settings-form" style="grid-column:1/-1">
             <label class="form-field"><span>Rede social</span><input v-model="social.label"></label>

@@ -11,26 +11,8 @@ async function handleSubmit(){touched.value=true;formError.value=false;submitSuc
 
 <template>
   <LandingContainer>
-    <LandingSectionhead>
-      <template v-slot:title>
-        <div class="flex flex-col items-center">
-          <span class="text-neutral-900">Contacto</span>
-          <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
-            <div class="w-1/2 bg-secondary-500"></div>
-            <div class="w-1/2 bg-primary-700"></div>
-          </div>
-        </div>
-      </template>
-
-      <template v-slot:desc>
-        <p class="text-neutral-600">
-          Preenche o formulário e entra em contacto connosco.
-        </p>
-        <p class="text-neutral-600 mt-2">
-          Envia-nos uma mensagem ou email. Respondemos o mais rápido possível!
-        </p>
-      </template>
-    </LandingSectionhead>
+    <CmsManagedPageHeader page-slug="contacto" fallback-title="Contacto" fallback-description="Preenche o formulário e entra em contacto connosco.
+Envia-nos uma mensagem ou email. Respondemos o mais rápido possível!" />
 
     <div class="mx-auto mt-16 max-w-full">
       <div

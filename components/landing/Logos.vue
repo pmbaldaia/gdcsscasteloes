@@ -1,4 +1,5 @@
 <script setup>
+const props=defineProps({ title: { type: String, default: 'Patrocínios' } })
 import { ref, onMounted, onUnmounted } from "vue";
 import { useSponsors } from "~/modules/sponsors/useSponsors";
 const { sponsors } = await useSponsors();
@@ -15,7 +16,7 @@ onUnmounted(()=>{window.removeEventListener('keydown',onKeydown);if(import.meta.
     <h2
       class="text-neutral-900 text-fluid-3xl font-bold text-center tracking-tight"
     >
-      Patrocínios
+      {{ props.title }}
     </h2>
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-10 mt-10 px-4">
       <button

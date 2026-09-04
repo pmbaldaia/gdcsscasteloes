@@ -26,24 +26,7 @@ const eventosPassados = computed(() =>
 
 <template>
   <LandingContainer>
-    <LandingSectionhead>
-      <template #title>
-        <div class="flex flex-col items-center">
-          <span class="text-neutral-900">Próximos Eventos</span>
-          <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
-            <div class="w-1/2 bg-secondary-500"></div>
-            <div class="w-1/2 bg-primary-700"></div>
-          </div>
-        </div>
-      </template>
-
-      <template #desc>
-        <span class="text-neutral-600">
-          Não percas as nossas próximas festas e eventos! Vem divertir-te
-          connosco!
-        </span>
-      </template>
-    </LandingSectionhead>
+    <CmsManagedPageHeader page-slug="eventos" fallback-title="Próximos Eventos" fallback-description="Não percas as nossas próximas festas e eventos! Vem divertir-te connosco!" />
 
     <!-- Eventos Futuros -->
     <div

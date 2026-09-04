@@ -14,6 +14,7 @@ const normalizeRole = (role='viewer') => {
 export const usersService = {
   async list(){ return (await usersRepository.readAll()).map(clean) },
   async get(id){ const u=await usersRepository.findById(id); return u?clean(u):null },
+  async findRawById(id){ return usersRepository.findById(id) },
   async findByEmail(email){ return (await usersRepository.readAll()).find(u=>u.email===normalizeEmail(email))||null },
   async findByUsername(username){ return (await usersRepository.readAll()).find(u=>normalizeUsername(u.username)===normalizeUsername(username))||null },
   async create(payload){
@@ -30,7 +31,7 @@ export const usersService = {
     if(!validUsername(username)){const e=new Error('O utilizador deve ter entre 3 e 32 caracteres e usar apenas letras, números, ponto, hífen ou underscore');e.statusCode=400;throw e}
     const usernameOwner=await this.findByUsername(username);if(usernameOwner&&usernameOwner.id!==id){const e=new Error('Este nome de utilizador já existe');e.statusCode=409;throw e}
     const emailOwner=email&&await this.findByEmail(email);if(emailOwner&&emailOwner.id!==id){const e=new Error('Já existe um utilizador com este email');e.statusCode=409;throw e}
-    const patch={ name:payload.name?.trim()??current.name, username, email, role:normalizeRole(payload.role??current.role), active:payload.active??current.active, updatedAt:new Date().toISOString() }
+    const patch={ name:payload.name?.trim()??current.name, username, email, role:normalizeRole(payload.role??current.role), active:payload.active??current.active, avatar:payload.avatar??current.avatar??'', updatedAt:new Date().toISOString() }
     if(payload.password) patch.passwordHash=hashPassword(payload.password)
     const row=await usersRepository.update(id,patch); return clean(row)
   },

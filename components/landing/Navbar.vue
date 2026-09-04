@@ -9,34 +9,26 @@ import {
 } from "@phosphor-icons/vue";
 import { useRoute } from "vue-router";
 import { useSiteSettings } from "~/modules/settings/useSiteSettings";
+import { useMenus } from "~/modules/menus/useMenus";
 
 const { isDark } = useThemeMode();
 const open = ref(false);
 const scrolled = ref(false);
 const route = useRoute();
 const { settings } = await useSiteSettings();
+const { header: cmsHeaderMenus } = await useMenus();
 
 const isHome = computed(() => route.path === "/" || route.path === "");
 const overlaysHero = computed(() => isHome.value && !scrolled.value && !open.value);
 
-const defaultMenuitems = [
-  { title: "Sobre nós", path: "/sobre/", visible: true },
-  { title: "Equipa", path: "/equipa/", visible: true },
-  { title: "Calendário", path: "/calendario/", visible: true },
-  { title: "Eventos", path: "/eventos/", visible: true },
-  { title: "Galeria", path: "/galeria/", visible: true },
-  { title: "Oportunidades", path: "/oportunidades/", visible: true },
-];
-const menuitems = computed(() => (Array.isArray(settings.value.navigation) && settings.value.navigation.length
-  ? settings.value.navigation
-  : defaultMenuitems).filter((item) => item.visible !== false));
+const menuitems = computed(() => cmsHeaderMenus.value);
 const socialLinks = computed(() => Array.isArray(settings.value.socialLinks) ? settings.value.socialLinks.filter((item) => item.visible !== false && item.url) : []);
 const socialIcon = (platform = '') => ({ instagram: PhInstagramLogo, facebook: PhFacebookLogo, tiktok: PhTiktokLogo }[String(platform).toLowerCase()] || PhInstagramLogo);
 
 const isActive = (item) =>
-  item.path === "/eventos/"
+  item.url === "/eventos/"
     ? route.path === "/eventos/" || route.path.startsWith("/eventos/")
-    : route.path === item.path;
+    : route.path === item.url;
 
 function getScrollTop() {
   return (
@@ -118,9 +110,11 @@ watch(() => route.path, () => {
           <ul
             class="flex flex-col items-center text-center lg:flex-row lg:gap-1 py-4 lg:py-0 border-t border-neutral-50 lg:border-0 mt-2 lg:mt-0"
           >
-            <li v-for="item in menuitems" :key="item.path">
+            <li v-for="item in menuitems" :key="`${item.url}-${item.label}`">
               <NuxtLink
-                :to="item.path"
+                :to="item.url"
+                :target="item.target || '_self'"
+                :rel="item.target === '_blank' ? 'noopener noreferrer' : undefined"
                 @click="open = false"
                 :aria-current="isActive(item) ? 'page' : undefined"
                 :class="[
@@ -130,7 +124,7 @@ watch(() => route.path, () => {
                     : 'text-neutral-600 hover:text-primary-900 hover:bg-neutral-50 lg:hover:bg-transparent',
                 ]"
               >
-                {{ item.title }}
+                {{ item.label }}
               </NuxtLink>
             </li>
           </ul>

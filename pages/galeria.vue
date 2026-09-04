@@ -27,22 +27,7 @@ const closeDialog = () => {
 
 <template>
   <LandingContainer>
-    <LandingSectionhead>
-      <template #title>
-        <div class="flex flex-col items-center">
-          <span class="text-neutral-900">Galeria</span>
-          <div class="mt-5 w-32 h-px flex rounded-sm overflow-hidden">
-            <div class="w-1/2 bg-secondary-500"></div>
-            <div class="w-1/2 bg-primary-700"></div>
-          </div>
-        </div>
-      </template>
-      <template #desc>
-        <p class="text-neutral-600">
-          Espreita alguns dos momentos que captámos em imagens!
-        </p>
-      </template>
-    </LandingSectionhead>
+    <CmsManagedPageHeader page-slug="galeria" fallback-title="Galeria" fallback-description="Espreita alguns dos momentos que captámos em imagens!" />
 
     <div class="space-y-16 sm:space-y-20 mt-12">
       <section v-for="(category, index) in categories" :key="index">

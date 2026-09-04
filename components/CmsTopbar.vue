@@ -15,6 +15,10 @@ const pageMeta = computed(() => {
 
   const map = [
     { test: (p:string) => p === '/admin', label: 'Painel de controlo', icon: 'lucide:layout-dashboard' },
+    { test: (p:string) => p.startsWith('/admin/paginas'), label: 'Páginas', icon: 'lucide:file-text' },
+    { test: (p:string) => p.startsWith('/admin/blocos'), label: 'Blocos de conteúdo', icon: 'lucide:blocks' },
+    { test: (p:string) => p.startsWith('/admin/menus'), label: 'Menus', icon: 'lucide:menu' },
+    { test: (p:string) => p.startsWith('/admin/perfil'), label: 'O meu perfil', icon: 'lucide:user-cog' },
     { test: (p:string) => p.startsWith('/admin/jogos'), label: 'Jogos e jornadas', icon: 'lucide:calendar-days' },
     { test: (p:string) => p.startsWith('/admin/equipas'), label: 'Equipas', icon: 'lucide:shield' },
     { test: (p:string) => p.startsWith('/admin/plantel'), label: 'Plantel', icon: 'lucide:users' },
@@ -96,7 +100,8 @@ function openSite() {
 
       <button class="user-menu" type="button" @click="menuOpen = !menuOpen">
         <span class="user-menu__avatar">
-          {{ (user?.name || 'AD').slice(0, 2).toUpperCase() }}
+          <img v-if="user?.avatar" :src="user.avatar" :alt="user.name || 'Perfil'" class="user-menu__avatar-image">
+          <template v-else>{{ (user?.name || 'AD').slice(0, 2).toUpperCase() }}</template>
         </span>
         <span class="user-menu__copy">
           <strong>{{ user?.name || 'Administrador' }}</strong>
@@ -106,6 +111,10 @@ function openSite() {
       </button>
 
       <div v-if="menuOpen" class="user-dropdown">
+        <NuxtLink to="/admin/perfil" @click="menuOpen = false">
+          <Icon name="lucide:user-cog" />
+          O meu perfil
+        </NuxtLink>
         <NuxtLink to="/admin/mensagens" class="mobile-menu-link" @click="menuOpen = false">
           <Icon name="lucide:mail" />
           Mensagens

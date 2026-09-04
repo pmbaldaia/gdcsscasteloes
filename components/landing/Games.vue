@@ -1,4 +1,5 @@
 <script setup>
+const props=defineProps({ title: { type: String, default: 'Próximo Jogo' } })
 import { computed } from "vue";
 import { useGames } from "~/modules/games/useGames";
 const { jornadas, teams } = await useGames();
@@ -47,7 +48,7 @@ const showVoltaBadge = computed(
   <div class="max-w-3xl mx-auto mt-10">
     <div v-if="nextGame" class="card-surface p-6 sm:p-8 text-center relative">
       <h3 class="text-fluid-2xl font-bold text-neutral-900 mb-3">
-        🎯 Próximo Jogo
+        {{ props.title }}
       </h3>
 
       <p class="text-fluid-lg text-neutral-600 mb-6 leading-relaxed">

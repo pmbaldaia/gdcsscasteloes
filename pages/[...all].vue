@@ -1,11 +1,6 @@
-<script setup>
-definePageMeta({
-  layout: "error",
-});
-
-const error = useError();
-error.value = createError({
-  statusCode: 404,
-  statusMessage: "Página não encontrada",
-});
+<script setup lang="ts">
+definePageMeta({layout:'default'})
+const route=useRoute()
+const slug=computed(()=>Array.isArray(route.params.all)?route.params.all.join('/'):String(route.params.all||''))
 </script>
+<template><CmsPublicPageRenderer v-if="slug" :page-slug="slug"/></template>

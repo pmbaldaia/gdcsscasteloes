@@ -1,7 +1,9 @@
 <script setup>
 import { useSiteSettings } from "~/modules/settings/useSiteSettings";
 import { PhInstagramLogo, PhFacebookLogo, PhTiktokLogo } from "@phosphor-icons/vue";
+import { useMenus } from "~/modules/menus/useMenus";
 const { settings } = await useSiteSettings();
+const { footer: footerMenus } = await useMenus();
 const socialLinks = computed(() => Array.isArray(settings.value.socialLinks) ? settings.value.socialLinks.filter(item => item.visible !== false && item.url) : []);
 const socialIcon = (platform = '') => ({ instagram: PhInstagramLogo, facebook: PhFacebookLogo, tiktok: PhTiktokLogo }[String(platform).toLowerCase()] || PhInstagramLogo);</script>
 
@@ -16,7 +18,7 @@ const socialIcon = (platform = '') => ({ instagram: PhInstagramLogo, facebook: P
 
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-8">
         <div class="flex flex-col h-full justify-start text-left">
-          <h3 class="text-fluid-xl font-bold mb-1">Sobre</h3>
+          <h3 class="text-fluid-xl font-bold mb-1">{{ settings.footerAboutTitle || 'Sobre' }}</h3>
           <div class="w-[10%] border-b-2 border-secondary-800 mb-3"></div>
           <p class="text-fluid-sm leading-relaxed text-neutral-600">
 {{ settings.footerAbout }}
@@ -24,70 +26,23 @@ const socialIcon = (platform = '') => ({ instagram: PhInstagramLogo, facebook: P
         </div>
 
         <div class="flex flex-col h-full justify-start text-left">
-          <h3 class="text-fluid-xl font-bold mb-1">Links Úteis</h3>
+          <h3 class="text-fluid-xl font-bold mb-1">{{ settings.footerLinksTitle || 'Links Úteis' }}</h3>
           <div class="w-[10%] border-b-2 border-secondary-800 mb-3"></div>
           <ul class="space-y-3 text-fluid-sm">
-            <li>
-              <a
-                href="/contacto"
+            <li v-for="item in footerMenus" :key="`${item.url}-${item.label}`">
+              <NuxtLink
+                :to="item.url"
+                :target="item.target || '_self'"
+                :rel="item.target === '_blank' ? 'noopener noreferrer' : undefined"
                 class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
-                aria-label="Clica aqui para ver os contactos"
-              >
-                Contactos
-              </a>
+              >{{ item.label }}</NuxtLink>
             </li>
-            <li>
-              <a
-                href="/politicas/cookies"
-                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
-                aria-label="Clica aqui para ver a política de cookies"
-              >
-                Política de Cookies
-              </a>
-            </li>
-            <li>
-              <a
-                href="/politicas/privacidade"
-                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
-                aria-label="Clica aqui para ver a política de privacidade"
-              >
-                Política de Privacidade
-              </a>
-            </li>
-            <li>
-              <a
-                href="/politicas/servico"
-                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
-                aria-label="Clica aqui para ver os termos de serviço"
-              >
-                Termos de Serviço
-              </a>
-            </li>
-            <li>
-              <a
-                href="/politicas/servico"
-                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
-                aria-label="Clica aqui para ver os termos de serviço"
-              >
-                Termos de Serviço
-              </a>
-            </li>
-            <li>
-              <a
-                href="/pdf/manual-acolhimento-boas-praticas.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="transition-colors duration-300 text-neutral-600 hover:text-secondary-800 hover:underline"
-                aria-label="Clica aqui para ver o Manual de Acolhimento e Boas Práticas"
-              >
-                Manual de Acolhimento e Boas Práticas
-              </a>
-            </li>
+
           </ul>
         </div>
 
         <div class="flex flex-col h-full justify-start text-left">
-          <h3 class="text-fluid-xl font-bold mb-1">Redes Sociais</h3>
+          <h3 class="text-fluid-xl font-bold mb-1">{{ settings.footerSocialTitle || 'Redes Sociais' }}</h3>
           <div class="w-[10%] border-b-2 border-secondary-800 mb-3"></div>
           <ul class="space-y-3 text-fluid-sm">
             <li v-for="social in socialLinks" :key="social.platform">
@@ -100,7 +55,7 @@ const socialIcon = (platform = '') => ({ instagram: PhInstagramLogo, facebook: P
         </div>
 
         <div class="flex flex-col h-full justify-start text-left">
-          <h3 class="text-fluid-xl font-bold mb-1">Contacto</h3>
+          <h3 class="text-fluid-xl font-bold mb-1">{{ settings.footerContactTitle || 'Contacto' }}</h3>
           <div class="w-[10%] border-b-2 border-secondary-800 mb-3"></div>
           <p v-if="settings.contactEmail" class="text-fluid-sm leading-relaxed text-neutral-600">
             Email:<br />

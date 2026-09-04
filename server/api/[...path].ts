@@ -16,15 +16,18 @@ import { sponsorsService } from '../backend/modules/sponsors/sponsors.service.mj
 import { opportunitiesService } from '../backend/modules/opportunities/opportunities.service.mjs'
 import { verifyToken } from '../backend/core/auth.mjs'
 import { season2627Service } from '../backend/modules/season-2627/season-2627.service.mjs'
+import { pagesService } from '../backend/modules/pages/pages.service.mjs'
+import { contentBlocksService } from '../backend/modules/content-blocks/content-blocks.service.mjs'
+import { menusService } from '../backend/modules/menus/menus.service.mjs'
 
-const resources:any={games:gamesService,teams:teamsService,events:eventsService,gallery:galleryService,members:membersService,board:boardService,staff:staffService,players:playersService,users:usersService,messages:messagesService,settings:settingsService,sponsors:sponsorsService,opportunities:opportunitiesService}
-const publicResources=new Set(['games','teams','events','gallery','board','staff','players','settings','sponsors','opportunities'])
+const resources:any={games:gamesService,teams:teamsService,events:eventsService,gallery:galleryService,members:membersService,board:boardService,staff:staffService,players:playersService,users:usersService,messages:messagesService,settings:settingsService,sponsors:sponsorsService,opportunities:opportunitiesService,pages:pagesService,contentBlocks:contentBlocksService,menus:menusService}
+const publicResources=new Set(['games','teams','events','gallery','board','staff','players','settings','sponsors','opportunities','pages','contentBlocks','menus'])
 const fail=(statusCode:number,message:string)=>{ throw createError({statusCode,statusMessage:message,message}) }
 const currentUser=(event:any)=>{const value=getHeader(event,'authorization')||'';return verifyToken(value.startsWith('Bearer ')?value.slice(7):'')}
 const requireAuth=(event:any)=>{const u=currentUser(event);if(!u)fail(401,'Sessão inválida ou expirada');return u}
 const requireEditor=(u:any)=>{if(!['admin','viewer'].includes(u.role))fail(403,'Sem permissão para editar conteúdos')}
 const requireAdmin=(u:any)=>{if(u.role!=='admin')fail(403,'Apenas administradores podem executar esta ação')}
-const validate=(r:string,p:any)=>{if(r==='games'&&(!String(p.season||'').trim()||!String(p.jornada||'').trim()||!p.date||!Array.isArray(p.teams)||p.teams.filter(Boolean).length!==2))fail(400,'Época, jornada, data e duas equipas são obrigatórias');if(r==='teams'&&!p.name?.trim())fail(400,'O nome da equipa é obrigatório');if(r==='events'&&(!p.nome?.trim()||!p.slug?.trim()||!p.data?.trim()))fail(400,'Nome, slug e data do evento são obrigatórios');if(r==='gallery'&&(!p.title?.trim()||!Array.isArray(p.images)))fail(400,'Título e lista de imagens são obrigatórios');if(r==='members'&&!p.nome?.trim())fail(400,'O nome do sócio é obrigatório');if(r==='board'&&(!p.nome?.trim()||!p.funcao?.trim()))fail(400,'Nome e função são obrigatórios');if(['players','staff'].includes(r)&&!p.img?.trim())fail(400,'A imagem é obrigatória');if(r==='sponsors'&&(!p.src?.trim()||!p.alt?.trim()))fail(400,'Imagem e nome do patrocinador são obrigatórios');if(r==='opportunities'&&(!p.title?.trim()||!p.price?.trim()))fail(400,'Título e preço são obrigatórios')}
+const validate=(r:string,p:any)=>{if(r==='games'&&(!String(p.season||'').trim()||!String(p.jornada||'').trim()||!p.date||!Array.isArray(p.teams)||p.teams.filter(Boolean).length!==2))fail(400,'Época, jornada, data e duas equipas são obrigatórias');if(r==='teams'&&!p.name?.trim())fail(400,'O nome da equipa é obrigatório');if(r==='events'&&(!p.nome?.trim()||!p.slug?.trim()||!p.data?.trim()))fail(400,'Nome, slug e data do evento são obrigatórios');if(r==='gallery'&&(!p.title?.trim()||!Array.isArray(p.images)))fail(400,'Título e lista de imagens são obrigatórios');if(r==='members'&&!p.nome?.trim())fail(400,'O nome do sócio é obrigatório');if(r==='board'&&(!p.nome?.trim()||!p.funcao?.trim()))fail(400,'Nome e função são obrigatórios');if(['players','staff'].includes(r)&&!p.img?.trim())fail(400,'A imagem é obrigatória');if(r==='sponsors'&&(!p.src?.trim()||!p.alt?.trim()))fail(400,'Imagem e nome do patrocinador são obrigatórios');if(r==='opportunities'&&(!p.title?.trim()||!p.price?.trim()))fail(400,'Título e preço são obrigatórios');if(r==='pages'&&(!p.title?.trim()||!p.slug?.trim()))fail(400,'Título e endereço da página são obrigatórios');if(r==='contentBlocks'&&(!p.pageSlug?.trim()||!p.type?.trim()))fail(400,'Página e tipo de bloco são obrigatórios');if(r==='menus'&&(!p.label?.trim()||!p.url?.trim()))fail(400,'Nome e destino do menu são obrigatórios')}
 export default defineEventHandler(async(event)=>{
  const path=(getRouterParam(event,'path')||'').split('/').filter(Boolean); const method=event.method;
  if(path[0]==='health'&&method==='GET'){
@@ -46,8 +49,9 @@ export default defineEventHandler(async(event)=>{
  }
  if(path[0]==='auth'&&path[1]==='login'&&method==='POST'){const p=await readBody(event);return authService.login(p.username,p.password)}
  if(path[0]==='auth'&&path[1]==='register')fail(403,'O registo público está desativado. Contacta um administrador.')
- if(path[0]==='auth'&&path[1]==='me'&&method==='GET')return {user:requireAuth(event)}
+ if(path[0]==='auth'&&path[1]==='me'&&method==='GET'){const u=requireAuth(event);return {user:await authService.me(u.sub)}}
  if(path[0]==='auth'&&path[1]==='logout'&&method==='POST'){requireAuth(event);return {ok:true}}
+ if(path[0]==='auth'&&path[1]==='profile'&&['PUT','PATCH'].includes(method)){const u=requireAuth(event);return authService.updateProfile(u.sub,await readBody(event))}
  if(path[0]==='public'&&path[1]==='contact'&&method==='POST'){setResponseStatus(event,201);return createPublicMessage(await readBody(event))}
  if(path[0]==='media'){
    const user=requireAuth(event)

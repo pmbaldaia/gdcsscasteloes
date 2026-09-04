@@ -67,23 +67,7 @@ const gameStatus = (status) =>
 
 <template>
   <LandingContainer>
-    <LandingSectionhead>
-      <template #title>
-        <div class="flex flex-col items-center">
-          <span class="text-neutral-900">Calendário</span>
-          <div class="mt-5 flex h-px w-32 overflow-hidden rounded-sm">
-            <div class="w-1/2 bg-secondary-500" />
-            <div class="w-1/2 bg-primary-700" />
-          </div>
-        </div>
-      </template>
-
-      <template #desc>
-        <span class="text-neutral-600">
-          Consulta o calendário oficial de jogos do clube por época.
-        </span>
-      </template>
-    </LandingSectionhead>
+    <CmsManagedPageHeader page-slug="calendario" fallback-title="Calendário" fallback-description="Consulta o calendário oficial de jogos do clube por época." />
 
     <div class="mx-auto mt-10 mb-16 w-full max-w-5xl">
       <div class="mb-7 flex flex-col gap-4 rounded-xl border border-neutral-200 bg-surface p-4 shadow-sm md:flex-row md:items-center md:justify-between">

@@ -14,6 +14,11 @@ const allGroups: CmsNavGroup[] = [
   { label: 'Geral', items: [
     { label: 'Painel de controlo', icon: 'lucide:layout-dashboard', to: '/admin' },
   ]},
+  { label: 'Conteúdo', items: [
+    { label: 'Páginas', icon: 'lucide:file-text', to: '/admin/paginas' },
+    { label: 'Blocos de conteúdo', icon: 'lucide:blocks', to: '/admin/blocos' },
+    { label: 'Menus', icon: 'lucide:menu', to: '/admin/menus' },
+  ]},
   { label: 'Competição', items: [
     { label: 'Jogos', icon: 'lucide:calendar-days', to: '/admin/jogos' },
     { label: 'Equipas', icon: 'lucide:shield', to: '/admin/equipas' },
@@ -33,6 +38,9 @@ const allGroups: CmsNavGroup[] = [
   { label: 'Clube', items: [
     { label: 'Sócios', icon: 'lucide:user-round-check', to: '/admin/socios' },
     { label: 'Multimédia', icon: 'lucide:image', to: '/admin/media' },
+  ]},
+  { label: 'Conta', items: [
+    { label: 'O meu perfil', icon: 'lucide:user-cog', to: '/admin/perfil' },
   ]},
   { label: 'Sistema', items: [
     { label: 'Utilizadores', icon: 'lucide:key-round', to: '/admin/utilizadores', adminOnly: true },

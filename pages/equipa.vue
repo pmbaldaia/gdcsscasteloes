@@ -8,7 +8,7 @@ import "~/assets/css/galeria.css";
 
 definePageMeta({ layout: "default" });
 
-const season = "2026/2027";
+const { value: cmsValue } = await useManagedPageContent('equipa');
 const fallbackImage = "/equipa/default.webp";
 const selectedImage = ref(null);
 const dialogRef = ref(null);
@@ -53,37 +53,20 @@ function getConselhoFiscalPosition(index) {
 
 <template>
   <LandingContainer>
-    <LandingSectionhead>
-      <template #title>
-        <div class="flex flex-col items-center">
-          <span class="text-neutral-900">Equipa {{ season }}</span>
-
-          <div class="mt-5 flex h-px w-32 overflow-hidden rounded-sm">
-            <div class="w-1/2 bg-primary-700"></div>
-            <div class="w-1/2 bg-secondary-500"></div>
-          </div>
-        </div>
-      </template>
-
-      <template #desc>
-        <span class="text-neutral-600">
-          Órgãos sociais, equipa técnica e plantel do G.D.C.S.S. Castelões
-        </span>
-      </template>
-    </LandingSectionhead>
+    <CmsManagedPageHeader page-slug="equipa" fallback-title="Equipa 2026/2027" fallback-description="Órgãos sociais, equipa técnica e plantel do G.D.C.S.S. Castelões" />
 
     <section class="mt-12 w-full">
       <div class="mb-12 text-center">
         <span
           class="text-sm font-semibold uppercase tracking-[0.25em] text-primary-700"
         >
-          Órgãos Sociais
+          {{ cmsValue('social-title','title','Órgãos Sociais').value }}
         </span>
       </div>
 
       <section class="w-full">
         <h2 class="mb-6 text-center text-2xl font-bold text-neutral-900">
-          Assembleia Geral
+          {{ cmsValue('assembly-title','title','Assembleia Geral').value }}
         </h2>
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
@@ -114,7 +97,7 @@ function getConselhoFiscalPosition(index) {
 
       <section class="mt-16 w-full">
         <h2 class="mb-6 text-center text-2xl font-bold text-neutral-900">
-          Direção
+          {{ cmsValue('board-title','title','Direção').value }}
         </h2>
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
@@ -145,7 +128,7 @@ function getConselhoFiscalPosition(index) {
 
       <section class="mt-16 w-full">
         <h2 class="mb-6 text-center text-2xl font-bold text-neutral-900">
-          Conselho Fiscal
+          {{ cmsValue('fiscal-title','title','Conselho Fiscal').value }}
         </h2>
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
@@ -181,13 +164,13 @@ function getConselhoFiscalPosition(index) {
         <span
           class="text-sm font-semibold uppercase tracking-[0.25em] text-primary-700"
         >
-          Estrutura Desportiva
+          {{ cmsValue('sport-title','title','Estrutura Desportiva').value }}
         </span>
       </div>
 
       <section id="equipa-tecnica" class="w-full scroll-mt-28">
         <h2 class="mb-6 text-center text-2xl font-bold text-neutral-900">
-          Equipa Técnica
+          {{ cmsValue('staff-title','title','Equipa Técnica').value }}
         </h2>
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -213,7 +196,7 @@ function getConselhoFiscalPosition(index) {
 
       <section id="plantel" class="mt-16 w-full scroll-mt-28">
         <h2 class="mb-6 text-center text-2xl font-bold text-neutral-900">
-          Plantel
+          {{ cmsValue('squad-title','title','Plantel').value }}
         </h2>
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
