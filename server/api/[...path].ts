@@ -22,7 +22,7 @@ const publicResources=new Set(['games','teams','events','gallery','board','staff
 const fail=(statusCode:number,message:string)=>{ throw createError({statusCode,statusMessage:message,message}) }
 const currentUser=(event:any)=>{const value=getHeader(event,'authorization')||'';return verifyToken(value.startsWith('Bearer ')?value.slice(7):'')}
 const requireAuth=(event:any)=>{const u=currentUser(event);if(!u)fail(401,'Sessão inválida ou expirada');return u}
-const requireEditor=(u:any)=>{if(!['admin','editor'].includes(u.role))fail(403,'Sem permissão para editar conteúdos')}
+const requireEditor=(u:any)=>{if(!['admin','viewer'].includes(u.role))fail(403,'Sem permissão para editar conteúdos')}
 const requireAdmin=(u:any)=>{if(u.role!=='admin')fail(403,'Apenas administradores podem executar esta ação')}
 const validate=(r:string,p:any)=>{if(r==='games'&&(!String(p.season||'').trim()||!String(p.jornada||'').trim()||!p.date||!Array.isArray(p.teams)||p.teams.filter(Boolean).length!==2))fail(400,'Época, jornada, data e duas equipas são obrigatórias');if(r==='teams'&&!p.name?.trim())fail(400,'O nome da equipa é obrigatório');if(r==='events'&&(!p.nome?.trim()||!p.slug?.trim()||!p.data?.trim()))fail(400,'Nome, slug e data do evento são obrigatórios');if(r==='gallery'&&(!p.title?.trim()||!Array.isArray(p.images)))fail(400,'Título e lista de imagens são obrigatórios');if(r==='members'&&!p.nome?.trim())fail(400,'O nome do sócio é obrigatório');if(r==='board'&&(!p.nome?.trim()||!p.funcao?.trim()))fail(400,'Nome e função são obrigatórios');if(['players','staff'].includes(r)&&!p.img?.trim())fail(400,'A imagem é obrigatória');if(r==='sponsors'&&(!p.src?.trim()||!p.alt?.trim()))fail(400,'Imagem e nome do patrocinador são obrigatórios');if(r==='opportunities'&&(!p.title?.trim()||!p.price?.trim()))fail(400,'Título e preço são obrigatórios')}
 export default defineEventHandler(async(event)=>{
@@ -44,7 +44,7 @@ export default defineEventHandler(async(event)=>{
    if(method==='POST'&&path[1]==='import')return season2627Service.importMissing()
    fail(405,'Método não permitido')
  }
- if(path[0]==='auth'&&path[1]==='login'&&method==='POST'){const p=await readBody(event);return authService.login(p.email,p.password)}
+ if(path[0]==='auth'&&path[1]==='login'&&method==='POST'){const p=await readBody(event);return authService.login(p.username,p.password)}
  if(path[0]==='auth'&&path[1]==='register')fail(403,'O registo público está desativado. Contacta um administrador.')
  if(path[0]==='auth'&&path[1]==='me'&&method==='GET')return {user:requireAuth(event)}
  if(path[0]==='auth'&&path[1]==='logout'&&method==='POST'){requireAuth(event);return {ok:true}}

@@ -1,4 +1,14 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'admin' });
-import {usersService} from '~/modules/users/service/users.service';const service=usersService();const fields=[{key:'name',label:'Nome'},{key:'email',label:'Email',type:'email'},{key:'password',label:'Palavra-passe',type:'password',required:false,placeholder:'Mínimo 8 caracteres; vazio mantém atual'},{key:'role',label:'Perfil',type:'select',options:[{value:'admin',label:'Administrador'},{value:'editor',label:'Editor'}]},{key:'active',label:'Ativo',type:'select',options:[{value:true,label:'Sim'},{value:false,label:'Não'}]}] as any</script>
-<template><CmsResourceManager :service="service" title="Utilizadores" description="Contas com acesso à área administrativa." :fields="fields" :columns="['name','email','role','active']"/></template>
+import {usersService} from '~/modules/users/service/users.service';
+const service=usersService();
+const fields=[
+  {key:'name',label:'Nome'},
+  {key:'username',label:'Nome de utilizador',placeholder:'Ex.: admin'},
+  {key:'email',label:'Email',type:'email',required:false},
+  {key:'password',label:'Palavra-passe',type:'password',required:false,placeholder:'Mínimo 8 caracteres; vazio mantém atual'},
+  {key:'role',label:'Tipo de acesso',type:'select',options:[{value:'admin',label:'Administrador'},{value:'viewer',label:'Consulta e edição'}]},
+  {key:'active',label:'Conta ativa',type:'select',options:[{value:true,label:'Sim'},{value:false,label:'Não'}]}
+] as any
+</script>
+<template><CmsResourceManager :service="service" title="Utilizadores" description="Gere quem pode entrar no painel e o nível de acesso de cada pessoa." :fields="fields" :columns="['name','username','role','active']"/></template>

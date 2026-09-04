@@ -1,7 +1,8 @@
 import crypto from 'node:crypto'
 
 const secret = process.env.AUTH_SECRET || 'gdcss-dev-change-this-secret'
-const ttlSeconds = Number(process.env.AUTH_TTL_SECONDS || 60 * 60 * 8)
+const configuredTtl = Number(process.env.AUTH_TTL_SECONDS || 60 * 60)
+const ttlSeconds = Number.isFinite(configuredTtl) && configuredTtl > 0 ? Math.min(Math.floor(configuredTtl), 60 * 60) : 60 * 60
 
 const b64 = (value) => Buffer.from(value).toString('base64url')
 const unb64 = (value) => Buffer.from(value, 'base64url').toString('utf8')
@@ -18,7 +19,7 @@ export function verifyPassword(password, stored = '') {
   return crypto.timingSafeEqual(Buffer.from(candidate), Buffer.from(hash))
 }
 export function createToken(user) {
-  const payload = b64(JSON.stringify({ sub: user.id, email: user.email, name: user.name, role: user.role, exp: Math.floor(Date.now()/1000)+ttlSeconds }))
+  const payload = b64(JSON.stringify({ sub: user.id, username: user.username, name: user.name, role: user.role, exp: Math.floor(Date.now()/1000)+ttlSeconds }))
   return `${payload}.${sign(payload)}`
 }
 export function verifyToken(token = '') {

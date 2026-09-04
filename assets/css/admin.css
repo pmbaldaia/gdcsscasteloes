@@ -3489,3 +3489,778 @@ html.dark .auth-logo {
   }
 }
 
+
+/* =========================================================
+   CMS FINAL RESPONSIVE CONTRACT — tables, tools and actions
+   Keep this block last so legacy mobile/table rules cannot
+   reintroduce compressed desktop tables or broken action labels.
+   ========================================================= */
+
+/* Action labels are mobile-only. Desktop/tablet keep compact icon actions. */
+.cms-shell .resource-data-table .row-actions__label {
+  display: none;
+}
+
+/* Desktop/tablet table contract */
+@media (min-width: 761px) {
+  .cms-shell .content-panel {
+    overflow: hidden;
+  }
+
+  .cms-shell .panel__header.content-panel__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 22px;
+  }
+
+  .cms-shell .content-panel__header > div:first-child {
+    flex: 1 1 320px;
+    min-width: 220px;
+  }
+
+  .cms-shell .resource-tools {
+    flex: 0 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 10px;
+    max-width: 760px;
+  }
+
+  .cms-shell .resource-search {
+    min-width: 240px;
+    min-height: 42px;
+  }
+
+  .cms-shell .resource-filter-wrap {
+    min-width: 170px;
+  }
+
+  .cms-shell .resource-tools > .btn {
+    min-height: 42px;
+    white-space: nowrap;
+  }
+
+  .cms-shell .table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    overscroll-behavior-inline: contain;
+    scrollbar-gutter: stable;
+  }
+
+  .cms-shell .resource-data-table {
+    width: 100%;
+    min-width: 720px;
+    table-layout: auto;
+  }
+
+  .cms-shell .resource-data-table th,
+  .cms-shell .resource-data-table td {
+    vertical-align: middle;
+  }
+
+  .cms-shell .resource-data-table td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .cms-shell .resource-data-table th:last-child,
+  .cms-shell .resource-data-table td:last-child {
+    width: 132px !important;
+    min-width: 132px !important;
+    max-width: 132px !important;
+    padding-inline: 10px !important;
+  }
+
+  .cms-shell .resource-data-table .row-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .cms-shell .resource-data-table .row-actions .icon-button {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 34px;
+    width: 34px;
+    min-width: 34px;
+    max-width: 34px;
+    height: 34px;
+    min-height: 34px;
+    padding: 0;
+    border-radius: 9px;
+  }
+
+  .cms-shell .resource-data-table .row-actions .icon-button svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+/* Phone/tablet card contract */
+@media (max-width: 760px) {
+  html,
+  body,
+  #__nuxt {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .cms-shell .cms-content {
+    width: 100%;
+    min-width: 0;
+    padding: 14px !important;
+  }
+
+  .cms-shell .page-stack,
+  .cms-shell .page-heading,
+  .cms-shell .panel,
+  .cms-shell .content-panel {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .cms-shell .page-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .cms-shell .page-heading > div:first-child {
+    min-width: 0;
+  }
+
+  .cms-shell .page-heading h1 {
+    margin-top: 4px;
+    font-size: clamp(1.8rem, 8.5vw, 2.35rem);
+    line-height: 1.08;
+  }
+
+  .cms-shell .page-heading__description {
+    margin-top: 10px;
+    max-width: none;
+    font-size: 1rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  .cms-shell .page-heading__actions,
+  .cms-shell .page-heading__actions .btn {
+    width: 100%;
+  }
+
+  .cms-shell .page-heading__actions .btn {
+    min-height: 50px;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  .cms-shell .panel__header.content-panel__header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+    padding: 18px !important;
+  }
+
+  .cms-shell .content-panel__header > div:first-child h2 {
+    margin: 0;
+    font-size: 1.12rem;
+    line-height: 1.3;
+  }
+
+  .cms-shell .content-panel__header > div:first-child p {
+    margin-top: 7px;
+    font-size: .94rem;
+    line-height: 1.5;
+  }
+
+  .cms-shell .resource-tools {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .cms-shell .resource-search,
+  .cms-shell .resource-filter-wrap,
+  .cms-shell .resource-filter,
+  .cms-shell .resource-tools > .btn {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  .cms-shell .resource-search {
+    min-height: 48px !important;
+    padding-inline: 14px;
+  }
+
+  .cms-shell .resource-search input,
+  .cms-shell .resource-filter {
+    min-width: 0 !important;
+    font-size: 16px !important;
+  }
+
+  .cms-shell .resource-tools > .btn {
+    min-height: 48px !important;
+    justify-content: center;
+  }
+
+  .cms-shell .table-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible !important;
+  }
+
+  .cms-shell .resource-data-table {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .cms-shell .resource-data-table thead {
+    display: none !important;
+  }
+
+  .cms-shell .resource-data-table tbody {
+    display: grid !important;
+    width: 100% !important;
+    gap: 12px !important;
+    padding: 12px !important;
+  }
+
+  .cms-shell .resource-data-table tr {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 14px !important;
+    background: var(--color-surface) !important;
+    box-shadow: 0 2px 10px rgb(15 23 42 / .04);
+  }
+
+  .cms-shell .resource-data-table td,
+  .cms-shell .resource-data-table td:nth-child(n),
+  .cms-shell .resource-data-table td:last-child {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: minmax(88px, 30%) minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 52px !important;
+    margin: 0 !important;
+    padding: 11px 14px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--color-border) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .cms-shell .resource-data-table td::before {
+    content: attr(data-label) !important;
+    display: block !important;
+    min-width: 0;
+    color: var(--color-ink-faint);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: .045em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  .cms-shell .resource-data-table td > strong,
+  .cms-shell .resource-data-table td > span,
+  .cms-shell .resource-data-table td > a {
+    min-width: 0;
+  }
+
+  .cms-shell .resource-data-table .table-image-preview {
+    width: 72px !important;
+    height: 62px !important;
+    max-width: 100%;
+    object-fit: contain;
+    justify-self: start;
+  }
+
+  /* Actions always occupy their own full row, horizontally and equally. */
+  .cms-shell .resource-data-table td:last-child {
+    display: block !important;
+    min-height: 0 !important;
+    padding: 12px !important;
+    border-bottom: 0 !important;
+    background: var(--color-primary-50) !important;
+  }
+
+  .cms-shell .resource-data-table td:last-child::before {
+    display: none !important;
+  }
+
+  .cms-shell .resource-data-table .row-actions {
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+    gap: 8px !important;
+  }
+
+  .cms-shell .resource-data-table .row-actions .icon-button {
+    display: inline-flex !important;
+    flex: 1 1 0 !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    padding: 0 7px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 10px !important;
+    background: var(--color-surface) !important;
+    line-height: 1 !important;
+    overflow: hidden !important;
+  }
+
+  .cms-shell .resource-data-table .row-actions .icon-button svg {
+    flex: 0 0 auto !important;
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .cms-shell .resource-data-table .row-actions__label {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 11.5px !important;
+    font-weight: 750 !important;
+    line-height: 1 !important;
+  }
+
+  .cms-shell .resource-data-table .row-actions .icon-button.danger {
+    background: var(--color-surface) !important;
+  }
+
+  .cms-shell .cms-pagination {
+    padding: 14px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .cms-shell .cms-content {
+    padding: 10px !important;
+  }
+
+  .cms-shell .resource-data-table tbody {
+    padding: 10px !important;
+  }
+
+  .cms-shell .resource-data-table td,
+  .cms-shell .resource-data-table td:nth-child(n) {
+    grid-template-columns: minmax(76px, 28%) minmax(0, 1fr) !important;
+    padding-inline: 12px !important;
+  }
+
+  .cms-shell .resource-data-table .row-actions {
+    gap: 6px !important;
+  }
+
+  .cms-shell .resource-data-table .row-actions .icon-button {
+    padding-inline: 5px !important;
+    gap: 4px !important;
+  }
+
+  .cms-shell .resource-data-table .row-actions__label {
+    font-size: 10.5px !important;
+  }
+}
+
+/* Dark mode equivalents for the final mobile action strip. */
+@media (max-width: 760px) {
+  html.dark .cms-shell .resource-data-table td:last-child {
+    background: var(--ui-surface-soft) !important;
+  }
+
+  html.dark .cms-shell .resource-data-table .row-actions .icon-button {
+    background: var(--ui-surface-raised) !important;
+    border-color: var(--ui-control-border) !important;
+  }
+
+  html.dark .cms-shell .resource-data-table .row-actions .icon-button.danger {
+    background: var(--ui-danger-soft) !important;
+  }
+}
+
+/* =========================================================
+   DESKTOP FULL-WIDTH — CMS
+   Remove o content cap que criava margens laterais excessivas.
+   A área útil passa a ocupar toda a largura disponível após a sidebar.
+   ========================================================= */
+@media (min-width: 861px) {
+  .cms-shell .cms-content {
+    width: 100%;
+    max-width: none;
+    padding: 24px 20px 28px;
+  }
+
+  .cms-shell .page-stack {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .cms-shell .page-heading,
+  .cms-shell .panel,
+  .cms-shell .content-panel,
+  .cms-shell .stats-grid,
+  .cms-shell .dashboard-grid,
+  .cms-shell .media-grid {
+    width: 100%;
+    max-width: none;
+  }
+
+  .cms-shell .cms-topbar {
+    padding-inline: 20px;
+  }
+}
+
+/* Sidebar compacta/tablet: mantém igualmente a área de conteúdo fluida. */
+@media (min-width: 621px) and (max-width: 860px) {
+  .cms-shell .page-stack {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+}
+
+/* Editor de recursos no conteúdo: substitui modais de criar/editar/ver */
+.cms-shell .resource-editor-page {
+  display: grid;
+  gap: 18px;
+  width: 100%;
+  min-width: 0;
+}
+.cms-shell .resource-editor-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.cms-shell .resource-back-button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--color-primary-800);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cms-shell .resource-back-button:hover { text-decoration: underline; }
+.cms-shell .resource-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: var(--color-ink-soft);
+  font-size: .9rem;
+}
+.cms-shell .resource-breadcrumb button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+.cms-shell .resource-breadcrumb button:hover { color: var(--color-primary-800); }
+.cms-shell .resource-breadcrumb span {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+.cms-shell .resource-breadcrumb svg { flex: 0 0 auto; }
+.cms-shell .resource-inline-editor { width: 100%; min-width: 0; }
+.cms-shell .resource-inline-editor__header h1 { margin: 2px 0 8px; }
+
+@media (max-width: 620px) {
+  .cms-shell .resource-breadcrumb {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .cms-shell .resource-breadcrumb::-webkit-scrollbar { display: none; }
+}
+
+/* =========================================================
+   Editor inline — acabamento global do CMS
+   Mantém criar/editar/ver dentro da área de conteúdo e não
+   com aparência de modal aberta.
+   ========================================================= */
+.cms-shell .resource-editor-page {
+  gap: 16px;
+}
+
+.cms-shell .resource-editor-nav {
+  gap: 8px;
+  padding: 2px 2px 0;
+}
+
+.cms-shell .resource-back-button {
+  min-height: 38px;
+  padding: 7px 10px;
+  margin-left: -10px;
+  border-radius: 9px;
+  text-decoration: none;
+  transition: background-color .18s ease, color .18s ease;
+}
+
+.cms-shell .resource-back-button:hover {
+  text-decoration: none;
+  background: var(--color-primary-tint);
+  color: var(--color-primary-dark);
+}
+
+.cms-shell .resource-breadcrumb {
+  min-height: 28px;
+  gap: 7px;
+  font-size: .875rem;
+  line-height: 1.4;
+}
+
+.cms-shell .resource-breadcrumb button {
+  min-height: 28px;
+  padding: 3px 4px;
+  margin-inline: -4px;
+  border-radius: 6px;
+}
+
+.cms-shell .resource-breadcrumb button:hover {
+  background: var(--color-primary-tint);
+  text-decoration: none;
+}
+
+.cms-shell .resource-inline-editor {
+  width: 100%;
+  min-width: 0;
+  overflow: clip;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgb(15 23 42 / .06);
+}
+
+.cms-shell .resource-inline-editor__form {
+  display: grid;
+  min-width: 0;
+}
+
+.cms-shell .resource-inline-editor__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px 30px 22px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.cms-shell .resource-inline-editor__header .eyebrow {
+  margin: 0 0 7px;
+  line-height: 1.2;
+}
+
+.cms-shell .resource-inline-editor__header h1 {
+  margin: 0;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  color: var(--color-ink);
+}
+
+.cms-shell .resource-inline-editor__header p:not(.eyebrow) {
+  max-width: 760px;
+  margin: 9px 0 0;
+  color: var(--color-ink-soft);
+  line-height: 1.6;
+}
+
+.cms-shell .resource-inline-editor__grid.form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 20px;
+  padding: 28px 30px 32px;
+  background: var(--color-surface);
+}
+
+.cms-shell .resource-inline-editor .form-field {
+  min-width: 0;
+  gap: 8px;
+}
+
+.cms-shell .resource-inline-editor .form-field > span,
+.cms-shell .resource-inline-editor .cms-button-row__fields label > span {
+  font-size: .78rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+}
+
+.cms-shell .resource-inline-editor .form-field input,
+.cms-shell .resource-inline-editor .form-field select,
+.cms-shell .resource-inline-editor .form-field textarea {
+  min-height: 46px;
+  border-radius: 10px;
+}
+
+.cms-shell .resource-inline-editor .form-field textarea {
+  min-height: 132px;
+  resize: vertical;
+}
+
+.cms-shell .resource-inline-editor__footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 74px;
+  padding: 14px 30px;
+  border-top: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 96%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.cms-shell .resource-inline-editor__footer .btn {
+  min-height: 44px;
+  padding-inline: 18px;
+}
+
+.cms-shell .resource-inline-editor__footer .btn--primary {
+  min-width: 170px;
+}
+
+/* Imagens e blocos repetíveis não devem ficar esmagados em desktop. */
+.cms-shell .resource-inline-editor .form-field--wide {
+  grid-column: 1 / -1;
+}
+
+.cms-shell .resource-inline-editor .image-field,
+.cms-shell .resource-inline-editor .cms-buttons-editor {
+  max-width: 100%;
+}
+
+/* Desktop muito largo: mantém campos legíveis sem reintroduzir margens
+   grandes na página inteira. */
+@media (min-width: 1500px) {
+  .cms-shell .resource-inline-editor__grid.form-grid {
+    grid-template-columns: repeat(2, minmax(360px, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .cms-shell .resource-inline-editor__header {
+    padding: 22px 22px 18px;
+  }
+
+  .cms-shell .resource-inline-editor__grid.form-grid {
+    grid-template-columns: 1fr;
+    gap: 17px;
+    padding: 22px;
+  }
+
+  .cms-shell .resource-inline-editor .form-field--wide {
+    grid-column: auto;
+  }
+
+  .cms-shell .resource-inline-editor__footer {
+    padding: 13px 22px;
+  }
+}
+
+@media (max-width: 620px) {
+  .cms-shell .resource-editor-page {
+    gap: 12px;
+  }
+
+  .cms-shell .resource-editor-nav {
+    gap: 5px;
+  }
+
+  .cms-shell .resource-inline-editor {
+    border-radius: 14px;
+  }
+
+  .cms-shell .resource-inline-editor__header {
+    padding: 18px 16px 16px;
+  }
+
+  .cms-shell .resource-inline-editor__header h1 {
+    font-size: 1.35rem;
+  }
+
+  .cms-shell .resource-inline-editor__header p:not(.eyebrow) {
+    margin-top: 7px;
+    font-size: .92rem;
+  }
+
+  .cms-shell .resource-inline-editor__grid.form-grid {
+    padding: 18px 16px 22px;
+    gap: 16px;
+  }
+
+  .cms-shell .resource-inline-editor__footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  }
+
+  .cms-shell .resource-inline-editor__footer .btn,
+  .cms-shell .resource-inline-editor__footer .btn--primary {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+}
+
+html.dark .cms-shell .resource-inline-editor {
+  box-shadow: 0 14px 34px rgb(0 0 0 / .22);
+}

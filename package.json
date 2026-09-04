@@ -20,7 +20,8 @@
     "deps:reset": "node scripts/reset-dependencies.mjs",
     "brand:check": "node scripts/check-admin-brand.mjs",
     "a11y:tokens": "node scripts/check-accessibility-tokens.mjs",
-    "sync:mongodb": "node --env-file=.env scripts/sync-mongodb.mjs"
+    "sync:mongodb": "node --env-file=.env scripts/sync-mongodb.mjs",
+    "mongo:migrate-usernames": "node --env-file=.env scripts/migrate-users-to-username.mjs"
   },
   "devDependencies": {
     "@nuxt/image": "^2.1.0",
@@ -48,7 +49,7 @@
   },
   "allowScripts": {
     "esbuild@0.28.2": true,
-    "sharp@0.32.6": true,
-    "fsevents@2.3.3": true
+    "fsevents@2.3.3": true,
+    "sharp@0.32.6": true
   }
 }

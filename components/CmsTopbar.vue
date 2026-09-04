@@ -7,7 +7,7 @@ const { user, logout } = useAuth()
 const toast = useToast()
 
 const roleLabel = computed(() =>
-  ({ admin: 'Administrador', editor: 'Editor' } as Record<string,string>)[user.value?.role || ''] || 'Utilizador'
+  ({ admin: 'Administrador', viewer: 'Consulta e edição' } as Record<string,string>)[user.value?.role || ''] || 'Utilizador'
 )
 
 const pageMeta = computed(() => {

@@ -5,7 +5,8 @@ type SelectOption = string | number | boolean | { value: string | number | boole
 interface Field {
   key: string
   label: string
-  type?: 'text'|'date'|'time'|'datetime-local'|'textarea'|'number'|'select'|'array'|'image'|'image-multi'|'email'|'password'
+  tableLabel?: string
+  type?: 'text'|'date'|'time'|'datetime-local'|'textarea'|'number'|'select'|'array'|'buttons'|'image'|'image-multi'|'email'|'password'
   options?: SelectOption[]
   placeholder?: string
   required?: boolean
@@ -32,10 +33,13 @@ const props=withDefaults(defineProps<{
   allowCreate?: boolean
   allowEdit?: boolean
   allowDelete?: boolean
+  showPublishAction?: boolean
+  editActionLabel?: string
   panelNote?: string
   emptyText?: string
   defaultFilters?: Record<string, any>
-}>(), { publishKey: 'status', showSearch: true, allowCreate: true, allowEdit: true, allowDelete: true, panelNote: 'As alterações guardadas aqui são refletidas no site público.', emptyText: 'Adiciona o primeiro registo para começar.', defaultFilters: () => ({}) })
+  inlineEditor?: boolean
+}>(), { publishKey: 'status', showSearch: true, allowCreate: true, allowEdit: true, allowDelete: true, showPublishAction: true, editActionLabel: 'Editar', panelNote: 'As alterações guardadas ficam disponíveis automaticamente onde este conteúdo é utilizado.', emptyText: 'Ainda não existe conteúdo. Adiciona o primeiro item para começar.', defaultFilters: () => ({}), inlineEditor: true })
 
 const route=useRoute()
 const router=useRouter()
@@ -46,9 +50,9 @@ const toast=useToast()
 const confirmDialog=useConfirm()
 const { user }=useAuth()
 const isAdmin=computed(()=>user.value?.role==='admin')
-const isEditor=computed(()=>user.value?.role==='editor')
+const isViewer=computed(()=>user.value?.role==='viewer')
 const canCreate=computed(()=>props.allowCreate && isAdmin.value)
-const canEdit=computed(()=>props.allowEdit && (isAdmin.value || isEditor.value))
+const canEdit=computed(()=>props.allowEdit && (isAdmin.value || isViewer.value))
 const canDelete=computed(()=>props.allowDelete && isAdmin.value)
 const query=ref('')
 const page=ref(1)
@@ -69,16 +73,16 @@ const localImagePreviews=ref<Record<string,string>>({})
 
 const visibleColumns=computed(()=>props.columns?.length?props.columns:props.fields.slice(0,4).map(f=>f.key))
 const filterFields=computed(()=>props.fields.filter(f=>f.filterable))
-const isPublishable=computed(()=>props.fields.some(f=>f.key===props.publishKey))
+const isPublishable=computed(()=>props.showPublishAction && props.fields.some(f=>f.key===props.publishKey))
 
 const normalizedOption=(option:SelectOption)=> typeof option==='object' && option!==null && 'value' in option
   ? option
   : { value: option, label: String(option) }
 const optionLabel=(field:Field,value:any)=>{
   const match=(field.options||[]).map(normalizedOption).find(o=>String(o.value)===String(value))
-  return match?.label ?? value
+  return match?.label ?? cmsValueLabel(value)
 }
-const fieldLabel=(key:string)=>props.fields.find(f=>f.key===key)?.label||key
+const fieldLabel=(key:string)=>props.fields.find(f=>f.key===key)?.tableLabel||props.fields.find(f=>f.key===key)?.label||cmsKeyLabel(key)
 const toLocalDateTimeInput=(value:any)=>{
   if(!value) return ''
   const date=new Date(value)
@@ -98,11 +102,16 @@ const display=(item:any,key:string)=>{
   if(field?.type==='image-multi' && Array.isArray(v)) return `${v.length} ${v.length===1?'imagem':'imagens'}`
   if(Array.isArray(v)) return v.join(' · ')
   if(field?.type==='select') return optionLabel(field,v)
+  // Slugs/valores técnicos de página mantêm-se na API/MongoDB, mas no CMS
+  // são apresentados com nomes legíveis sempre que exista um label conhecido.
+  if(key==='pageSlug') return cmsValueLabel(v)
   if(field?.type==='datetime-local') return formatDateTime(v)
   if(typeof v==='boolean') return v?'Sim':'Não'
   return v??'—'
 }
 
+const isStatusColumn=(key:string)=>key==='status' || key==='state'
+const statusTone=(value:any)=>cmsStatusTone(value)
 const isImageColumn=(key:string)=>props.fields.find(f=>f.key===key)?.type==='image'
 const imagePreviewFor=(field:Field)=>localImagePreviews.value[field.key]||editing.value?.[field.key]||''
 const revokeLocalPreviews=()=>{
@@ -134,11 +143,14 @@ const paginatedItems=computed(()=>{
 watch([query,filters],()=>{ page.value=1 },{deep:true})
 watch(totalPages,(total)=>{ if(page.value>total) page.value=total })
 
-async function load(){
-  pending.value=true; error.value=''
+async function load({ silent=false }:{ silent?:boolean }={}){
+  if(!silent){ pending.value=true; error.value='' }
   try{ items.value=await props.service.list() }
-  catch(e:any){ const message=e?.data?.message||e?.statusMessage||e?.message||'Erro ao carregar os dados.'; error.value=message; toast.error('Não foi possível carregar', message) }
-  finally{ pending.value=false }
+  catch(e:any){
+    const message=e?.data?.message||e?.message||'Não foi possível carregar a informação.'
+    if(!silent){ error.value=message; toast.error('Não foi possível carregar', message) }
+  }
+  finally{ if(!silent) pending.value=false }
 }
 function empty(){
   return Object.fromEntries(props.fields.map(f=>{
@@ -147,7 +159,7 @@ function empty(){
       return [f.key,max+1]
     }
     if(f.defaultValue!==undefined) return [f.key,typeof f.defaultValue==='function'?f.defaultValue():f.defaultValue]
-    return [f.key,['array','image-multi'].includes(f.type||'')?[]:'']
+    return [f.key,['array','buttons','image-multi'].includes(f.type||'')?[]:'']
   }))
 }
 function create(){
@@ -180,8 +192,8 @@ function close(){
 function validate(payload:any){
   for(const f of props.fields){
     if(f.required===false) continue
-    if(['text','email','password','date','time','datetime-local','select'].includes(f.type||'text') && !String(payload[f.key]??'').trim()) return `${f.label} é obrigatório.`
-    if(['array','image-multi'].includes(f.type||'') && (!Array.isArray(payload[f.key]) || !payload[f.key].filter(Boolean).length)) return `${f.label} é obrigatório.`
+    if(['text','email','password','date','time','datetime-local','select'].includes(f.type||'text') && !String(payload[f.key]??'').trim()) return `Preenche o campo “${f.label}”.`
+    if(['array','buttons','image-multi'].includes(f.type||'') && (!Array.isArray(payload[f.key]) || !payload[f.key].filter(Boolean).length)) return `Preenche o campo “${f.label}”.`
   }
   return ''
 }
@@ -206,11 +218,11 @@ async function submit(){
     const wasEditing=editingId.value!==null
     close()
     toast.success(
-      wasEditing ? 'Alterações guardadas' : 'Registo adicionado',
-      wasEditing ? 'O registo foi atualizado com sucesso.' : 'O novo registo foi criado com sucesso.'
+      wasEditing ? 'Alterações guardadas' : 'Conteúdo adicionado',
+      wasEditing ? 'As alterações foram guardadas com sucesso.' : 'O novo conteúdo foi criado com sucesso.'
     )
   }catch(e:any){
-    const message=e?.data?.message||e?.statusMessage||e?.message||'Não foi possível guardar as alterações.'
+    const message=e?.data?.message||e?.message||'Não foi possível guardar as alterações.'
     error.value=message
     toast.error('Erro ao guardar', message)
   }finally{ saving.value=false }
@@ -219,10 +231,10 @@ async function del(item:any){
   if(!canDelete.value) return
   const label = display(item, visibleColumns.value[0])
   const accepted = await confirmDialog.ask({
-    title: 'Eliminar registo?',
+    title: 'Eliminar este conteúdo?',
     message: label && label !== '—'
       ? `Vais eliminar “${label}”. Esta ação não pode ser anulada.`
-      : 'Este registo será eliminado de forma permanente. Esta ação não pode ser anulada.',
+      : 'Este conteúdo será eliminado de forma permanente. Esta ação não pode ser anulada.',
     confirmLabel: 'Sim, eliminar',
     cancelLabel: 'Cancelar',
     tone: 'danger',
@@ -232,10 +244,10 @@ async function del(item:any){
   try{
     await props.service.remove(item.id)
     await load()
-    toast.success('Registo eliminado', 'O registo foi removido com sucesso.')
+    toast.success('Conteúdo eliminado', 'O conteúdo foi removido com sucesso.')
   }
   catch(e:any){
-    const message=e?.data?.message||e?.statusMessage||e?.message||'Não foi possível eliminar o registo.'
+    const message=e?.data?.message||e?.message||'Não foi possível eliminar este conteúdo.'
     error.value=message
     toast.error('Erro ao eliminar', message)
   }
@@ -252,7 +264,7 @@ async function togglePublish(item:any){
     else if(item.publishedAt && new Date(item.publishedAt).getTime()>Date.now()) toast.success('Publicação agendada', `O conteúdo será publicado em ${formatDateTime(item.publishedAt)}.`)
     else toast.success('Conteúdo publicado', 'O conteúdo já está disponível no site público.')
   }catch(e:any){
-    const message=e?.data?.message||e?.statusMessage||e?.message||'Não foi possível alterar o estado de publicação.'
+    const message=e?.data?.message||e?.message||'Não foi possível alterar o estado de publicação.'
     error.value=message
     toast.error('Erro ao alterar publicação', message)
   }
@@ -273,13 +285,13 @@ async function uploadImage(field:Field,event:Event){
     const media=mediaService()
     const result=await media.upload(file)
     editing.value[field.key]=result.url
-    toast.success('Imagem carregada', 'Confirma a pré-visualização e guarda o registo para aplicar a alteração.')
+    toast.success('Imagem carregada', 'Confirma a pré-visualização e guarda as alterações para a aplicar.')
   }catch(e:any){
     const preview=localImagePreviews.value[field.key]
     if(preview?.startsWith('blob:')) URL.revokeObjectURL(preview)
     delete localImagePreviews.value[field.key]
     error.value=e?.data?.message||e?.message||'Não foi possível carregar a imagem.'
-    toast.error('Erro no upload', error.value)
+    toast.error('Erro ao carregar a imagem', error.value)
   }finally{
     uploadBusy.value[field.key]=false
     input.value=''
@@ -291,55 +303,108 @@ function clearImage(field:Field){
   delete localImagePreviews.value[field.key]
   if(editing.value) editing.value[field.key]=''
 }
+type CmsButtonStyle = 'primary' | 'secondary'
+const buttonFromRaw=(raw:any,index=0)=>{
+  const parts=String(raw??'').split('|')
+  const label=parts[0]||''
+  const url=parts[1]||''
+  const rawStyle=parts[2]
+  const style: CmsButtonStyle = rawStyle==='secondary' || rawStyle==='primary'
+    ? rawStyle
+    : index===0 ? 'primary' : 'secondary'
+  return { label, url, style }
+}
+const encodeButton=(button:{label?:string;url?:string;style?:CmsButtonStyle})=>
+  `${button.label||''}|${button.url||''}|${button.style||'primary'}`
+function buttonPart(fieldKey:string,index:number,key:'label'|'url'|'style'){
+  if(!editing.value) return ''
+  return buttonFromRaw(editing.value[fieldKey]?.[index],index)[key]
+}
+function updateButton(fieldKey:string,index:number,key:'label'|'url'|'style',value:string){
+  if(!editing.value) return
+  const list=Array.isArray(editing.value[fieldKey])?[...editing.value[fieldKey]]:[]
+  const current=buttonFromRaw(list[index],index)
+  ;(current as any)[key]=value
+  list[index]=encodeButton(current)
+  editing.value[fieldKey]=list
+}
+function addButton(fieldKey:string){
+  if(!editing.value) return
+  const list=Array.isArray(editing.value[fieldKey])?[...editing.value[fieldKey]]:[]
+  const style: CmsButtonStyle=list.length===0?'primary':'secondary'
+  list.push(encodeButton({label:'',url:'',style}))
+  editing.value[fieldKey]=list
+}
+function removeButton(fieldKey:string,index:number){
+  if(!editing.value) return
+  const list=Array.isArray(editing.value[fieldKey])?[...editing.value[fieldKey]]:[]
+  list.splice(index,1)
+  editing.value[fieldKey]=list
+}
 function clearFilters(){
   query.value=''
   filters.value=Object.fromEntries(filterFields.value.map(f=>[f.key,'']))
   page.value=1
 }
-onMounted(async()=>{ await load(); if(route.query.new==='1' && canCreate.value) create() })
-onBeforeUnmount(revokeLocalPreviews)
+let syncTimer:ReturnType<typeof setInterval>|undefined
+const syncFromServer=()=>{
+  if(document.visibilityState!=='visible'||pending.value||saving.value||modalOpen.value) return
+  void load({silent:true})
+}
+onMounted(async()=>{
+  await load()
+  if(route.query.new==='1' && canCreate.value) create()
+  syncTimer=setInterval(syncFromServer,5_000)
+  document.addEventListener('visibilitychange',syncFromServer)
+})
+onBeforeUnmount(()=>{
+  if(syncTimer) clearInterval(syncTimer)
+  document.removeEventListener('visibilitychange',syncFromServer)
+  revokeLocalPreviews()
+})
 </script>
 
 <template>
   <div class="page-stack">
-    <header class="page-heading">
-      <div><p class="eyebrow">GDCSS Castelões · Gestão</p><h1>{{title}}</h1><p class="page-heading__description">{{description}}</p></div>
-      <div v-if="canCreate" class="page-heading__actions"><button class="btn btn--primary" @click="create"><Icon name="lucide:plus"/> Adicionar</button></div>
+    <header v-if="!modalOpen" class="page-heading">
+      <div><p class="eyebrow">Área de gestão</p><h1>{{title}}</h1><p class="page-heading__description">{{description}}</p></div>
+      <div v-if="canCreate" class="page-heading__actions"><button class="btn btn--primary" @click="create"><Icon name="lucide:plus"/> Adicionar novo</button></div>
     </header>
 
     <p v-if="error" class="cms-alert cms-alert--danger">{{error}}</p>
 
-    <section class="panel content-panel">
+    <section v-if="!inlineEditor || !modalOpen" class="panel content-panel">
       <div class="panel__header content-panel__header">
-        <div><h2>{{filteredItems.length}} de {{items.length}} registos</h2><p>{{ panelNote }}</p></div>
+        <div><h2>{{filteredItems.length}} de {{items.length}} itens</h2><p>{{ panelNote }}</p></div>
         <div class="resource-tools">
           <label v-if="showSearch" class="resource-search"><Icon name="lucide:search"/><input v-model="query" type="search" placeholder="Pesquisar…"></label>
           <label v-for="field in filterFields" :key="field.key" class="resource-filter-wrap">
             <span>{{ field.label }}</span>
             <select v-model="filters[field.key]" class="resource-filter" :aria-label="`Filtrar por ${field.label}`">
-              <option value="">Todos</option>
+              <option value="">Todos os estados</option>
               <option v-for="option in field.options" :key="String(normalizedOption(option).value)" :value="normalizedOption(option).value">{{normalizedOption(option).label}}</option>
             </select>
           </label>
-          <button v-if="query || Object.values(filters).some(Boolean)" class="btn btn--ghost" @click="clearFilters"><Icon name="lucide:x"/> Limpar</button>
-          <button class="btn btn--secondary" @click="load" :disabled="pending"><Icon name="lucide:refresh-cw"/> Atualizar</button>
+          <button v-if="query || Object.values(filters).some(Boolean)" class="btn btn--ghost" @click="clearFilters"><Icon name="lucide:x"/> Limpar filtros</button>
+          <button class="btn btn--secondary" @click="load" :disabled="pending"><Icon name="lucide:refresh-cw"/> Atualizar lista</button>
         </div>
       </div>
 
       <div v-if="pending" class="cms-loading">A carregar…</div>
-      <div v-else-if="!filteredItems.length" class="empty-state"><Icon name="lucide:inbox" size="30"/><h3>{{query||Object.values(filters).some(Boolean)?'Sem resultados':'Ainda não existem registos'}}</h3><p>{{query||Object.values(filters).some(Boolean)?'Altera a pesquisa ou os filtros.':emptyText}}</p><button v-if="canCreate&&!query&&!Object.values(filters).some(Boolean)" class="btn btn--primary" @click="create">Adicionar registo</button></div>
+      <div v-else-if="!filteredItems.length" class="empty-state"><Icon name="lucide:inbox" size="30"/><h3>{{query||Object.values(filters).some(Boolean)?'Sem resultados':'Ainda não existe conteúdo'}}</h3><p>{{query||Object.values(filters).some(Boolean)?'Altera a pesquisa ou os filtros.':emptyText}}</p><button v-if="canCreate&&!query&&!Object.values(filters).some(Boolean)" class="btn btn--primary" @click="create">Adicionar conteúdo</button></div>
       <div v-else class="table-scroll">
         <table class="data-table resource-data-table"><thead><tr><th v-for="c in visibleColumns" :key="c">{{fieldLabel(c)}}</th><th>Ações</th></tr></thead>
           <tbody><tr v-for="item in paginatedItems" :key="item.id">
             <td v-for="c in visibleColumns" :key="c" :data-label="fieldLabel(c)">
               <img v-if="isImageColumn(c) && item[c]" :src="item[c]" :alt="`Imagem de ${display(item,visibleColumns[0])}`" class="table-image-preview" loading="lazy">
               <strong v-else-if="c===visibleColumns[0]">{{display(item,c)}}</strong>
+              <CmsBadge v-else-if="isStatusColumn(c)" :label="String(display(item,c))" :tone="statusTone(item[c])" />
               <template v-else>{{display(item,c)}}</template>
             </td>
             <td data-label="Ações"><div class="row-actions">
-              <button v-if="isPublishable && canEdit" class="icon-button icon-button--small" @click="togglePublish(item)" :title="item[publishKey]==='draft'?'Publicar':'Despublicar'"><Icon :name="item[publishKey]==='draft'?'lucide:eye':'lucide:eye-off'"/></button>
-              <button v-if="canEdit" class="icon-button icon-button--small" @click="edit(item)" title="Editar"><Icon name="lucide:pencil"/></button>
-              <button v-if="canDelete" class="icon-button icon-button--small danger" @click="del(item)" title="Eliminar"><Icon name="lucide:trash-2"/></button>
+              <button v-if="isPublishable && canEdit" class="icon-button icon-button--small" @click="togglePublish(item)" :title="item[publishKey]==='draft'?'Publicar':'Despublicar'" :aria-label="item[publishKey]==='draft'?'Publicar':'Despublicar'"><Icon :name="item[publishKey]==='draft'?'lucide:eye':'lucide:eye-off'"/><span class="row-actions__label">{{ item[publishKey]==='draft'?'Publicar':'Despublicar' }}</span></button>
+              <button v-if="canEdit" class="icon-button icon-button--small" @click="edit(item)" :title="editActionLabel" :aria-label="editActionLabel"><Icon name="lucide:pencil"/><span class="row-actions__label">{{ editActionLabel }}</span></button>
+              <button v-if="canDelete" class="icon-button icon-button--small danger" @click="del(item)" title="Eliminar" aria-label="Eliminar"><Icon name="lucide:trash-2"/><span class="row-actions__label">Eliminar</span></button>
             </div></td>
           </tr></tbody>
         </table>
@@ -352,58 +417,65 @@ onBeforeUnmount(revokeLocalPreviews)
       />
     </section>
 
-    <div v-if="modalOpen" class="modal-backdrop" @click.self="close">
-      <form v-if="editing" class="cms-modal" @submit.prevent="submit">
-        <header><div><p class="eyebrow">{{editingId!==null?'Editar registo':'Novo registo'}}</p><h2>{{title}}</h2></div><button type="button" class="icon-button" @click="close"><Icon name="lucide:x"/></button></header>
-        <div class="form-grid">
-          <label v-for="field in fields" :key="field.key" class="form-field" :class="{'form-field--wide':['textarea','array','image','image-multi'].includes(field.type||'')}">
+    <section v-if="modalOpen && inlineEditor && editing" class="resource-editor-page" aria-live="polite">
+      <div class="resource-editor-nav">
+        <button type="button" class="resource-back-button" @click="close"><Icon name="lucide:arrow-left"/> Voltar atrás</button>
+        <nav class="resource-breadcrumb" aria-label="Breadcrumb">
+          <button type="button" @click="close">Área de gestão</button>
+          <Icon name="lucide:chevron-right"/>
+          <button type="button" @click="close">{{ title }}</button>
+          <Icon name="lucide:chevron-right"/>
+          <span>{{ editingId!==null ? 'Editar' : 'Adicionar' }}</span>
+        </nav>
+      </div>
+      <div class="panel resource-inline-editor">
+      <form class="resource-inline-editor__form" @submit.prevent="submit">
+        <header class="resource-inline-editor__header">
+          <div>
+            <p class="eyebrow">{{editingId!==null?'Editar conteúdo':'Adicionar conteúdo'}}</p>
+            <h1>{{ editingId!==null ? `Editar ${title}` : `Adicionar ${title}` }}</h1>
+            <p>{{ editingId!==null ? 'Atualiza os campos necessários e guarda as alterações.' : 'Preenche os campos necessários para adicionar um novo registo.' }}</p>
+          </div>
+        </header>
+        <div class="form-grid resource-inline-editor__grid">
+          <label v-for="field in fields" :key="field.key" class="form-field" :class="{'form-field--wide':['textarea','array','buttons','image','image-multi'].includes(field.type||'')}">
             <span>{{field.label}}</span>
             <textarea v-if="field.type==='textarea'" v-model="editing[field.key]" rows="5" :placeholder="field.placeholder" :readonly="field.readonly"/>
             <textarea v-else-if="field.type==='array'" :value="Array.isArray(editing[field.key])?editing[field.key].join('\n'):editing[field.key]" rows="5" placeholder="Um item por linha" @input="arrayInput(field.key,$event)"/>
-            <select v-else-if="field.type==='select'" v-model="editing[field.key]" :disabled="field.readonly"><option value="">Selecionar…</option><option v-for="option in field.options" :key="String(normalizedOption(option).value)" :value="normalizedOption(option).value">{{normalizedOption(option).label}}</option></select>
-            <CmsDateTimePicker
-              v-else-if="['date','time','datetime-local'].includes(field.type||'')"
-              v-model="editing[field.key]"
-              :type="field.type as 'date'|'time'|'datetime-local'"
-              :required="field.required!==false"
-              :readonly="field.readonly"
-              :placeholder="field.placeholder"
-            />
-            <CmsGalleryImagePicker
-              v-else-if="field.type==='image-multi'"
-              v-model="editing[field.key]"
-            />
+            <div v-else-if="field.type==='buttons'" class="cms-buttons-editor">
+              <div v-if="!editing[field.key]?.length" class="cms-buttons-editor__empty">Ainda não existem botões neste bloco.</div>
+              <article v-for="(_raw,index) in editing[field.key]" :key="`${field.key}-${index}`" class="cms-button-row">
+                <div class="cms-button-row__heading"><strong>Botão {{ index + 1 }}</strong><button type="button" class="text-button danger" @click="removeButton(field.key,index)"><Icon name="lucide:trash-2"/> Remover</button></div>
+                <div class="cms-button-row__fields">
+                  <label><span>Texto do botão</span><input :value="buttonPart(field.key,index,'label')" type="text" placeholder="Ex.: Saber mais" @input="updateButton(field.key,index,'label',($event.target as HTMLInputElement).value)"></label>
+                  <label><span>Destino</span><input :value="buttonPart(field.key,index,'url')" type="text" placeholder="Ex.: /contacto" @input="updateButton(field.key,index,'url',($event.target as HTMLInputElement).value)"></label>
+                  <label><span>Estilo</span><select :value="buttonPart(field.key,index,'style')" @change="updateButton(field.key,index,'style',($event.target as HTMLSelectElement).value)"><option value="primary">Primário</option><option value="secondary">Secundário</option></select></label>
+                </div>
+              </article>
+              <button type="button" class="btn btn--secondary cms-buttons-editor__add" @click="addButton(field.key)"><Icon name="lucide:plus"/> Adicionar botão</button>
+              <small class="form-field__hint">O primeiro botão é criado como Primário. A partir do segundo, o estilo predefinido é Secundário para manter a hierarquia visual.</small>
+            </div>
+            <select v-else-if="field.type==='select'" v-model="editing[field.key]" :disabled="field.readonly"><option value="">Seleciona uma opção</option><option v-for="option in field.options" :key="String(normalizedOption(option).value)" :value="normalizedOption(option).value">{{normalizedOption(option).label}}</option></select>
+            <CmsDateTimePicker v-else-if="['date','time','datetime-local'].includes(field.type||'')" v-model="editing[field.key]" :type="field.type as 'date'|'time'|'datetime-local'" :required="field.required!==false" :readonly="field.readonly" :placeholder="field.placeholder" />
+            <CmsGalleryImagePicker v-else-if="field.type==='image-multi'" v-model="editing[field.key]" />
             <template v-else-if="field.type==='image'">
               <div class="image-field">
-                <div v-if="imagePreviewFor(field)" class="image-preview-card">
-                  <img :src="imagePreviewFor(field)" :alt="`Pré-visualização de ${field.label}`" class="image-preview">
-                  <div class="image-preview-card__meta">
-                    <span>{{ localImagePreviews[field.key] ? 'Nova imagem selecionada' : 'Imagem atual' }}</span>
-                    <a v-if="editing[field.key] && !localImagePreviews[field.key]" :href="editing[field.key]" target="_blank" rel="noopener">Abrir imagem</a>
-                  </div>
-                </div>
-                <div v-else class="image-preview-empty">
-                  <Icon name="lucide:image" size="28"/>
-                  <span>Ainda não existe imagem.</span>
-                </div>
-                <input v-model="editing[field.key]" type="text" :placeholder="field.placeholder||'URL ou caminho da imagem'">
-                <label class="image-upload-button" :class="{'is-loading':uploadBusy[field.key]}">
-                  <Icon :name="uploadBusy[field.key]?'lucide:loader-circle':'lucide:upload'" />
-                  {{ uploadBusy[field.key] ? 'A carregar…' : imagePreviewFor(field) ? 'Substituir imagem' : 'Carregar imagem' }}
-                  <input type="file" accept="image/*" hidden :disabled="uploadBusy[field.key]" @change="uploadImage(field,$event)">
-                </label>
-                <button v-if="imagePreviewFor(field)" type="button" class="btn btn--ghost image-remove-button" :disabled="uploadBusy[field.key]" @click="clearImage(field)">
-                  <Icon name="lucide:x"/> Remover imagem
-                </button>
-                <small class="form-field__hint">A pré-visualização é atualizada assim que selecionas o ficheiro. O URL final é guardado no MongoDB depois de guardares o registo.</small>
+                <div v-if="imagePreviewFor(field)" class="image-preview-card"><img :src="imagePreviewFor(field)" :alt="`Pré-visualização de ${field.label}`" class="image-preview"><div class="image-preview-card__meta"><span>{{ localImagePreviews[field.key] ? 'Nova imagem selecionada' : 'Imagem atual' }}</span><a v-if="editing[field.key] && !localImagePreviews[field.key]" :href="editing[field.key]" target="_blank" rel="noopener">Abrir imagem</a></div></div>
+                <div v-else class="image-preview-empty"><Icon name="lucide:image" size="28"/><span>Ainda não existe imagem.</span></div>
+                <input v-model="editing[field.key]" type="text" :placeholder="field.placeholder||'Endereço da imagem ou caminho do ficheiro'">
+                <label class="image-upload-button" :class="{'is-loading':uploadBusy[field.key]}"><Icon :name="uploadBusy[field.key]?'lucide:loader-circle':'lucide:upload'" />{{ uploadBusy[field.key] ? 'A carregar…' : imagePreviewFor(field) ? 'Substituir imagem' : 'Carregar imagem' }}<input type="file" accept="image/*" hidden :disabled="uploadBusy[field.key]" @change="uploadImage(field,$event)"></label>
+                <button v-if="imagePreviewFor(field)" type="button" class="btn btn--ghost image-remove-button" :disabled="uploadBusy[field.key]" @click="clearImage(field)"><Icon name="lucide:x"/> Remover imagem</button>
+                <small class="form-field__hint">A pré-visualização é atualizada assim que selecionas o ficheiro. O endereço final da imagem é guardado depois de guardares as alterações.</small>
               </div>
             </template>
             <input v-else v-model="editing[field.key]" :type="field.type||'text'" :placeholder="field.placeholder" :required="field.required!==false" :readonly="field.readonly"/>
             <small v-if="field.hint" class="form-field__hint">{{field.hint}}</small>
           </label>
         </div>
-        <footer><button type="button" class="btn btn--secondary" @click="close">Cancelar</button><button class="btn btn--primary" :disabled="saving">{{saving?'A guardar…':editingId!==null?'Guardar alterações':'Adicionar registo'}}</button></footer>
+        <footer class="resource-inline-editor__footer"><button type="button" class="btn btn--secondary" @click="close">Cancelar</button><button class="btn btn--primary" :disabled="saving">{{saving?'A guardar…':editingId!==null?'Guardar alterações':'Adicionar conteúdo'}}</button></footer>
       </form>
-    </div>
+      </div>
+    </section>
+
   </div>
 </template>
