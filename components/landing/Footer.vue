@@ -1,7 +1,9 @@
 <script setup>
 import { useSiteSettings } from "~/modules/settings/useSiteSettings";
-import { PhInstagramLogo, PhFacebookLogo } from "@phosphor-icons/vue";
-const { settings } = await useSiteSettings();</script>
+import { PhInstagramLogo, PhFacebookLogo, PhTiktokLogo } from "@phosphor-icons/vue";
+const { settings } = await useSiteSettings();
+const socialLinks = computed(() => Array.isArray(settings.value.socialLinks) ? settings.value.socialLinks.filter(item => item.visible !== false && item.url) : []);
+const socialIcon = (platform = '') => ({ instagram: PhInstagramLogo, facebook: PhFacebookLogo, tiktok: PhTiktokLogo }[String(platform).toLowerCase()] || PhInstagramLogo);</script>
 
 <template>
   <footer
@@ -17,10 +19,7 @@ const { settings } = await useSiteSettings();</script>
           <h3 class="text-fluid-xl font-bold mb-1">Sobre</h3>
           <div class="w-[10%] border-b-2 border-secondary-800 mb-3"></div>
           <p class="text-fluid-sm leading-relaxed text-neutral-600">
-            Nós, enquanto equipa, temos a visão de procurar sempre a vitória e
-            sermos os melhores em tudo o que fazemos. Treinamos com dedicação e
-            foco para alcançar o topo e demonstrar a nossa paixão pelo futebol
-            em cada jogo.
+{{ settings.footerAbout }}
           </p>
         </div>
 
@@ -91,26 +90,10 @@ const { settings } = await useSiteSettings();</script>
           <h3 class="text-fluid-xl font-bold mb-1">Redes Sociais</h3>
           <div class="w-[10%] border-b-2 border-secondary-800 mb-3"></div>
           <ul class="space-y-3 text-fluid-sm">
-            <li>
-              <a
-                href="https://www.facebook.com/gdcscasteloes/"
-                target="_blank"
-                class="flex items-center space-x-2 text-neutral-600 hover:text-secondary-800 hover:underline transition-colors duration-300"
-                aria-label="Clica aqui para aceder ao Facebook"
-              >
-                <PhFacebookLogo class="w-6 h-6 fill-current" />
-                <span>Facebook</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.instagram.com/gdcsscasteloes/"
-                target="_blank"
-                class="flex items-center space-x-2 text-neutral-600 hover:text-secondary-800 hover:underline transition-colors duration-300"
-                aria-label="Clica aqui para aceder ao Instagram"
-              >
-                <PhInstagramLogo class="w-6 h-6 fill-current" />
-                <span>Instagram</span>
+            <li v-for="social in socialLinks" :key="social.platform">
+              <a :href="social.url" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-neutral-600 hover:text-secondary-800 hover:underline transition-colors duration-300" :aria-label="`Aceder a ${social.label || social.platform}`">
+                <component :is="socialIcon(social.platform)" class="w-6 h-6 fill-current" />
+                <span>{{ social.label || social.platform }}</span>
               </a>
             </li>
           </ul>
@@ -137,7 +120,7 @@ const { settings } = await useSiteSettings();</script>
       />
 
       <p class="text-center text-fluid-xs text-neutral-600 mt-8">
-        Copyright © {{ new Date().getFullYear() }} GDCSSCastelões. Todos os
+        Copyright © {{ new Date().getFullYear() }} {{ settings.clubName || 'GDCSS Castelões' }}. Todos os
         direitos reservados.
       </p>
 

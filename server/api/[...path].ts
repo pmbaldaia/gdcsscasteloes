@@ -31,11 +31,11 @@ export default defineEventHandler(async(event)=>{
    const db=await getMongoDb()
    await db.command({ping:1})
    const [settingsCount, usersCount, gamesCount] = await Promise.all([
-     db.collection('settings').countDocuments(),
-     db.collection('users').countDocuments(),
-     db.collection('games').countDocuments(),
+     db.collection('settings').countDocuments({}),
+     db.collection('users').countDocuments({}),
+     db.collection('games').countDocuments({}),
    ])
-   return {ok:true,database:'mongodb',collections:{settings:settingsCount,users:usersCount,games:gamesCount}}
+   return {ok:true,database:'mongodb',databaseName:process.env.MONGODB_DB||'gdcsscasteloes',entities:{settings:settingsCount,users:usersCount,games:gamesCount}}
  }
  if(path[0]==='season-2627'){
    const user=requireAuth(event)

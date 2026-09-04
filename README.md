@@ -163,3 +163,47 @@ npm run dev
 
 O site público e o CMS partilham a mesma fonte de verdade visual em `assets/css/tokens.css`.
 Consultar `docs/design-system.md` antes de adicionar novas cores ou componentes.
+
+## Migração segura MongoDB
+
+O comando `npm run sync:mongodb` migra os dados existentes para a collection principal `gdcsscasteloes`.
+
+Por defeito, o script procura primeiro uma collection `gdcsscasteloes_test`. Se não a encontrar e não existir `MONGODB_SOURCE_DB`, tenta automaticamente usar a base de dados antiga `gdcsscasteloes_test` como origem. A origem nunca é apagada.
+
+Variáveis opcionais para controlar explicitamente a migração:
+
+```env
+MONGODB_SOURCE_DB=gdcsscasteloes_test
+MONGODB_SOURCE_COLLECTION=gdcsscasteloes_test
+MONGODB_TARGET_COLLECTION=gdcsscasteloes
+```
+
+A collection `gdcsscasteloes_test`, quando existir, tem prioridade sobre as collections históricas separadas. No final, o script valida documento a documento se o conteúdo da origem foi preservado no destino e termina com erro se encontrar diferenças.
+
+## Migração definitiva: `gdcsscasteloes_test` → `gdcsscasteloes`
+
+O comando `npm run sync:mongodb` migra a base de dados antiga para a nova base sem apagar a origem.
+
+Configuração recomendada durante a migração:
+
+```env
+MONGODB_URI=...
+MONGODB_DB=gdcsscasteloes_test
+MONGODB_SOURCE_DB=gdcsscasteloes_test
+MONGODB_TARGET_DB=gdcsscasteloes
+```
+
+O script:
+- lê as collections de conteúdo da BD `gdcsscasteloes_test`;
+- consolida-as na collection principal `gdcsscasteloes` dentro da nova BD `gdcsscasteloes`;
+- copia também collections auxiliares/técnicas, incluindo GridFS (`media.files` e `media.chunks`), quando existirem;
+- usa upsert/reexecução segura;
+- não apaga nem altera a BD de origem;
+- preserva índices existentes e evita conflitos de nomes/especificações;
+- valida o conteúdo antes de declarar sucesso.
+
+Depois de a validação terminar com sucesso, a aplicação deve passar a usar:
+
+```env
+MONGODB_DB=gdcsscasteloes
+```

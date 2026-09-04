@@ -1,7 +1,7 @@
 import { MongoClient, ServerApiVersion } from 'mongodb'
 
 const uri = process.env.MONGODB_URI
-const dbName = process.env.MONGODB_DB || 'gdcsscasteloes_test'
+const dbName = process.env.MONGODB_DB || 'gdcsscasteloes'
 
 if (!uri) {
   console.error('MONGODB_URI não está definida.')

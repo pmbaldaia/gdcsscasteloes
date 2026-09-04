@@ -8,23 +8,30 @@ import {
   PhX,
 } from "@phosphor-icons/vue";
 import { useRoute } from "vue-router";
+import { useSiteSettings } from "~/modules/settings/useSiteSettings";
 
 const { isDark } = useThemeMode();
 const open = ref(false);
 const scrolled = ref(false);
 const route = useRoute();
+const { settings } = await useSiteSettings();
 
 const isHome = computed(() => route.path === "/" || route.path === "");
 const overlaysHero = computed(() => isHome.value && !scrolled.value && !open.value);
 
-const menuitems = [
-  { title: "Sobre nós", path: "/sobre/" },
-  { title: "Equipa", path: "/equipa/" },
-  { title: "Calendário", path: "/calendario/" },
-  { title: "Eventos", path: "/eventos/" },
-  { title: "Galeria", path: "/galeria/" },
-  { title: "Oportunidades", path: "/oportunidades/" },
+const defaultMenuitems = [
+  { title: "Sobre nós", path: "/sobre/", visible: true },
+  { title: "Equipa", path: "/equipa/", visible: true },
+  { title: "Calendário", path: "/calendario/", visible: true },
+  { title: "Eventos", path: "/eventos/", visible: true },
+  { title: "Galeria", path: "/galeria/", visible: true },
+  { title: "Oportunidades", path: "/oportunidades/", visible: true },
 ];
+const menuitems = computed(() => (Array.isArray(settings.value.navigation) && settings.value.navigation.length
+  ? settings.value.navigation
+  : defaultMenuitems).filter((item) => item.visible !== false));
+const socialLinks = computed(() => Array.isArray(settings.value.socialLinks) ? settings.value.socialLinks.filter((item) => item.visible !== false && item.url) : []);
+const socialIcon = (platform = '') => ({ instagram: PhInstagramLogo, facebook: PhFacebookLogo, tiktok: PhTiktokLogo }[String(platform).toLowerCase()] || PhInstagramLogo);
 
 const isActive = (item) =>
   item.path === "/eventos/"
@@ -128,35 +135,9 @@ watch(() => route.path, () => {
             </li>
           </ul>
 
-          <div
-            class="lg:hidden flex justify-center items-center pb-4 gap-5 w-full"
-          >
-            <a
-              href="https://www.instagram.com/gdcsscasteloes/"
-              aria-label="Instagram"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-neutral-600 hover:text-primary-800 transition-colors"
-            >
-              <PhInstagramLogo class="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.facebook.com/gdcscasteloes/"
-              aria-label="Facebook"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-neutral-600 hover:text-primary-800 transition-colors"
-            >
-              <PhFacebookLogo class="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.tiktok.com/@gdcss.casteloes"
-              aria-label="Facebook"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-neutral-600 hover:text-primary-800 transition-colors"
-            >
-              <PhTiktokLogo class="w-6 h-6" />
+          <div class="lg:hidden flex justify-center items-center pb-4 gap-5 w-full">
+            <a v-for="social in socialLinks" :key="social.platform" :href="social.url" :aria-label="social.label || social.platform" target="_blank" rel="noopener noreferrer" class="text-neutral-600 hover:text-primary-800 transition-colors">
+              <component :is="socialIcon(social.platform)" class="w-6 h-6" />
             </a>
           </div>
         </nav>
@@ -164,29 +145,8 @@ watch(() => route.path, () => {
         <div class="hidden lg:flex items-center gap-3 shrink-0">
           <ThemeToggle />
           <span class="h-5 w-px bg-neutral-200" aria-hidden="true"></span>
-          <a
-            href="https://www.instagram.com/gdcsscasteloes/"
-            target="_blank"
-            aria-label="Instagram"
-            class="text-neutral-600 hover:text-primary-800 transition-colors"
-          >
-            <PhInstagramLogo class="w-5 h-5" />
-          </a>
-          <a
-            href="https://www.facebook.com/gdcscasteloes/"
-            target="_blank"
-            aria-label="Facebook"
-            class="text-neutral-600 hover:text-primary-800 transition-colors"
-          >
-            <PhFacebookLogo class="w-5 h-5" />
-          </a>
-          <a
-            href="https://www.tiktok.com/@gdcss.casteloes"
-            target="_blank"
-            aria-label="Instagram"
-            class="text-neutral-600 hover:text-primary-800 transition-colors"
-          >
-            <PhTiktokLogo class="w-5 h-5" />
+          <a v-for="social in socialLinks" :key="`desktop-${social.platform}`" :href="social.url" target="_blank" :aria-label="social.label || social.platform" class="text-neutral-600 hover:text-primary-800 transition-colors">
+            <component :is="socialIcon(social.platform)" class="w-5 h-5" />
           </a>
         </div>
       </div>

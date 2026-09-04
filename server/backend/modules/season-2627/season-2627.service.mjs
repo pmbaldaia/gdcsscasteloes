@@ -26,14 +26,7 @@ export const season2627Service = {
     for (const name of season2627Teams) {
       if (names.has(normalized(name))) continue
       const now = new Date().toISOString()
-      await teamsCollection.insertOne({
-        id: crypto.randomUUID(),
-        name,
-        logo: '',
-        status: 'published',
-        createdAt: now,
-        updatedAt: now,
-      })
+      await teamsCollection.insertOne({ id: crypto.randomUUID(), name, logo: '', status: 'published', createdAt: now, updatedAt: now })
       names.add(normalized(name))
       teamsCreated++
     }
@@ -46,25 +39,11 @@ export const season2627Service = {
       const key = `${game.season}::${game.jornada}`
       if (keys.has(key)) continue
       const now = new Date().toISOString()
-      await gamesCollection.insertOne({
-        ...game,
-        id: crypto.randomUUID(),
-        createdAt: now,
-        updatedAt: now,
-      })
+      await gamesCollection.insertOne({ ...game, id: crypto.randomUUID(), createdAt: now, updatedAt: now })
       keys.add(key)
       gamesCreated++
     }
 
-    return {
-      ok: true,
-      season: '2026/2027',
-      teamsCreated,
-      teamsExisting: season2627Teams.length - teamsCreated,
-      gamesCreated,
-      gamesExisting: season2627Games.length - gamesCreated,
-      totalTeams: season2627Teams.length,
-      totalGames: season2627Games.length,
-    }
+    return { ok: true, season: '2026/2027', teamsCreated, teamsExisting: season2627Teams.length - teamsCreated, gamesCreated, gamesExisting: season2627Games.length - gamesCreated, totalTeams: season2627Teams.length, totalGames: season2627Games.length }
   },
 }
