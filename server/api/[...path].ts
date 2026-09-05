@@ -69,7 +69,14 @@ export default defineEventHandler(async(event)=>{
  }
  const isPublic=path[0]==='public'; const resource=isPublic?path[1]:path[0]; const id=isPublic?path[2]:path[1]; const service=resources[resource];
  if(!service||(isPublic&&!publicResources.has(resource)))fail(404,'Recurso não encontrado')
- if(isPublic){if(method!=='GET'||id)fail(405,'Método não permitido');return service.listPublic()}
+ if(isPublic){
+   if(method!=='GET'||id)fail(405,'Método não permitido')
+   // Conteúdo público muda através do CMS, mas não a cada clique. Esta cache
+   // curta permite ao CDN servir as transições seguintes sem voltar ao MongoDB
+   // e mantém uma atualização automática em segundo plano.
+   setHeader(event,'Cache-Control','public, max-age=60, s-maxage=60, stale-while-revalidate=300')
+   return service.listPublic()
+ }
  const user=requireAuth(event)
  if(resource==='users')requireAdmin(user)
 

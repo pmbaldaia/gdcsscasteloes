@@ -4,8 +4,10 @@ export async function useManagedPageContent(slug:string){
   const pagesRepo=createPublicRepository('pages')
   const blocksRepo=createPublicRepository('contentBlocks')
   const [{data:pages},{data:allBlocks}]=await Promise.all([
-    useAsyncData(`managed-pages-${slug}`,()=>pagesRepo.list(),{default:()=>[]}),
-    useAsyncData(`managed-blocks-${slug}`,()=>blocksRepo.list(),{default:()=>[]}),
+    // Partilha a cache com o renderer CMS público para não duplicar pedidos
+    // quando se navega entre páginas estáticas.
+    useAsyncData('gdcss-public-pages',()=>pagesRepo.list(),{default:()=>[]}),
+    useAsyncData('gdcss-public-content-blocks',()=>blocksRepo.list(),{default:()=>[]}),
   ])
   const page=computed(()=>pages.value.find((item:any)=>item.slug===slug&&item.status==='published')||null)
   const hasManagedPages=computed(()=>pages.value.length>0)
