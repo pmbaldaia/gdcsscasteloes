@@ -46,6 +46,7 @@ async function save() {
     }
 
     await refreshNuxtData('gdcss-public-settings')
+    notifyPublicCmsChange()
     toast.success(
       'Definições guardadas',
       'Os dados gerais foram atualizados com sucesso.'

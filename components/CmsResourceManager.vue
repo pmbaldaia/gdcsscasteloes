@@ -215,6 +215,7 @@ async function submit(){
     if(editingId.value!==null) await props.service.update(editingId.value,payload)
     else await props.service.create(payload)
     await load()
+    notifyPublicCmsChange()
     const wasEditing=editingId.value!==null
     close()
     toast.success(
@@ -244,6 +245,7 @@ async function del(item:any){
   try{
     await props.service.remove(item.id)
     await load()
+    notifyPublicCmsChange()
     toast.success('Conteúdo eliminado', 'O conteúdo foi removido com sucesso.')
   }
   catch(e:any){
@@ -260,6 +262,7 @@ async function togglePublish(item:any){
   try{
     await props.service.update(item.id,{...item,[key]:next})
     await load()
+    notifyPublicCmsChange()
     if(next==='draft') toast.info('Conteúdo despublicado', 'O conteúdo deixou de estar visível no site público.')
     else if(item.publishedAt && new Date(item.publishedAt).getTime()>Date.now()) toast.success('Publicação agendada', `O conteúdo será publicado em ${formatDateTime(item.publishedAt)}.`)
     else toast.success('Conteúdo publicado', 'O conteúdo já está disponível no site público.')
