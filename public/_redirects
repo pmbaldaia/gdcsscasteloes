@@ -1,0 +1,4 @@
+# Em caso de rota não estática, a Netlify entrega o pedido ao Nuxt/Nitro.
+# Sem este rewrite, URLs diretos (incluindo slugs do CMS) devolvem o 404
+# genérico da Netlify antes de a página 404 personalizada ser executada.
+/*  /.netlify/functions/server  200

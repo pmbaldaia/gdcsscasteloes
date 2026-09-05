@@ -28,7 +28,7 @@ const error = useError();
       <p class="text-fluid-2xl font-semibold mb-1">Página fora de jogo!</p>
       <p class="text-neutral-600 text-fluid-base mb-8 max-w-xs px-4">
         {{
-          error?.statusMessage || "Algo correu mal. Tenta novamente mais tarde."
+          error?.message || error?.statusMessage || "Algo correu mal. Tenta novamente mais tarde."
         }}
       </p>
 
