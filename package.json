@@ -25,7 +25,8 @@
     "a11y:tokens": "node scripts/check-accessibility-tokens.mjs",
     "sync:mongodb": "node --env-file=.env scripts/sync-mongodb.mjs",
     "mongo:migrate-usernames": "node --env-file=.env scripts/migrate-users-to-username.mjs",
-    "cms:bootstrap": "node --env-file=.env scripts/bootstrap-cms-content.mjs"
+    "cms:bootstrap": "node --env-file=.env scripts/bootstrap-cms-content.mjs",
+    "cms:update": "node --env-file=.env scripts/update-cms.mjs"
   },
   "devDependencies": {
     "@nuxt/image": "^2.1.0",

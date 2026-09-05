@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb'
+import crypto from 'node:crypto'
 const uri=process.env.MONGODB_URI
 const dbName=process.env.MONGODB_DB||'gdcsscasteloes'
 if(!uri) throw new Error('MONGODB_URI não está definido.')
@@ -15,6 +16,8 @@ try{
       let base=(row.role==='admin' && admins[0]?._id?.equals?.(row._id))?'admin':slug(row.name||row.email?.split('@')[0]||'utilizador')
       let candidate=base, n=2; while(used.has(candidate)){candidate=`${base.slice(0,26)}${n++}`}; used.add(candidate); patch.username=candidate
     }
+    if(!row.id) patch.id=crypto.randomUUID()
+    if(row.active===undefined) patch.active=true
     if(row.role==='editor') patch.role='viewer'
     if(Object.keys(patch).length){patch.updatedAt=new Date().toISOString();await users.updateOne({_id:row._id},{$set:patch});changed++}
   }

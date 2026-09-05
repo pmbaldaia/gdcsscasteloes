@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props=withDefaults(defineProps<{pageSlug:string;blockKey?:string;fallbackTitle?:string;fallbackDescription?:string}>(),{blockKey:'header',fallbackTitle:'',fallbackDescription:''})
 const { value, page, hasManagedPages }=await useManagedPageContent(props.pageSlug)
-if(hasManagedPages.value && !page.value) throw createError({statusCode:404,statusMessage:'Página não encontrada'})
+if(hasManagedPages.value && !page.value) throw createError({statusCode:404,message:'Página não encontrada'})
 useHead(()=>({title:page.value?.seoTitle||page.value?.title||props.fallbackTitle,meta:[{name:'description',content:page.value?.metaDescription||props.fallbackDescription},{name:'robots',content:page.value?.indexable===false?'noindex, nofollow':'index, follow'}],link:page.value?.canonical?[{rel:'canonical',href:page.value.canonical}]:[]}))
 const title=value(props.blockKey,'title',props.fallbackTitle)
 const description=value(props.blockKey,'content',props.fallbackDescription)

@@ -76,7 +76,7 @@ watch(() => route.path, () => {
         ]"
       >
         <div class="flex w-full lg:w-auto items-center justify-between">
-          <a href="/" class="shrink-0" aria-label="Logo Castelões">
+          <NuxtLink to="/" class="shrink-0" aria-label="Logo Castelões">
             <NuxtImg
               class="brand-logo-original transition-transform duration-300 hover:scale-105 w-14 h-14 sm:w-16 sm:h-16 lg:w-[4.5rem] lg:h-[4.5rem]"
               src="/img/logotipo.webp"
@@ -87,7 +87,7 @@ watch(() => route.path, () => {
               preload
               fetchpriority="high"
             />
-          </a>
+          </NuxtLink>
 
           <div class="flex items-center gap-2 lg:hidden">
             <ThemeToggle />

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props=defineProps<{pageSlug:string}>()
 const {page,blocks}=await usePublicCmsPage(props.pageSlug)
-if(!page.value) throw createError({statusCode:404,statusMessage:'Página não encontrada'})
+if(!page.value) throw createError({statusCode:404,message:'Página não encontrada'})
 const parseAction=(raw:any,index=0)=>{const [label,url,rawStyle]=String(raw||'').split('|');return{label,url:url||'#',style:rawStyle==='secondary'?'secondary':rawStyle==='primary'?'primary':index===0?'primary':'secondary'}}
 const features=computed(()=>blocks.value.filter((b:any)=>b.type==='feature'))
 const normalBlocks=computed(()=>blocks.value.filter((b:any)=>b.type!=='feature'))

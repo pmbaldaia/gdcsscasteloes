@@ -13,7 +13,7 @@ const pages=[
 ].map(([slug,title])=>({slug,title,status:'published',indexable:true}))
 
 const blocks=[
-  {pageSlug:'inicio',key:'hero',type:'hero',eyebrow:'G.D.C.S.S. Castelões',title:'Bem-vindo ao site oficial do G.D.C.S.S. Castelões',content:'Celebrando com orgulho 41 anos de história, dedicação e conquistas, o G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada freguesia de Castelões. Venha fazer parte dessa jornada, repleta de momentos inesquecíveis e vitórias que marcaram a nossa comunidade!',image:'/img/gdcss-casteloes-tarja.webp',items:['Plantel|/equipa#plantel|secondary','Equipa Técnica|/equipa#equipa-tecnica|primary'],order:1},
+  {pageSlug:'inicio',key:'hero',type:'hero',eyebrow:'G.D.C.S.S. Castelões',title:'Bem-vindo ao site oficial do G.D.C.S.S. Castelões',content:'Celebrando com orgulho 41 anos de história, dedicação e conquistas, o G.D.C.S.S. Castelões foi fundado a 11 de abril de 1984, na nossa amada freguesia de Castelões. Venha fazer parte dessa jornada, repleta de momentos inesquecíveis e vitórias que marcaram a nossa comunidade!',image:'/img/gdcss-casteloes-tarja.webp',items:['Plantel|/equipa#plantel|primary','Calendário|/calendario|secondary'],order:1},
   {pageSlug:'inicio',key:'features-header',type:'section-header',title:'Vive o Clube. Dá Tudo em Campo.',content:'Conhece o que te espera quando vestes esta camisola. Aqui jogas com garra.',order:2},
   ...[
     ['feature-1','Treina no Máximo','Aqui treinas com intensidade e foco. Cada sessão é uma oportunidade para te superares dentro das quatro linhas.','game-icons:soccer-field'],
@@ -74,8 +74,13 @@ const blocks=[
 try{
   const db=client.db(dbName)
   const menus=db.collection('menus')
+  const pagesCol=db.collection('pages')
+  const blocksCol=db.collection('contentBlocks')
+  // Só inicializa conteúdo numa BD verdadeiramente nova. Em BDs já usadas,
+  // respeita conteúdos e remoções feitas no CMS.
+  const hasExistingCms=Boolean(await pagesCol.estimatedDocumentCount())||Boolean(await blocksCol.estimatedDocumentCount())||Boolean(await menus.estimatedDocumentCount())
   const settings=await db.collection('settings').findOne({})
-  if(await menus.countDocuments({})===0){
+  if(!hasExistingCms&&await menus.countDocuments({})===0){
     const navigation=Array.isArray(settings?.navigation)?settings.navigation:[]
     const header=(navigation.length?navigation:[
       {title:'Sobre nós',path:'/sobre/',visible:true},{title:'Equipa',path:'/equipa/',visible:true},{title:'Calendário',path:'/calendario/',visible:true},{title:'Eventos',path:'/eventos/',visible:true},{title:'Galeria',path:'/galeria/',visible:true},{title:'Oportunidades',path:'/oportunidades/',visible:true}
@@ -84,13 +89,11 @@ try{
     await menus.insertMany([...header,...footer])
   }
 
-  const pagesCol=db.collection('pages')
-  for(const page of pages){
+  if(!hasExistingCms) for(const page of pages){
     await pagesCol.updateOne({slug:page.slug},{$setOnInsert:{id:crypto.randomUUID(),...page,createdAt:now},$set:{updatedAt:now}},{upsert:true})
   }
-  const blocksCol=db.collection('contentBlocks')
   let created=0,kept=0
-  for(const block of blocks){
+  for(const block of hasExistingCms?[]:blocks){
     const exists=await blocksCol.findOne({pageSlug:block.pageSlug,key:block.key})
     if(exists){kept++;continue}
     const migrated={...block}
@@ -110,5 +113,5 @@ try{
   await blocksCol.createIndex({id:1},{unique:true,sparse:true}).catch(()=>{})
   await blocksCol.createIndex({pageSlug:1,status:1,order:1}).catch(()=>{})
   await blocksCol.createIndex({pageSlug:1,key:1},{unique:true,sparse:true}).catch(()=>{})
-  console.log(`CMS preparado em ${dbName}: ${pages.length} páginas; ${created} blocos criados; ${kept} blocos existentes preservados.`)
+  console.log(`CMS atualizado em ${dbName}: ${hasExistingCms?'conteúdo existente preservado':`${pages.length} páginas; ${created} blocos criados; ${kept} blocos existentes preservados`}.`)
 }finally{await client.close()}

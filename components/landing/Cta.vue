@@ -15,21 +15,21 @@
     <div
       class="mt-6 flex flex-col sm:flex-row gap-3 justify-start items-center"
     >
-      <a
-        href="/sobre/"
+      <NuxtLink
+        to="/sobre"
         class="btn-club-green w-full sm:w-auto"
         aria-label="Clica aqui para conhecer o clube"
       >
         Conhecer o Clube
-      </a>
+      </NuxtLink>
 
-      <a
-        href="/contacto/"
+      <NuxtLink
+        to="/contacto"
         class="btn-club-red w-full sm:w-auto"
         aria-label="Clica aqui para te tornares sócio"
       >
         Torna-te Sócio
-      </a>
+      </NuxtLink>
     </div>
   </div>
 </template>
