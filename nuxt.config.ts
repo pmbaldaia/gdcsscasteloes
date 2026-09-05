@@ -53,7 +53,12 @@ function getAllRoutes(dir: string, prefix = ""): string[] {
 }
 
 const isProd = process.env.NODE_ENV === "production";
-const siteUrl = process.env.NUXT_SITE_URL || "http://localhost:3000";
+const siteUrl = (
+  process.env.NUXT_SITE_URL ||
+  process.env.URL ||
+  process.env.DEPLOY_PRIME_URL ||
+  "http://localhost:3000"
+).replace(/\/$/, "");
 
 export default defineNuxtConfig({
   compatibilityDate: "2026-05-23",
@@ -264,7 +269,8 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/tokens.css", "~/assets/css/main.css"],
 
-  devtools: { enabled: true },
+  // DevTools não devem ser incluídas no bundle de produção.
+  devtools: { enabled: !isProd },
 
   postcss: {
     plugins: {

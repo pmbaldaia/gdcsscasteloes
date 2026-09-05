@@ -7,139 +7,155 @@ const sources = [
         "urls": [
             {
                 "loc": "https://gdcsscasteloes.pt/[...all]",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
+            },
+            {
+                "loc": "https://gdcsscasteloes.pt/admin/blocos",
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/conteudos",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/definicoes",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/direcao",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/equipa-tecnica",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/equipas",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/eventos",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/galeria",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/jogos",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/login",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/media",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/mensagens",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
+            },
+            {
+                "loc": "https://gdcsscasteloes.pt/admin/menus",
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/oportunidades",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
+            },
+            {
+                "loc": "https://gdcsscasteloes.pt/admin/paginas",
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/patrocinios",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
+            },
+            {
+                "loc": "https://gdcsscasteloes.pt/admin/perfil",
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/pesquisa",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/plantel",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/socios",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/admin/utilizadores",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/auth/login",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/auth/register",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/calendario",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/contacto",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/equipa",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/eventos/[slug]",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/eventos",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/galeria",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/manutencao",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/oportunidades",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/politicas/cookies",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/politicas/privacidade",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/politicas/servico",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt/sobre",
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             },
             {
                 "loc": "https://gdcsscasteloes.pt",
@@ -166,31 +182,31 @@ const sources = [
                         "loc": "undefined/equipa/direcao/Carlos Teixeira.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/CeciΓòá├╝lia Sousa.webp"
+                        "loc": "undefined/equipa/direcao/Cecília Sousa.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Ceci╬ô├▓├íuΓòá├¬lia Sousa.webp"
+                        "loc": "undefined/equipa/direcao/CeciΓòá├╝lia Sousa.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Ceci╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬uΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íeΓòá├╝lia Sousa.webp"
+                        "loc": "undefined/equipa/direcao/Ceci╬ô├▓├íuΓòá├¬lia Sousa.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Cecília Sousa.webp"
+                        "loc": "undefined/equipa/direcao/Ceci╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬uΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íeΓòá├╝lia Sousa.webp"
                     },
                     {
                         "loc": "undefined/equipa/direcao/Cec├¡lia Sousa.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/CeΓòá├╝sar Silva.webp"
+                        "loc": "undefined/equipa/direcao/César Silva.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Ce╬ô├▓├íuΓòá├¬sar Silva.webp"
+                        "loc": "undefined/equipa/direcao/CeΓòá├╝sar Silva.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Ce╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬uΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íeΓòá├╝sar Silva.webp"
+                        "loc": "undefined/equipa/direcao/Ce╬ô├▓├íuΓòá├¬sar Silva.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/César Silva.webp"
+                        "loc": "undefined/equipa/direcao/Ce╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬uΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íeΓòá├╝sar Silva.webp"
                     },
                     {
                         "loc": "undefined/equipa/direcao/C├⌐sar Silva.webp"
@@ -214,16 +230,16 @@ const sources = [
                         "loc": "undefined/equipa/direcao/Jorge Rebelo.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/LuiΓòá├╝sa Teixeira.webp"
+                        "loc": "undefined/equipa/direcao/Luísa Teixeira.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Lui╬ô├▓├íuΓòá├¬sa Teixeira.webp"
+                        "loc": "undefined/equipa/direcao/LuiΓòá├╝sa Teixeira.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Lui╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬uΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íeΓòá├╝sa Teixeira.webp"
+                        "loc": "undefined/equipa/direcao/Lui╬ô├▓├íuΓòá├¬sa Teixeira.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Luísa Teixeira.webp"
+                        "loc": "undefined/equipa/direcao/Lui╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬uΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íeΓòá├╝sa Teixeira.webp"
                     },
                     {
                         "loc": "undefined/equipa/direcao/Lu├¡sa Teixeira.webp"
@@ -241,19 +257,19 @@ const sources = [
                         "loc": "undefined/equipa/direcao/Rui Almeida.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/TaΓòá├⌐nia Ribeiro.webp"
+                        "loc": "undefined/equipa/direcao/Tânia Ribeiro.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Ta╬ô├▓├íeΓòá├╝nia Ribeiro.webp"
+                        "loc": "undefined/equipa/direcao/TaΓòá├⌐nia Ribeiro.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Ta╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬eΓò¼├┤oΓòá├çaΓòá├╝u╬ô├▓├íeΓòá├⌐nia Ribeiro.webp"
+                        "loc": "undefined/equipa/direcao/Ta╬ô├▓├íeΓòá├╝nia Ribeiro.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/Tânia Ribeiro.webp"
+                        "loc": "undefined/equipa/direcao/Ta╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬eΓò¼├┤oΓòá├çaΓòá├╝u╬ô├▓├íeΓòá├⌐nia Ribeiro.webp"
                     },
                     {
-                        "loc": "undefined/equipa/direcao/T├ónia Ribeiro.webp"
+                        "loc": "undefined/equipa/direcao/T├ónia Ribeiro.webp"
                     },
                     {
                         "loc": "undefined/equipa/direcao/Vitor Ribeiro.webp"
@@ -424,19 +440,19 @@ const sources = [
                         "loc": "undefined/logos/AD FREIXO CIMA.webp"
                     },
                     {
-                        "loc": "undefined/logos/AD VAΓòá├╝RZEA FC.webp"
+                        "loc": "undefined/logos/AD VÁRZEA FC.webp"
                     },
                     {
-                        "loc": "undefined/logos/AD VA╬ô├▓├íuΓòá├¬RZEA FC.webp"
+                        "loc": "undefined/logos/AD VAΓòá├╝RZEA FC.webp"
                     },
                     {
-                        "loc": "undefined/logos/AD VA╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬uΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íeΓòá├╝RZEA FC.webp"
+                        "loc": "undefined/logos/AD VA╬ô├▓├íuΓòá├¬RZEA FC.webp"
                     },
                     {
-                        "loc": "undefined/logos/AD VÁRZEA FC.webp"
+                        "loc": "undefined/logos/AD VA╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬uΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íeΓòá├╝RZEA FC.webp"
                     },
                     {
-                        "loc": "undefined/logos/AD V├üRZEA FC.webp"
+                        "loc": "undefined/logos/AD V├üRZEA FC.webp"
                     },
                     {
                         "loc": "undefined/logos/ASS NEVOGILDE.webp"
@@ -445,19 +461,19 @@ const sources = [
                         "loc": "undefined/logos/ATL C CROCA.webp"
                     },
                     {
-                        "loc": "undefined/logos/CAIΓòá├╝DE REI SC.webp"
+                        "loc": "undefined/logos/CAÍDE REI SC.webp"
                     },
                     {
-                        "loc": "undefined/logos/CAI╬ô├▓├íuΓòá├¬DE REI SC.webp"
+                        "loc": "undefined/logos/CAIΓòá├╝DE REI SC.webp"
                     },
                     {
-                        "loc": "undefined/logos/CAI╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬uΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íeΓòá├╝DE REI SC.webp"
+                        "loc": "undefined/logos/CAI╬ô├▓├íuΓòá├¬DE REI SC.webp"
                     },
                     {
-                        "loc": "undefined/logos/CAÍDE REI SC.webp"
+                        "loc": "undefined/logos/CAI╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬uΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íeΓòá├╝DE REI SC.webp"
                     },
                     {
-                        "loc": "undefined/logos/CA├ìDE REI SC.webp"
+                        "loc": "undefined/logos/CA├ìDE REI SC.webp"
                     },
                     {
                         "loc": "undefined/logos/CCR S VICENTE IRIVO.webp"
@@ -469,43 +485,43 @@ const sources = [
                         "loc": "undefined/logos/FC FELGUEIRAS ΓÇ£BΓÇ¥ ΓÇô SAD.webp"
                     },
                     {
-                        "loc": "undefined/logos/FC FELGUEIRAS Γò¼├┤CΓòá┬║Γö¼├║BΓò¼├┤CΓòá┬║Γö¼├æ Γò¼├┤CΓòá┬║oΓòá├⌐ SAD.webp"
+                        "loc": "undefined/logos/FC FELGUEIRAS Γò¼├┤CΓòá┬║Γö¼├║BΓò¼├┤CΓòá┬║Γö¼├æ Γò¼├┤CΓòá┬║oΓòá├⌐ SAD.webp"
                     },
                     {
                         "loc": "undefined/logos/FC FELGUEIRAS “B” – SAD.webp"
                     },
                     {
-                        "loc": "undefined/logos/FC FELGUEIRAS ╬ô├ç┬úB╬ô├ç┬Ñ ╬ô├ç├┤ SAD.webp"
+                        "loc": "undefined/logos/FC FELGUEIRAS ╬ô├ç┬úB╬ô├ç┬Ñ ╬ô├ç├┤ SAD.webp"
                     },
                     {
                         "loc": "undefined/logos/FC VILA BOA QUIRES.webp"
                     },
                     {
-                        "loc": "undefined/logos/GD LIVRACΓòá┬║AΓòá├óO.webp"
+                        "loc": "undefined/logos/GD LIVRAÇÃO.webp"
                     },
                     {
-                        "loc": "undefined/logos/GD LIVRAC╬ô├▓├íΓö¼ΓòæA╬ô├▓├íaΓòá├⌐O.webp"
+                        "loc": "undefined/logos/GD LIVRACΓòá┬║AΓòá├óO.webp"
                     },
                     {
-                        "loc": "undefined/logos/GD LIVRAÇÃO.webp"
+                        "loc": "undefined/logos/GD LIVRAC╬ô├▓├íΓö¼ΓòæA╬ô├▓├íaΓòá├⌐O.webp"
                     },
                     {
-                        "loc": "undefined/logos/GD LIVRA├ç├âO.webp"
+                        "loc": "undefined/logos/GD LIVRA├ç├âO.webp"
                     },
                     {
-                        "loc": "undefined/logos/GDCSS CASTELOΓòá├óES.webp"
+                        "loc": "undefined/logos/GDCSS CASTELÕES.webp"
                     },
                     {
-                        "loc": "undefined/logos/GDCSS CASTELO╬ô├▓├íaΓòá├⌐ES.webp"
+                        "loc": "undefined/logos/GDCSS CASTELOΓòá├óES.webp"
                     },
                     {
-                        "loc": "undefined/logos/GDCSS CASTELO╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬aΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íuΓòá├¬ES.webp"
+                        "loc": "undefined/logos/GDCSS CASTELO╬ô├▓├íaΓòá├⌐ES.webp"
                     },
                     {
-                        "loc": "undefined/logos/GDCSS CASTELÕES.webp"
+                        "loc": "undefined/logos/GDCSS CASTELO╬ô├▓┬╝oΓòá├⌐o╬ô├▓├íCΓòá┬║a╬ô├▓├íuΓòá├¬aΓò¼├┤oΓòá├çaΓòá├╝e╬ô├▓├íuΓòá├¬ES.webp"
                     },
                     {
-                        "loc": "undefined/logos/GDCSS CASTEL├òES.webp"
+                        "loc": "undefined/logos/GDCSS CASTEL├òES.webp"
                     },
                     {
                         "loc": "undefined/logos/GRD RANS.webp"
@@ -691,7 +707,7 @@ const sources = [
                         "loc": "undefined/patrocinios/vistara.webp"
                     }
                 ],
-                "lastmod": "2026-08-31T15:11:55.189Z"
+                "lastmod": "2026-09-05T10:13:08.203Z"
             }
         ],
         "sourceType": "user"
@@ -742,6 +758,15 @@ const sources = [
                 "loc": "/admin/media"
             },
             {
+                "loc": "/admin/menus"
+            },
+            {
+                "loc": "/admin/blocos"
+            },
+            {
+                "loc": "/admin/perfil"
+            },
+            {
                 "loc": "/admin/socios"
             },
             {
@@ -755,6 +780,9 @@ const sources = [
             },
             {
                 "loc": "/admin/galeria"
+            },
+            {
+                "loc": "/admin/paginas"
             },
             {
                 "loc": "/admin/plantel"

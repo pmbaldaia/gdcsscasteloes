@@ -2,6 +2,9 @@
   "name": "gdcss-casteloes",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20.19.0 <21"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

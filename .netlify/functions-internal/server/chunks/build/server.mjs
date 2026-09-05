@@ -1,5 +1,5 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { toRef, computed, watch, isRef, hasInjectionContext, getCurrentInstance, inject, ref, getCurrentScope, defineComponent, createElementBlock, shallowRef, provide, cloneVNode, h, defineAsyncComponent, unref, shallowReactive, useSSRContext, createApp, isVNode, createCommentVNode, withCtx, createVNode, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, reactive, effectScope, Suspense, nextTick, mergeProps, Fragment, isReadonly, toRaw, isShallow, isReactive } from 'vue';
-import { c as createError$1, o as parseURL, h as encodePath, q as decodePath, t as hasProtocol, v as isScriptProtocol, w as joinURL, x as withQuery, y as klona, z as sanitizeStatusCode, A as getRequestHeader, B as destr, C as isEqual, D as getContext, E as setCookie, F as getCookie, G as deleteCookie, $ as $fetch$1, H as baseURL, I as defu, J as createHooks, K as executeAsync } from '../nitro/nitro.mjs';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { hasInjectionContext, getCurrentInstance, inject, computed, watch, toRef, isRef, getCurrentScope, ref, defineComponent, createElementBlock, shallowRef, provide, cloneVNode, h, defineAsyncComponent, unref, shallowReactive, useSSRContext, createApp, isVNode, createCommentVNode, withCtx, createVNode, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, reactive, effectScope, Suspense, nextTick, mergeProps, Fragment, isReadonly, toRaw, isShallow, isReactive } from 'vue';
+import { c as createError$1, o as parseURL, h as encodePath, q as decodePath, t as hasProtocol, v as isScriptProtocol, w as joinURL, x as withQuery, y as klona, z as sanitizeStatusCode, A as getRequestHeader, B as destr, C as isEqual, D as setCookie, E as getCookie, F as deleteCookie, $ as $fetch$1, G as baseURL, H as defu, I as createHooks } from '../nitro/nitro.mjs';
 import { setActivePinia, createPinia, shouldHydrate } from 'pinia';
 import { useRoute as useRoute$1, RouterView, START_LOCATION, createMemoryHistory, createRouter } from 'vue-router';
 import { ssrRenderComponent, ssrRenderSuspense, ssrRenderVNode } from 'vue/server-renderer';
@@ -20,6 +20,233 @@ import 'unhead/server';
 import 'devalue';
 import 'unhead/utils';
 import 'unhead/plugins';
+
+function createContext$1(opts = {}) {
+  let currentInstance;
+  let isSingleton = false;
+  const checkConflict = (instance) => {
+    if (currentInstance && currentInstance !== instance) {
+      throw new Error("Context conflict");
+    }
+  };
+  let als;
+  if (opts.asyncContext) {
+    const _AsyncLocalStorage = opts.AsyncLocalStorage || globalThis.AsyncLocalStorage;
+    if (_AsyncLocalStorage) {
+      als = new _AsyncLocalStorage();
+    } else {
+      console.warn("[unctx] `AsyncLocalStorage` is not provided.");
+    }
+  }
+  const _getCurrentInstance = () => {
+    if (als) {
+      const instance = als.getStore();
+      if (instance !== void 0) {
+        return instance;
+      }
+    }
+    return currentInstance;
+  };
+  return {
+    use: () => {
+      const _instance = _getCurrentInstance();
+      if (_instance === void 0) {
+        throw new Error("Context is not available");
+      }
+      return _instance;
+    },
+    tryUse: () => {
+      return _getCurrentInstance();
+    },
+    set: (instance, replace) => {
+      if (!replace) {
+        checkConflict(instance);
+      }
+      currentInstance = instance;
+      isSingleton = true;
+    },
+    unset: () => {
+      currentInstance = void 0;
+      isSingleton = false;
+    },
+    call: (instance, callback) => {
+      checkConflict(instance);
+      currentInstance = instance;
+      try {
+        return als ? als.run(instance, callback) : callback();
+      } finally {
+        if (!isSingleton) {
+          currentInstance = void 0;
+        }
+      }
+    },
+    async callAsync(instance, callback) {
+      currentInstance = instance;
+      const onRestore = () => {
+        currentInstance = instance;
+      };
+      const onLeave = () => currentInstance === instance ? onRestore : void 0;
+      asyncHandlers$1.add(onLeave);
+      try {
+        const r = als ? als.run(instance, callback) : callback();
+        if (!isSingleton) {
+          currentInstance = void 0;
+        }
+        return await r;
+      } finally {
+        asyncHandlers$1.delete(onLeave);
+      }
+    }
+  };
+}
+function createNamespace$1(defaultOpts = {}) {
+  const contexts = {};
+  return {
+    get(key, opts = {}) {
+      if (!contexts[key]) {
+        contexts[key] = createContext$1({ ...defaultOpts, ...opts });
+      }
+      return contexts[key];
+    }
+  };
+}
+const _globalThis$1 = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof global !== "undefined" ? global : {};
+const globalKey$1 = "__unctx__";
+const defaultNamespace = _globalThis$1[globalKey$1] || (_globalThis$1[globalKey$1] = createNamespace$1());
+const getContext = (key, opts = {}) => defaultNamespace.get(key, opts);
+const asyncHandlersKey$1 = "__unctx_async_handlers__";
+const asyncHandlers$1 = _globalThis$1[asyncHandlersKey$1] || (_globalThis$1[asyncHandlersKey$1] = /* @__PURE__ */ new Set());
+function executeAsync$1(function_) {
+  const restores = [];
+  for (const leaveHandler of asyncHandlers$1) {
+    const restore2 = leaveHandler();
+    if (restore2) {
+      restores.push(restore2);
+    }
+  }
+  const restore = () => {
+    for (const restore2 of restores) {
+      restore2();
+    }
+  };
+  let awaitable = function_();
+  if (awaitable && typeof awaitable === "object" && "catch" in awaitable) {
+    awaitable = awaitable.catch((error) => {
+      restore();
+      throw error;
+    });
+  }
+  return [awaitable, restore];
+}
+
+function _getAsyncLocalStorage() {
+	return globalThis.AsyncLocalStorage || globalThis.process?.getBuiltinModule?.("node:async_hooks")?.AsyncLocalStorage;
+}
+const _WeakRef = globalThis.WeakRef || class StrongRef {
+	#value;
+	constructor(value) {
+		this.#value = value;
+	}
+	deref() {
+		return this.#value;
+	}
+};
+function createContext(opts = {}) {
+	let currentInstance;
+	let isSingleton = false;
+	const checkConflict = (instance) => {
+		if (currentInstance && currentInstance !== instance) throw new Error("Context conflict");
+	};
+	let als;
+	if (opts.asyncContext) {
+		const _AsyncLocalStorage = opts.AsyncLocalStorage || _getAsyncLocalStorage();
+		if (_AsyncLocalStorage) als = new _AsyncLocalStorage();
+		else console.warn("[unctx] `AsyncLocalStorage` is not provided.");
+	}
+	const _wrapInstance = (instance) => als && instance !== null && typeof instance === "object" ? { __unctx_weak: new _WeakRef(instance) } : instance;
+	const _unwrapInstance = (store) => store && store.__unctx_weak ? store.__unctx_weak.deref() : store;
+	const _getCurrentInstance = () => {
+		if (als) {
+			const store = als.getStore();
+			if (store !== void 0) return _unwrapInstance(store);
+		}
+		return currentInstance;
+	};
+	return {
+		use: () => {
+			const _instance = _getCurrentInstance();
+			if (_instance === void 0) throw new Error("Context is not available");
+			return _instance;
+		},
+		tryUse: () => {
+			return _getCurrentInstance() ?? null;
+		},
+		set: (instance, replace) => {
+			if (!replace) checkConflict(instance);
+			currentInstance = instance;
+			isSingleton = true;
+		},
+		unset: () => {
+			currentInstance = void 0;
+			isSingleton = false;
+		},
+		call: (instance, callback) => {
+			checkConflict(instance);
+			currentInstance = instance;
+			try {
+				return als ? als.run(_wrapInstance(instance), callback) : callback();
+			} finally {
+				if (!isSingleton) currentInstance = void 0;
+			}
+		},
+		async callAsync(instance, callback) {
+			currentInstance = instance;
+			const onRestore = () => {
+				currentInstance = instance;
+			};
+			const onLeave = () => currentInstance === instance ? onRestore : void 0;
+			asyncHandlers.add(onLeave);
+			try {
+				const r = als ? als.run(_wrapInstance(instance), callback) : callback();
+				if (!isSingleton) currentInstance = void 0;
+				return await r;
+			} finally {
+				asyncHandlers.delete(onLeave);
+			}
+		}
+	};
+}
+function createNamespace(defaultOpts = {}) {
+	const contexts = {};
+	return { get(key, opts = {}) {
+		if (!contexts[key]) contexts[key] = createContext({
+			...defaultOpts,
+			...opts
+		});
+		return contexts[key];
+	} };
+}
+const _globalThis = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof global !== "undefined" ? global : {};
+const globalKey = "__unctx__";
+_globalThis[globalKey] || (_globalThis[globalKey] = createNamespace());
+const asyncHandlersKey = "__unctx_async_handlers__";
+const asyncHandlers = _globalThis[asyncHandlersKey] || (_globalThis[asyncHandlersKey] = /* @__PURE__ */ new Set());
+function executeAsync(function_) {
+	const restores = [];
+	for (const leaveHandler of asyncHandlers) {
+		const restore = leaveHandler();
+		if (restore) restores.push(restore);
+	}
+	const restore = () => {
+		for (const restore of restores) restore();
+	};
+	let awaitable = function_();
+	if (awaitable && typeof awaitable === "object" && "catch" in awaitable) awaitable = awaitable.catch((error) => {
+		restore();
+		throw error;
+	});
+	return [awaitable, restore];
+}
 
 const NullObject = /* @__PURE__ */ (() => {
   const C = function() {
@@ -724,28 +951,28 @@ const generateRouteKey = (routeProps, override) => {
 function toArray(value) {
   return Array.isArray(value) ? value : [value];
 }
-const __nuxt_page_meta$x = {
+const __nuxt_page_meta$B = { layout: "default" };
+const __nuxt_page_meta$A = {
   layout: "default"
 };
-const __nuxt_page_meta$w = {
+const __nuxt_page_meta$z = { layout: "default" };
+const __nuxt_page_meta$y = {
   layout: "default"
 };
-const __nuxt_page_meta$v = { layout: "default" };
-const __nuxt_page_meta$u = {
-  layout: "default"
-};
+const __nuxt_page_meta$x = { layout: "default" };
+const __nuxt_page_meta$w = { layout: "default" };
+const __nuxt_page_meta$v = { layout: "blank" };
+const __nuxt_page_meta$u = { layout: "default" };
 const __nuxt_page_meta$t = {
-  layout: "error"
-};
-const __nuxt_page_meta$s = { layout: "default" };
-const __nuxt_page_meta$r = { layout: "blank" };
-const __nuxt_page_meta$q = { layout: "default" };
-const __nuxt_page_meta$p = {
   layout: "blank"
 };
+const __nuxt_page_meta$s = { layout: "admin" };
+const __nuxt_page_meta$r = { layout: "admin" };
+const __nuxt_page_meta$q = { layout: "admin-auth" };
+const __nuxt_page_meta$p = { layout: "admin" };
 const __nuxt_page_meta$o = { layout: "admin" };
 const __nuxt_page_meta$n = { layout: "admin" };
-const __nuxt_page_meta$m = { layout: "admin-auth" };
+const __nuxt_page_meta$m = { layout: "admin" };
 const __nuxt_page_meta$l = { layout: "admin" };
 const __nuxt_page_meta$k = { layout: "admin" };
 const __nuxt_page_meta$j = { layout: "admin" };
@@ -766,222 +993,240 @@ const __nuxt_page_meta$9 = { layout: "admin" };
 const __nuxt_page_meta$8 = { layout: "admin" };
 const __nuxt_page_meta$7 = { layout: "admin" };
 const __nuxt_page_meta$6 = { layout: "admin" };
-const __nuxt_page_meta$5 = {
-  layout: "default"
-};
-const __nuxt_page_meta$4 = {
-  layout: "default"
-};
+const __nuxt_page_meta$5 = { layout: "default" };
+const __nuxt_page_meta$4 = { layout: "default" };
 const __nuxt_page_meta$3 = { layout: "admin" };
 const __nuxt_page_meta$2 = { layout: "admin" };
 const __nuxt_page_meta$1 = { layout: "admin" };
-const __nuxt_page_meta = {
-  layout: "default"
-};
+const __nuxt_page_meta = { layout: "default" };
 const _routes = [
   {
     name: "index",
     path: "/",
-    meta: __nuxt_page_meta$x || {},
-    component: () => import('./index-DN7nQUVS.mjs')
+    meta: __nuxt_page_meta$B || {},
+    component: () => import('./index-BiIc0gTS.mjs')
   },
   {
     name: "sobre",
     path: "/sobre",
-    meta: __nuxt_page_meta$w || {},
-    component: () => import('./sobre-wJ1cyj1L.mjs')
+    meta: __nuxt_page_meta$A || {},
+    component: () => import('./sobre-CKoM9h3P.mjs')
   },
   {
     name: "equipa",
     path: "/equipa",
-    meta: __nuxt_page_meta$v || {},
-    component: () => import('./equipa-x5hmwclJ.mjs')
+    meta: __nuxt_page_meta$z || {},
+    component: () => import('./equipa-CKHHjUEI.mjs')
   },
   {
     name: "galeria",
     path: "/galeria",
-    meta: __nuxt_page_meta$u || {},
-    component: () => import('./galeria-D-urv8mV.mjs')
+    meta: __nuxt_page_meta$y || {},
+    component: () => import('./galeria-DcqHruFf.mjs')
   },
   {
     name: "all",
     path: "/:all(.*)*",
-    meta: __nuxt_page_meta$t || {},
-    component: () => import('./_...all_-C3EZ7-5d.mjs')
+    meta: __nuxt_page_meta$x || {},
+    component: () => import('./_...all_-EpM30K_K.mjs')
   },
   {
     name: "contacto",
     path: "/contacto",
-    meta: __nuxt_page_meta$s || {},
-    component: () => import('./contacto-B4uDeL8O.mjs')
+    meta: __nuxt_page_meta$w || {},
+    component: () => import('./contacto-DS1Fy81q.mjs')
   },
   {
     name: "auth-login",
     path: "/auth/login",
-    meta: __nuxt_page_meta$r || {},
-    component: () => import('./login-CXOOg9lw.mjs')
+    meta: __nuxt_page_meta$v || {},
+    component: () => import('./login-biKqCdSL.mjs')
   },
   {
     name: "calendario",
     path: "/calendario",
-    meta: __nuxt_page_meta$q || {},
-    component: () => import('./calendario-By-x0Owi.mjs')
+    meta: __nuxt_page_meta$u || {},
+    component: () => import('./calendario-FpkAx6OX.mjs')
   },
   {
     name: "manutencao",
     path: "/manutencao",
-    meta: __nuxt_page_meta$p || {},
+    meta: __nuxt_page_meta$t || {},
     component: () => import('./manutencao-BNuTz9Wh.mjs')
   },
   {
     name: "admin",
     path: "/admin",
-    meta: __nuxt_page_meta$o || {},
-    component: () => import('./index-DqMF54T3.mjs')
+    meta: __nuxt_page_meta$s || {},
+    component: () => import('./index-BrwQN8yH.mjs')
   },
   {
     name: "admin-jogos",
     path: "/admin/jogos",
-    meta: __nuxt_page_meta$n || {},
-    component: () => import('./jogos-DA51Wn3y.mjs')
+    meta: __nuxt_page_meta$r || {},
+    component: () => import('./jogos-C4al4-4e.mjs')
   },
   {
     name: "admin-login",
     path: "/admin/login",
-    meta: __nuxt_page_meta$m || {},
-    component: () => import('./login-CgjQOrgW.mjs')
+    meta: __nuxt_page_meta$q || {},
+    component: () => import('./login-LB3RXxuO.mjs')
   },
   {
     name: "admin-media",
     path: "/admin/media",
-    meta: __nuxt_page_meta$l || {},
-    component: () => import('./media-DrROGqyo.mjs')
+    meta: __nuxt_page_meta$p || {},
+    component: () => import('./media-BN3lVi5T.mjs')
+  },
+  {
+    name: "admin-menus",
+    path: "/admin/menus",
+    meta: __nuxt_page_meta$o || {},
+    component: () => import('./menus-CVwQ0I3K.mjs')
+  },
+  {
+    name: "admin-blocos",
+    path: "/admin/blocos",
+    meta: __nuxt_page_meta$n || {},
+    component: () => import('./blocos-BrYMdiWW.mjs')
+  },
+  {
+    name: "admin-perfil",
+    path: "/admin/perfil",
+    meta: __nuxt_page_meta$m || {},
+    component: () => import('./perfil-Fr9rvSFn.mjs')
   },
   {
     name: "admin-socios",
     path: "/admin/socios",
-    meta: __nuxt_page_meta$k || {},
-    component: () => import('./socios-CKMdpuZK.mjs')
+    meta: __nuxt_page_meta$l || {},
+    component: () => import('./socios-CyDOnQ2n.mjs')
   },
   {
     name: "admin-direcao",
     path: "/admin/direcao",
-    meta: __nuxt_page_meta$j || {},
-    component: () => import('./direcao-SguPx2Nv.mjs')
+    meta: __nuxt_page_meta$k || {},
+    component: () => import('./direcao-DGT_it4y.mjs')
   },
   {
     name: "admin-equipas",
     path: "/admin/equipas",
-    meta: __nuxt_page_meta$i || {},
-    component: () => import('./equipas-sBT3JxN6.mjs')
+    meta: __nuxt_page_meta$j || {},
+    component: () => import('./equipas-BwI0fNTY.mjs')
   },
   {
     name: "admin-eventos",
     path: "/admin/eventos",
-    meta: __nuxt_page_meta$h || {},
-    component: () => import('./eventos-BIlNt2Uy.mjs')
+    meta: __nuxt_page_meta$i || {},
+    component: () => import('./eventos-uFLyWpjq.mjs')
   },
   {
     name: "admin-galeria",
     path: "/admin/galeria",
+    meta: __nuxt_page_meta$h || {},
+    component: () => import('./galeria-BKo9xeOw.mjs')
+  },
+  {
+    name: "admin-paginas",
+    path: "/admin/paginas",
     meta: __nuxt_page_meta$g || {},
-    component: () => import('./galeria-BtEQNqyo.mjs')
+    component: () => import('./paginas-Bq8EXNnD.mjs')
   },
   {
     name: "admin-plantel",
     path: "/admin/plantel",
     meta: __nuxt_page_meta$f || {},
-    component: () => import('./plantel-BHrdO4NC.mjs')
+    component: () => import('./plantel-B8f3hG2W.mjs')
   },
   {
     name: "auth-register",
     path: "/auth/register",
     meta: __nuxt_page_meta$e || {},
-    component: () => import('./register-BFOyj2HL.mjs')
+    component: () => import('./register-BUiC8r9_.mjs')
   },
   {
     name: "eventos",
     path: "/eventos",
     meta: __nuxt_page_meta$d || {},
-    component: () => import('./index-D-akLl6T.mjs')
+    component: () => import('./index-djtWk9lG.mjs')
   },
   {
     name: "oportunidades",
     path: "/oportunidades",
     meta: __nuxt_page_meta$c || {},
-    component: () => import('./oportunidades-C7LSo2-s.mjs')
+    component: () => import('./oportunidades-BQ8PU3uC.mjs')
   },
   {
     name: "admin-pesquisa",
     path: "/admin/pesquisa",
     meta: __nuxt_page_meta$b || {},
-    component: () => import('./pesquisa-DTZOEBIX.mjs')
+    component: () => import('./pesquisa-B-bL_DSS.mjs')
   },
   {
     name: "eventos-slug",
     path: "/eventos/:slug()",
     meta: __nuxt_page_meta$a || {},
-    component: () => import('./_slug_-DlJy4JtT.mjs')
+    component: () => import('./_slug_-CXU6hOIi.mjs')
   },
   {
     name: "admin-conteudos",
     path: "/admin/conteudos",
     meta: __nuxt_page_meta$9 || {},
-    component: () => import('./conteudos-qkvg68yo.mjs')
+    component: () => import('./conteudos-L9eTHAOJ.mjs')
   },
   {
     name: "admin-mensagens",
     path: "/admin/mensagens",
     meta: __nuxt_page_meta$8 || {},
-    component: () => import('./mensagens-CMMKjETc.mjs')
+    component: () => import('./mensagens-BYl90cVM.mjs')
   },
   {
     name: "admin-definicoes",
     path: "/admin/definicoes",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./definicoes-D5ZPnJ_k.mjs')
+    component: () => import('./definicoes-h6er7qaz.mjs')
   },
   {
     name: "admin-patrocinios",
     path: "/admin/patrocinios",
     meta: __nuxt_page_meta$6 || {},
-    component: () => import('./patrocinios-nX6X0DcN.mjs')
+    component: () => import('./patrocinios-13KlG__s.mjs')
   },
   {
     name: "politicas-cookies",
     path: "/politicas/cookies",
     meta: __nuxt_page_meta$5 || {},
-    component: () => import('./cookies-DbquFaJq.mjs')
+    component: () => import('./cookies-CoPkEIf-.mjs')
   },
   {
     name: "politicas-servico",
     path: "/politicas/servico",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./servico--tvWghL9.mjs')
+    component: () => import('./servico-BKSVaDrL.mjs')
   },
   {
     name: "admin-utilizadores",
     path: "/admin/utilizadores",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./utilizadores-BeH-MsCG.mjs')
+    component: () => import('./utilizadores-HYpmBtlK.mjs')
   },
   {
     name: "admin-oportunidades",
     path: "/admin/oportunidades",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./oportunidades-Cus3d9zD.mjs')
+    component: () => import('./oportunidades-CLpqglDM.mjs')
   },
   {
     name: "admin-equipa-tecnica",
     path: "/admin/equipa-tecnica",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./equipa-tecnica-CKPbckGw.mjs')
+    component: () => import('./equipa-tecnica-Odj7CbE_.mjs')
   },
   {
     name: "politicas-privacidade",
     path: "/politicas/privacidade",
     meta: __nuxt_page_meta || {},
-    component: () => import('./privacidade-u18E7eRt.mjs')
+    component: () => import('./privacidade-BTHULPGU.mjs')
   }
 ];
 const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
@@ -989,7 +1234,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
   if (!to.meta?.validate) {
     return;
   }
-  const result = ([__temp, __restore] = executeAsync(() => Promise.resolve(to.meta.validate(to))), __temp = await __temp, __restore(), __temp);
+  const result = ([__temp, __restore] = executeAsync$1(() => Promise.resolve(to.meta.validate(to))), __temp = await __temp, __restore(), __temp);
   if (result === true) {
     return;
   }
@@ -1100,11 +1345,11 @@ function useState(...args) {
   return state;
 }
 const useAuth = () => {
-  const token = useCookie("gdcss_cms_token", { sameSite: "lax" });
+  const token = useCookie("gdcss_cms_token", { sameSite: "lax", secure: true, maxAge: 60 * 60 });
   const user = useState("cms-user", () => null);
   const authHeaders = () => token.value ? { Authorization: `Bearer ${token.value}` } : {};
-  async function login(email, password) {
-    const result = await $fetch(`/api/auth/login`, { method: "POST", body: { email, password } });
+  async function login(username, password) {
+    const result = await $fetch(`/api/auth/login`, { method: "POST", body: { username, password } });
     token.value = result.token;
     user.value = result.user;
     return result.user;
@@ -1112,6 +1357,12 @@ const useAuth = () => {
   async function me() {
     if (!token.value) throw new Error("Sem sessão");
     const result = await $fetch(`/api/auth/me`, { headers: authHeaders() });
+    user.value = result.user;
+    return result.user;
+  }
+  async function updateProfile(payload) {
+    const result = await $fetch(`/api/auth/profile`, { method: "PUT", headers: authHeaders(), body: payload });
+    token.value = result.token;
     user.value = result.user;
     return result.user;
   }
@@ -1124,7 +1375,7 @@ const useAuth = () => {
     user.value = null;
     return navigateTo("/admin/login");
   }
-  return { token, user, login, me, logout, authHeaders };
+  return { token, user, login, me, logout, updateProfile, authHeaders };
 };
 const admin_45auth_45global = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
   let __temp, __restore;
@@ -1194,7 +1445,7 @@ const plugin$1 = /* @__PURE__ */ defineNuxtPlugin({
       routerBase += "#";
     }
     const history = routerOptions.history?.(routerBase) ?? createMemoryHistory(routerBase);
-    const routes = routerOptions.routes ? ([__temp, __restore] = executeAsync(() => routerOptions.routes(_routes)), __temp = await __temp, __restore(), __temp) ?? _routes : _routes;
+    const routes = routerOptions.routes ? ([__temp, __restore] = executeAsync$1(() => routerOptions.routes(_routes)), __temp = await __temp, __restore(), __temp) ?? _routes : _routes;
     let startPosition;
     const router = createRouter({
       ...routerOptions,
@@ -1279,14 +1530,14 @@ const plugin$1 = /* @__PURE__ */ defineNuxtPlugin({
     try {
       if (true) {
         ;
-        [__temp, __restore] = executeAsync(() => router.push(initialURL)), await __temp, __restore();
+        [__temp, __restore] = executeAsync$1(() => router.push(initialURL)), await __temp, __restore();
         ;
       }
       ;
-      [__temp, __restore] = executeAsync(() => router.isReady()), await __temp, __restore();
+      [__temp, __restore] = executeAsync$1(() => router.isReady()), await __temp, __restore();
       ;
     } catch (error2) {
-      [__temp, __restore] = executeAsync(() => nuxtApp.runWithContext(() => showError(error2))), await __temp, __restore();
+      [__temp, __restore] = executeAsync$1(() => nuxtApp.runWithContext(() => showError(error2))), await __temp, __restore();
     }
     const resolvedInitialRoute = router.currentRoute.value;
     const hasDeferredRoute = false;
@@ -1521,8 +1772,8 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     }
   }
 });
-const LazyIcon = defineAsyncComponent(() => import('./Icon-DhbMUx6q.mjs').then((r) => r["default"] || r.default || r));
-const LazyIconCSS = defineAsyncComponent(() => import('./IconCSS-B8o6Sc93.mjs').then((r) => r["default"] || r.default || r));
+const LazyIcon = defineAsyncComponent(() => import('./Icon-jTnUEsFD.mjs').then((r) => r["default"] || r.default || r));
+const LazyIconCSS = defineAsyncComponent(() => import('./IconCSS-BqvRfPiM.mjs').then((r) => r["default"] || r.default || r));
 const lazyGlobalComponents = [
   ["Icon", LazyIcon],
   ["IconCSS", LazyIconCSS]
@@ -1566,11 +1817,11 @@ const plugins = [
   robot_meta_server_bRHpso_4KN_Ec3RJzqCvbuvfZsNOeE_4TgpL8dCNuwk
 ];
 const layouts = {
-  "admin-auth": defineAsyncComponent(() => import('./admin-auth-BzjKBeTM.mjs').then((m) => m.default || m)),
-  admin: defineAsyncComponent(() => import('./admin-DXh2THVq.mjs').then((m) => m.default || m)),
-  blank: defineAsyncComponent(() => import('./blank-B4Lni5Rk.mjs').then((m) => m.default || m)),
-  default: defineAsyncComponent(() => import('./default-2N7mnQfv.mjs').then((m) => m.default || m)),
-  error: defineAsyncComponent(() => import('./error-B-aG63QF.mjs').then((m) => m.default || m))
+  "admin-auth": defineAsyncComponent(() => import('./admin-auth-CSixoLm4.mjs').then((m) => m.default || m)),
+  admin: defineAsyncComponent(() => import('./admin-BJAorMse.mjs').then((m) => m.default || m)),
+  blank: defineAsyncComponent(() => import('./blank-eEvcAoW8.mjs').then((m) => m.default || m)),
+  default: defineAsyncComponent(() => import('./default-CGYGv2tj.mjs').then((m) => m.default || m)),
+  error: defineAsyncComponent(() => import('./error-DuTRn5m4.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;
 const LayoutLoader = defineComponent({
@@ -1896,8 +2147,8 @@ const _sfc_main$1 = {
     const statusText = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-BSwWjcUY.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-DTJ_bO0o.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-KW9NKSAt.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-BUuDLRj1.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ status: unref(status), statusText: unref(statusText), statusCode: unref(status), statusMessage: unref(statusText), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
@@ -1989,5 +2240,5 @@ let entry;
 }
 const entry_default = ((ssrContext) => entry(ssrContext));
 
-export { useError as a, useRuntimeConfig as b, createError as c, useRouter as d, entry_default as default, useAuth as e, useThemeMode as f, encodeRoutePath as g, hashMode as h, useNuxtApp as i, nuxtLinkDefaults as j, useState as k, asyncDataDefaults as l, useRequestEvent as m, navigateTo as n, defineAppConfig as o, useRoute as p, resolveRouteObject as r, useHead as u };
+export { useRoute as a, useRuntimeConfig as b, createError as c, useRouter as d, entry_default as default, useAuth as e, useThemeMode as f, encodeRoutePath as g, hashMode as h, useNuxtApp as i, nuxtLinkDefaults as j, useState as k, asyncDataDefaults as l, useRequestEvent as m, navigateTo as n, defineAppConfig as o, useError as p, resolveRouteObject as r, useHead as u };
 //# sourceMappingURL=server.mjs.map

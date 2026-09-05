@@ -26,11 +26,19 @@ function createCrudService(repository, { normalize = (value) => value, publicFil
   }
 }
 
+const indexedCollections = new Set();
+
 async function collectionFor(resource) {
   const db = await getMongoDb();
   const collection = db.collection(resource);
-  await collection.createIndex({ id: 1 }, { unique: true, sparse: true });
-  if (resource === 'users') await collection.createIndex({ email: 1 }, { unique: true, sparse: true });
+
+  if (!indexedCollections.has(resource)) {
+    const indexes = await collection.indexes().catch(() => []);
+    const hasIdIndex = indexes.some(index => Object.keys(index.key || {}).length === 1 && index.key?.id === 1);
+    if (!hasIdIndex) await collection.createIndex({ id: 1 }, { unique: true, sparse: true });
+    indexedCollections.add(resource);
+  }
+
   return collection
 }
 
@@ -46,37 +54,25 @@ function createMongoRepository(resource) {
       const collection = await collectionFor(resource);
       return (await collection.find({}).toArray()).map(clean$1)
     },
-
     async findById(id) {
       const collection = await collectionFor(resource);
       return clean$1(await collection.findOne({ id: String(id) }))
     },
-
     async create(payload) {
       const collection = await collectionFor(resource);
       const now = new Date().toISOString();
-      const item = {
-        ...payload,
-        id: String(payload.id ?? crypto.randomUUID()),
-        createdAt: payload.createdAt ?? now,
-        updatedAt: now,
-      };
+      const item = { ...payload, id: String(payload.id ?? crypto.randomUUID()), createdAt: payload.createdAt ?? now, updatedAt: now };
       await collection.insertOne(item);
       return clean$1(item)
     },
-
     async update(id, payload) {
       const collection = await collectionFor(resource);
       const current = await collection.findOne({ id: String(id) });
       if (!current) return null
-      const { _id, id: ignoredId, ...safePayload } = payload || {};
-      await collection.updateOne(
-        { id: String(id) },
-        { $set: { ...safePayload, updatedAt: new Date().toISOString() } },
-      );
+      const { _id, id: ignoredId, entityType: ignoredType, ...safePayload } = payload || {};
+      await collection.updateOne({ id: String(id) }, { $set: { ...safePayload, updatedAt: new Date().toISOString() }, $unset: { entityType: '' } });
       return clean$1(await collection.findOne({ id: String(id) }))
     },
-
     async remove(id) {
       const collection = await collectionFor(resource);
       const result = await collection.deleteOne({ id: String(id) });
@@ -195,7 +191,8 @@ const playersService = {
 const usersRepository = createMongoRepository('users');
 
 const secret = process.env.AUTH_SECRET || 'gdcss-dev-change-this-secret';
-const ttlSeconds = Number(process.env.AUTH_TTL_SECONDS || 60 * 60 * 8);
+const configuredTtl = Number(process.env.AUTH_TTL_SECONDS || 60 * 60);
+const ttlSeconds = Number.isFinite(configuredTtl) && configuredTtl > 0 ? Math.min(Math.floor(configuredTtl), 60 * 60) : 60 * 60;
 
 const b64 = (value) => Buffer.from(value).toString('base64url');
 const unb64 = (value) => Buffer.from(value, 'base64url').toString('utf8');
@@ -212,7 +209,7 @@ function verifyPassword(password, stored = '') {
   return crypto.timingSafeEqual(Buffer.from(candidate), Buffer.from(hash))
 }
 function createToken(user) {
-  const payload = b64(JSON.stringify({ sub: user.id, email: user.email, name: user.name, role: user.role, exp: Math.floor(Date.now()/1000)+ttlSeconds }));
+  const payload = b64(JSON.stringify({ sub: user.id, username: user.username, name: user.name, role: user.role, exp: Math.floor(Date.now()/1000)+ttlSeconds }));
   return `${payload}.${sign(payload)}`
 }
 function verifyToken(token = '') {
@@ -226,25 +223,36 @@ function verifyToken(token = '') {
 }
 
 const clean = ({ passwordHash, ...user }) => user;
-const normalizeEmail = (email='') => email.trim().toLowerCase();
-const allowedRoles = new Set(['admin','editor']);
-const normalizeRole = (role='editor') => {
-  if(!allowedRoles.has(role)){ const e=new Error('Perfil inválido. Usa Administrador ou Editor.'); e.statusCode=400; throw e }
+const normalizeEmail = (email='') => String(email).trim().toLowerCase();
+const normalizeUsername = (username='') => String(username).trim().toLowerCase();
+const validUsername = (username) => /^[a-z0-9][a-z0-9._-]{2,31}$/.test(username);
+const allowedRoles = new Set(['admin','viewer']);
+const normalizeRole = (role='viewer') => {
+  if(role==='editor') role='viewer';
+  if(!allowedRoles.has(role)){ const e=new Error('Perfil inválido. Usa Administrador ou Consulta e edição.'); e.statusCode=400; throw e }
   return role
 };
 const usersService = {
   async list(){ return (await usersRepository.readAll()).map(clean) },
   async get(id){ const u=await usersRepository.findById(id); return u?clean(u):null },
+  async findRawById(id){ return usersRepository.findById(id) },
   async findByEmail(email){ return (await usersRepository.readAll()).find(u=>u.email===normalizeEmail(email))||null },
+  async findByUsername(username){ return (await usersRepository.readAll()).find(u=>normalizeUsername(u.username)===normalizeUsername(username))||null },
   async create(payload){
-    if(!payload.name?.trim() || !normalizeEmail(payload.email) || !payload.password || payload.password.length<8) { const e=new Error('Nome, email e palavra-passe (mín. 8 caracteres) são obrigatórios'); e.statusCode=400; throw e }
-    if(await this.findByEmail(payload.email)){ const e=new Error('Já existe um utilizador com este email'); e.statusCode=409; throw e }
-    const row=await usersRepository.create({ id:crypto.randomUUID(), name:payload.name.trim(), email:normalizeEmail(payload.email), role:normalizeRole(payload.role||'editor'), active:payload.active!==false, passwordHash:hashPassword(payload.password), createdAt:new Date().toISOString(), updatedAt:new Date().toISOString() });
+    const username=normalizeUsername(payload.username), email=normalizeEmail(payload.email);
+    if(!payload.name?.trim() || !validUsername(username) || !payload.password || payload.password.length<8) { const e=new Error('Nome, utilizador (3–32 caracteres) e palavra-passe (mín. 8 caracteres) são obrigatórios'); e.statusCode=400; throw e }
+    if(await this.findByUsername(username)){ const e=new Error('Este nome de utilizador já existe'); e.statusCode=409; throw e }
+    if(email&&await this.findByEmail(email)){ const e=new Error('Já existe um utilizador com este email'); e.statusCode=409; throw e }
+    const row=await usersRepository.create({ id:crypto.randomUUID(), name:payload.name.trim(), username, email, role:normalizeRole(payload.role||'viewer'), active:payload.active!==false, passwordHash:hashPassword(payload.password), createdAt:new Date().toISOString(), updatedAt:new Date().toISOString() });
     return clean(row)
   },
   async update(id,payload){
     const current=await usersRepository.findById(id); if(!current) return null
-    const patch={ name:payload.name?.trim()??current.name, email:normalizeEmail(payload.email??current.email), role:normalizeRole(payload.role??current.role), active:payload.active??current.active, updatedAt:new Date().toISOString() };
+    const username=normalizeUsername(payload.username??current.username), email=normalizeEmail(payload.email??current.email);
+    if(!validUsername(username)){const e=new Error('O utilizador deve ter entre 3 e 32 caracteres e usar apenas letras, números, ponto, hífen ou underscore');e.statusCode=400;throw e}
+    const usernameOwner=await this.findByUsername(username);if(usernameOwner&&usernameOwner.id!==id){const e=new Error('Este nome de utilizador já existe');e.statusCode=409;throw e}
+    const emailOwner=email&&await this.findByEmail(email);if(emailOwner&&emailOwner.id!==id){const e=new Error('Já existe um utilizador com este email');e.statusCode=409;throw e}
+    const patch={ name:payload.name?.trim()??current.name, username, email, role:normalizeRole(payload.role??current.role), active:payload.active??current.active, avatar:payload.avatar??current.avatar??'', updatedAt:new Date().toISOString() };
     if(payload.password) patch.passwordHash=hashPassword(payload.password);
     const row=await usersRepository.update(id,patch); return clean(row)
   },
@@ -252,17 +260,35 @@ const usersService = {
 };
 
 const authService = {
-  async login(email,password){
-    const user=await usersService.findByEmail(email);
+  async login(username,password){
+    const user=await usersService.findByUsername(username);
     if(!user || !user.active || !verifyPassword(password,user.passwordHash)){
-      const e=new Error('Email ou palavra-passe inválidos');e.statusCode=401;throw e
+      const e=new Error('Utilizador ou palavra-passe inválidos');e.statusCode=401;throw e
     }
-    if(!['admin','editor'].includes(user.role)){
+    if(!['admin','viewer'].includes(user.role)){
       const e=new Error('Este perfil já não tem acesso ao CMS. Contacta um administrador.');e.statusCode=403;throw e
     }
-    return {token:createToken(user),user:{id:user.id,name:user.name,email:user.email,role:user.role}}
+    return {token:createToken(user),user:{id:user.id,name:user.name,username:user.username,email:user.email||'',role:user.role,avatar:user.avatar||''}}
   },
-  async register(payload){ const user=await usersService.create({...payload,role:'editor'}); const raw=await usersService.findByEmail(user.email); return {token:createToken(raw),user} }
+  async me(userId){
+    const current=await usersService.findRawById(userId);
+    if(!current || !current.active){const e=new Error('Utilizador não encontrado ou inativo');e.statusCode=401;throw e}
+    return {id:current.id,name:current.name,username:current.username,email:current.email||'',role:current.role,avatar:current.avatar||''}
+  },
+  async updateProfile(userId,payload={}){
+    const current=await usersService.findRawById(userId);
+    if(!current){const e=new Error('Utilizador não encontrado');e.statusCode=404;throw e}
+    const wantsPassword=Boolean(payload.password||payload.currentPassword);
+    if(wantsPassword){
+      if(!payload.currentPassword || !verifyPassword(payload.currentPassword,current.passwordHash)){const e=new Error('A palavra-passe atual não está correta');e.statusCode=400;throw e}
+      if(!payload.password || String(payload.password).length<8){const e=new Error('A nova palavra-passe deve ter pelo menos 8 caracteres');e.statusCode=400;throw e}
+    }
+    await usersService.update(userId,{name:payload.name??current.name,username:current.username,email:current.email,role:current.role,active:current.active,avatar:payload.avatar??current.avatar??'',password:wantsPassword?payload.password:undefined});
+    const updated=await usersService.findRawById(userId);
+    const user={id:updated.id,name:updated.name,username:updated.username,email:updated.email||'',role:updated.role,avatar:updated.avatar||''};
+    return {token:createToken(updated),user}
+  },
+  async register(payload){ const user=await usersService.create({...payload,role:'viewer'}); const raw=await usersService.findByUsername(user.username); return {token:createToken(raw),user} }
 };
 
 const allowed = new Set([
@@ -843,14 +869,7 @@ const season2627Service = {
     for (const name of season2627Teams) {
       if (names.has(normalized(name))) continue
       const now = new Date().toISOString();
-      await teamsCollection.insertOne({
-        id: crypto.randomUUID(),
-        name,
-        logo: '',
-        status: 'published',
-        createdAt: now,
-        updatedAt: now,
-      });
+      await teamsCollection.insertOne({ id: crypto.randomUUID(), name, logo: '', status: 'published', createdAt: now, updatedAt: now });
       names.add(normalized(name));
       teamsCreated++;
     }
@@ -863,33 +882,34 @@ const season2627Service = {
       const key = `${game.season}::${game.jornada}`;
       if (keys.has(key)) continue
       const now = new Date().toISOString();
-      await gamesCollection.insertOne({
-        ...game,
-        id: crypto.randomUUID(),
-        createdAt: now,
-        updatedAt: now,
-      });
+      await gamesCollection.insertOne({ ...game, id: crypto.randomUUID(), createdAt: now, updatedAt: now });
       keys.add(key);
       gamesCreated++;
     }
 
-    return {
-      ok: true,
-      season: '2026/2027',
-      teamsCreated,
-      teamsExisting: season2627Teams.length - teamsCreated,
-      gamesCreated,
-      gamesExisting: season2627Games.length - gamesCreated,
-      totalTeams: season2627Teams.length,
-      totalGames: season2627Games.length,
-    }
+    return { ok: true, season: '2026/2027', teamsCreated, teamsExisting: season2627Teams.length - teamsCreated, gamesCreated, gamesExisting: season2627Games.length - gamesCreated, totalTeams: season2627Teams.length, totalGames: season2627Games.length }
   },
 };
 
-const resources = { games: gamesService, teams: teamsService, events: eventsService, gallery: galleryService, members: membersService, board: boardService, staff: staffService, players: playersService, users: usersService, messages: messagesService, settings: settingsService, sponsors: sponsorsService, opportunities: opportunitiesService };
-const publicResources = /* @__PURE__ */ new Set(["games", "teams", "events", "gallery", "board", "staff", "players", "settings", "sponsors", "opportunities"]);
+const pagesRepository=createMongoRepository('pages');
+
+const normalize$2=p=>({...p,slug:String(p.slug||'').trim().replace(/^\/+|\/+$/g,''),status:p.status||'draft',updatedAt:new Date().toISOString()});
+const pagesService=createCrudService(pagesRepository,{normalize: normalize$2,publicFilter:r=>r.status==='published'});
+
+const contentBlocksRepository=createMongoRepository('contentBlocks');
+
+const normalize$1=p=>({...p,pageSlug:String(p.pageSlug||'').trim().replace(/^\/+|\/+$/g,''),order:Number(p.order||1),status:p.status||'published',updatedAt:new Date().toISOString()});
+const contentBlocksService=createCrudService(contentBlocksRepository,{normalize: normalize$1,publicFilter:r=>r.status==='published'});
+
+const menusRepository=createMongoRepository('menus');
+
+const normalize=p=>({...p,label:String(p.label||'').trim(),url:String(p.url||'').trim(),location:p.location||'header',order:Number(p.order||1),status:p.status||'active',target:p.target||'_self',updatedAt:new Date().toISOString()});
+const menusService=createCrudService(menusRepository,{normalize,publicFilter:r=>r.status==='active'});
+
+const resources = { games: gamesService, teams: teamsService, events: eventsService, gallery: galleryService, members: membersService, board: boardService, staff: staffService, players: playersService, users: usersService, messages: messagesService, settings: settingsService, sponsors: sponsorsService, opportunities: opportunitiesService, pages: pagesService, contentBlocks: contentBlocksService, menus: menusService };
+const publicResources = /* @__PURE__ */ new Set(["games", "teams", "events", "gallery", "board", "staff", "players", "settings", "sponsors", "opportunities", "pages", "contentBlocks", "menus"]);
 const fail = (statusCode, message) => {
-  throw createError({ statusCode, statusMessage: message, message });
+  throw createError({ statusCode, message });
 };
 const currentUser = (event) => {
   const value = getHeader(event, "authorization") || "";
@@ -901,13 +921,13 @@ const requireAuth = (event) => {
   return u;
 };
 const requireEditor = (u) => {
-  if (!["admin", "editor"].includes(u.role)) fail(403, "Sem permiss\xE3o para editar conte\xFAdos");
+  if (!["admin", "viewer"].includes(u.role)) fail(403, "Sem permiss\xE3o para editar conte\xFAdos");
 };
 const requireAdmin = (u) => {
   if (u.role !== "admin") fail(403, "Apenas administradores podem executar esta a\xE7\xE3o");
 };
 const validate = (r, p) => {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s;
   if (r === "games" && (!String(p.season || "").trim() || !String(p.jornada || "").trim() || !p.date || !Array.isArray(p.teams) || p.teams.filter(Boolean).length !== 2)) fail(400, "\xC9poca, jornada, data e duas equipas s\xE3o obrigat\xF3rias");
   if (r === "teams" && !((_a = p.name) == null ? void 0 : _a.trim())) fail(400, "O nome da equipa \xE9 obrigat\xF3rio");
   if (r === "events" && (!((_b = p.nome) == null ? void 0 : _b.trim()) || !((_c = p.slug) == null ? void 0 : _c.trim()) || !((_d = p.data) == null ? void 0 : _d.trim()))) fail(400, "Nome, slug e data do evento s\xE3o obrigat\xF3rios");
@@ -917,6 +937,9 @@ const validate = (r, p) => {
   if (["players", "staff"].includes(r) && !((_i = p.img) == null ? void 0 : _i.trim())) fail(400, "A imagem \xE9 obrigat\xF3ria");
   if (r === "sponsors" && (!((_j = p.src) == null ? void 0 : _j.trim()) || !((_k = p.alt) == null ? void 0 : _k.trim()))) fail(400, "Imagem e nome do patrocinador s\xE3o obrigat\xF3rios");
   if (r === "opportunities" && (!((_l = p.title) == null ? void 0 : _l.trim()) || !((_m = p.price) == null ? void 0 : _m.trim()))) fail(400, "T\xEDtulo e pre\xE7o s\xE3o obrigat\xF3rios");
+  if (r === "pages" && (!((_n = p.title) == null ? void 0 : _n.trim()) || !((_o = p.slug) == null ? void 0 : _o.trim()))) fail(400, "T\xEDtulo e endere\xE7o da p\xE1gina s\xE3o obrigat\xF3rios");
+  if (r === "contentBlocks" && (!((_p = p.pageSlug) == null ? void 0 : _p.trim()) || !((_q = p.type) == null ? void 0 : _q.trim()))) fail(400, "P\xE1gina e tipo de bloco s\xE3o obrigat\xF3rios");
+  if (r === "menus" && (!((_r = p.label) == null ? void 0 : _r.trim()) || !((_s = p.url) == null ? void 0 : _s.trim()))) fail(400, "Nome e destino do menu s\xE3o obrigat\xF3rios");
 };
 const ____path_ = defineEventHandler(async (event) => {
   const path = (getRouterParam(event, "path") || "").split("/").filter(Boolean);
@@ -925,11 +948,11 @@ const ____path_ = defineEventHandler(async (event) => {
     const db = await getMongoDb();
     await db.command({ ping: 1 });
     const [settingsCount, usersCount, gamesCount] = await Promise.all([
-      db.collection("settings").countDocuments(),
-      db.collection("users").countDocuments(),
-      db.collection("games").countDocuments()
+      db.collection("settings").countDocuments({}),
+      db.collection("users").countDocuments({}),
+      db.collection("games").countDocuments({})
     ]);
-    return { ok: true, database: "mongodb", collections: { settings: settingsCount, users: usersCount, games: gamesCount } };
+    return { ok: true, database: "mongodb", databaseName: process.env.MONGODB_DB || "gdcsscasteloes", entities: { settings: settingsCount, users: usersCount, games: gamesCount } };
   }
   if (path[0] === "season-2627") {
     const user2 = requireAuth(event);
@@ -940,13 +963,20 @@ const ____path_ = defineEventHandler(async (event) => {
   }
   if (path[0] === "auth" && path[1] === "login" && method === "POST") {
     const p = await readBody(event);
-    return authService.login(p.email, p.password);
+    return authService.login(p.username, p.password);
   }
   if (path[0] === "auth" && path[1] === "register") fail(403, "O registo p\xFAblico est\xE1 desativado. Contacta um administrador.");
-  if (path[0] === "auth" && path[1] === "me" && method === "GET") return { user: requireAuth(event) };
+  if (path[0] === "auth" && path[1] === "me" && method === "GET") {
+    const u = requireAuth(event);
+    return { user: await authService.me(u.sub) };
+  }
   if (path[0] === "auth" && path[1] === "logout" && method === "POST") {
     requireAuth(event);
     return { ok: true };
+  }
+  if (path[0] === "auth" && path[1] === "profile" && ["PUT", "PATCH"].includes(method)) {
+    const u = requireAuth(event);
+    return authService.updateProfile(u.sub, await readBody(event));
   }
   if (path[0] === "public" && path[1] === "contact" && method === "POST") {
     setResponseStatus(event, 201);

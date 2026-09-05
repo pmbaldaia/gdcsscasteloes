@@ -103,6 +103,11 @@ Na Netlify devem existir as variáveis:
 - `AUTH_TTL_SECONDS`
 - `NUXT_SITE_URL`
 
+`NUXT_SITE_URL` deve ser o domínio final em HTTPS. Caso não seja definido, o
+projeto usa automaticamente o URL de deploy disponibilizado pela Netlify.
+Não enviar o ficheiro `.env` para o repositório: usar apenas as variáveis de
+ambiente da Netlify, com base em `.env.example`.
+
 ## Produção
 
 Antes de passar a produção, usar outra base (`gdcsscasteloes`) e alterar `AUTH_SECRET` e a credencial MongoDB usada nos testes.

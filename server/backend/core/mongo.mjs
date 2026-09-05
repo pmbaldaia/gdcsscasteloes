@@ -25,11 +25,20 @@ export async function getMongoDb() {
       maxPoolSize: 10,
       minPoolSize: 0,
       serverSelectionTimeoutMS: 10000,
+      connectTimeoutMS: 10000,
+      maxIdleTimeMS: 45000,
     })
     globalThis[globalKey] = client.connect()
   }
-  const client = await globalThis[globalKey]
-  return client.db(dbName)
+  try {
+    const client = await globalThis[globalKey]
+    return client.db(dbName)
+  } catch (error) {
+    // Uma função Netlify pode manter-se quente. Se a primeira ligação falhar,
+    // não reutilizamos para sempre a Promise rejeitada no pedido seguinte.
+    delete globalThis[globalKey]
+    throw error
+  }
 }
 
 export async function getGridFsBucket() {

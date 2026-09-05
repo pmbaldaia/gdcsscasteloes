@@ -18,13 +18,13 @@ const ____path__get = defineEventHandler(async (event) => {
   var _a;
   const id = decodeURIComponent(getRouterParam(event, "path") || "");
   if (!ObjectId.isValid(id)) {
-    throw createError({ statusCode: 404, statusMessage: "Ficheiro n\xE3o encontrado" });
+    throw createError({ statusCode: 404, message: "Ficheiro n\xE3o encontrado" });
   }
   const objectId = new ObjectId(id);
   const db = await getMongoDb();
   const file = await db.collection("media.files").findOne({ _id: objectId });
   if (!file) {
-    throw createError({ statusCode: 404, statusMessage: "Ficheiro n\xE3o encontrado" });
+    throw createError({ statusCode: 404, message: "Ficheiro n\xE3o encontrado" });
   }
   setHeader(event, "Content-Type", ((_a = file.metadata) == null ? void 0 : _a.mime) || "application/octet-stream");
   setHeader(event, "Content-Length", String(file.length));

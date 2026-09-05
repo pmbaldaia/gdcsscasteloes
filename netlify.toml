@@ -3,9 +3,10 @@ command = "npm run build"
 publish = "dist"
 
 [build.environment]
-NODE_VERSION = "20"
+# Nuxt 3.21 / Vite 7 requerem Node 20.19+.
+NODE_VERSION = "20.19.0"
 NITRO_PRESET = "netlify"
-SECRETS_SCAN_OMIT_KEYS = "NUXT_SITE_NAME,MONGODB_DB,NUXT_SITE_URL"
+SECRETS_SCAN_OMIT_KEYS = "NUXT_SITE_NAME,MONGODB_DB,NUXT_SITE_URL,AUTH_TTL_SECONDS"
 
 [functions]
 node_bundler = "esbuild"

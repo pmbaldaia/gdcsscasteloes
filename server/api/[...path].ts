@@ -22,7 +22,7 @@ import { menusService } from '../backend/modules/menus/menus.service.mjs'
 
 const resources:any={games:gamesService,teams:teamsService,events:eventsService,gallery:galleryService,members:membersService,board:boardService,staff:staffService,players:playersService,users:usersService,messages:messagesService,settings:settingsService,sponsors:sponsorsService,opportunities:opportunitiesService,pages:pagesService,contentBlocks:contentBlocksService,menus:menusService}
 const publicResources=new Set(['games','teams','events','gallery','board','staff','players','settings','sponsors','opportunities','pages','contentBlocks','menus'])
-const fail=(statusCode:number,message:string)=>{ throw createError({statusCode,statusMessage:message,message}) }
+const fail=(statusCode:number,message:string)=>{ throw createError({statusCode,message}) }
 const currentUser=(event:any)=>{const value=getHeader(event,'authorization')||'';return verifyToken(value.startsWith('Bearer ')?value.slice(7):'')}
 const requireAuth=(event:any)=>{const u=currentUser(event);if(!u)fail(401,'Sessão inválida ou expirada');return u}
 const requireEditor=(u:any)=>{if(!['admin','viewer'].includes(u.role))fail(403,'Sem permissão para editar conteúdos')}
