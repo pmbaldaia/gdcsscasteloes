@@ -444,8 +444,8 @@ onBeforeUnmount(()=>{
             <textarea v-else-if="field.type==='array'" :value="Array.isArray(editing[field.key])?editing[field.key].join('\n'):editing[field.key]" rows="5" placeholder="Um item por linha" @input="arrayInput(field.key,$event)"/>
             <div v-else-if="field.type==='buttons'" class="cms-buttons-editor">
               <div v-if="!editing[field.key]?.length" class="cms-buttons-editor__empty">Ainda não existem botões neste bloco.</div>
-              <article v-for="(_raw,index) in editing[field.key]" :key="`${field.key}-${index}`" class="cms-button-row">
-                <div class="cms-button-row__heading"><strong>Botão {{ index + 1 }}</strong><button type="button" class="text-button danger" @click="removeButton(field.key,index)"><Icon name="lucide:trash-2"/> Remover</button></div>
+              <article v-for="(_raw,index) in editing[field.key]" :key="`${field.key}-${index}`" class="cms-button-row" :class="`cms-button-row--${buttonPart(field.key,index,'style')}`">
+                <div class="cms-button-row__heading"><div class="cms-button-row__title"><span class="cms-button-row__number">{{ String(index + 1).padStart(2,'0') }}</span><strong>Botão {{ index + 1 }}</strong></div><button type="button" class="text-button danger cms-button-row__remove" :aria-label="`Remover botão ${index + 1}`" @click="removeButton(field.key,index)"><Icon name="lucide:trash-2"/> <span>Remover</span></button></div>
                 <div class="cms-button-row__fields">
                   <label><span>Texto do botão</span><input :value="buttonPart(field.key,index,'label')" type="text" placeholder="Ex.: Saber mais" @input="updateButton(field.key,index,'label',($event.target as HTMLInputElement).value)"></label>
                   <label><span>Destino</span><input :value="buttonPart(field.key,index,'url')" type="text" placeholder="Ex.: /contacto" @input="updateButton(field.key,index,'url',($event.target as HTMLInputElement).value)"></label>

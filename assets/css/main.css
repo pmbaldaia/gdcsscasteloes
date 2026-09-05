@@ -768,6 +768,37 @@ html.dark .logo-surface {
   transform: translateY(-2px);
 }
 
+/* CTA criado pelo CMS: mantém a mesma linguagem visual em todos os tamanhos. */
+.cms-cta {
+  width: min(calc(100% - 2rem), 1080px);
+  margin: clamp(3rem, 7vw, 5rem) auto 0;
+  padding: clamp(1.35rem, 4vw, 3.75rem);
+  border: 1px solid var(--ui-divider);
+  border-radius: var(--radius-card);
+  background: var(--ui-surface);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.cms-cta__inner { max-width: 760px; margin: 0 auto; }
+.cms-cta h2 { margin: 0; color: var(--ui-text); font-size: clamp(1.7rem, 3.6vw, 2.7rem); font-weight: 800; line-height: 1.12; text-wrap: balance; }
+.cms-cta p { max-width: 650px; margin: 1rem auto 0; color: var(--ui-text-muted); font-size: clamp(1rem, 1.6vw, 1.125rem); line-height: 1.65; }
+.cms-cta__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: clamp(1.4rem, 3vw, 2rem); }
+.cms-cta__button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 11px 20px; border: 1px solid transparent; border-radius: var(--radius-button); font-size: .94rem; font-weight: 700; line-height: 1.1; text-decoration: none; transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease; }
+.cms-cta__button:hover { transform: translateY(-2px); }
+.cms-cta__button--primary { background: var(--ui-primary-bg); border-color: var(--ui-primary-bg); color: #fff; }
+.cms-cta__button--primary:hover { background: var(--ui-primary-bg-hover); border-color: var(--ui-primary-bg-hover); color: #fff; }
+.cms-cta__button--secondary { background: var(--ui-danger-bg); border-color: var(--ui-danger-bg); color: #fff; }
+.cms-cta__button--secondary:hover { background: var(--ui-danger-bg-hover); border-color: var(--ui-danger-bg-hover); color: #fff; }
+
+@media (max-width: 639px) {
+  .cms-cta { width: calc(100% - 2rem); margin-top: 3rem; padding: 1.5rem 1rem; }
+  .cms-cta__actions { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .cms-cta__button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) { .cms-cta__button { transition: none; } .cms-cta__button:hover { transform: none; } }
+
 .home-hero__button--primary {
   background: #005c00;
   border-color: #238423;

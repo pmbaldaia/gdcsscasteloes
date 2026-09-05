@@ -4265,6 +4265,82 @@ html.dark .cms-shell .resource-inline-editor {
   box-shadow: 0 14px 34px rgb(0 0 0 / .22);
 }
 
+/* Editor de botões dos blocos de conteúdo: cartões próprios e adaptáveis. */
+.cms-shell .resource-inline-editor .cms-buttons-editor {
+  display: grid;
+  gap: 14px;
+  padding: clamp(14px, 2vw, 20px);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-bg);
+}
+
+.cms-shell .cms-buttons-editor__empty {
+  padding: 16px;
+  border: 1px dashed var(--color-border);
+  border-radius: 10px;
+  color: var(--color-ink-soft);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.cms-shell .cms-button-row {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  box-shadow: 0 1px 2px rgb(15 23 42 / .04);
+}
+
+.cms-shell .cms-button-row--primary { border-left: 4px solid var(--color-primary); }
+.cms-shell .cms-button-row--secondary { border-left: 4px solid var(--color-secondary, var(--color-ink-soft)); }
+
+.cms-shell .cms-button-row__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+}
+
+.cms-shell .cms-button-row__title { display: inline-flex; align-items: center; gap: 9px; min-width: 0; }
+.cms-shell .cms-button-row__title strong { color: var(--color-ink); font-size: var(--text-sm); }
+.cms-shell .cms-button-row__number { display: grid; flex: 0 0 auto; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--color-primary-tint); color: var(--color-primary-dark); font-size: .68rem; font-weight: 800; }
+.cms-shell .cms-button-row__remove { flex: 0 0 auto; min-height: 34px; padding-inline: 7px; }
+
+.cms-shell .cms-button-row__fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.55fr) minmax(140px, .65fr);
+  gap: 14px;
+  padding: 16px;
+}
+
+.cms-shell .cms-button-row__fields label { display: grid; min-width: 0; gap: 7px; }
+.cms-shell .cms-button-row__fields input,
+.cms-shell .cms-button-row__fields select { width: 100%; min-width: 0; background: var(--color-surface); }
+.cms-shell .cms-buttons-editor__add { width: max-content; min-height: 42px; }
+.cms-shell .cms-buttons-editor .form-field__hint { margin: 0; color: var(--color-ink-soft); line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .cms-shell .cms-button-row__fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cms-shell .cms-button-row__fields label:last-child { grid-column: 1 / -1; max-width: 220px; }
+}
+
+@media (max-width: 560px) {
+  .cms-shell .resource-inline-editor .cms-buttons-editor { padding: 10px; gap: 10px; }
+  .cms-shell .cms-button-row__heading { min-height: 48px; padding: 8px 10px; }
+  .cms-shell .cms-button-row__fields { grid-template-columns: 1fr; gap: 12px; padding: 12px 10px; }
+  .cms-shell .cms-button-row__fields label:last-child { grid-column: auto; max-width: none; }
+  .cms-shell .cms-buttons-editor__add { width: 100%; justify-content: center; }
+}
+
+html.dark .cms-shell .resource-inline-editor .cms-buttons-editor { background: var(--color-surface-alt); }
+html.dark .cms-shell .cms-button-row { background: var(--color-surface); box-shadow: none; }
+html.dark .cms-shell .cms-button-row__heading { background: var(--color-bg); }
+
 /* Perfil do CMS */
 .profile-form{overflow:hidden}
 .profile-form__section{display:grid;grid-template-columns:minmax(190px,.75fr) minmax(0,1.25fr);gap:24px;padding:24px;border-bottom:1px solid var(--color-border)}
