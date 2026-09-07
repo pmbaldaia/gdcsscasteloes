@@ -12,12 +12,16 @@ const allowed = new Set([
   'application/pdf',
 ])
 
-const convertibleImages = new Set([
+const resizableImages = new Set([
   'image/jpeg',
   'image/png',
   'image/webp',
-  'image/gif',
 ])
+
+// Limite suficientemente alto para fotografia e ecrãs atuais, mas evita
+// guardar ficheiros enormes que o site nunca irá apresentar nessa dimensão.
+// Nunca amplia nem recorta: preserva sempre o enquadramento original.
+const MAX_IMAGE_SIDE = 2560
 
 const safe = (name = 'file') =>
   name.normalize('NFD')
@@ -27,6 +31,46 @@ const safe = (name = 'file') =>
 
 const toBuffer = (value = '') =>
   Buffer.from(String(value).replace(/^data:[^;]+;base64,/, ''), 'base64')
+
+async function optimiseImage(sourceBuffer, sourceMime) {
+  const image = sharp(sourceBuffer, { failOn: 'none' }).rotate()
+  const metadata = await image.metadata()
+
+  const pipeline = image.resize({
+    width: MAX_IMAGE_SIDE,
+    height: MAX_IMAGE_SIDE,
+    fit: 'inside',
+    withoutEnlargement: true,
+    kernel: sharp.kernel.lanczos3,
+  })
+
+  // Mantém o formato enviado. Isto evita alterações visuais desnecessárias,
+  // preserva transparência em PNG/WebP e usa qualidade alta em fotografias.
+  if (sourceMime === 'image/jpeg') {
+    return {
+      buffer: await pipeline.jpeg({ quality: 92, mozjpeg: true }).toBuffer(),
+      mime: sourceMime,
+      width: metadata.width,
+      height: metadata.height,
+    }
+  }
+
+  if (sourceMime === 'image/png') {
+    return {
+      buffer: await pipeline.png({ compressionLevel: 9, adaptiveFiltering: true, palette: false }).toBuffer(),
+      mime: sourceMime,
+      width: metadata.width,
+      height: metadata.height,
+    }
+  }
+
+  return {
+    buffer: await pipeline.webp({ quality: 92, effort: 5 }).toBuffer(),
+    mime: sourceMime,
+    width: metadata.width,
+    height: metadata.height,
+  }
+}
 
 export const mediaService = {
   async list(baseUrl = '') {
@@ -60,14 +104,13 @@ export const mediaService = {
     let mime = payload.mime
     let originalName = safe(payload.filename)
 
-    if (convertibleImages.has(payload.mime)) {
+    let dimensions = null
+    if (resizableImages.has(payload.mime)) {
       try {
-        buffer = await sharp(sourceBuffer, { animated: false })
-          .rotate()
-          .webp({ quality: 84, effort: 4 })
-          .toBuffer()
-        mime = 'image/webp'
-        originalName = originalName.replace(/\.[^.]+$/, '') + '.webp'
+        const processed = await optimiseImage(sourceBuffer, payload.mime)
+        buffer = processed.buffer
+        mime = processed.mime
+        dimensions = { width: processed.width, height: processed.height }
       } catch {
         const error = new Error('Não foi possível processar a imagem')
         error.statusCode = 400
@@ -82,6 +125,8 @@ export const mediaService = {
         mime,
         originalMime: payload.mime,
         originalFilename: safe(payload.filename),
+        dimensions,
+        resized: Boolean(dimensions && (dimensions.width > MAX_IMAGE_SIDE || dimensions.height > MAX_IMAGE_SIDE)),
       },
     })
 

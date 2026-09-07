@@ -544,9 +544,11 @@ button { color: inherit; }
 .gallery-picker__upload.is-disabled svg{animation:cms-spin .8s linear infinite}
 .gallery-picker__count{margin-left:auto;font-size:12px;font-weight:700;color:var(--color-ink-soft);background:var(--color-bg);padding:7px 10px;border-radius:999px}
 .gallery-picker__selected{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px}
-.gallery-picker__selected-card{position:relative;overflow:hidden;aspect-ratio:1/1;border:1px solid var(--color-border);border-radius:12px;background:var(--color-surface-alt)}
+.gallery-picker__selected-card{position:relative;overflow:hidden;aspect-ratio:1/1;border:1px solid var(--color-border);border-radius:12px;background:var(--color-surface-alt);cursor:grab;transition:border-color .16s ease,opacity .16s ease,transform .16s ease}
+.gallery-picker__selected-card:active{cursor:grabbing}.gallery-picker__selected-card.is-dragging{opacity:.45;transform:scale(.97);border-color:var(--color-primary)}
 .gallery-picker__selected-card img{width:100%;height:100%;display:block;object-fit:cover}
 .gallery-picker__selected-card>span{position:absolute;left:7px;bottom:7px;min-width:25px;height:25px;display:grid;place-items:center;padding:0 6px;border-radius:999px;background:rgba(20,20,20,.72);color:#fff;font-size:11px;font-weight:800}
+.gallery-picker__order{position:absolute;right:7px;bottom:7px;display:flex;overflow:hidden;border-radius:9px;background:rgba(255,255,255,.94);box-shadow:0 2px 10px rgba(0,0,0,.16)}.gallery-picker__order button{width:27px;height:27px;display:grid;place-items:center;padding:0;border:0;background:transparent;color:var(--color-ink);cursor:pointer}.gallery-picker__order button+button{border-left:1px solid var(--color-border)}.gallery-picker__order button:hover:not(:disabled){background:#fff;color:var(--color-primary)}.gallery-picker__order button:disabled{opacity:.36;cursor:not-allowed}
 .gallery-picker__remove{position:absolute;right:7px;top:7px;width:29px;height:29px;display:grid;place-items:center;padding:0;border:0;border-radius:9px;background:rgba(255,255,255,.93);color:var(--color-danger);box-shadow:0 2px 10px rgba(0,0,0,.16);cursor:pointer}
 .gallery-picker__remove:hover{background:#fff}
 .gallery-picker__empty{min-height:145px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:22px;border:1px dashed var(--color-border);border-radius:14px;background:var(--color-surface-alt);text-align:center;color:var(--color-ink-soft)}

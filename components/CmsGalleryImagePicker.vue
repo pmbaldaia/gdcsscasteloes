@@ -20,6 +20,7 @@ const libraryPending = ref(false)
 const uploading = ref(false)
 const selectedLibraryUrls = ref<string[]>([])
 const search = ref('')
+const draggedImageIndex = ref<number | null>(null)
 
 const images = computed(() => Array.isArray(props.modelValue) ? props.modelValue : [])
 
@@ -40,6 +41,23 @@ function setImages(next: string[]) {
 
 function removeImage(url: string) {
   setImages(images.value.filter(item => item !== url))
+}
+
+function moveImage(from: number, to: number) {
+  if (from === to || from < 0 || to < 0 || from >= images.value.length || to >= images.value.length) return
+  const next = [...images.value]
+  const [image] = next.splice(from, 1)
+  next.splice(to, 0, image)
+  setImages(next)
+}
+
+function startDragging(index: number) {
+  draggedImageIndex.value = index
+}
+
+function dropImage(index: number) {
+  if (draggedImageIndex.value !== null) moveImage(draggedImageIndex.value, index)
+  draggedImageIndex.value = null
 }
 
 async function openLibrary() {
@@ -154,9 +172,28 @@ async function uploadFiles(event: Event) {
     </div>
 
     <div v-if="images.length" class="gallery-picker__selected">
-      <article v-for="(url, index) in images" :key="`${url}-${index}`" class="gallery-picker__selected-card">
+      <article
+        v-for="(url, index) in images"
+        :key="`${url}-${index}`"
+        class="gallery-picker__selected-card"
+        :class="{ 'is-dragging': draggedImageIndex === index }"
+        draggable="true"
+        title="Arrasta para alterar a ordem"
+        @dragstart="startDragging(index)"
+        @dragend="draggedImageIndex = null"
+        @dragover.prevent
+        @drop.prevent="dropImage(index)"
+      >
         <img :src="url" :alt="`Imagem ${index + 1} do álbum`">
         <span>{{ index + 1 }}</span>
+        <div class="gallery-picker__order" aria-label="Ordenar imagem">
+          <button type="button" :disabled="index === 0" :aria-label="`Mover imagem ${index + 1} para trás`" title="Mover para trás" @click="moveImage(index, index - 1)">
+            <Icon name="lucide:chevron-left" size="15" />
+          </button>
+          <button type="button" :disabled="index === images.length - 1" :aria-label="`Mover imagem ${index + 1} para a frente`" title="Mover para a frente" @click="moveImage(index, index + 1)">
+            <Icon name="lucide:chevron-right" size="15" />
+          </button>
+        </div>
         <button
           type="button"
           class="gallery-picker__remove"

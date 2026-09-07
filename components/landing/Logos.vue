@@ -39,7 +39,6 @@ onUnmounted(()=>{window.removeEventListener('keydown',onKeydown);if(import.meta.
           sizes="100px sm:120px md:160px"
           densities="1x 2x"
           loading="lazy"
-          placeholder="blur"
         />
       </button>
     </div>

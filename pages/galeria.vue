@@ -45,7 +45,7 @@ const closeDialog = () => {
             :key="`${index}-${i}`"
             type="button"
             @click="openImage(src)"
-            class="cursor-pointer overflow-hidden rounded-lg shadow hover:shadow-lg transition duration-300 h-48 w-full text-left"
+            class="gallery-image-card cursor-pointer overflow-hidden rounded-lg shadow hover:shadow-lg transition duration-300 h-48 w-full text-left"
           >
             <SiteImage
               :src="src"
@@ -56,7 +56,7 @@ const closeDialog = () => {
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 400px"
               loading="lazy"
               decoding="async"
-              class="w-full h-full object-cover hover:scale-[1.02] transition-transform rounded-lg"
+              class="gallery-image w-full h-full object-cover hover:scale-[1.02] transition-transform rounded-lg"
             />
           </button>
         </div>

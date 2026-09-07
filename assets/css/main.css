@@ -250,6 +250,16 @@ body {
   color: var(--ui-text);
 }
 
+/* Fotografias da galeria: o CMS guarda o ficheiro, o site mostra-o sem
+   filtros, transparência ou camadas visuais adicionais. */
+.gallery-image,
+.gallery-image-card {
+  opacity: 1 !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
 :where(input, textarea, select) {
   background: var(--ui-surface);
   color: var(--ui-text);

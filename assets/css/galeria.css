@@ -94,6 +94,29 @@
   transform: scale(1.04);
 }
 
+/* As imagens guardadas na galeria são sempre apresentadas tal como foram
+   carregadas: sem camada escura, transparência, filtro ou efeito de blur. */
+.gallery-image-card,
+.gallery-image-card::before,
+.gallery-image-card::after,
+.gallery-image {
+  opacity: 1 !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.gallery-image-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.gallery-image-card::before,
+.gallery-image-card::after {
+  content: none !important;
+  display: none !important;
+}
+
 .close-btn:focus-visible {
   outline: 3px solid rgba(255,255,255,.75);
   outline-offset: 3px;

@@ -31,7 +31,7 @@ const previewImages = computed(() => {
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         loading="lazy"
         decoding="async"
-        class="w-full h-64 object-cover rounded-lg shadow-lg"
+        class="gallery-image w-full h-64 object-cover rounded-lg shadow-lg"
       />
     </div>
 
